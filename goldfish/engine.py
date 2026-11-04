@@ -566,7 +566,10 @@ class MemoryDB:
         if semantic_plan:
             decisions={item['id']:item for item in semantic_plan['selected'] if item['state']!='redundant'}
             scores={sid:1-index*.05 for index,sid in enumerate(decisions) if sid in by_id}
-            reasons={sid:decisions[sid]['why'] for sid in scores}
+            # A ranker's rationale is not source evidence. It remains available
+            # for audit but cannot inject an invented personality/cause claim.
+            intent=semantic_plan.get('intent','unknown')
+            reasons={sid:'语义候选；问题意图：'+(intent if intent in {'fact','reason','change','comparison','unknown'} else 'unknown') for sid in scores}
         edges={}
         for e in self.active_reviewed_links():
             e={**e,'kind':e['effective_kind'],'reason':e['review_reason']}
@@ -634,6 +637,7 @@ class MemoryDB:
             selected.append({'id':sid,'text':s['text'],'score':round(scores[sid],3),
                              'injected_text':memory_text,'coverage':decision['state'] if decision else 'lexical_only',
                              'reason':reasons[sid],'evidence_count':self.db.execute('SELECT COUNT(*) FROM evidence WHERE summary_id=?',(sid,)).fetchone()[0]})
+            if decision:selected[-1]['selection_reason_model']=decision.get('why','')
         output.append('</goldfish-memory>')
         if not selected and not profile_lines: return {'results':[], 'injection':'', 'mode':'lexical+time+graph'+('+semantic' if semantic_scores else ''),'tested_context':bool(context)}
         return {'results':selected,'injection':'\n'.join(output),'mode':'lexical+time+graph'+('+semantic' if semantic_scores else ''),

@@ -114,6 +114,15 @@ class HybridIndexTests(unittest.TestCase):
         self.db.prune_vector_index()
         self.assertEqual(self.db.db.execute('SELECT COUNT(*) FROM auxiliary_vectors').fetchone()[0],0)
 
+    def test_model_selection_reason_is_not_injected_as_personality_evidence(self):
+        sid,mid=self.summary('本次把预算4320更正为3840')
+        plan={'intent':'fact','selected':[{'id':sid,'text':'本次把预算4320更正为3840','state':'missing',
+            'why':'证明AI天生冷静，而且用户在寻找控制感'}]}
+        result=self.db.recall('实际纠错证据',semantic_plan=plan,max_chars=1200)
+        self.assertIn('3840',result['injection'])
+        self.assertNotIn('天生冷静',result['injection']);self.assertNotIn('控制感',result['injection'])
+        self.assertIn('天生冷静',result['results'][0]['selection_reason_model'])
+
     def test_exact_query_cache_is_bounded_and_revision_specific(self):
         class Embeddings:
             identity='revision1';last_call={'usage':{'prompt_tokens':2}}
