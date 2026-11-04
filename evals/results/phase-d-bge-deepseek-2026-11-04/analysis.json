@@ -1,0 +1,3539 @@
+{
+  "method": "Frozen evidence/phrase probes; not independent human semantic validation.",
+  "datasets": {
+    "regression": {
+      "index_build": {
+        "indexed": 54,
+        "calls": 5,
+        "elapsed_ms": 2048.3814979997987,
+        "embedding_tokens": 4002
+      },
+      "source_catalog_correction": {
+        "original_invalid_evidence_count": 0,
+        "source_catalog_count": 64
+      },
+      "variants": {
+        "existing": {
+          "quality": {
+            "query_count": 24,
+            "returned_count": 47,
+            "relevant_count": 23,
+            "false_positive_count": 1,
+            "unknown_count": 23,
+            "judged_count": 24,
+            "precision": 0.9583333333333334,
+            "precision_lower_bound": 0.48936170212765956,
+            "precision_upper_bound": 0.9787234042553191,
+            "expected_fact_count": 29,
+            "hit_fact_count": 19,
+            "missed_fact_count": 10,
+            "unresolved_fact_count": 6,
+            "recall": 0.6551724137931034,
+            "recall_lower_bound": 0.6551724137931034,
+            "recall_upper_bound": 0.8620689655172413,
+            "profiles": {
+              "returned_count": 60,
+              "relevant_count": 7,
+              "false_positive_count": 0,
+              "unknown_count": 53,
+              "judged_count": 7,
+              "precision": 1.0,
+              "precision_lower_bound": 0.11666666666666667,
+              "precision_upper_bound": 1.0,
+              "expected_count": 6,
+              "hit_count": 5,
+              "missed_count": 1,
+              "unresolved_count": 1,
+              "recall": 0.8333333333333334,
+              "recall_lower_bound": 0.8333333333333334,
+              "recall_upper_bound": 1.0
+            }
+          },
+          "latency_ms": {
+            "median": 4.295480998735002,
+            "p95_nearest_rank": 7.085424000251805,
+            "max": 12.998958000025596
+          },
+          "llm_calls": 0,
+          "llm_token_usage": {
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0
+          },
+          "llm_usd_at_observed_peak_rates": 0,
+          "embedding_calls": 0,
+          "embedding_tokens": 0,
+          "model_purposes": {},
+          "input_characters_not_tokens": 15705,
+          "candidates_max": 0
+        },
+        "embedding": {
+          "quality": {
+            "query_count": 24,
+            "returned_count": 56,
+            "relevant_count": 26,
+            "false_positive_count": 2,
+            "unknown_count": 28,
+            "judged_count": 28,
+            "precision": 0.9285714285714286,
+            "precision_lower_bound": 0.4642857142857143,
+            "precision_upper_bound": 0.9642857142857143,
+            "expected_fact_count": 29,
+            "hit_fact_count": 16,
+            "missed_fact_count": 13,
+            "unresolved_fact_count": 9,
+            "recall": 0.5517241379310345,
+            "recall_lower_bound": 0.5517241379310345,
+            "recall_upper_bound": 0.8620689655172413,
+            "profiles": {
+              "returned_count": 4,
+              "relevant_count": 2,
+              "false_positive_count": 0,
+              "unknown_count": 2,
+              "judged_count": 2,
+              "precision": 1.0,
+              "precision_lower_bound": 0.5,
+              "precision_upper_bound": 1.0,
+              "expected_count": 6,
+              "hit_count": 2,
+              "missed_count": 4,
+              "unresolved_count": 1,
+              "recall": 0.3333333333333333,
+              "recall_lower_bound": 0.3333333333333333,
+              "recall_upper_bound": 0.5
+            }
+          },
+          "latency_ms": {
+            "median": 77.98291249946487,
+            "p95_nearest_rank": 2265.9402980007144,
+            "max": 2932.385644999158
+          },
+          "llm_calls": 2,
+          "llm_token_usage": {
+            "prompt_tokens": 1567,
+            "completion_tokens": 719,
+            "total_tokens": 2286
+          },
+          "llm_usd_at_observed_peak_rates": 0.001220004,
+          "embedding_calls": 24,
+          "embedding_tokens": 1037,
+          "model_purposes": {
+            "batch_dedup": 1,
+            "coverage_only": 1
+          },
+          "input_characters_not_tokens": 13924,
+          "candidates_max": 11
+        },
+        "hybrid": {
+          "quality": {
+            "query_count": 24,
+            "returned_count": 64,
+            "relevant_count": 28,
+            "false_positive_count": 6,
+            "unknown_count": 30,
+            "judged_count": 34,
+            "precision": 0.8235294117647058,
+            "precision_lower_bound": 0.4375,
+            "precision_upper_bound": 0.90625,
+            "expected_fact_count": 29,
+            "hit_fact_count": 18,
+            "missed_fact_count": 11,
+            "unresolved_fact_count": 7,
+            "recall": 0.6206896551724138,
+            "recall_lower_bound": 0.6206896551724138,
+            "recall_upper_bound": 0.8620689655172413,
+            "profiles": {
+              "returned_count": 4,
+              "relevant_count": 2,
+              "false_positive_count": 0,
+              "unknown_count": 2,
+              "judged_count": 2,
+              "precision": 1.0,
+              "precision_lower_bound": 0.5,
+              "precision_upper_bound": 1.0,
+              "expected_count": 6,
+              "hit_count": 2,
+              "missed_count": 4,
+              "unresolved_count": 1,
+              "recall": 0.3333333333333333,
+              "recall_lower_bound": 0.3333333333333333,
+              "recall_upper_bound": 0.5
+            }
+          },
+          "latency_ms": {
+            "median": 76.86038100018777,
+            "p95_nearest_rank": 127.5753709996934,
+            "max": 2965.3797789997043
+          },
+          "llm_calls": 1,
+          "llm_token_usage": {
+            "prompt_tokens": 972,
+            "completion_tokens": 544,
+            "total_tokens": 1516
+          },
+          "llm_usd_at_observed_peak_rates": 0.00075624,
+          "embedding_calls": 24,
+          "embedding_tokens": 1037,
+          "model_purposes": {
+            "coverage_only": 1
+          },
+          "input_characters_not_tokens": 15619,
+          "candidates_max": 13
+        },
+        "hybrid_llm": {
+          "quality": {
+            "query_count": 24,
+            "returned_count": 40,
+            "relevant_count": 25,
+            "false_positive_count": 0,
+            "unknown_count": 15,
+            "judged_count": 25,
+            "precision": 1.0,
+            "precision_lower_bound": 0.625,
+            "precision_upper_bound": 1.0,
+            "expected_fact_count": 29,
+            "hit_fact_count": 20,
+            "missed_fact_count": 9,
+            "unresolved_fact_count": 8,
+            "recall": 0.6896551724137931,
+            "recall_lower_bound": 0.6896551724137931,
+            "recall_upper_bound": 0.9655172413793104,
+            "profiles": {
+              "returned_count": 15,
+              "relevant_count": 5,
+              "false_positive_count": 0,
+              "unknown_count": 10,
+              "judged_count": 5,
+              "precision": 1.0,
+              "precision_lower_bound": 0.3333333333333333,
+              "precision_upper_bound": 1.0,
+              "expected_count": 6,
+              "hit_count": 4,
+              "missed_count": 2,
+              "unresolved_count": 1,
+              "recall": 0.6666666666666666,
+              "recall_lower_bound": 0.6666666666666666,
+              "recall_upper_bound": 0.8333333333333334
+            }
+          },
+          "latency_ms": {
+            "median": 2727.23261200008,
+            "p95_nearest_rank": 3636.266647001321,
+            "max": 4163.963109998804
+          },
+          "llm_calls": 28,
+          "llm_token_usage": {
+            "prompt_tokens": 41235,
+            "completion_tokens": 9518,
+            "total_tokens": 50753
+          },
+          "llm_usd_at_observed_peak_rates": 0.019765475999999997,
+          "embedding_calls": 24,
+          "embedding_tokens": 1037,
+          "model_purposes": {
+            "semantic_recall": 24,
+            "batch_dedup": 4
+          },
+          "input_characters_not_tokens": 11273,
+          "candidates_max": 13
+        }
+      }
+    },
+    "phase_c_regression": {
+      "index_build": {
+        "indexed": 18,
+        "calls": 2,
+        "elapsed_ms": 388.9122769996902,
+        "embedding_tokens": 946
+      },
+      "source_catalog_correction": {
+        "original_invalid_evidence_count": 0,
+        "source_catalog_count": 20
+      },
+      "variants": {
+        "existing": {
+          "quality": {
+            "query_count": 10,
+            "returned_count": 12,
+            "relevant_count": 7,
+            "false_positive_count": 1,
+            "unknown_count": 4,
+            "judged_count": 8,
+            "precision": 0.875,
+            "precision_lower_bound": 0.5833333333333334,
+            "precision_upper_bound": 0.9166666666666666,
+            "expected_fact_count": 10,
+            "hit_fact_count": 5,
+            "missed_fact_count": 5,
+            "unresolved_fact_count": 2,
+            "recall": 0.5,
+            "recall_lower_bound": 0.5,
+            "recall_upper_bound": 0.7,
+            "profiles": {
+              "returned_count": 9,
+              "relevant_count": 0,
+              "false_positive_count": 0,
+              "unknown_count": 9,
+              "judged_count": 0,
+              "precision": null,
+              "precision_lower_bound": 0.0,
+              "precision_upper_bound": 1.0,
+              "expected_count": 0,
+              "hit_count": 0,
+              "missed_count": 0,
+              "unresolved_count": 0,
+              "recall": null,
+              "recall_lower_bound": null,
+              "recall_upper_bound": null
+            }
+          },
+          "latency_ms": {
+            "median": 1.1128440000902629,
+            "p95_nearest_rank": 3.955099000449991,
+            "max": 3.955099000449991
+          },
+          "llm_calls": 0,
+          "llm_token_usage": {
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0
+          },
+          "llm_usd_at_observed_peak_rates": 0,
+          "embedding_calls": 0,
+          "embedding_tokens": 0,
+          "model_purposes": {},
+          "input_characters_not_tokens": 3470,
+          "candidates_max": 0
+        },
+        "embedding": {
+          "quality": {
+            "query_count": 10,
+            "returned_count": 16,
+            "relevant_count": 8,
+            "false_positive_count": 2,
+            "unknown_count": 6,
+            "judged_count": 10,
+            "precision": 0.8,
+            "precision_lower_bound": 0.5,
+            "precision_upper_bound": 0.875,
+            "expected_fact_count": 10,
+            "hit_fact_count": 6,
+            "missed_fact_count": 4,
+            "unresolved_fact_count": 3,
+            "recall": 0.6,
+            "recall_lower_bound": 0.6,
+            "recall_upper_bound": 0.9,
+            "profiles": {
+              "returned_count": 0,
+              "relevant_count": 0,
+              "false_positive_count": 0,
+              "unknown_count": 0,
+              "judged_count": 0,
+              "precision": null,
+              "precision_lower_bound": null,
+              "precision_upper_bound": null,
+              "expected_count": 0,
+              "hit_count": 0,
+              "missed_count": 0,
+              "unresolved_count": 0,
+              "recall": null,
+              "recall_lower_bound": null,
+              "recall_upper_bound": null
+            }
+          },
+          "latency_ms": {
+            "median": 48.06125899995095,
+            "p95_nearest_rank": 55.8809719987039,
+            "max": 55.8809719987039
+          },
+          "llm_calls": 0,
+          "llm_token_usage": {
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0
+          },
+          "llm_usd_at_observed_peak_rates": 0,
+          "embedding_calls": 10,
+          "embedding_tokens": 388,
+          "model_purposes": {},
+          "input_characters_not_tokens": 3810,
+          "candidates_max": 4
+        },
+        "hybrid": {
+          "quality": {
+            "query_count": 10,
+            "returned_count": 17,
+            "relevant_count": 8,
+            "false_positive_count": 1,
+            "unknown_count": 8,
+            "judged_count": 9,
+            "precision": 0.8888888888888888,
+            "precision_lower_bound": 0.47058823529411764,
+            "precision_upper_bound": 0.9411764705882353,
+            "expected_fact_count": 10,
+            "hit_fact_count": 6,
+            "missed_fact_count": 4,
+            "unresolved_fact_count": 3,
+            "recall": 0.6,
+            "recall_lower_bound": 0.6,
+            "recall_upper_bound": 0.9,
+            "profiles": {
+              "returned_count": 0,
+              "relevant_count": 0,
+              "false_positive_count": 0,
+              "unknown_count": 0,
+              "judged_count": 0,
+              "precision": null,
+              "precision_lower_bound": null,
+              "precision_upper_bound": null,
+              "expected_count": 0,
+              "hit_count": 0,
+              "missed_count": 0,
+              "unresolved_count": 0,
+              "recall": null,
+              "recall_lower_bound": null,
+              "recall_upper_bound": null
+            }
+          },
+          "latency_ms": {
+            "median": 46.64107800090278,
+            "p95_nearest_rank": 76.68933799868682,
+            "max": 76.68933799868682
+          },
+          "llm_calls": 0,
+          "llm_token_usage": {
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0
+          },
+          "llm_usd_at_observed_peak_rates": 0,
+          "embedding_calls": 10,
+          "embedding_tokens": 388,
+          "model_purposes": {},
+          "input_characters_not_tokens": 3965,
+          "candidates_max": 8
+        },
+        "hybrid_llm": {
+          "quality": {
+            "query_count": 10,
+            "returned_count": 10,
+            "relevant_count": 6,
+            "false_positive_count": 0,
+            "unknown_count": 4,
+            "judged_count": 6,
+            "precision": 1.0,
+            "precision_lower_bound": 0.6,
+            "precision_upper_bound": 1.0,
+            "expected_fact_count": 10,
+            "hit_fact_count": 6,
+            "missed_fact_count": 4,
+            "unresolved_fact_count": 3,
+            "recall": 0.6,
+            "recall_lower_bound": 0.6,
+            "recall_upper_bound": 0.9,
+            "profiles": {
+              "returned_count": 0,
+              "relevant_count": 0,
+              "false_positive_count": 0,
+              "unknown_count": 0,
+              "judged_count": 0,
+              "precision": null,
+              "precision_lower_bound": null,
+              "precision_upper_bound": null,
+              "expected_count": 0,
+              "hit_count": 0,
+              "missed_count": 0,
+              "unresolved_count": 0,
+              "recall": null,
+              "recall_lower_bound": null,
+              "recall_upper_bound": null
+            }
+          },
+          "latency_ms": {
+            "median": 1606.8247699995482,
+            "p95_nearest_rank": 2517.8097099997103,
+            "max": 2517.8097099997103
+          },
+          "llm_calls": 8,
+          "llm_token_usage": {
+            "prompt_tokens": 8753,
+            "completion_tokens": 1718,
+            "total_tokens": 10471
+          },
+          "llm_usd_at_observed_peak_rates": 0.0036714359999999997,
+          "embedding_calls": 10,
+          "embedding_tokens": 388,
+          "model_purposes": {
+            "semantic_recall": 8
+          },
+          "input_characters_not_tokens": 2755,
+          "candidates_max": 8
+        }
+      }
+    },
+    "heldout": {
+      "index_build": {
+        "indexed": 16,
+        "calls": 2,
+        "elapsed_ms": 350.8206500009692,
+        "embedding_tokens": 946
+      },
+      "source_catalog_correction": {
+        "original_invalid_evidence_count": 0,
+        "source_catalog_count": 18
+      },
+      "variants": {
+        "existing": {
+          "quality": {
+            "query_count": 12,
+            "returned_count": 13,
+            "relevant_count": 5,
+            "false_positive_count": 1,
+            "unknown_count": 7,
+            "judged_count": 6,
+            "precision": 0.8333333333333334,
+            "precision_lower_bound": 0.38461538461538464,
+            "precision_upper_bound": 0.9230769230769231,
+            "expected_fact_count": 13,
+            "hit_fact_count": 5,
+            "missed_fact_count": 8,
+            "unresolved_fact_count": 3,
+            "recall": 0.38461538461538464,
+            "recall_lower_bound": 0.38461538461538464,
+            "recall_upper_bound": 0.6153846153846154,
+            "profiles": {
+              "returned_count": 4,
+              "relevant_count": 1,
+              "false_positive_count": 0,
+              "unknown_count": 3,
+              "judged_count": 1,
+              "precision": 1.0,
+              "precision_lower_bound": 0.25,
+              "precision_upper_bound": 1.0,
+              "expected_count": 2,
+              "hit_count": 1,
+              "missed_count": 1,
+              "unresolved_count": 0,
+              "recall": 0.5,
+              "recall_lower_bound": 0.5,
+              "recall_upper_bound": 0.5
+            }
+          },
+          "latency_ms": {
+            "median": 0.8066734999374603,
+            "p95_nearest_rank": 1.7419949999748496,
+            "max": 1.7419949999748496
+          },
+          "llm_calls": 0,
+          "llm_token_usage": {
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0
+          },
+          "llm_usd_at_observed_peak_rates": 0,
+          "embedding_calls": 0,
+          "embedding_tokens": 0,
+          "model_purposes": {},
+          "input_characters_not_tokens": 3477,
+          "candidates_max": 0
+        },
+        "embedding": {
+          "quality": {
+            "query_count": 12,
+            "returned_count": 22,
+            "relevant_count": 7,
+            "false_positive_count": 1,
+            "unknown_count": 14,
+            "judged_count": 8,
+            "precision": 0.875,
+            "precision_lower_bound": 0.3181818181818182,
+            "precision_upper_bound": 0.9545454545454546,
+            "expected_fact_count": 13,
+            "hit_fact_count": 7,
+            "missed_fact_count": 6,
+            "unresolved_fact_count": 5,
+            "recall": 0.5384615384615384,
+            "recall_lower_bound": 0.5384615384615384,
+            "recall_upper_bound": 0.9230769230769231,
+            "profiles": {
+              "returned_count": 2,
+              "relevant_count": 1,
+              "false_positive_count": 0,
+              "unknown_count": 1,
+              "judged_count": 1,
+              "precision": 1.0,
+              "precision_lower_bound": 0.5,
+              "precision_upper_bound": 1.0,
+              "expected_count": 2,
+              "hit_count": 1,
+              "missed_count": 1,
+              "unresolved_count": 0,
+              "recall": 0.5,
+              "recall_lower_bound": 0.5,
+              "recall_upper_bound": 0.5
+            }
+          },
+          "latency_ms": {
+            "median": 47.34978600026807,
+            "p95_nearest_rank": 73.37881799867318,
+            "max": 73.37881799867318
+          },
+          "llm_calls": 0,
+          "llm_token_usage": {
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0
+          },
+          "llm_usd_at_observed_peak_rates": 0,
+          "embedding_calls": 12,
+          "embedding_tokens": 512,
+          "model_purposes": {},
+          "input_characters_not_tokens": 5459,
+          "candidates_max": 3
+        },
+        "hybrid": {
+          "quality": {
+            "query_count": 12,
+            "returned_count": 24,
+            "relevant_count": 7,
+            "false_positive_count": 1,
+            "unknown_count": 16,
+            "judged_count": 8,
+            "precision": 0.875,
+            "precision_lower_bound": 0.2916666666666667,
+            "precision_upper_bound": 0.9583333333333334,
+            "expected_fact_count": 13,
+            "hit_fact_count": 7,
+            "missed_fact_count": 6,
+            "unresolved_fact_count": 5,
+            "recall": 0.5384615384615384,
+            "recall_lower_bound": 0.5384615384615384,
+            "recall_upper_bound": 0.9230769230769231,
+            "profiles": {
+              "returned_count": 2,
+              "relevant_count": 1,
+              "false_positive_count": 0,
+              "unknown_count": 1,
+              "judged_count": 1,
+              "precision": 1.0,
+              "precision_lower_bound": 0.5,
+              "precision_upper_bound": 1.0,
+              "expected_count": 2,
+              "hit_count": 1,
+              "missed_count": 1,
+              "unresolved_count": 0,
+              "recall": 0.5,
+              "recall_lower_bound": 0.5,
+              "recall_upper_bound": 0.5
+            }
+          },
+          "latency_ms": {
+            "median": 52.1207925012277,
+            "p95_nearest_rank": 78.8202559997444,
+            "max": 78.8202559997444
+          },
+          "llm_calls": 0,
+          "llm_token_usage": {
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0
+          },
+          "llm_usd_at_observed_peak_rates": 0,
+          "embedding_calls": 12,
+          "embedding_tokens": 512,
+          "model_purposes": {},
+          "input_characters_not_tokens": 5753,
+          "candidates_max": 8
+        },
+        "hybrid_llm": {
+          "quality": {
+            "query_count": 12,
+            "returned_count": 17,
+            "relevant_count": 7,
+            "false_positive_count": 1,
+            "unknown_count": 9,
+            "judged_count": 8,
+            "precision": 0.875,
+            "precision_lower_bound": 0.4117647058823529,
+            "precision_upper_bound": 0.9411764705882353,
+            "expected_fact_count": 13,
+            "hit_fact_count": 7,
+            "missed_fact_count": 6,
+            "unresolved_fact_count": 5,
+            "recall": 0.5384615384615384,
+            "recall_lower_bound": 0.5384615384615384,
+            "recall_upper_bound": 0.9230769230769231,
+            "profiles": {
+              "returned_count": 4,
+              "relevant_count": 2,
+              "false_positive_count": 0,
+              "unknown_count": 2,
+              "judged_count": 2,
+              "precision": 1.0,
+              "precision_lower_bound": 0.5,
+              "precision_upper_bound": 1.0,
+              "expected_count": 2,
+              "hit_count": 2,
+              "missed_count": 0,
+              "unresolved_count": 0,
+              "recall": 1.0,
+              "recall_lower_bound": 1.0,
+              "recall_upper_bound": 1.0
+            }
+          },
+          "latency_ms": {
+            "median": 2016.20326200009,
+            "p95_nearest_rank": 3261.6508199989767,
+            "max": 3261.6508199989767
+          },
+          "llm_calls": 10,
+          "llm_token_usage": {
+            "prompt_tokens": 9921,
+            "completion_tokens": 2994,
+            "total_tokens": 12915
+          },
+          "llm_usd_at_observed_peak_rates": 0.005402508,
+          "embedding_calls": 12,
+          "embedding_tokens": 512,
+          "model_purposes": {
+            "semantic_recall": 10
+          },
+          "input_characters_not_tokens": 4524,
+          "candidates_max": 8
+        }
+      }
+    },
+    "heldout_growth": {
+      "index_build": {
+        "indexed": 1016,
+        "calls": 65,
+        "elapsed_ms": 10795.844760999898,
+        "embedding_tokens": 47695
+      },
+      "source_catalog_correction": {
+        "original_invalid_evidence_count": 1000,
+        "source_catalog_count": 1018
+      },
+      "variants": {
+        "existing": {
+          "quality": {
+            "query_count": 12,
+            "returned_count": 16,
+            "relevant_count": 5,
+            "false_positive_count": 0,
+            "unknown_count": 11,
+            "judged_count": 5,
+            "precision": 1.0,
+            "precision_lower_bound": 0.3125,
+            "precision_upper_bound": 1.0,
+            "expected_fact_count": 13,
+            "hit_fact_count": 5,
+            "missed_fact_count": 8,
+            "unresolved_fact_count": 3,
+            "recall": 0.38461538461538464,
+            "recall_lower_bound": 0.38461538461538464,
+            "recall_upper_bound": 0.6153846153846154,
+            "profiles": {
+              "returned_count": 4,
+              "relevant_count": 1,
+              "false_positive_count": 0,
+              "unknown_count": 3,
+              "judged_count": 1,
+              "precision": 1.0,
+              "precision_lower_bound": 0.25,
+              "precision_upper_bound": 1.0,
+              "expected_count": 2,
+              "hit_count": 1,
+              "missed_count": 1,
+              "unresolved_count": 0,
+              "recall": 0.5,
+              "recall_lower_bound": 0.5,
+              "recall_upper_bound": 0.5
+            }
+          },
+          "latency_ms": {
+            "median": 53.572281500237295,
+            "p95_nearest_rank": 76.78383599886729,
+            "max": 76.78383599886729
+          },
+          "llm_calls": 0,
+          "llm_token_usage": {
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0
+          },
+          "llm_usd_at_observed_peak_rates": 0,
+          "embedding_calls": 0,
+          "embedding_tokens": 0,
+          "model_purposes": {},
+          "input_characters_not_tokens": 3932,
+          "candidates_max": 0
+        },
+        "embedding": {
+          "quality": {
+            "query_count": 12,
+            "returned_count": 23,
+            "relevant_count": 7,
+            "false_positive_count": 1,
+            "unknown_count": 15,
+            "judged_count": 8,
+            "precision": 0.875,
+            "precision_lower_bound": 0.30434782608695654,
+            "precision_upper_bound": 0.9565217391304348,
+            "expected_fact_count": 13,
+            "hit_fact_count": 7,
+            "missed_fact_count": 6,
+            "unresolved_fact_count": 5,
+            "recall": 0.5384615384615384,
+            "recall_lower_bound": 0.5384615384615384,
+            "recall_upper_bound": 0.9230769230769231,
+            "profiles": {
+              "returned_count": 2,
+              "relevant_count": 1,
+              "false_positive_count": 0,
+              "unknown_count": 1,
+              "judged_count": 1,
+              "precision": 1.0,
+              "precision_lower_bound": 0.5,
+              "precision_upper_bound": 1.0,
+              "expected_count": 2,
+              "hit_count": 1,
+              "missed_count": 1,
+              "unresolved_count": 0,
+              "recall": 0.5,
+              "recall_lower_bound": 0.5,
+              "recall_upper_bound": 0.5
+            }
+          },
+          "latency_ms": {
+            "median": 357.40766350045305,
+            "p95_nearest_rank": 1223.8524050007982,
+            "max": 1223.8524050007982
+          },
+          "llm_calls": 0,
+          "llm_token_usage": {
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0
+          },
+          "llm_usd_at_observed_peak_rates": 0,
+          "embedding_calls": 12,
+          "embedding_tokens": 512,
+          "model_purposes": {},
+          "input_characters_not_tokens": 5590,
+          "candidates_max": 8
+        },
+        "hybrid": {
+          "quality": {
+            "query_count": 12,
+            "returned_count": 25,
+            "relevant_count": 7,
+            "false_positive_count": 1,
+            "unknown_count": 17,
+            "judged_count": 8,
+            "precision": 0.875,
+            "precision_lower_bound": 0.28,
+            "precision_upper_bound": 0.96,
+            "expected_fact_count": 13,
+            "hit_fact_count": 7,
+            "missed_fact_count": 6,
+            "unresolved_fact_count": 5,
+            "recall": 0.5384615384615384,
+            "recall_lower_bound": 0.5384615384615384,
+            "recall_upper_bound": 0.9230769230769231,
+            "profiles": {
+              "returned_count": 2,
+              "relevant_count": 1,
+              "false_positive_count": 0,
+              "unknown_count": 1,
+              "judged_count": 1,
+              "precision": 1.0,
+              "precision_lower_bound": 0.5,
+              "precision_upper_bound": 1.0,
+              "expected_count": 2,
+              "hit_count": 1,
+              "missed_count": 1,
+              "unresolved_count": 0,
+              "recall": 0.5,
+              "recall_lower_bound": 0.5,
+              "recall_upper_bound": 0.5
+            }
+          },
+          "latency_ms": {
+            "median": 317.6118290002705,
+            "p95_nearest_rank": 425.58851800095,
+            "max": 425.58851800095
+          },
+          "llm_calls": 0,
+          "llm_token_usage": {
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0
+          },
+          "llm_usd_at_observed_peak_rates": 0,
+          "embedding_calls": 12,
+          "embedding_tokens": 512,
+          "model_purposes": {},
+          "input_characters_not_tokens": 5884,
+          "candidates_max": 8
+        },
+        "hybrid_llm": {
+          "quality": {
+            "query_count": 12,
+            "returned_count": 18,
+            "relevant_count": 7,
+            "false_positive_count": 1,
+            "unknown_count": 10,
+            "judged_count": 8,
+            "precision": 0.875,
+            "precision_lower_bound": 0.3888888888888889,
+            "precision_upper_bound": 0.9444444444444444,
+            "expected_fact_count": 13,
+            "hit_fact_count": 7,
+            "missed_fact_count": 6,
+            "unresolved_fact_count": 5,
+            "recall": 0.5384615384615384,
+            "recall_lower_bound": 0.5384615384615384,
+            "recall_upper_bound": 0.9230769230769231,
+            "profiles": {
+              "returned_count": 4,
+              "relevant_count": 2,
+              "false_positive_count": 0,
+              "unknown_count": 2,
+              "judged_count": 2,
+              "precision": 1.0,
+              "precision_lower_bound": 0.5,
+              "precision_upper_bound": 1.0,
+              "expected_count": 2,
+              "hit_count": 2,
+              "missed_count": 0,
+              "unresolved_count": 0,
+              "recall": 1.0,
+              "recall_lower_bound": 1.0,
+              "recall_upper_bound": 1.0
+            }
+          },
+          "latency_ms": {
+            "median": 2225.915645999521,
+            "p95_nearest_rank": 3297.6919600005203,
+            "max": 3297.6919600005203
+          },
+          "llm_calls": 10,
+          "llm_token_usage": {
+            "prompt_tokens": 11447,
+            "completion_tokens": 3197,
+            "total_tokens": 14644
+          },
+          "llm_usd_at_observed_peak_rates": 0.004824419999999999,
+          "embedding_calls": 12,
+          "embedding_tokens": 512,
+          "model_purposes": {
+            "semantic_recall": 10
+          },
+          "input_characters_not_tokens": 4713,
+          "candidates_max": 8
+        }
+      }
+    }
+  },
+  "usage_ledger": [
+    {
+      "run": "dev",
+      "llm_calls": 0,
+      "embedding_calls": 5,
+      "tokens": {
+        "llm": {
+          "prompt_tokens": 0,
+          "completion_tokens": 0,
+          "total_tokens": 0
+        },
+        "embedding": {
+          "prompt_tokens": 4002,
+          "completion_tokens": 0,
+          "total_tokens": 4002
+        }
+      },
+      "llm_usd_peak_estimate": 0
+    },
+    {
+      "run": "dev2",
+      "llm_calls": 5,
+      "embedding_calls": 20,
+      "tokens": {
+        "llm": {
+          "prompt_tokens": 7448,
+          "completion_tokens": 1837,
+          "total_tokens": 9285
+        },
+        "embedding": {
+          "prompt_tokens": 4635,
+          "completion_tokens": 0,
+          "total_tokens": 4635
+        }
+      },
+      "llm_usd_peak_estimate": 0.003949584
+    },
+    {
+      "run": "dev3",
+      "llm_calls": 6,
+      "embedding_calls": 20,
+      "tokens": {
+        "llm": {
+          "prompt_tokens": 8063,
+          "completion_tokens": 1653,
+          "total_tokens": 9716
+        },
+        "embedding": {
+          "prompt_tokens": 4635,
+          "completion_tokens": 0,
+          "total_tokens": 4635
+        }
+      },
+      "llm_usd_peak_estimate": 0.002784324
+    },
+    {
+      "run": "frozen",
+      "llm_calls": 71,
+      "embedding_calls": 248,
+      "tokens": {
+        "llm": {
+          "prompt_tokens": 95855,
+          "completion_tokens": 21377,
+          "total_tokens": 117232
+        },
+        "embedding": {
+          "prompt_tokens": 60936,
+          "completion_tokens": 0,
+          "total_tokens": 60936
+        }
+      },
+      "llm_usd_peak_estimate": 0.042291395999999995
+    },
+    {
+      "run": "live-native",
+      "llm_calls": 21,
+      "embedding_calls": 8,
+      "tokens": {
+        "llm": {
+          "prompt_tokens": 41905,
+          "completion_tokens": 3538,
+          "total_tokens": 45443
+        },
+        "embedding": {
+          "prompt_tokens": 2841,
+          "completion_tokens": 0,
+          "total_tokens": 2841
+        }
+      },
+      "llm_usd_peak_estimate": 0.0111723
+    },
+    {
+      "run": "live-lossy",
+      "llm_calls": 21,
+      "embedding_calls": 8,
+      "tokens": {
+        "llm": {
+          "prompt_tokens": 41438,
+          "completion_tokens": 2948,
+          "total_tokens": 44386
+        },
+        "embedding": {
+          "prompt_tokens": 2845,
+          "completion_tokens": 0,
+          "total_tokens": 2845
+        }
+      },
+      "llm_usd_peak_estimate": 0.010512359999999998
+    },
+    {
+      "run": "live-native-final",
+      "llm_calls": 21,
+      "embedding_calls": 8,
+      "tokens": {
+        "llm": {
+          "prompt_tokens": 42794,
+          "completion_tokens": 3770,
+          "total_tokens": 46564
+        },
+        "embedding": {
+          "prompt_tokens": 2842,
+          "completion_tokens": 0,
+          "total_tokens": 2842
+        }
+      },
+      "llm_usd_peak_estimate": 0.010738968
+    },
+    {
+      "run": "live-lossy-final",
+      "llm_calls": 21,
+      "embedding_calls": 8,
+      "tokens": {
+        "llm": {
+          "prompt_tokens": 40789,
+          "completion_tokens": 2844,
+          "total_tokens": 43633
+        },
+        "embedding": {
+          "prompt_tokens": 2839,
+          "completion_tokens": 0,
+          "total_tokens": 2839
+        }
+      },
+      "llm_usd_peak_estimate": 0.00925206
+    },
+    {
+      "run": "token-probe",
+      "llm_calls": 40,
+      "embedding_calls": 0,
+      "tokens": {
+        "llm": {
+          "prompt_tokens": 9730,
+          "completion_tokens": 40,
+          "total_tokens": 9770
+        },
+        "embedding": {}
+      },
+      "llm_usd_peak_estimate": 0.002628312
+    },
+    {
+      "run": "token-probe-final",
+      "llm_calls": 24,
+      "embedding_calls": 0,
+      "tokens": {
+        "llm": {
+          "prompt_tokens": 7355,
+          "completion_tokens": 24,
+          "total_tokens": 7379
+        },
+        "embedding": {}
+      },
+      "llm_usd_peak_estimate": 0.001896612
+    },
+    {
+      "run": "cache_probe",
+      "llm_calls": 0,
+      "embedding_calls": 1,
+      "tokens": {
+        "llm": {},
+        "embedding": {
+          "total_tokens": 41
+        }
+      },
+      "llm_usd_peak_estimate": 0
+    },
+    {
+      "run": "initial_real_local_smoke_console",
+      "llm_calls": 0,
+      "embedding_calls": 1,
+      "tokens": {
+        "llm": {},
+        "embedding": {
+          "total_tokens": 31
+        }
+      },
+      "llm_usd_peak_estimate": 0
+    }
+  ],
+  "unknown_queue": [
+    {
+      "dataset": "regression",
+      "variant": "existing",
+      "query_id": "q02",
+      "unknown_ids": [
+        "f7f1f901-64d0-4e8e-bd3c-9764bd6215f6",
+        "5f2277ae-1a0f-4560-bc35-4d7dd991fdcd"
+      ],
+      "unresolved_fact_ids": [
+        "f04"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "existing",
+      "query_id": "q03",
+      "unknown_ids": [
+        "34dd0cd4-9093-4650-9cb7-fc9e39d6f302",
+        "6357d37f-ae15-44ca-98b1-11663b0031b5",
+        "ae8cfa24-55ed-4f8a-8934-51ceb988f48e"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": [
+        "f04",
+        "f10",
+        "f11"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "variant": "existing",
+      "query_id": "q04",
+      "unknown_ids": [],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [
+        "417a230a-ee91-4902-b459-98949949326e"
+      ],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "existing",
+      "query_id": "q05",
+      "unknown_ids": [
+        "4399f25d-fe45-4d32-b140-05fac9ad33de"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "existing",
+      "query_id": "q06",
+      "unknown_ids": [
+        "acc2df4b-d1ea-4b04-b645-193af279ee64",
+        "05b504da-b573-4f2a-9105-cce67e7c0104"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "existing",
+      "query_id": "q09",
+      "unknown_ids": [
+        "40663291-d25c-49d4-ae27-2535d40b05d8",
+        "7dd6a756-292d-4265-8cc1-3c887995afd5",
+        "81566ca0-f688-4261-9b9f-4a44a74abe28"
+      ],
+      "unresolved_fact_ids": [
+        "f06"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "existing",
+      "query_id": "q10",
+      "unknown_ids": [
+        "03ac7bdc-471f-4b4f-ac73-f6684e52895e",
+        "7dd6a756-292d-4265-8cc1-3c887995afd5"
+      ],
+      "unresolved_fact_ids": [
+        "f07"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "existing",
+      "query_id": "q14",
+      "unknown_ids": [],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": [
+        "f13"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "variant": "existing",
+      "query_id": "q15",
+      "unknown_ids": [
+        "ae8cfa24-55ed-4f8a-8934-51ceb988f48e",
+        "34dd0cd4-9093-4650-9cb7-fc9e39d6f302"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "existing",
+      "query_id": "q16",
+      "unknown_ids": [
+        "e0bcba89-1ed9-4a3d-9d59-9c8274ad4d6d"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "existing",
+      "query_id": "q17",
+      "unknown_ids": [
+        "d3b47d62-836e-47fa-8937-705e5c301f8a",
+        "417a230a-ee91-4902-b459-98949949326e"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "existing",
+      "query_id": "q18",
+      "unknown_ids": [
+        "d814bc9f-9bc1-466e-9b74-2448bbebfd11"
+      ],
+      "unresolved_fact_ids": [
+        "f02"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "existing",
+      "query_id": "q21",
+      "unknown_ids": [
+        "9bdd446d-650d-4ec1-8256-08cb17ea36ff"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "existing",
+      "query_id": "q22",
+      "unknown_ids": [],
+      "unresolved_fact_ids": [
+        "f22"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "existing",
+      "query_id": "q23",
+      "unknown_ids": [
+        "4399f25d-fe45-4d32-b140-05fac9ad33de"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "existing",
+      "query_id": "q24",
+      "unknown_ids": [
+        "f7f1f901-64d0-4e8e-bd3c-9764bd6215f6",
+        "40663291-d25c-49d4-ae27-2535d40b05d8"
+      ],
+      "unresolved_fact_ids": [
+        "f04"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "embedding",
+      "query_id": "q02",
+      "unknown_ids": [
+        "5f2277ae-1a0f-4560-bc35-4d7dd991fdcd",
+        "f7f1f901-64d0-4e8e-bd3c-9764bd6215f6"
+      ],
+      "unresolved_fact_ids": [
+        "f04"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "embedding",
+      "query_id": "q03",
+      "unknown_ids": [
+        "f7f1f901-64d0-4e8e-bd3c-9764bd6215f6",
+        "34dd0cd4-9093-4650-9cb7-fc9e39d6f302",
+        "5f2277ae-1a0f-4560-bc35-4d7dd991fdcd"
+      ],
+      "unresolved_fact_ids": [
+        "f04"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": [
+        "f10",
+        "f11"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "variant": "embedding",
+      "query_id": "q04",
+      "unknown_ids": [],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [
+        "417a230a-ee91-4902-b459-98949949326e"
+      ],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "embedding",
+      "query_id": "q05",
+      "unknown_ids": [],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [
+        "ea54c822-831d-498d-8195-7f7cccc07a61"
+      ],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "embedding",
+      "query_id": "q06",
+      "unknown_ids": [
+        "05b504da-b573-4f2a-9105-cce67e7c0104",
+        "34dd0cd4-9093-4650-9cb7-fc9e39d6f302"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "embedding",
+      "query_id": "q07",
+      "unknown_ids": [
+        "d9cbbcf0-62cb-4d06-acc0-f7d9692654ec"
+      ],
+      "unresolved_fact_ids": [
+        "f19"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "embedding",
+      "query_id": "q08",
+      "unknown_ids": [
+        "5c2500d0-8dca-43d2-9ea8-0c57841b7966"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "embedding",
+      "query_id": "q09",
+      "unknown_ids": [
+        "40663291-d25c-49d4-ae27-2535d40b05d8",
+        "81566ca0-f688-4261-9b9f-4a44a74abe28",
+        "7dd6a756-292d-4265-8cc1-3c887995afd5"
+      ],
+      "unresolved_fact_ids": [
+        "f06"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "embedding",
+      "query_id": "q10",
+      "unknown_ids": [
+        "03ac7bdc-471f-4b4f-ac73-f6684e52895e"
+      ],
+      "unresolved_fact_ids": [
+        "f22"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": [
+        "f07"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "variant": "embedding",
+      "query_id": "q11",
+      "unknown_ids": [
+        "5f2277ae-1a0f-4560-bc35-4d7dd991fdcd"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "embedding",
+      "query_id": "q13",
+      "unknown_ids": [
+        "806da7f1-fb2a-4732-88d6-fc9dd4d5c27d"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "embedding",
+      "query_id": "q14",
+      "unknown_ids": [
+        "7d461d08-b920-432c-a86d-3a9d132f663a",
+        "9bdd446d-650d-4ec1-8256-08cb17ea36ff"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": [
+        "f13"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "variant": "embedding",
+      "query_id": "q15",
+      "unknown_ids": [
+        "ae8cfa24-55ed-4f8a-8934-51ceb988f48e",
+        "34dd0cd4-9093-4650-9cb7-fc9e39d6f302"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "embedding",
+      "query_id": "q16",
+      "unknown_ids": [
+        "e0bcba89-1ed9-4a3d-9d59-9c8274ad4d6d",
+        "d814bc9f-9bc1-466e-9b74-2448bbebfd11"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "embedding",
+      "query_id": "q17",
+      "unknown_ids": [
+        "d3b47d62-836e-47fa-8937-705e5c301f8a",
+        "417a230a-ee91-4902-b459-98949949326e"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "embedding",
+      "query_id": "q18",
+      "unknown_ids": [
+        "d814bc9f-9bc1-466e-9b74-2448bbebfd11"
+      ],
+      "unresolved_fact_ids": [
+        "f02"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "embedding",
+      "query_id": "q21",
+      "unknown_ids": [
+        "9bdd446d-650d-4ec1-8256-08cb17ea36ff"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "embedding",
+      "query_id": "q22",
+      "unknown_ids": [],
+      "unresolved_fact_ids": [
+        "f22"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "embedding",
+      "query_id": "q23",
+      "unknown_ids": [
+        "4399f25d-fe45-4d32-b140-05fac9ad33de",
+        "acc2df4b-d1ea-4b04-b645-193af279ee64"
+      ],
+      "unresolved_fact_ids": [
+        "f17"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "embedding",
+      "query_id": "q24",
+      "unknown_ids": [
+        "f7f1f901-64d0-4e8e-bd3c-9764bd6215f6"
+      ],
+      "unresolved_fact_ids": [
+        "f04"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "hybrid",
+      "query_id": "q02",
+      "unknown_ids": [
+        "5f2277ae-1a0f-4560-bc35-4d7dd991fdcd",
+        "f7f1f901-64d0-4e8e-bd3c-9764bd6215f6"
+      ],
+      "unresolved_fact_ids": [
+        "f04"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "hybrid",
+      "query_id": "q03",
+      "unknown_ids": [
+        "f7f1f901-64d0-4e8e-bd3c-9764bd6215f6",
+        "34dd0cd4-9093-4650-9cb7-fc9e39d6f302"
+      ],
+      "unresolved_fact_ids": [
+        "f04"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": [
+        "f10",
+        "f11"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "variant": "hybrid",
+      "query_id": "q04",
+      "unknown_ids": [],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [
+        "417a230a-ee91-4902-b459-98949949326e"
+      ],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "hybrid",
+      "query_id": "q05",
+      "unknown_ids": [],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [
+        "ea54c822-831d-498d-8195-7f7cccc07a61"
+      ],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "hybrid",
+      "query_id": "q06",
+      "unknown_ids": [
+        "d814bc9f-9bc1-466e-9b74-2448bbebfd11",
+        "05b504da-b573-4f2a-9105-cce67e7c0104"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "hybrid",
+      "query_id": "q08",
+      "unknown_ids": [],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [
+        "acfb8eed-13bd-402f-ac40-21d9a22e1b39"
+      ],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "hybrid",
+      "query_id": "q09",
+      "unknown_ids": [
+        "40663291-d25c-49d4-ae27-2535d40b05d8",
+        "7dd6a756-292d-4265-8cc1-3c887995afd5",
+        "81566ca0-f688-4261-9b9f-4a44a74abe28"
+      ],
+      "unresolved_fact_ids": [
+        "f06"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "hybrid",
+      "query_id": "q10",
+      "unknown_ids": [
+        "03ac7bdc-471f-4b4f-ac73-f6684e52895e"
+      ],
+      "unresolved_fact_ids": [
+        "f22"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": [
+        "f07"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "variant": "hybrid",
+      "query_id": "q11",
+      "unknown_ids": [
+        "5f2277ae-1a0f-4560-bc35-4d7dd991fdcd"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "hybrid",
+      "query_id": "q12",
+      "unknown_ids": [
+        "ef487b4b-7cc0-4b03-9de9-6d475c63741c",
+        "d6d4e9b6-6a80-4771-81b3-b19a472e1a39",
+        "7dd6a756-292d-4265-8cc1-3c887995afd5"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "hybrid",
+      "query_id": "q13",
+      "unknown_ids": [
+        "806da7f1-fb2a-4732-88d6-fc9dd4d5c27d",
+        "d6d4e9b6-6a80-4771-81b3-b19a472e1a39"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "hybrid",
+      "query_id": "q14",
+      "unknown_ids": [
+        "7d461d08-b920-432c-a86d-3a9d132f663a",
+        "81566ca0-f688-4261-9b9f-4a44a74abe28"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": [
+        "f13"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "variant": "hybrid",
+      "query_id": "q15",
+      "unknown_ids": [
+        "ae8cfa24-55ed-4f8a-8934-51ceb988f48e",
+        "34dd0cd4-9093-4650-9cb7-fc9e39d6f302"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "hybrid",
+      "query_id": "q16",
+      "unknown_ids": [
+        "e0bcba89-1ed9-4a3d-9d59-9c8274ad4d6d",
+        "40663291-d25c-49d4-ae27-2535d40b05d8"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "hybrid",
+      "query_id": "q17",
+      "unknown_ids": [
+        "d3b47d62-836e-47fa-8937-705e5c301f8a",
+        "417a230a-ee91-4902-b459-98949949326e"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "hybrid",
+      "query_id": "q18",
+      "unknown_ids": [
+        "d814bc9f-9bc1-466e-9b74-2448bbebfd11"
+      ],
+      "unresolved_fact_ids": [
+        "f02"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "hybrid",
+      "query_id": "q20",
+      "unknown_ids": [],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [
+        "417a230a-ee91-4902-b459-98949949326e",
+        "acfb8eed-13bd-402f-ac40-21d9a22e1b39"
+      ],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "hybrid",
+      "query_id": "q21",
+      "unknown_ids": [
+        "9bdd446d-650d-4ec1-8256-08cb17ea36ff"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [
+        "62fb18ac-3fbf-44e5-ab21-902557510eec"
+      ],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "hybrid",
+      "query_id": "q22",
+      "unknown_ids": [
+        "40663291-d25c-49d4-ae27-2535d40b05d8"
+      ],
+      "unresolved_fact_ids": [
+        "f22"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "hybrid",
+      "query_id": "q23",
+      "unknown_ids": [
+        "acc2df4b-d1ea-4b04-b645-193af279ee64"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "hybrid",
+      "query_id": "q24",
+      "unknown_ids": [
+        "f7f1f901-64d0-4e8e-bd3c-9764bd6215f6",
+        "34dd0cd4-9093-4650-9cb7-fc9e39d6f302"
+      ],
+      "unresolved_fact_ids": [
+        "f04"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "hybrid_llm",
+      "query_id": "q02",
+      "unknown_ids": [
+        "f7f1f901-64d0-4e8e-bd3c-9764bd6215f6",
+        "5f2277ae-1a0f-4560-bc35-4d7dd991fdcd"
+      ],
+      "unresolved_fact_ids": [
+        "f04"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "hybrid_llm",
+      "query_id": "q03",
+      "unknown_ids": [
+        "f7f1f901-64d0-4e8e-bd3c-9764bd6215f6"
+      ],
+      "unresolved_fact_ids": [
+        "f04"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "hybrid_llm",
+      "query_id": "q06",
+      "unknown_ids": [
+        "05b504da-b573-4f2a-9105-cce67e7c0104"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "hybrid_llm",
+      "query_id": "q09",
+      "unknown_ids": [
+        "7dd6a756-292d-4265-8cc1-3c887995afd5",
+        "ef487b4b-7cc0-4b03-9de9-6d475c63741c"
+      ],
+      "unresolved_fact_ids": [
+        "f06"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "hybrid_llm",
+      "query_id": "q10",
+      "unknown_ids": [
+        "7dd6a756-292d-4265-8cc1-3c887995afd5"
+      ],
+      "unresolved_fact_ids": [
+        "f07"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "hybrid_llm",
+      "query_id": "q13",
+      "unknown_ids": [
+        "d6d4e9b6-6a80-4771-81b3-b19a472e1a39"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "hybrid_llm",
+      "query_id": "q14",
+      "unknown_ids": [
+        "34dd0cd4-9093-4650-9cb7-fc9e39d6f302"
+      ],
+      "unresolved_fact_ids": [
+        "f13"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "hybrid_llm",
+      "query_id": "q15",
+      "unknown_ids": [
+        "ae8cfa24-55ed-4f8a-8934-51ceb988f48e"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "hybrid_llm",
+      "query_id": "q16",
+      "unknown_ids": [
+        "e0bcba89-1ed9-4a3d-9d59-9c8274ad4d6d"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "hybrid_llm",
+      "query_id": "q17",
+      "unknown_ids": [
+        "d3b47d62-836e-47fa-8937-705e5c301f8a"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "hybrid_llm",
+      "query_id": "q18",
+      "unknown_ids": [
+        "d814bc9f-9bc1-466e-9b74-2448bbebfd11"
+      ],
+      "unresolved_fact_ids": [
+        "f02"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": [
+        "f17"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "variant": "hybrid_llm",
+      "query_id": "q22",
+      "unknown_ids": [],
+      "unresolved_fact_ids": [
+        "f22"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "hybrid_llm",
+      "query_id": "q23",
+      "unknown_ids": [
+        "acc2df4b-d1ea-4b04-b645-193af279ee64"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "regression",
+      "variant": "hybrid_llm",
+      "query_id": "q24",
+      "unknown_ids": [
+        "f7f1f901-64d0-4e8e-bd3c-9764bd6215f6"
+      ],
+      "unresolved_fact_ids": [
+        "f04"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "phase_c_regression",
+      "variant": "existing",
+      "query_id": "z01",
+      "unknown_ids": [
+        "6f77b950-ccc9-452b-9177-645c5b7735c4"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "phase_c_regression",
+      "variant": "existing",
+      "query_id": "z03",
+      "unknown_ids": [
+        "053feace-1d46-43e0-8118-d77bbdbf40b6"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [
+        "0b79aac0-bd57-4909-b140-81bba832a589"
+      ],
+      "no_candidate_fact_ids": [
+        "h03"
+      ]
+    },
+    {
+      "dataset": "phase_c_regression",
+      "variant": "existing",
+      "query_id": "z05",
+      "unknown_ids": [],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": [
+        "h05"
+      ]
+    },
+    {
+      "dataset": "phase_c_regression",
+      "variant": "existing",
+      "query_id": "z06",
+      "unknown_ids": [],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": [
+        "h06"
+      ]
+    },
+    {
+      "dataset": "phase_c_regression",
+      "variant": "existing",
+      "query_id": "z07",
+      "unknown_ids": [
+        "f50ee33b-550f-4e15-9c3c-0732403ae297"
+      ],
+      "unresolved_fact_ids": [
+        "h08"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "phase_c_regression",
+      "variant": "existing",
+      "query_id": "z08",
+      "unknown_ids": [
+        "d2016ef2-9f79-4020-acb0-dc0723b8099a"
+      ],
+      "unresolved_fact_ids": [
+        "h09"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "phase_c_regression",
+      "variant": "embedding",
+      "query_id": "z01",
+      "unknown_ids": [],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [
+        "9682e982-1d49-4891-98ce-94f0ce16a69a"
+      ],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "phase_c_regression",
+      "variant": "embedding",
+      "query_id": "z03",
+      "unknown_ids": [
+        "053feace-1d46-43e0-8118-d77bbdbf40b6"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [
+        "f96f3707-1b1c-41cf-9179-bb88775c9d8d"
+      ],
+      "no_candidate_fact_ids": [
+        "h03"
+      ]
+    },
+    {
+      "dataset": "phase_c_regression",
+      "variant": "embedding",
+      "query_id": "z05",
+      "unknown_ids": [
+        "053feace-1d46-43e0-8118-d77bbdbf40b6"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "phase_c_regression",
+      "variant": "embedding",
+      "query_id": "z06",
+      "unknown_ids": [
+        "6f77b950-ccc9-452b-9177-645c5b7735c4",
+        "d35e02d4-f752-42f3-8f94-eac0390c9975"
+      ],
+      "unresolved_fact_ids": [
+        "h06"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "phase_c_regression",
+      "variant": "embedding",
+      "query_id": "z07",
+      "unknown_ids": [
+        "f50ee33b-550f-4e15-9c3c-0732403ae297"
+      ],
+      "unresolved_fact_ids": [
+        "h08"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "phase_c_regression",
+      "variant": "embedding",
+      "query_id": "z08",
+      "unknown_ids": [
+        "d2016ef2-9f79-4020-acb0-dc0723b8099a"
+      ],
+      "unresolved_fact_ids": [
+        "h09"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "phase_c_regression",
+      "variant": "hybrid",
+      "query_id": "z01",
+      "unknown_ids": [
+        "6f77b950-ccc9-452b-9177-645c5b7735c4"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "phase_c_regression",
+      "variant": "hybrid",
+      "query_id": "z03",
+      "unknown_ids": [
+        "053feace-1d46-43e0-8118-d77bbdbf40b6"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [
+        "0b79aac0-bd57-4909-b140-81bba832a589"
+      ],
+      "no_candidate_fact_ids": [
+        "h03"
+      ]
+    },
+    {
+      "dataset": "phase_c_regression",
+      "variant": "hybrid",
+      "query_id": "z05",
+      "unknown_ids": [
+        "053feace-1d46-43e0-8118-d77bbdbf40b6",
+        "6f77b950-ccc9-452b-9177-645c5b7735c4"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "phase_c_regression",
+      "variant": "hybrid",
+      "query_id": "z06",
+      "unknown_ids": [
+        "6f77b950-ccc9-452b-9177-645c5b7735c4",
+        "d35e02d4-f752-42f3-8f94-eac0390c9975"
+      ],
+      "unresolved_fact_ids": [
+        "h06"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "phase_c_regression",
+      "variant": "hybrid",
+      "query_id": "z07",
+      "unknown_ids": [
+        "f50ee33b-550f-4e15-9c3c-0732403ae297"
+      ],
+      "unresolved_fact_ids": [
+        "h08"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "phase_c_regression",
+      "variant": "hybrid",
+      "query_id": "z08",
+      "unknown_ids": [
+        "d2016ef2-9f79-4020-acb0-dc0723b8099a"
+      ],
+      "unresolved_fact_ids": [
+        "h09"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "phase_c_regression",
+      "variant": "hybrid_llm",
+      "query_id": "z03",
+      "unknown_ids": [],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": [
+        "h03"
+      ]
+    },
+    {
+      "dataset": "phase_c_regression",
+      "variant": "hybrid_llm",
+      "query_id": "z06",
+      "unknown_ids": [
+        "d35e02d4-f752-42f3-8f94-eac0390c9975",
+        "6f77b950-ccc9-452b-9177-645c5b7735c4"
+      ],
+      "unresolved_fact_ids": [
+        "h06"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "phase_c_regression",
+      "variant": "hybrid_llm",
+      "query_id": "z07",
+      "unknown_ids": [
+        "f50ee33b-550f-4e15-9c3c-0732403ae297"
+      ],
+      "unresolved_fact_ids": [
+        "h08"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "phase_c_regression",
+      "variant": "hybrid_llm",
+      "query_id": "z08",
+      "unknown_ids": [
+        "d2016ef2-9f79-4020-acb0-dc0723b8099a"
+      ],
+      "unresolved_fact_ids": [
+        "h09"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout",
+      "variant": "existing",
+      "query_id": "w01",
+      "unknown_ids": [],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": [
+        "d01"
+      ]
+    },
+    {
+      "dataset": "heldout",
+      "variant": "existing",
+      "query_id": "w02",
+      "unknown_ids": [
+        "5bb386d7-1e8a-4d3f-811c-e16ebbaa827f"
+      ],
+      "unresolved_fact_ids": [
+        "d02"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout",
+      "variant": "existing",
+      "query_id": "w03",
+      "unknown_ids": [
+        "39d7cc06-ea4c-42c0-bb40-344d642054f8"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": [
+        "d03"
+      ]
+    },
+    {
+      "dataset": "heldout",
+      "variant": "existing",
+      "query_id": "w04",
+      "unknown_ids": [
+        "5bb386d7-1e8a-4d3f-811c-e16ebbaa827f",
+        "2fd6b588-112e-480c-aee4-c1de2a5781a7"
+      ],
+      "unresolved_fact_ids": [
+        "d02"
+      ],
+      "false_positive_ids": [
+        "98e044b1-e9f2-4432-91e0-049fa7c4810e"
+      ],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout",
+      "variant": "existing",
+      "query_id": "w05",
+      "unknown_ids": [],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": [
+        "d05"
+      ]
+    },
+    {
+      "dataset": "heldout",
+      "variant": "existing",
+      "query_id": "w06",
+      "unknown_ids": [
+        "b88d4ee4-c510-4c7b-9429-cc27111a261e"
+      ],
+      "unresolved_fact_ids": [
+        "d06"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout",
+      "variant": "existing",
+      "query_id": "w09",
+      "unknown_ids": [],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": [
+        "d09"
+      ]
+    },
+    {
+      "dataset": "heldout",
+      "variant": "existing",
+      "query_id": "w11",
+      "unknown_ids": [
+        "d18126c1-1bfb-4725-aeb0-22a68b5d7f7a"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout",
+      "variant": "existing",
+      "query_id": "w12",
+      "unknown_ids": [
+        "5bb386d7-1e8a-4d3f-811c-e16ebbaa827f"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": [
+        "d05"
+      ]
+    },
+    {
+      "dataset": "heldout",
+      "variant": "embedding",
+      "query_id": "w01",
+      "unknown_ids": [
+        "5bb386d7-1e8a-4d3f-811c-e16ebbaa827f",
+        "39d7cc06-ea4c-42c0-bb40-344d642054f8"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout",
+      "variant": "embedding",
+      "query_id": "w02",
+      "unknown_ids": [
+        "5bb386d7-1e8a-4d3f-811c-e16ebbaa827f",
+        "b88d4ee4-c510-4c7b-9429-cc27111a261e"
+      ],
+      "unresolved_fact_ids": [
+        "d02"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout",
+      "variant": "embedding",
+      "query_id": "w04",
+      "unknown_ids": [
+        "5bb386d7-1e8a-4d3f-811c-e16ebbaa827f",
+        "9cdd35f7-a5f2-4d03-bfc0-6180c3223eb0"
+      ],
+      "unresolved_fact_ids": [
+        "d02"
+      ],
+      "false_positive_ids": [
+        "98e044b1-e9f2-4432-91e0-049fa7c4810e"
+      ],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout",
+      "variant": "embedding",
+      "query_id": "w05",
+      "unknown_ids": [
+        "39d7cc06-ea4c-42c0-bb40-344d642054f8",
+        "5bb386d7-1e8a-4d3f-811c-e16ebbaa827f"
+      ],
+      "unresolved_fact_ids": [
+        "d05"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout",
+      "variant": "embedding",
+      "query_id": "w06",
+      "unknown_ids": [
+        "b88d4ee4-c510-4c7b-9429-cc27111a261e",
+        "2fd6b588-112e-480c-aee4-c1de2a5781a7"
+      ],
+      "unresolved_fact_ids": [
+        "d06"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout",
+      "variant": "embedding",
+      "query_id": "w09",
+      "unknown_ids": [],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": [
+        "d09"
+      ]
+    },
+    {
+      "dataset": "heldout",
+      "variant": "embedding",
+      "query_id": "w11",
+      "unknown_ids": [
+        "d18126c1-1bfb-4725-aeb0-22a68b5d7f7a",
+        "5bb386d7-1e8a-4d3f-811c-e16ebbaa827f"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout",
+      "variant": "embedding",
+      "query_id": "w12",
+      "unknown_ids": [
+        "5bb386d7-1e8a-4d3f-811c-e16ebbaa827f",
+        "39d7cc06-ea4c-42c0-bb40-344d642054f8"
+      ],
+      "unresolved_fact_ids": [
+        "d05"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout",
+      "variant": "hybrid",
+      "query_id": "w01",
+      "unknown_ids": [
+        "5bb386d7-1e8a-4d3f-811c-e16ebbaa827f",
+        "39d7cc06-ea4c-42c0-bb40-344d642054f8"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout",
+      "variant": "hybrid",
+      "query_id": "w02",
+      "unknown_ids": [
+        "5bb386d7-1e8a-4d3f-811c-e16ebbaa827f",
+        "b88d4ee4-c510-4c7b-9429-cc27111a261e"
+      ],
+      "unresolved_fact_ids": [
+        "d02"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout",
+      "variant": "hybrid",
+      "query_id": "w03",
+      "unknown_ids": [
+        "39d7cc06-ea4c-42c0-bb40-344d642054f8"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout",
+      "variant": "hybrid",
+      "query_id": "w04",
+      "unknown_ids": [
+        "5bb386d7-1e8a-4d3f-811c-e16ebbaa827f",
+        "2fd6b588-112e-480c-aee4-c1de2a5781a7"
+      ],
+      "unresolved_fact_ids": [
+        "d02"
+      ],
+      "false_positive_ids": [
+        "98e044b1-e9f2-4432-91e0-049fa7c4810e"
+      ],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout",
+      "variant": "hybrid",
+      "query_id": "w05",
+      "unknown_ids": [
+        "39d7cc06-ea4c-42c0-bb40-344d642054f8",
+        "5bb386d7-1e8a-4d3f-811c-e16ebbaa827f"
+      ],
+      "unresolved_fact_ids": [
+        "d05"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout",
+      "variant": "hybrid",
+      "query_id": "w06",
+      "unknown_ids": [
+        "b88d4ee4-c510-4c7b-9429-cc27111a261e",
+        "2fd6b588-112e-480c-aee4-c1de2a5781a7"
+      ],
+      "unresolved_fact_ids": [
+        "d06"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout",
+      "variant": "hybrid",
+      "query_id": "w08",
+      "unknown_ids": [
+        "5ad193b1-9090-4fbf-91a4-6b981ffcfc4d"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout",
+      "variant": "hybrid",
+      "query_id": "w09",
+      "unknown_ids": [],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": [
+        "d09"
+      ]
+    },
+    {
+      "dataset": "heldout",
+      "variant": "hybrid",
+      "query_id": "w11",
+      "unknown_ids": [
+        "d18126c1-1bfb-4725-aeb0-22a68b5d7f7a",
+        "5bb386d7-1e8a-4d3f-811c-e16ebbaa827f"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout",
+      "variant": "hybrid",
+      "query_id": "w12",
+      "unknown_ids": [
+        "5bb386d7-1e8a-4d3f-811c-e16ebbaa827f",
+        "39d7cc06-ea4c-42c0-bb40-344d642054f8"
+      ],
+      "unresolved_fact_ids": [
+        "d05"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout",
+      "variant": "hybrid_llm",
+      "query_id": "w02",
+      "unknown_ids": [
+        "5bb386d7-1e8a-4d3f-811c-e16ebbaa827f"
+      ],
+      "unresolved_fact_ids": [
+        "d02"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout",
+      "variant": "hybrid_llm",
+      "query_id": "w04",
+      "unknown_ids": [
+        "5bb386d7-1e8a-4d3f-811c-e16ebbaa827f",
+        "2fd6b588-112e-480c-aee4-c1de2a5781a7"
+      ],
+      "unresolved_fact_ids": [
+        "d02"
+      ],
+      "false_positive_ids": [
+        "98e044b1-e9f2-4432-91e0-049fa7c4810e"
+      ],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout",
+      "variant": "hybrid_llm",
+      "query_id": "w05",
+      "unknown_ids": [
+        "39d7cc06-ea4c-42c0-bb40-344d642054f8"
+      ],
+      "unresolved_fact_ids": [
+        "d05"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout",
+      "variant": "hybrid_llm",
+      "query_id": "w06",
+      "unknown_ids": [
+        "2fd6b588-112e-480c-aee4-c1de2a5781a7",
+        "b88d4ee4-c510-4c7b-9429-cc27111a261e"
+      ],
+      "unresolved_fact_ids": [
+        "d06"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout",
+      "variant": "hybrid_llm",
+      "query_id": "w09",
+      "unknown_ids": [],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": [
+        "d09"
+      ]
+    },
+    {
+      "dataset": "heldout",
+      "variant": "hybrid_llm",
+      "query_id": "w11",
+      "unknown_ids": [
+        "d18126c1-1bfb-4725-aeb0-22a68b5d7f7a"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout",
+      "variant": "hybrid_llm",
+      "query_id": "w12",
+      "unknown_ids": [
+        "5bb386d7-1e8a-4d3f-811c-e16ebbaa827f",
+        "39d7cc06-ea4c-42c0-bb40-344d642054f8"
+      ],
+      "unresolved_fact_ids": [
+        "d05"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout_growth",
+      "variant": "existing",
+      "query_id": "w01",
+      "unknown_ids": [],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": [
+        "d01"
+      ]
+    },
+    {
+      "dataset": "heldout_growth",
+      "variant": "existing",
+      "query_id": "w02",
+      "unknown_ids": [
+        "5bb386d7-1e8a-4d3f-811c-e16ebbaa827f"
+      ],
+      "unresolved_fact_ids": [
+        "d02"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout_growth",
+      "variant": "existing",
+      "query_id": "w03",
+      "unknown_ids": [
+        "39d7cc06-ea4c-42c0-bb40-344d642054f8"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": [
+        "d03"
+      ]
+    },
+    {
+      "dataset": "heldout_growth",
+      "variant": "existing",
+      "query_id": "w04",
+      "unknown_ids": [
+        "5bb386d7-1e8a-4d3f-811c-e16ebbaa827f",
+        "2fd6b588-112e-480c-aee4-c1de2a5781a7",
+        "noise-s-10"
+      ],
+      "unresolved_fact_ids": [
+        "d02"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout_growth",
+      "variant": "existing",
+      "query_id": "w05",
+      "unknown_ids": [
+        "noise-s-10",
+        "noise-s-101",
+        "noise-s-108"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": [
+        "d05"
+      ]
+    },
+    {
+      "dataset": "heldout_growth",
+      "variant": "existing",
+      "query_id": "w06",
+      "unknown_ids": [
+        "b88d4ee4-c510-4c7b-9429-cc27111a261e"
+      ],
+      "unresolved_fact_ids": [
+        "d06"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout_growth",
+      "variant": "existing",
+      "query_id": "w09",
+      "unknown_ids": [],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": [
+        "d09"
+      ]
+    },
+    {
+      "dataset": "heldout_growth",
+      "variant": "existing",
+      "query_id": "w11",
+      "unknown_ids": [
+        "d18126c1-1bfb-4725-aeb0-22a68b5d7f7a"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout_growth",
+      "variant": "existing",
+      "query_id": "w12",
+      "unknown_ids": [
+        "5bb386d7-1e8a-4d3f-811c-e16ebbaa827f"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": [
+        "d05"
+      ]
+    },
+    {
+      "dataset": "heldout_growth",
+      "variant": "embedding",
+      "query_id": "w01",
+      "unknown_ids": [
+        "5bb386d7-1e8a-4d3f-811c-e16ebbaa827f",
+        "39d7cc06-ea4c-42c0-bb40-344d642054f8"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout_growth",
+      "variant": "embedding",
+      "query_id": "w02",
+      "unknown_ids": [
+        "5bb386d7-1e8a-4d3f-811c-e16ebbaa827f",
+        "b88d4ee4-c510-4c7b-9429-cc27111a261e"
+      ],
+      "unresolved_fact_ids": [
+        "d02"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout_growth",
+      "variant": "embedding",
+      "query_id": "w04",
+      "unknown_ids": [
+        "5bb386d7-1e8a-4d3f-811c-e16ebbaa827f",
+        "9cdd35f7-a5f2-4d03-bfc0-6180c3223eb0"
+      ],
+      "unresolved_fact_ids": [
+        "d02"
+      ],
+      "false_positive_ids": [
+        "98e044b1-e9f2-4432-91e0-049fa7c4810e"
+      ],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout_growth",
+      "variant": "embedding",
+      "query_id": "w05",
+      "unknown_ids": [
+        "39d7cc06-ea4c-42c0-bb40-344d642054f8",
+        "5bb386d7-1e8a-4d3f-811c-e16ebbaa827f",
+        "noise-s-542"
+      ],
+      "unresolved_fact_ids": [
+        "d05"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout_growth",
+      "variant": "embedding",
+      "query_id": "w06",
+      "unknown_ids": [
+        "b88d4ee4-c510-4c7b-9429-cc27111a261e",
+        "2fd6b588-112e-480c-aee4-c1de2a5781a7"
+      ],
+      "unresolved_fact_ids": [
+        "d06"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout_growth",
+      "variant": "embedding",
+      "query_id": "w09",
+      "unknown_ids": [],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": [
+        "d09"
+      ]
+    },
+    {
+      "dataset": "heldout_growth",
+      "variant": "embedding",
+      "query_id": "w11",
+      "unknown_ids": [
+        "d18126c1-1bfb-4725-aeb0-22a68b5d7f7a",
+        "5bb386d7-1e8a-4d3f-811c-e16ebbaa827f"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout_growth",
+      "variant": "embedding",
+      "query_id": "w12",
+      "unknown_ids": [
+        "5bb386d7-1e8a-4d3f-811c-e16ebbaa827f",
+        "39d7cc06-ea4c-42c0-bb40-344d642054f8"
+      ],
+      "unresolved_fact_ids": [
+        "d05"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout_growth",
+      "variant": "hybrid",
+      "query_id": "w01",
+      "unknown_ids": [
+        "5bb386d7-1e8a-4d3f-811c-e16ebbaa827f",
+        "39d7cc06-ea4c-42c0-bb40-344d642054f8"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout_growth",
+      "variant": "hybrid",
+      "query_id": "w02",
+      "unknown_ids": [
+        "5bb386d7-1e8a-4d3f-811c-e16ebbaa827f",
+        "b88d4ee4-c510-4c7b-9429-cc27111a261e"
+      ],
+      "unresolved_fact_ids": [
+        "d02"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout_growth",
+      "variant": "hybrid",
+      "query_id": "w03",
+      "unknown_ids": [
+        "39d7cc06-ea4c-42c0-bb40-344d642054f8"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout_growth",
+      "variant": "hybrid",
+      "query_id": "w04",
+      "unknown_ids": [
+        "5bb386d7-1e8a-4d3f-811c-e16ebbaa827f",
+        "2fd6b588-112e-480c-aee4-c1de2a5781a7"
+      ],
+      "unresolved_fact_ids": [
+        "d02"
+      ],
+      "false_positive_ids": [
+        "98e044b1-e9f2-4432-91e0-049fa7c4810e"
+      ],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout_growth",
+      "variant": "hybrid",
+      "query_id": "w05",
+      "unknown_ids": [
+        "39d7cc06-ea4c-42c0-bb40-344d642054f8",
+        "5bb386d7-1e8a-4d3f-811c-e16ebbaa827f",
+        "noise-s-108"
+      ],
+      "unresolved_fact_ids": [
+        "d05"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout_growth",
+      "variant": "hybrid",
+      "query_id": "w06",
+      "unknown_ids": [
+        "b88d4ee4-c510-4c7b-9429-cc27111a261e",
+        "2fd6b588-112e-480c-aee4-c1de2a5781a7"
+      ],
+      "unresolved_fact_ids": [
+        "d06"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout_growth",
+      "variant": "hybrid",
+      "query_id": "w08",
+      "unknown_ids": [
+        "5ad193b1-9090-4fbf-91a4-6b981ffcfc4d"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout_growth",
+      "variant": "hybrid",
+      "query_id": "w09",
+      "unknown_ids": [],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": [
+        "d09"
+      ]
+    },
+    {
+      "dataset": "heldout_growth",
+      "variant": "hybrid",
+      "query_id": "w11",
+      "unknown_ids": [
+        "d18126c1-1bfb-4725-aeb0-22a68b5d7f7a",
+        "5bb386d7-1e8a-4d3f-811c-e16ebbaa827f"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout_growth",
+      "variant": "hybrid",
+      "query_id": "w12",
+      "unknown_ids": [
+        "5bb386d7-1e8a-4d3f-811c-e16ebbaa827f",
+        "39d7cc06-ea4c-42c0-bb40-344d642054f8"
+      ],
+      "unresolved_fact_ids": [
+        "d05"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout_growth",
+      "variant": "hybrid_llm",
+      "query_id": "w01",
+      "unknown_ids": [
+        "5bb386d7-1e8a-4d3f-811c-e16ebbaa827f"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout_growth",
+      "variant": "hybrid_llm",
+      "query_id": "w02",
+      "unknown_ids": [
+        "5bb386d7-1e8a-4d3f-811c-e16ebbaa827f"
+      ],
+      "unresolved_fact_ids": [
+        "d02"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout_growth",
+      "variant": "hybrid_llm",
+      "query_id": "w04",
+      "unknown_ids": [
+        "5bb386d7-1e8a-4d3f-811c-e16ebbaa827f",
+        "2fd6b588-112e-480c-aee4-c1de2a5781a7"
+      ],
+      "unresolved_fact_ids": [
+        "d02"
+      ],
+      "false_positive_ids": [
+        "98e044b1-e9f2-4432-91e0-049fa7c4810e"
+      ],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout_growth",
+      "variant": "hybrid_llm",
+      "query_id": "w05",
+      "unknown_ids": [
+        "39d7cc06-ea4c-42c0-bb40-344d642054f8"
+      ],
+      "unresolved_fact_ids": [
+        "d05"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout_growth",
+      "variant": "hybrid_llm",
+      "query_id": "w06",
+      "unknown_ids": [
+        "b88d4ee4-c510-4c7b-9429-cc27111a261e",
+        "2fd6b588-112e-480c-aee4-c1de2a5781a7"
+      ],
+      "unresolved_fact_ids": [
+        "d06"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout_growth",
+      "variant": "hybrid_llm",
+      "query_id": "w09",
+      "unknown_ids": [],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": [
+        "d09"
+      ]
+    },
+    {
+      "dataset": "heldout_growth",
+      "variant": "hybrid_llm",
+      "query_id": "w11",
+      "unknown_ids": [
+        "d18126c1-1bfb-4725-aeb0-22a68b5d7f7a"
+      ],
+      "unresolved_fact_ids": [],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    },
+    {
+      "dataset": "heldout_growth",
+      "variant": "hybrid_llm",
+      "query_id": "w12",
+      "unknown_ids": [
+        "5bb386d7-1e8a-4d3f-811c-e16ebbaa827f",
+        "39d7cc06-ea4c-42c0-bb40-344d642054f8"
+      ],
+      "unresolved_fact_ids": [
+        "d05"
+      ],
+      "false_positive_ids": [],
+      "no_candidate_fact_ids": []
+    }
+  ],
+  "total": {
+    "llm_calls": 230,
+    "embedding_calls": 327,
+    "llm_usd_peak_estimate": 0.095225916,
+    "llm_tokens": 333408,
+    "embedding_tokens": 85647
+  },
+  "main_model_input_sample": [
+    {
+      "dataset": "regression",
+      "query_id": "q03",
+      "variant": "no_memory",
+      "marginal_prompt_tokens": 0,
+      "reused_control": true
+    },
+    {
+      "dataset": "regression",
+      "query_id": "q03",
+      "variant": "existing",
+      "marginal_prompt_tokens": 577,
+      "reused_control": true
+    },
+    {
+      "dataset": "regression",
+      "query_id": "q03",
+      "variant": "embedding",
+      "marginal_prompt_tokens": 435
+    },
+    {
+      "dataset": "regression",
+      "query_id": "q03",
+      "variant": "hybrid",
+      "marginal_prompt_tokens": 424
+    },
+    {
+      "dataset": "regression",
+      "query_id": "q03",
+      "variant": "hybrid_llm",
+      "marginal_prompt_tokens": 441
+    },
+    {
+      "dataset": "regression",
+      "query_id": "q13",
+      "variant": "no_memory",
+      "marginal_prompt_tokens": 0,
+      "reused_control": true
+    },
+    {
+      "dataset": "regression",
+      "query_id": "q13",
+      "variant": "existing",
+      "marginal_prompt_tokens": 244,
+      "reused_control": true
+    },
+    {
+      "dataset": "regression",
+      "query_id": "q13",
+      "variant": "embedding",
+      "marginal_prompt_tokens": 228
+    },
+    {
+      "dataset": "regression",
+      "query_id": "q13",
+      "variant": "hybrid",
+      "marginal_prompt_tokens": 334
+    },
+    {
+      "dataset": "regression",
+      "query_id": "q13",
+      "variant": "hybrid_llm",
+      "marginal_prompt_tokens": 218
+    },
+    {
+      "dataset": "regression",
+      "query_id": "q14",
+      "variant": "no_memory",
+      "marginal_prompt_tokens": 0,
+      "reused_control": true
+    },
+    {
+      "dataset": "regression",
+      "query_id": "q14",
+      "variant": "existing",
+      "marginal_prompt_tokens": 167,
+      "reused_control": true
+    },
+    {
+      "dataset": "regression",
+      "query_id": "q14",
+      "variant": "embedding",
+      "marginal_prompt_tokens": 328
+    },
+    {
+      "dataset": "regression",
+      "query_id": "q14",
+      "variant": "hybrid",
+      "marginal_prompt_tokens": 331
+    },
+    {
+      "dataset": "regression",
+      "query_id": "q14",
+      "variant": "hybrid_llm",
+      "marginal_prompt_tokens": 286
+    },
+    {
+      "dataset": "regression",
+      "query_id": "q22",
+      "variant": "no_memory",
+      "marginal_prompt_tokens": 0,
+      "reused_control": true
+    },
+    {
+      "dataset": "regression",
+      "query_id": "q22",
+      "variant": "existing",
+      "marginal_prompt_tokens": 368,
+      "reused_control": true
+    },
+    {
+      "dataset": "regression",
+      "query_id": "q22",
+      "variant": "embedding",
+      "marginal_prompt_tokens": 208
+    },
+    {
+      "dataset": "regression",
+      "query_id": "q22",
+      "variant": "hybrid",
+      "marginal_prompt_tokens": 288
+    },
+    {
+      "dataset": "regression",
+      "query_id": "q22",
+      "variant": "hybrid_llm",
+      "marginal_prompt_tokens": 208
+    },
+    {
+      "dataset": "heldout",
+      "query_id": "w01",
+      "variant": "no_memory",
+      "marginal_prompt_tokens": 0,
+      "reused_control": true
+    },
+    {
+      "dataset": "heldout",
+      "query_id": "w01",
+      "variant": "existing",
+      "marginal_prompt_tokens": 0,
+      "reused_control": true
+    },
+    {
+      "dataset": "heldout",
+      "query_id": "w01",
+      "variant": "embedding",
+      "marginal_prompt_tokens": 380
+    },
+    {
+      "dataset": "heldout",
+      "query_id": "w01",
+      "variant": "hybrid",
+      "marginal_prompt_tokens": 380
+    },
+    {
+      "dataset": "heldout",
+      "query_id": "w01",
+      "variant": "hybrid_llm",
+      "marginal_prompt_tokens": 159
+    },
+    {
+      "dataset": "heldout",
+      "query_id": "w03",
+      "variant": "no_memory",
+      "marginal_prompt_tokens": 0,
+      "reused_control": true
+    },
+    {
+      "dataset": "heldout",
+      "query_id": "w03",
+      "variant": "existing",
+      "marginal_prompt_tokens": 296,
+      "reused_control": true
+    },
+    {
+      "dataset": "heldout",
+      "query_id": "w03",
+      "variant": "embedding",
+      "marginal_prompt_tokens": 291
+    },
+    {
+      "dataset": "heldout",
+      "query_id": "w03",
+      "variant": "hybrid",
+      "marginal_prompt_tokens": 398
+    },
+    {
+      "dataset": "heldout",
+      "query_id": "w03",
+      "variant": "hybrid_llm",
+      "marginal_prompt_tokens": 291
+    },
+    {
+      "dataset": "heldout",
+      "query_id": "w05",
+      "variant": "no_memory",
+      "marginal_prompt_tokens": 0,
+      "reused_control": true
+    },
+    {
+      "dataset": "heldout",
+      "query_id": "w05",
+      "variant": "existing",
+      "marginal_prompt_tokens": 0,
+      "reused_control": true
+    },
+    {
+      "dataset": "heldout",
+      "query_id": "w05",
+      "variant": "embedding",
+      "marginal_prompt_tokens": 278
+    },
+    {
+      "dataset": "heldout",
+      "query_id": "w05",
+      "variant": "hybrid",
+      "marginal_prompt_tokens": 278
+    },
+    {
+      "dataset": "heldout",
+      "query_id": "w05",
+      "variant": "hybrid_llm",
+      "marginal_prompt_tokens": 164
+    },
+    {
+      "dataset": "heldout",
+      "query_id": "w09",
+      "variant": "no_memory",
+      "marginal_prompt_tokens": 0,
+      "reused_control": true
+    },
+    {
+      "dataset": "heldout",
+      "query_id": "w09",
+      "variant": "existing",
+      "marginal_prompt_tokens": 0,
+      "reused_control": true
+    },
+    {
+      "dataset": "heldout",
+      "query_id": "w09",
+      "variant": "embedding",
+      "marginal_prompt_tokens": 88
+    },
+    {
+      "dataset": "heldout",
+      "query_id": "w09",
+      "variant": "hybrid",
+      "marginal_prompt_tokens": 88
+    },
+    {
+      "dataset": "heldout",
+      "query_id": "w09",
+      "variant": "hybrid_llm",
+      "marginal_prompt_tokens": 126
+    }
+  ],
+  "cache_probe": [
+    {
+      "mode": "hybrid",
+      "embedding_error": null,
+      "query_embedding_cache_hit": false,
+      "measurements": [
+        {
+          "provider": "openai",
+          "model": "bge-small-zh-v1.5",
+          "purpose": "embedding_query",
+          "usage": {
+            "prompt_tokens": 41,
+            "total_tokens": 41
+          },
+          "input_count": 1,
+          "latency_ms": 25.743,
+          "error_type": null
+        }
+      ],
+      "latency_ms": 444.761,
+      "candidate_count": 3,
+      "active_count": 1009,
+      "channels": {
+        "keyword": [
+          "d18126c1-1bfb-4725-aeb0-22a68b5d7f7a",
+          "39d7cc06-ea4c-42c0-bb40-344d642054f8",
+          "9cdd35f7-a5f2-4d03-bfc0-6180c3223eb0"
+        ],
+        "embedding": [
+          "9cdd35f7-a5f2-4d03-bfc0-6180c3223eb0",
+          "d18126c1-1bfb-4725-aeb0-22a68b5d7f7a"
+        ],
+        "theme": [],
+        "time": [
+          "39d7cc06-ea4c-42c0-bb40-344d642054f8",
+          "9cdd35f7-a5f2-4d03-bfc0-6180c3223eb0"
+        ]
+      }
+    },
+    {
+      "mode": "hybrid",
+      "embedding_error": null,
+      "query_embedding_cache_hit": true,
+      "measurements": [],
+      "latency_ms": 194.36,
+      "candidate_count": 3,
+      "active_count": 1009,
+      "channels": {
+        "keyword": [
+          "d18126c1-1bfb-4725-aeb0-22a68b5d7f7a",
+          "39d7cc06-ea4c-42c0-bb40-344d642054f8",
+          "9cdd35f7-a5f2-4d03-bfc0-6180c3223eb0"
+        ],
+        "embedding": [
+          "9cdd35f7-a5f2-4d03-bfc0-6180c3223eb0",
+          "d18126c1-1bfb-4725-aeb0-22a68b5d7f7a"
+        ],
+        "theme": [],
+        "time": [
+          "39d7cc06-ea4c-42c0-bb40-344d642054f8",
+          "9cdd35f7-a5f2-4d03-bfc0-6180c3223eb0"
+        ]
+      }
+    }
+  ]
+}

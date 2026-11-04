@@ -140,5 +140,21 @@ class HybridIndexTests(unittest.TestCase):
             self.assertEqual(len(service._query_vectors),128)
         finally:service.close()
 
+    def test_manual_rebuild_continues_past_one_bounded_batch_in_background(self):
+        class Embeddings:
+            identity='test';configured=True
+            def embed(self,texts,**kwargs):return [[1,0] for text in texts]
+        with patch.dict(os.environ,{},clear=True):service=Service(Path(self.temp.name)/'rebuild.db')
+        try:
+            service.embeddings=Embeddings()
+            with service.db.transaction():
+                for i in range(270):
+                    mid=service.db.add_message('s','user','记录'+str(i));service.db.add_summary('记录'+str(i),[mid])
+            result=service.handle('/reindex',{'force':True})
+            self.assertEqual(result['indexed'],256)
+            service.pool.submit(lambda:None).result(timeout=3)
+            self.assertEqual(service.db.missing_embeddings('test'),[])
+        finally:service.close()
+
 
 if __name__=='__main__':unittest.main()

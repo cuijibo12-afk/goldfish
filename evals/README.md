@@ -1,5 +1,7 @@
 # 中文长期记忆质量评测
 
+第四阶段见 [PHASE_D.md](../docs/PHASE_D.md)：`phase_d.py` 比较原检索、真实Embedding、混合、混合精排；v2新集在 `4c80c84` 实现前冻结。真实向量来自固定ONNX BGE-small-zh-v1.5，LLM为DeepSeek。`phase_d_analysis.py` 无网络复算，`phase_d_replay.py` 复核历史真实失败输出和延迟/缓存，`phase_d_finalize.py` 审计来源目录并重渲染已记录计划。模型输出不因探针失分而重试或改gold。v2输出公开后只可用作回归。
+
 第三阶段当前复现入口及完整数据见 [PHASE_C.md](../docs/PHASE_C.md) 和 `phase_c.py`。它保留原baseline集，另用在实现前冻结的新中文集；对照深度0/1/2，逐条记录失败与未裁决。`phase_c_analysis.py` 可零网络复算；`phase_c_token_probe.py` 用真实usage测主模型输入增量，不将截断输出算作成功回答。新集已公开后只能作为回归，不能再用来宣称未见泛化。
 
 下文保留第二阶段方法与历史命令。当前代码增加了真实关系复核调用，单次提取预算不再等于全部请求数；若运行 `evals.run_real`，应把8会话预算从8提高到例如24，长会话预算从5提高到例如15。若精确复现第二阶段代码，应使用提交 `17bb7ef`，不能混用新提示词却沿用旧版用量结论。

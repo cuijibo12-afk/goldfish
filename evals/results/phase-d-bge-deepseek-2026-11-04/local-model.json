@@ -1,0 +1,21 @@
+{
+  "model": "bge-small-zh-v1.5",
+  "repository": "Xenova/bge-small-zh-v1.5",
+  "revision": "75c43b069aac4d136ba6bc1122f995fedcfd2781",
+  "backend": "onnxruntime_cpu",
+  "dimension": 512,
+  "pooling": "CLS",
+  "max_length": 512,
+  "file_hashes": {
+    "README.md": "cb22054df1a98f7ee9d5b281d023e67c27cc316e1733baf03fc994d95c3048ab",
+    "tokenizer_config.json": "e6f3b96db926a37d4039995fbf5ad17de158dfb8f6343d607e4dbaad18d75f5a",
+    "config.json": "d4193ead3a810fd694fa8a31d7fc72fbaebc0668b603e398734bf2f6538ff42f",
+    "tokenizer.json": "48cea5d44424912a6fd1ea647bf4fe50b55ab8b1e5879c3275f80e339e8fae26",
+    "onnx/model.onnx": "69a0b846f4f116b5e6aabf9546ea6754d02264f3211a13a1bd69b31b8040749a"
+  },
+  "manual_smoke": {
+    "input_count": 3,
+    "usage_tokens_observed": 31,
+    "notice": "Actual initial console probe, included in total ledger; not semantic quality validation."
+  }
+}

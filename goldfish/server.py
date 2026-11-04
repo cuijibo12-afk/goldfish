@@ -265,7 +265,12 @@ class Service:
             if data.get('force'):
                 with self._reindex_lock:self.db.prune_vector_index(force=True)
                 with self._query_vector_lock:self._query_vectors.clear()
-            return {'ok':True,**self._reindex()}
+            result={'ok':True,**self._reindex()}
+            if self.embeddings.configured:
+                more=bool(self.db.missing_embeddings(self.embeddings.identity,limit=1) or self.db.missing_aux_embeddings(self.embeddings.identity,self._aux_kinds(),limit=1))
+                result['background_pending']=more
+                if more:self.pool.submit(self._background_reindex)
+            return result
         if path=='/consolidate':
             sid=str(data['session_id'])
             try:

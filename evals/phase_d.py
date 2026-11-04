@@ -101,8 +101,9 @@ def evaluate(name,corpus,memory,output,model,embedding,noise=0,dev=False):
                         print(json.dumps({'dataset':name,'mode':mode,'query':qid}),flush=True)
             report['variants'][mode]=results
             report.setdefault('actual_calls_by_variant',{})[mode]={'llm':len(model.calls)-first_chat,'embedding':len(embedding.calls)-first_embed}
+        scoring_corpus={**corpus,'raw_messages':[dict(r) for r in service.db.db.execute('SELECT * FROM raw_messages')]}
         for mode,rows in report['variants'].items():
-            report['scores'][mode]=score_run(corpus,actual['summaries'],actual['profiles'],actual['links'],rows)
+            report['scores'][mode]=score_run(scoring_corpus,actual['summaries'],actual['profiles'],actual['links'],rows)
         dump(output/(name+'.json'),report)
     finally:old.close();service.close()
     return report

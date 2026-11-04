@@ -1,0 +1,242 @@
+{
+  "models": {
+    "llm": {
+      "provider": "openai",
+      "model": "deepseek-flash",
+      "configured": true,
+      "local": false,
+      "thinking": "disabled",
+      "max_tokens": 8192,
+      "revision": "",
+      "query_prefix": ""
+    },
+    "embedding": {
+      "provider": "openai",
+      "model": "bge-small-zh-v1.5",
+      "configured": true,
+      "local": true,
+      "thinking": "provider_default",
+      "max_tokens": null,
+      "revision": "75c43b069aac4d136ba6bc1122f995fedcfd2781",
+      "query_prefix": "为这个句子生成表示以用于检索相关文章："
+    }
+  },
+  "datasets": {
+    "regression": "regression.json",
+    "phase_c_regression": "phase_c_regression.json",
+    "heldout": "heldout.json",
+    "heldout_growth": "heldout_growth.json"
+  },
+  "source_hashes": {
+    "goldfish/retrieval.py": "a0b94247d4529177b6ecd7920022978fc7440f1fe95f3713f9399a24388b24b8",
+    "goldfish/engine.py": "63a032024a0c0ec95600391c24aa538477ce54ee4dd4e16a6f7a1dbd77cdff96",
+    "goldfish/server.py": "934ba63d82a9dd1f17e23fe99a3ddfc3fd2a49a5d90b0aec234013ca3a85271f",
+    "goldfish/providers.py": "71f6be6e89e98aefb3daa24147d18aea5b8b76a98bf9d9b67fe0eeb1e7acf998",
+    "goldfish/consolidate.py": "a9680a04ffb66d41cb464c186971558a9a0a5274caff2f5871bd33b9765ac5f8",
+    "goldfish/__init__.py": "e0cca641942b8be104bf663079a43526530e92ad4502ba08e926b3eb8144e922",
+    "goldfish/semantic.py": "e1cdf1f48b17785faad7169e2087879037541136b432a01a7ef2caf093bcefca",
+    "goldfish/relations.py": "55695d5fda276e21f96d1ea9a095e5f72ef0df6aae9ab8a5e721f05213df6498"
+  },
+  "heldout_extraction": [
+    {
+      "session": "d01",
+      "result": {
+        "ok": true,
+        "processed": 2,
+        "summaries": 1,
+        "links_proposed": 0,
+        "links": 0,
+        "profiles": 0,
+        "relation_review_measurement": null,
+        "rejected_items": []
+      }
+    },
+    {
+      "session": "d02",
+      "result": {
+        "ok": true,
+        "processed": 2,
+        "summaries": 1,
+        "links_proposed": 1,
+        "links": 1,
+        "profiles": 0,
+        "relation_review_measurement": {
+          "provider": "openai",
+          "model": "deepseek-flash",
+          "response_id": "2689ccc0-a35f-4f25-b2f7-de2d71260e13",
+          "finish_reason": "stop",
+          "latency_ms": 1639.806,
+          "usage": {
+            "prompt_tokens": 1044,
+            "completion_tokens": 210,
+            "total_tokens": 1254,
+            "prompt_tokens_details": {
+              "cached_tokens": 128
+            },
+            "prompt_cache_hit_tokens": 128,
+            "prompt_cache_miss_tokens": 916
+          },
+          "error_type": null,
+          "thinking": "disabled",
+          "max_tokens": 4096,
+          "purpose": "relation_validation"
+        },
+        "rejected_items": []
+      }
+    },
+    {
+      "session": "d03",
+      "result": {
+        "ok": true,
+        "processed": 2,
+        "summaries": 1,
+        "links_proposed": 0,
+        "links": 0,
+        "profiles": 1,
+        "relation_review_measurement": null,
+        "rejected_items": [
+          {
+            "kind": "profiles",
+            "index": 1,
+            "reason": "invalid_item_or_evidence"
+          }
+        ]
+      }
+    },
+    {
+      "session": "d04",
+      "result": {
+        "ok": true,
+        "processed": 2,
+        "summaries": 1,
+        "links_proposed": 1,
+        "links": 1,
+        "profiles": 0,
+        "relation_review_measurement": {
+          "provider": "openai",
+          "model": "deepseek-flash",
+          "response_id": "e2bdf705-d7ae-4d42-a412-0f51d109032c",
+          "finish_reason": "stop",
+          "latency_ms": 1982.01,
+          "usage": {
+            "prompt_tokens": 1300,
+            "completion_tokens": 229,
+            "total_tokens": 1529,
+            "prompt_tokens_details": {
+              "cached_tokens": 128
+            },
+            "prompt_cache_hit_tokens": 128,
+            "prompt_cache_miss_tokens": 1172
+          },
+          "error_type": null,
+          "thinking": "disabled",
+          "max_tokens": 4096,
+          "purpose": "relation_validation"
+        },
+        "rejected_items": []
+      }
+    },
+    {
+      "session": "d05",
+      "result": {
+        "ok": true,
+        "processed": 2,
+        "summaries": 1,
+        "links_proposed": 0,
+        "links": 0,
+        "profiles": 0,
+        "relation_review_measurement": null,
+        "rejected_items": []
+      }
+    },
+    {
+      "session": "d06",
+      "result": {
+        "ok": true,
+        "processed": 2,
+        "summaries": 2,
+        "links_proposed": 1,
+        "links": 1,
+        "profiles": 0,
+        "relation_review_measurement": {
+          "provider": "openai",
+          "model": "deepseek-flash",
+          "response_id": "dabe3fe8-7592-4538-8485-577ce055a698",
+          "finish_reason": "stop",
+          "latency_ms": 1413.541,
+          "usage": {
+            "prompt_tokens": 1433,
+            "completion_tokens": 146,
+            "total_tokens": 1579,
+            "prompt_tokens_details": {
+              "cached_tokens": 128
+            },
+            "prompt_cache_hit_tokens": 128,
+            "prompt_cache_miss_tokens": 1305
+          },
+          "error_type": null,
+          "thinking": "disabled",
+          "max_tokens": 4096,
+          "purpose": "relation_validation"
+        },
+        "rejected_items": []
+      }
+    },
+    {
+      "session": "d07",
+      "result": {
+        "ok": true,
+        "processed": 2,
+        "summaries": 1,
+        "links_proposed": 0,
+        "links": 0,
+        "profiles": 2,
+        "relation_review_measurement": null,
+        "rejected_items": []
+      }
+    },
+    {
+      "session": "d08",
+      "result": {
+        "ok": true,
+        "processed": 2,
+        "summaries": 0,
+        "links_proposed": 0,
+        "links": 0,
+        "profiles": 2,
+        "relation_review_measurement": null,
+        "rejected_items": []
+      }
+    },
+    {
+      "session": "d09",
+      "result": {
+        "ok": true,
+        "processed": 2,
+        "summaries": 1,
+        "links_proposed": 0,
+        "links": 0,
+        "profiles": 2,
+        "relation_review_measurement": null,
+        "rejected_items": []
+      }
+    }
+  ],
+  "usage_actual": {
+    "llm": {
+      "prompt_tokens": 95855,
+      "completion_tokens": 21377,
+      "total_tokens": 117232
+    },
+    "embedding": {
+      "prompt_tokens": 60936,
+      "completion_tokens": 0,
+      "total_tokens": 60936
+    }
+  },
+  "call_counts": {
+    "llm": 71,
+    "embedding": 248
+  },
+  "fixture_sha256": "5fbf66b9578424954b124c8be65687f3832148c1dbeb7744a558dd34ff7538a6"
+}

@@ -101,3 +101,44 @@ GOLDFISH_RELATION_REVIEW 默认1：整理提出关系后，再以两端原话审
 DSH 插件 depth 默认0；1、2仅用于显式试验。第三阶段实测扩散增加判断Token，未证明稳定收益，所以没有开启默认扩散。
 
 实际DeepSeek用量、延迟、冻结新集、失败及复现命令见 docs/PHASE_C.md。
+
+十一、第四阶段：独立Embedding及混合方案
+
+GOLDFISH_RETRIEVAL_MODE 可选：
+legacy（默认）：原有检索；若另开语义召回仍走原语义路径。
+embedding：向量概括候选，保留共同的画像保护、覆盖及去重。
+hybrid：向量、关键词、主题、时间融合，不用LLM重排。
+hybrid_llm：同一融合候选再按需LLM精排。
+所有方案继续DSH生命周期自动注入，不增加Agent工具。
+
+GOLDFISH_SEMANTIC_RECALL=1 仍是调用LLM排序/语义覆盖/同批去重的显式开关。
+不打开时只有保守精确覆盖；向量分数不代表事实已经覆盖。
+embedding、hybrid 在需要覆盖/去重时也可能调用LLM，费用不能按“纯向量所以一定为0”计算。
+
+Ollama（需自己已安装模型；本阶段未实测BGE-M3）：
+GOLDFISH_EMBED_PROVIDER=ollama
+GOLDFISH_EMBED_MODEL=bge-m3
+GOLDFISH_EMBED_URL=http://127.0.0.1:11434
+
+本地或云端兼容API：
+GOLDFISH_EMBED_PROVIDER=openai
+GOLDFISH_EMBED_URL=https://YOUR_EMBEDDING_PROVIDER/v1
+GOLDFISH_EMBED_MODEL=YOUR_ACTUAL_EMBEDDING_MODEL
+GOLDFISH_EMBED_API_KEY=仅在运行环境设置
+
+Embedding不继承LLM的端点、模型或密钥。云端Embedding会接收概括、被选中的辅助文档及查询；LLM语义覆盖另发当前上下文。
+GOLDFISH_EMBED_REVISION 可填写模型固定revision/版本；别名原地更换权重时应更新它并重启。未知的远端别名漂移不能自动识别。
+GOLDFISH_EMBED_QUERY_PREFIX 默认为空；只有所用模型要求时才设置查询前缀，文档不加该前缀。BGE-small-zh-v1.5本次使用“为这个句子生成表示以用于检索相关文章：”；不要不加区分地沿用于BGE-M3或其他模型。
+GOLDFISH_EMBED_AUX 默认profile；可设置profile,theme,link加入主题和经过复核的关联理由辅助索引，或空值只建概括。辅助相似度不能证明关系。
+
+启动后增量索引概括与辅助文档；内容hash、概括version、模型身份均必须匹配。概括修改后旧向量失效，归档后移出索引，原始证据不删除。
+POST /reindex 支持 {"force":true} 清理并重建向量，不删除记忆。同步部分后若返回background_pending=true，会继续后台排空。查询向量缓存最多128条/5分钟，模型身份变化或强制重建会失效。切换配置仍需重启。
+
+本次真实本地试验使用项目外的固定ONNX文件，不依赖Ollama：
+可选依赖：python -m pip install onnxruntime tokenizers numpy
+先自行下载 Xenova/bge-small-zh-v1.5 的revision 75c43b069aac4d136ba6bc1122f995fedcfd2781，至少包含tokenizer.json和onnx/model.onnx。
+python -m evals.local_embedding_server --model-dir /ABS/PATH/TO/MODEL --port 18321
+然后配置GOLDFISH_EMBED_PROVIDER=openai、URL=http://127.0.0.1:18321、MODEL=bge-small-zh-v1.5、REVISION为上述revision。
+该可选服务实际运行CPU模型，没有伪造向量；不是安装金鱼核心所必需的依赖。Ollama或其他实际Embedding服务仍可直接使用。
+
+真实质量、费用、Token和失败见 docs/PHASE_D.md。未证明Embedding全面更好，所以默认保留legacy；云端Embedding适配仅协议验证，本阶段真实向量来自本地CPU。
