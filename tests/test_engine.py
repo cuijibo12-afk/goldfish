@@ -23,8 +23,8 @@ class MemoryTests(unittest.TestCase):
         z=self.db.add_summary('曾表达过对职业变化中未知因素的担心',[c],'2026-11-01')
         self.db.attach_theme(self.db.add_theme('职业路径'),x,'曾有施工经历')
         self.db.attach_theme(self.db.add_theme('职业路径'),y,'转向考试')
-        self.db.add_link(x,z,'contextual','职业变化是相关情境')
-        res=self.db.recall('我在工地工作那段时间怎么样',max_items=5,max_chars=3000)
+        self.db.add_link(x,z,'contextual','职业变化是相关情境',origin='human_review',confirmed=True)
+        res=self.db.recall('我在工地工作那段时间怎么样',max_items=5,max_chars=3000,depth=2)
         ids={x['id'] for x in res['results']}
         self.assertIn(x,ids)
         self.assertIn(z,ids) # A detail should activate associated experience.

@@ -10,6 +10,7 @@ import math
 import re
 import sqlite3
 import uuid
+import hashlib
 import threading
 from contextlib import contextmanager
 from functools import wraps
@@ -20,7 +21,7 @@ from zoneinfo import ZoneInfo
 import os
 from pathlib import Path
 
-RELATIONS = {"same_topic", "same_person", "same_event", "chronological", "contrast", "emotion_echo", "contextual", "possible_cause", "causal_confirmed"}
+RELATIONS = {"same_topic", "same_person", "same_event", "chronological", "contrast", "emotion_echo", "contextual", "possible_cause", "causal_confirmed", "same_entity", "temporal_sequence", "similar_context", "contradiction", "comparison"}
 PROFILES = {"user_profile", "interaction_expectation", "ai_observed", "feedback"}
 # Generic question words are not sufficient evidence of a shared experience.
 # This remains a lexical fallback, not Chinese word segmentation or semantics.
@@ -104,7 +105,7 @@ class MemoryDB:
         self.db = sqlite3.connect(self.path, check_same_thread=False, timeout=30, isolation_level=None)
         self.db.row_factory = sqlite3.Row
         version = self.db.execute('PRAGMA user_version').fetchone()[0]
-        if version > 1:
+        if version > 2:
             self.db.close()
             raise ValueError('Database schema is newer than this Goldfish version')
         self.db.execute('PRAGMA journal_mode=WAL')
@@ -145,12 +146,16 @@ class MemoryDB:
         CREATE TABLE IF NOT EXISTS summary_vectors(
           summary_id TEXT PRIMARY KEY REFERENCES summaries(id) ON DELETE CASCADE,
           model_identity TEXT NOT NULL, dim INTEGER NOT NULL, vector_json TEXT NOT NULL, indexed_at TEXT NOT NULL);
+        CREATE TABLE IF NOT EXISTS link_reviews(
+          link_id TEXT PRIMARY KEY REFERENCES links(id), status TEXT NOT NULL, effective_kind TEXT NOT NULL,
+          reason TEXT NOT NULL, evidence_json TEXT NOT NULL, reviewer_kind TEXT NOT NULL,
+          model TEXT NOT NULL, input_hash TEXT NOT NULL, reviewed_at TEXT NOT NULL);
         ''')
         # v0 is the unversioned v0.2 handoff schema. This migration is additive.
         with self.transaction():
             self.db.execute('CREATE INDEX IF NOT EXISTS raw_session_seq ON raw_messages(session_id,seq)')
             self.db.execute('CREATE INDEX IF NOT EXISTS evidence_message ON evidence(message_id)')
-            self.db.execute('PRAGMA user_version=1')
+            self.db.execute('PRAGMA user_version=2')
 
     @contextmanager
     def transaction(self):
@@ -279,6 +284,48 @@ class MemoryDB:
                             [(stored_id,mid) for mid in sources])
         return stored_id
 
+    def _link_input_hash(self, link):
+        parts=[]
+        for sid in (link['left_id'],link['right_id']):
+            s=self.db.execute('SELECT text,start_time,end_time,version FROM summaries WHERE id=?',(sid,)).fetchone()
+            parts.append(dict(s) if s else None)
+            parts.append(sorted(r['id'] for r in self.evidence_for(sid)))
+        return hashlib.sha256(json.dumps(parts,sort_keys=True,ensure_ascii=False).encode()).hexdigest()
+
+    @transactional
+    def record_link_review(self, link_id, review, model=''):
+        from .relations import canonical, disjoint_dates
+        link=self.db.execute('SELECT * FROM links WHERE id=?',(link_id,)).fetchone()
+        if not link: raise ValueError('unknown link')
+        review=dict(review); citations=review.get('evidence',[]); cited=set()
+        for item in citations:
+            source=self.get_message(item.get('message_id'))
+            if source and isinstance(item.get('quote'),str) and item['quote'].strip() and item['quote'] in source['text']:
+                cited.add(source['id'])
+        left=dict(self.db.execute('SELECT * FROM summaries WHERE id=?',(link['left_id'],)).fetchone())
+        right=dict(self.db.execute('SELECT * FROM summaries WHERE id=?',(link['right_id'],)).fetchone())
+        if review['status']=='supported' and (not cited.intersection(r['id'] for r in self.evidence_for(link['left_id'])) or not cited.intersection(r['id'] for r in self.evidence_for(link['right_id']))):
+            review['status']='uncertain';review['reason']='原话引用未覆盖两端；'+review['reason']
+        if canonical(review['kind'])=='same_event' and disjoint_dates(left,right):
+            review['status']='rejected';review['reason']='事件时间不重合；'+review['reason']
+        self.db.execute('''INSERT OR REPLACE INTO link_reviews VALUES(?,?,?,?,?,?,?,?,?)''',
+            (link_id,review['status'],review['kind'],review['reason'],json.dumps(review['evidence'],ensure_ascii=False),
+             'model',model,self._link_input_hash(link),now_iso()))
+
+    @locked
+    def active_reviewed_links(self):
+        from .relations import canonical
+        result=[]
+        for row in self.db.execute('''SELECT l.*,r.status AS review_status,r.effective_kind,
+                r.reason AS review_reason,r.input_hash FROM links l LEFT JOIN link_reviews r ON l.id=r.link_id'''):
+            edge=dict(row)
+            human=edge['confirmed'] and edge['origin'] in {'human_review','user_confirmed'}
+            if not human and (edge['review_status']!='supported' or edge['input_hash']!=self._link_input_hash(edge)): continue
+            edge['effective_kind']=canonical(edge['kind']) if human else edge['effective_kind']
+            edge['review_reason']=edge['reason'] if human else edge['review_reason']
+            result.append(edge)
+        return result
+
     @transactional
     def add_profile(self, kind, text, evidence_ids):
         if kind not in PROFILES: raise ValueError('invalid profile kind')
@@ -374,7 +421,7 @@ class MemoryDB:
         return res
 
     @locked
-    def recall(self, query, context='', max_items=5, max_chars=1500, depth=2, today=None, semantic_scores=None):
+    def recall(self, query, context='', max_items=5, max_chars=1500, depth=0, today=None, semantic_scores=None, semantic_plan=None):
         """Dual topic/time starting recall + summary-to-summary spreading activation.
 
         The budget is a CHARACTER budget, not a verified model-token budget.
@@ -404,13 +451,18 @@ class MemoryDB:
             if years and not temporal and (s['start_time'] or s['end_time']): score*=.5
             if score >= .09: base[s['id']] = score
         scores=base.copy(); reasons={sid:'直接召回（关键词/主题/时间）' for sid in base}
+        decisions={}
+        if semantic_plan:
+            decisions={item['id']:item for item in semantic_plan['selected']}
+            scores={sid:1-index*.05 for index,sid in enumerate(decisions) if sid in by_id}
+            reasons={sid:decisions[sid]['why'] for sid in scores}
         edges={}
-        for r in self.db.execute('SELECT * FROM links WHERE confidence>=0.35'):
-            e=dict(r)
+        for e in self.active_reviewed_links():
+            e={**e,'kind':e['effective_kind'],'reason':e['review_reason']}
             for a,b in [(e['left_id'],e['right_id']),(e['right_id'],e['left_id'])]:
                 edges.setdefault(a,[]).append((b,e))
         # Start expansion only from strongest directly relevant anchors.
-        starts=sorted(base,key=base.get,reverse=True)[:4]
+        starts=[] if semantic_plan else sorted(base,key=base.get,reverse=True)[:4]
         queue=deque([(sid,base[sid],0) for sid in starts]); seen=set()
         while queue:
             sid,strength,level=queue.popleft()
@@ -429,6 +481,15 @@ class MemoryDB:
                     seen.add(marker);queue.append((neighbor,graph_score,nlevel))
         selected=[]
         profile_lines=self._profile_strings(min(350,max_chars//3), context, query)
+        if semantic_plan:
+            profile_lines=[]; remaining=min(350,max_chars//3)
+            for item in semantic_plan['selected']:
+                if not item['id'].startswith('profile:') or item['state']=='full': continue
+                row=self.db.execute('SELECT kind FROM profile WHERE id=?',(item['id'][8:],)).fetchone()
+                if not row: continue
+                label={'user_profile':'用户画像','interaction_expectation':'交互期望','ai_observed':'AI行为记录','feedback':'反馈'}[row['kind']]
+                line=f'[{label}] '+escape(item['text'])
+                if len(line)<=remaining: profile_lines.append(line);remaining-=len(line)+1
         zone=os.getenv('GOLDFISH_TIMEZONE','Asia/Shanghai')
         try: current_time=datetime.now(ZoneInfo(zone)).isoformat(timespec='minutes')
         except (KeyError,ValueError): current_time=datetime.now(timezone.utc).isoformat(timespec='minutes')
@@ -443,10 +504,14 @@ class MemoryDB:
             if len(selected)>=max_items: break
             s=by_id[sid]
             # Do not trust an "injected sometime earlier" cache: check current effective context.
-            if _covered(s['text'], context):
+            decision=decisions.get(sid)
+            if (decision and decision['state']=='full') or (not decision and _covered(s['text'], context)):
                 continue
+            memory_text=decision['text'] if decision else s['text']
+            if decision and decision['state']=='partial': memory_text='本段经历尚缺的部分：'+memory_text
+            if decision and decision['state']=='contradicted': reasons[sid]+='；与当前说法存在不一致，须保留时间和来源区别'
             line=(f'<memory key="gf:{sid}:v{s["version"]}" date="{s["start_time"] or "unknown"}">' +
-                  escape(s['text']) + ' | '+escape(reasons[sid]))
+                  escape(memory_text) + ' | '+escape(reasons[sid]))
             if raw_requested:
                 sources=self.evidence_for(sid)
                 # Exact text is offered only when asked; stay within same injection budget.
@@ -455,11 +520,13 @@ class MemoryDB:
             if used+len(line)+1>max_chars: continue
             output.append(line);used+=len(line)+1
             selected.append({'id':sid,'text':s['text'],'score':round(scores[sid],3),
+                             'injected_text':memory_text,'coverage':decision['state'] if decision else 'lexical_only',
                              'reason':reasons[sid],'evidence_count':self.db.execute('SELECT COUNT(*) FROM evidence WHERE summary_id=?',(sid,)).fetchone()[0]})
         output.append('</goldfish-memory>')
         if not selected and not profile_lines: return {'results':[], 'injection':'', 'mode':'lexical+time+graph'+('+semantic' if semantic_scores else ''),'tested_context':bool(context)}
         return {'results':selected,'injection':'\n'.join(output),'mode':'lexical+time+graph'+('+semantic' if semantic_scores else ''),
-                'tested_context':bool(context),'time_filter':sorted(years)}
+                'tested_context':bool(context),'time_filter':sorted(years),
+                'semantic_plan':{k:v for k,v in semantic_plan.items() if k not in {'payload','raw_output'}} if semantic_plan else None}
 
     @locked
     def evidence_for(self, summary_id):

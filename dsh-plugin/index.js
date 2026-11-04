@@ -47,7 +47,7 @@ export function apply(ctx, config = {}) {
     throw new Error('Remote Goldfish servers require HTTPS');
   }
   const token = config.token ?? process.env.GOLDFISH_LOCAL_TOKEN ?? '';
-  const timeout = Math.max(50, Math.min(Number(config.timeoutMs) || 2500, 30000));
+  const timeout = Math.max(50, Math.min(Number(config.timeoutMs) || 12000, 30000));
   const maxChars = Math.max(250, Math.min(Number(config.maxChars) || 1800, 8000));
   const warn = message => ctx.logger?.warn('[goldfish] ' + message);
   // Compaction inside a tool chain can remove its triggering human message.
@@ -153,8 +153,9 @@ export function apply(ctx, config = {}) {
       const context = [...history, ...decision.messages].map(message => flatten(message.content))
         .filter(Boolean).join('\n');
       const data = await post(url, '/recall', {
-        query, context, max_chars: maxChars, limit: config.limit ?? 5, depth: config.depth ?? 2,
+        query, context, max_chars: maxChars, limit: config.limit ?? 5, depth: config.depth ?? 0,
         semantic_timeout_ms: Math.max(50, timeout - 300),
+        semantic_budget_ms: Math.max(100, timeout - 1500),
       }, timeout, token, signal);
       if (signal?.aborted || !data?.ok || !data.injection) return decision;
       const injected = {

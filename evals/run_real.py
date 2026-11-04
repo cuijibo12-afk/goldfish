@@ -57,6 +57,17 @@ class RecordingModel(ChatModel):
         self.max_calls = max_calls
         self.calls = []
 
+    def decide(self, prompt, data, **kwargs):
+        if len(self.calls)>=self.max_calls: raise RuntimeError('evaluation_model_call_budget_exhausted')
+        record={'purpose':kwargs.get('purpose'),'input':data}
+        try:
+            output,measurement=super().decide(prompt,data,**kwargs)
+            record.update({'output':output,'measurement':measurement})
+            return output,measurement
+        finally:
+            if 'measurement' not in record: record['measurement']=self.last_call
+            self.calls.append(record)
+
     def extract(self, messages, related):
         if len(self.calls) >= self.max_calls:
             raise RuntimeError('evaluation_model_call_budget_exhausted')

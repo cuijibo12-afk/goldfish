@@ -9,6 +9,7 @@ import math
 import os
 import re
 import time
+import threading
 from dataclasses import dataclass, field
 from urllib.parse import urlsplit
 from urllib.error import HTTPError
@@ -139,6 +140,7 @@ def load_config(task: str) -> ModelConfig:
 class ChatModel:
     def __init__(self, cfg: ModelConfig | None = None):
         self.cfg = cfg or load_config('LLM')
+        self._measurements = threading.local()
         self.last_call = None
 
     @property
@@ -153,6 +155,27 @@ class ChatModel:
         inputs = [{'role': 'system', 'content': PROMPT},
                   {'role': 'user', 'content': json.dumps({'raw_messages': messages,
                       'candidate_existing_summaries': related}, ensure_ascii=False)}]
+        return self.generate_json(inputs, purpose='consolidation')
+
+    @property
+    def last_call(self):
+        return getattr(self._measurements, 'last_call', None)
+
+    @last_call.setter
+    def last_call(self, value):
+        self._measurements.last_call = value
+
+    def decide(self, prompt, data, *, purpose, timeout=6, max_tokens=4096):
+        """Same explicit provider for semantic decisions; no hidden model route."""
+        inputs = [{'role': 'system', 'content': prompt},
+                  {'role': 'user', 'content': json.dumps(data, ensure_ascii=False)}]
+        output = self.generate_json(inputs, purpose=purpose, timeout=timeout, max_tokens=max_tokens)
+        return output, dict(self.last_call or {})
+
+    def generate_json(self, inputs, *, purpose, timeout=60, max_tokens=None):
+        if not self.configured:
+            raise RuntimeError('Model is not configured')
+        output_limit = max_tokens if max_tokens is not None else self.cfg.max_tokens
         started = time.perf_counter()
         data = {}
         error = None
@@ -162,14 +185,14 @@ class ChatModel:
                 payload = {'model': self.cfg.model, 'messages': inputs, 'stream': False,
                            'format': 'json', 'options': {'temperature': 0.1}}
                 if self.cfg.thinking: payload['think'] = self.cfg.thinking == 'enabled'
-                if self.cfg.max_tokens: payload['options']['num_predict'] = self.cfg.max_tokens
-                data = _post_json(url, payload, self.cfg.key)
+                if output_limit: payload['options']['num_predict'] = output_limit
+                data = _post_json(url, payload, self.cfg.key, timeout=timeout)
                 return _json_from_text(data['message']['content'])
             url = _endpoint(self.cfg.endpoint, '/v1/chat/completions')
             payload = {'model': self.cfg.model, 'temperature': 0.1, 'messages': inputs}
             if self.cfg.thinking: payload['thinking'] = {'type': self.cfg.thinking}
-            if self.cfg.max_tokens: payload['max_tokens'] = self.cfg.max_tokens
-            data = _post_json(url, payload, self.cfg.key)
+            if output_limit: payload['max_tokens'] = output_limit
+            data = _post_json(url, payload, self.cfg.key, timeout=timeout)
             return _json_from_text(data['choices'][0]['message']['content'])
         except Exception as err:
             error = type(err).__name__
@@ -190,7 +213,7 @@ class ChatModel:
                 'latency_ms': round((time.perf_counter() - started) * 1000, 3),
                 'usage': usage, 'error_type': error,
                 'thinking': self.cfg.thinking or 'provider_default',
-                'max_tokens': self.cfg.max_tokens,
+                'max_tokens': output_limit, 'purpose': purpose,
             }
 
 

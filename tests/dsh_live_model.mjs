@@ -21,7 +21,7 @@ const report = {
   schema: 'goldfish.dsh-live-model.v1', started_at: started, status: 'starting',
   fixture_notice: 'All human inputs and historical seed messages are synthetic fixtures. Assistant replies, consolidation output, and compaction summaries must come from real HTTP model responses.',
   scope: 'Real DSH core host, not the interactive DSH CLI/UI. No memory tools. Live automatic consolidation remains enabled and each turn waits for its completion.',
-  budgets: { conversation: 6, compaction: 1, consolidation: 7 },
+  budgets: { conversation: 6, compaction: 1, consolidation: 7, semantic_recall: 6, relation_validation: 10 },
   calls: [], checks: [], turns: [], recall_calls: [], limitations: [
     'Coverage checks measure documented literal/alias cue survival, not complete fact, relation, scene, date, or negation correctness. Unmatched English paraphrases require human review.',
     'One real compaction is observed without forcing the model to drop or retain any fact. A retained fact is not an omission/reinjection success.',
@@ -197,6 +197,8 @@ if (missing.length) {
       for (const name of ['DSH_LIVE_API_KEY', 'DEEPSEEK_API_KEY', 'OPENAI_API_KEY']) delete env[name];
       if (extractionUrl) Object.assign(env, { GOLDFISH_LLM_PROVIDER: 'openai', GOLDFISH_LLM_URL: extractionUrl,
         GOLDFISH_LLM_MODEL: extractionConfig.model,
+        GOLDFISH_SEMANTIC_RECALL: process.env.GOLDFISH_SEMANTIC_RECALL || '0',
+        GOLDFISH_RELATION_REVIEW: process.env.GOLDFISH_RELATION_REVIEW || '1',
         ...process.env.GOLDFISH_LLM_THINKING ? { GOLDFISH_LLM_THINKING: process.env.GOLDFISH_LLM_THINKING } : {},
         ...process.env.GOLDFISH_LLM_MAX_TOKENS ? { GOLDFISH_LLM_MAX_TOKENS: process.env.GOLDFISH_LLM_MAX_TOKENS } : {} });
       backendOutput = '';
@@ -221,7 +223,10 @@ if (missing.length) {
         if (request.url !== '/v1/chat/completions') { response.writeHead(404); response.end('{}'); return; }
         const chunks = []; for await (const chunk of request) chunks.push(chunk);
         const payload = JSON.parse(Buffer.concat(chunks));
-        const { data } = await callModel(extractionConfig, payload, 'consolidation');
+        const system = payload.messages?.[0]?.content || '';
+        const purpose = system.startsWith('你是长期记忆检索') ? 'semantic_recall'
+          : system.startsWith('审核概括之间的关系') ? 'relation_validation' : 'consolidation';
+        const { data } = await callModel(extractionConfig, payload, purpose);
         response.writeHead(200, { 'Content-Type': 'application/json' }); response.end(JSON.stringify(data));
       } catch { response.writeHead(502, { 'Content-Type': 'application/json' }); response.end('{"error":"live_model_request_failed"}'); }
     });
@@ -284,7 +289,7 @@ if (missing.length) {
     await ctx.plugin(jsonl, { root: join(temp, 'sessions'), compression: 'none' });
     await ctx.plugin(loop.default, { agents: [] }); await ctx.plugin(meter.default);
     const adapter = new LiveAdapter(); ctx.llm.registerAdapter(['live-openai'], adapter);
-    await ctx.plugin(Goldfish, { serverUrl, token: '', outboxDir: join(temp, 'outbox'), timeoutMs: 2000, retryMs: 100, autoCapture: true, limit: 5, maxChars: 2400 });
+    await ctx.plugin(Goldfish, { serverUrl, token: '', outboxDir: join(temp, 'outbox'), timeoutMs: 12000, retryMs: 100, autoCapture: true, limit: 3, maxChars: 2400 });
     const agent = await ctx.agentLoop.create(sessions.SessionId('synthetic-live-six-turns'), { provider: 'live-openai', model: mainConfig.model, maxTokens: 256 });
     const facts = [
       { id: 'old_pier', description: '旧码头地点', aliases: ['旧码头', 'old pier', 'old wharf'] },

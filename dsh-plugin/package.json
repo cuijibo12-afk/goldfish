@@ -1,6 +1,6 @@
 {
   "name": "dsh-goldfish-memory-local",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "private": true,
   "description": "Personal DSH auto-recall bridge for a local evidence-linked memory graph",
   "type": "module",

@@ -12,6 +12,7 @@ from pathlib import Path
 from .engine import MemoryDB
 from .consolidate import consolidate_session
 from .providers import ChatModel, EmbeddingModel
+from .semantic import plan_recall
 
 class Service:
     def __init__(self, db_path, *, retry_base=1.0):
@@ -174,6 +175,15 @@ class Service:
         # Ollama cold start cannot freeze the memory event writer.
         if path=='/recall':
             semantic={}
+            plan=None; planning_error=None
+            depth=max(0,min(int(data.get('depth',0)),2))
+            if self.chat.configured and os.getenv('GOLDFISH_SEMANTIC_RECALL','0')=='1':
+                try:
+                    plan=plan_recall(self.db,self.chat,str(data.get('query','')),str(data.get('context','')),
+                        depth=depth,timeout=max(.1,min(float(data.get('semantic_budget_ms',10000))/1000,10)),limit=int(data.get('limit',5)))
+                except Exception as err:
+                    planning_error=type(err).__name__
+                    print('[goldfish] semantic recall fallback:',planning_error,flush=True)
             if self.embeddings.configured:
                 try:
                     # Leave time for lexical fallback before the DSH bridge's
@@ -186,11 +196,14 @@ class Service:
                     # No external inference outage may block the main DSH chat.
                     print('[goldfish] semantic fallback:',type(err).__name__,flush=True)
             with self.lock:
-                return {'ok':True,**self.db.recall(
+                result={'ok':True,**self.db.recall(
                     str(data.get('query','')),str(data.get('context','')),
                     max(0,min(int(data.get('limit',5)),12)),
                     max(250,min(int(data.get('max_chars',1800)),8000)),
-                    max(0,min(int(data.get('depth',2)),2)),semantic_scores=semantic)}
+                    depth,semantic_scores=semantic,semantic_plan=plan)}
+                result['semantic_fallback']=planning_error
+                if plan: result['semantic_plan']={k:v for k,v in plan.items() if k not in {'payload','raw_output'}}
+                return result
         if path=='/reindex':
             return {'ok':True,**self._reindex()}
         if path=='/consolidate':

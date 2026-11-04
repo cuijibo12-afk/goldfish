@@ -8,14 +8,17 @@ import re
 from datetime import datetime
 from .engine import MemoryDB, RELATIONS, PROFILES
 from .providers import ChatModel
+from .relations import review_relations
+import os
 
 PROMPT = '''你是个人长期记忆的记录员，不是聊天者。只根据给出的原始消息提取可验证的事实。
 目标：第一级缩句概括（不改变原意、保留具体事件）+ 第二级主题凝练（不是把所有细节压成主题）+ 概括之间的关联。
 必须返回合法 JSON 对象，不要 Markdown：
 {"summaries":[{"ref":"n1","text":"精确概括，不加入用户没说过的动机","evidence_ids":["原消息ID"],"theme":"一个短主题","theme_description":"主题覆盖什么","theme_reason":"这条概括为何属于该主题","start_time":"ISO或null","end_time":"ISO或null"}],
-"links":[{"from":"n1或已存在摘要ID","to":"n2或已存在摘要ID","kind":"same_topic|same_person|same_event|chronological|contrast|emotion_echo|contextual|possible_cause","reason":"关联理由，明确描述可观察证据和不确定性","confidence":0.6}],
+"links":[{"from":"n1或已存在摘要ID","to":"n2或已存在摘要ID","kind":"same_event|same_entity|temporal_sequence|similar_context|contradiction|comparison|same_topic|emotion_echo|possible_cause","reason":"关联理由，明确描述可观察证据和不确定性","confidence":0.6}],
 "profiles":[{"kind":"user_profile|interaction_expectation|feedback|ai_observed","text":"描述性陈述，不能转换成强制人格指令","evidence_ids":["原消息ID"]}]}
 规则：
+- 关系优先用规范类型same_event、same_entity、temporal_sequence、similar_context、contradiction、comparison、same_topic、emotion_echo。same_entity是同一人/物，same_event是同一个具体事件；同物跨年出现不是同一事件。contradiction是同一限定下不兼容，阶段变化用temporal_sequence/comparison，不能混同。
 - 用户希望 AI 怎么改变，归入 interaction_expectation，不归 AI 已有性格。
 - 单次抱怨一般为 feedback，除非用户明确说今后长期如此。
 - AI 自我宣称的喜好不算已验证人格，ai_observed 须基于真实助理行为。
@@ -125,6 +128,24 @@ def consolidate_session(db: MemoryDB, session_id: str, provider=None):
         result = provider.extract(messages, related)
         msg_ids = {m['id']: m for m in messages}
         summaries, links, profiles = _validate(result, msg_ids, related)
+        reviews={}; review_measurement=None
+        if links and callable(getattr(provider,'decide',None)) and os.getenv('GOLDFISH_RELATION_REVIEW','1')=='1':
+            endpoints={item.get('ref',''):dict(item) for item in summaries}
+            sources=dict(msg_ids)
+            with db.lock:
+                for old in related:
+                    evidence=db.evidence_for(old['id']); endpoints[old['id']]={**old,'evidence_ids':[r['id'] for r in evidence]}
+                    sources.update({r['id']:r for r in evidence})
+            candidates=[{'id':str(i),'kind':link['kind'],'reason':link['reason'],
+                         'left':endpoints[link['from'].strip()],'right':endpoints[link['to'].strip()]} for i,link in enumerate(links)]
+            try:
+                reviewed,review_measurement,_=review_relations(provider,candidates,sources)
+                reviews={row['id']:row for row in reviewed}
+            except Exception as err:
+                # Source summaries remain durable; unavailable relation review
+                # cannot silently authorize an edge for graph expansion.
+                reviews={str(i):{'status':'uncertain','kind':link['kind'],'reason':type(err).__name__,
+                                  'evidence':[]} for i,link in enumerate(links)}
         refs = {}
         with db.transaction():
             current = db.get_unprocessed_messages(session_id, limit=1)
@@ -139,13 +160,15 @@ def consolidate_session(db: MemoryDB, session_id: str, provider=None):
                 if item.get('theme', '').strip():
                     tid = db.add_theme(item['theme'], item.get('theme_description', ''))
                     db.attach_theme(tid, sid, item.get('theme_reason', ''))
-            for link in links:
+            for index,link in enumerate(links):
                 a, b = link['from'].strip(), link['to'].strip()
-                db.add_link(refs.get(a, a), refs.get(b, b), link['kind'],
+                lid=db.add_link(refs.get(a, a), refs.get(b, b), link['kind'],
                             link['reason'], float(link.get('confidence', .5)))
+                if str(index) in reviews: db.record_link_review(lid,reviews[str(index)],getattr(getattr(provider,'cfg',None),'model',''))
             for item in profiles:
                 db.add_profile(item['kind'], item['text'], item['evidence_ids'])
             # The outputs and cursor commit together, including on disk failures.
             db.mark_processed(session_id, messages[-1]['seq'])
         return {'ok': True, 'processed': len(messages), 'summaries': len(summaries),
-                'links_proposed': len(links), 'links': len(links), 'profiles': len(profiles)}
+                'links_proposed': len(links), 'links': len(links), 'profiles': len(profiles),
+                'relation_review_measurement':review_measurement}
