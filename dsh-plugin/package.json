@@ -1,10 +1,11 @@
 {
   "name": "dsh-goldfish-memory-local",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "private": true,
   "description": "Personal DSH auto-recall bridge for a local evidence-linked memory graph",
   "type": "module",
   "main": "index.js",
-  "files": ["index.js", "cordis.patch.yml"],
+  "files": ["index.js", "outbox.js", "cordis.patch.yml"],
+  "engines": {"node": ">=22"},
   "dsh": {"bundle": {"patch": "./cordis.patch.yml"}}
 }

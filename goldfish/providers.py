@@ -8,9 +8,10 @@ import json
 import math
 import os
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from urllib.parse import urlsplit
-from urllib.request import Request, urlopen
+from urllib.error import HTTPError
+from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 LOCAL_NAMES = {'localhost', '127.0.0.1', '::1'}
 
@@ -31,9 +32,19 @@ def _check_url(url: str):
     parsed = urlsplit(url)
     if parsed.scheme not in ('http', 'https') or not parsed.hostname:
         raise ValueError('Model endpoint must be an http(s) URL')
+    if parsed.username is not None or parsed.password is not None or parsed.fragment:
+        raise ValueError('Model endpoint must not contain credentials or a fragment')
     # API keys and personal memories should not travel over unencrypted WAN HTTP.
     if parsed.scheme == 'http' and parsed.hostname not in LOCAL_NAMES and os.getenv('GOLDFISH_ALLOW_INSECURE_REMOTE') != '1':
         raise ValueError('Remote model endpoints require HTTPS. Use GOLDFISH_ALLOW_INSECURE_REMOTE=1 only for a trusted private LAN.')
+
+
+class _NoModelRedirects(HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        # A redirect is not explicit consent to send private text or API keys to
+        # another endpoint. urllib otherwise preserves Authorization on 301/302.
+        fp.close()
+        raise ValueError('Model endpoint redirects are disabled; configure its final URL explicitly')
 
 
 def _post_json(url, payload, key='', timeout=60):
@@ -43,8 +54,16 @@ def _post_json(url, payload, key='', timeout=60):
         headers['Authorization'] = 'Bearer ' + key
     data = json.dumps(payload, ensure_ascii=False).encode('utf-8')
     req = Request(url, headers=headers, data=data, method='POST')
-    with urlopen(req, timeout=timeout) as response:
-        return json.loads(response.read().decode('utf-8'))
+    try:
+        # Keep the standard proxy/CA handlers, but never follow redirects.
+        with build_opener(_NoModelRedirects()).open(req, timeout=timeout) as response:
+            return json.loads(response.read().decode('utf-8'))
+    except HTTPError as err:
+        # Do not let server-supplied reason phrases or endpoint query credentials
+        # enter the service's error logs or API responses.
+        code = err.code
+        err.close()
+        raise RuntimeError(f'Model endpoint returned HTTP {code}') from None
 
 
 def _json_from_text(content):
@@ -73,7 +92,7 @@ class ModelConfig:
     provider: str
     endpoint: str
     model: str
-    key: str = ''
+    key: str = field(default='', repr=False)
 
     @property
     def configured(self):
@@ -147,29 +166,45 @@ class EmbeddingModel:
     def identity(self):
         return self.cfg.identity
 
-    def embed(self, texts: list[str]) -> list[list[float]]:
+    def embed(self, texts: list[str], *, timeout=45) -> list[list[float]]:
         if not self.configured:
             raise RuntimeError('Embedding model not configured')
         if not texts:
             return []
         if self.cfg.provider == 'ollama':
             url = _endpoint(self.cfg.endpoint, '/api/embed')
-            data = _post_json(url, {'model': self.cfg.model, 'input': texts}, self.cfg.key, timeout=45)
+            data = _post_json(url, {'model': self.cfg.model, 'input': texts}, self.cfg.key, timeout=timeout)
             vectors = data['embeddings']
         else:
             url = _endpoint(self.cfg.endpoint, '/v1/embeddings')
-            data = _post_json(url, {'model': self.cfg.model, 'input': texts}, self.cfg.key, timeout=45)
-            vectors = [item['embedding'] for item in sorted(data['data'], key=lambda x:x['index'])]
+            data = _post_json(url, {'model': self.cfg.model, 'input': texts}, self.cfg.key, timeout=timeout)
+            items = data.get('data') if isinstance(data, dict) else None
+            if not isinstance(items, list) or len(items) != len(texts):
+                raise ValueError('Embedding service returned an unexpected number of vectors')
+            if any(not isinstance(item, dict) or type(item.get('index')) is not int
+                   or 'embedding' not in item for item in items):
+                raise ValueError('Embedding service returned invalid indices')
+            if {item['index'] for item in items} != set(range(len(texts))):
+                raise ValueError('Embedding service returned invalid indices')
+            vectors = [item['embedding'] for item in sorted(items, key=lambda x:x['index'])]
         if not isinstance(vectors, list) or len(vectors) != len(texts):
             raise ValueError('Embedding service returned an unexpected number of vectors')
         out=[]
+        dimension = None
         for vector in vectors:
             if not isinstance(vector,list) or not vector or len(vector)>8192:
                 raise ValueError('Invalid embedding vector')
+            if dimension is not None and len(vector) != dimension:
+                raise ValueError('Embedding service returned inconsistent vector dimensions')
+            dimension = len(vector)
+            if any(type(n) not in (int, float) for n in vector):
+                raise ValueError('Embedding vector must contain only numbers')
             v = [float(n) for n in vector]
             if not all(math.isfinite(n) for n in v):
                 raise ValueError('Non-finite embedding vector')
-            norm = math.sqrt(sum(n*n for n in v))
-            if norm == 0: raise ValueError('Zero embedding vector')
-            out.append([n/norm for n in v])
+            scale = max(abs(n) for n in v)
+            if scale == 0: raise ValueError('Zero embedding vector')
+            scaled = [n/scale for n in v]
+            norm = math.hypot(*scaled)
+            out.append([n/norm for n in scaled])
         return out

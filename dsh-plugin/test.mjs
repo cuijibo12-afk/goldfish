@@ -12,7 +12,7 @@ test('DSH pre-step injects memory into main model input; never needs a tool',asy
     assert(hooks.has('agent/pre-step'));
     assert(!hooks.has('session/event'));
     const message={role:'user',source:{kind:'user'},content:[{type:'text',text:'你还记得那段经历吗'}]};
-    const decision=await hooks.get('agent/pre-step')({messages:[message],signal:new AbortController().signal},
+    const decision=await hooks.get('agent/pre-step')({agent:{session:{deriveMessages:()=>[]}},messages:[message],signal:new AbortController().signal},
       async()=>({kind:'enter',messages:[message]}));
     assert.equal(decision.messages.length,2);
     assert.equal(decision.messages[1].source.kind,'plugin:goldfish-memory');
@@ -27,7 +27,7 @@ test('Plugin skips injection if local recall is unavailable',async()=>{
     apply({on:(name,fn)=>hooks.set(name,fn),agents:{requireInitiator:()=>({session:{deriveMessages:()=>[]}})},logger:{warn:()=>{}}},
       {autoCapture:false,timeoutMs:50});
     const msg={role:'user',source:{kind:'user'},content:[{type:'text',text:'测试'}]};
-    const decision=await hooks.get('agent/pre-step')({messages:[msg],signal:new AbortController().signal},
+    const decision=await hooks.get('agent/pre-step')({agent:{session:{deriveMessages:()=>[]}},messages:[msg],signal:new AbortController().signal},
       async()=>({kind:'enter',messages:[msg]}));
     assert.equal(decision.messages.length,1);
   }finally{globalThis.fetch=before;}
