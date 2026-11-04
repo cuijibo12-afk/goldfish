@@ -88,7 +88,8 @@ class MemoryTests(unittest.TestCase):
         class EvilProvider:
             def extract(self,messages,related):
                 return {'summaries':[{'ref':'n','text':'用户昨天去了月球','evidence_ids':['unknown']}], 'profiles':[], 'links':[]}
-        with self.assertRaises(ValueError): consolidate_session(self.db,'s',EvilProvider())
+        outcome=consolidate_session(self.db,'s',EvilProvider())
+        self.assertEqual(len(outcome['rejected_items']),1)
         self.assertEqual(self.db.db.execute('SELECT COUNT(*) FROM summaries').fetchone()[0],0)
 
 if __name__=='__main__':unittest.main()

@@ -21,11 +21,11 @@ const report = {
   schema: 'goldfish.dsh-live-model.v1', started_at: started, status: 'starting',
   fixture_notice: 'All human inputs and historical seed messages are synthetic fixtures. Assistant replies, consolidation output, and compaction summaries must come from real HTTP model responses.',
   scope: 'Real DSH core host, not the interactive DSH CLI/UI. No memory tools. Live automatic consolidation remains enabled and each turn waits for its completion.',
-  budgets: { conversation: 6, compaction: 1, consolidation: 7, semantic_recall: 6, relation_validation: 10 },
+  budgets: { conversation: 6, compaction: 1, consolidation: 7, semantic_recall: 6, relation_validation: 10, embedding: 30, batch_dedup: 6 },
   calls: [], checks: [], turns: [], recall_calls: [], limitations: [
     'Coverage checks measure documented literal/alias cue survival, not complete fact, relation, scene, date, or negation correctness. Unmatched English paraphrases require human review.',
     'One real compaction is observed without forcing the model to drop or retain any fact. A retained fact is not an omission/reinjection success.',
-    'No embedding model, cancellation/retry/outage scenario, or personal DSH profile is exercised by this runner.',
+    'Embedding is exercised only when explicitly configured. No cancellation/retry/outage scenario or personal DSH profile is exercised by this runner.',
   ],
 };
 const compactionTokens = Number(process.env.DSH_LIVE_COMPACTION_TOKENS || 2048);
@@ -48,7 +48,8 @@ const extractionConfig = {
   key: first(process.env.GOLDFISH_LLM_API_KEY, mainConfig.key),
   model: first(process.env.GOLDFISH_LLM_MODEL, mainConfig.model),
 };
-const secrets = [mainConfig.key, extractionConfig.key, process.env.GOLDFISH_LOCAL_TOKEN].filter(Boolean);
+const embeddingConfig = { url: process.env.GOLDFISH_EMBED_URL || '', key: process.env.GOLDFISH_EMBED_API_KEY || '', model: process.env.GOLDFISH_EMBED_MODEL || '' };
+const secrets = [mainConfig.key, extractionConfig.key, embeddingConfig.key, process.env.GOLDFISH_LOCAL_TOKEN].filter(Boolean);
 const safeText = text => secrets.reduce((value, secret) => value.replaceAll(secret, '[REDACTED]'), String(text));
 const safeError = error => ({ name: error?.name || 'Error', message: safeText(error?.message || 'Unknown error').slice(0, 500) });
 const flatten = message => (message?.content || []).filter(block => block.type === 'text').map(block => block.text).join('');
@@ -105,7 +106,8 @@ async function callModel(config, payload, purpose, signal) {
   let stage = 'transport';
   try {
     record.http_attempted = true;
-    const response = await fetch(endpoint(config.url), { method: 'POST', redirect: 'error',
+    const target = purpose === 'embedding' ? config.url.replace(/\/$/, '').replace(/\/v1$/, '') + '/v1/embeddings' : endpoint(config.url);
+    const response = await fetch(target, { method: 'POST', redirect: 'error',
       headers: { 'Content-Type': 'application/json', ...config.key ? { Authorization: 'Bearer ' + config.key } : {} },
       body: JSON.stringify(payload), signal: signal ? AbortSignal.any([signal, AbortSignal.timeout(90000)]) : AbortSignal.timeout(90000) });
     record.http_status = response.status;
@@ -114,11 +116,11 @@ async function callModel(config, payload, purpose, signal) {
     if (!response.ok) { await response.body?.cancel(); throw new Error('Model endpoint returned HTTP ' + response.status); }
     stage = 'response_json';
     const data = await response.json();
-    record.response = { id: data.id, model: data.model, usage: data.usage,
+    record.response = purpose === 'embedding' ? { model: data.model, usage: data.usage, finish_reason: 'embedding_complete', count: data.data?.length, dim: data.data?.[0]?.embedding?.length } : { id: data.id, model: data.model, usage: data.usage,
       finish_reason: data.choices?.[0]?.finish_reason, text: data.choices?.[0]?.message?.content };
     record.dsh_usage = usageForDsh(data.usage);
     stage = 'response_validation';
-    if (typeof record.response.text !== 'string' || !record.response.text.trim()) throw new Error('Model response has no assistant text');
+    if (purpose === 'embedding' ? !record.response.count : typeof record.response.text !== 'string' || !record.response.text.trim()) throw new Error('Model response missing content');
     return { data, record };
   } catch (error) {
     // Never persist a nested network error: its message, request, or headers
@@ -137,7 +139,7 @@ async function saveReport() {
     const calls = report.calls.filter(call => call.purpose === purpose);
     return [purpose, { attempted: calls.length, http_attempted: calls.filter(call => call.http_attempted).length,
       http_succeeded: calls.filter(call => call.http_status >= 200 && call.http_status < 300).length,
-      successful: calls.filter(call => call.response && !call.error && call.response.finish_reason === 'stop').length,
+      successful: calls.filter(call => call.response && !call.error && ['stop','embedding_complete'].includes(call.response.finish_reason)).length,
       truncated: calls.filter(call => call.response?.finish_reason === 'length').length,
       latency_ms: Math.round(calls.reduce((sum, call) => sum + (call.latency_ms || 0), 0)),
       prompt_tokens: calls.reduce((sum, call) => sum + (call.response?.usage?.prompt_tokens || 0), 0),
@@ -162,6 +164,7 @@ if (missing.length) {
   const python = process.env.PYTHON || 'python';
   try {
     endpoint(mainConfig.url); endpoint(extractionConfig.url);
+    if (embeddingConfig.url) endpoint(embeddingConfig.url);
     if (process.env.GOLDFISH_LLM_PROVIDER && process.env.GOLDFISH_LLM_PROVIDER !== 'openai') throw new Error('This runner requires the openai-compatible consolidation provider');
     const requireRuntime = createRequire(join(resolve(process.env.DSH_TEST_RUNTIME), 'package.json'));
     const version = requireRuntime('@deepseek-ai/dsh/package.json').version;
@@ -198,9 +201,14 @@ if (missing.length) {
       if (extractionUrl) Object.assign(env, { GOLDFISH_LLM_PROVIDER: 'openai', GOLDFISH_LLM_URL: extractionUrl,
         GOLDFISH_LLM_MODEL: extractionConfig.model,
         GOLDFISH_SEMANTIC_RECALL: process.env.GOLDFISH_SEMANTIC_RECALL || '0',
+        GOLDFISH_RETRIEVAL_MODE: process.env.GOLDFISH_RETRIEVAL_MODE || 'legacy',
         GOLDFISH_RELATION_REVIEW: process.env.GOLDFISH_RELATION_REVIEW || '1',
         ...process.env.GOLDFISH_LLM_THINKING ? { GOLDFISH_LLM_THINKING: process.env.GOLDFISH_LLM_THINKING } : {},
         ...process.env.GOLDFISH_LLM_MAX_TOKENS ? { GOLDFISH_LLM_MAX_TOKENS: process.env.GOLDFISH_LLM_MAX_TOKENS } : {} });
+      if (embeddingConfig.url && embeddingConfig.model && extractionUrl) Object.assign(env, {
+        GOLDFISH_EMBED_PROVIDER: 'openai', GOLDFISH_EMBED_URL: extractionUrl, GOLDFISH_EMBED_MODEL: embeddingConfig.model,
+        GOLDFISH_EMBED_REVISION: process.env.GOLDFISH_EMBED_REVISION || '',
+        GOLDFISH_EMBED_QUERY_PREFIX: process.env.GOLDFISH_EMBED_QUERY_PREFIX || '' });
       backendOutput = '';
       backend = spawn(python, ['-m', 'goldfish.server', '--port', String(backendPort), '--db', db], { cwd: root, env, stdio: ['ignore', 'pipe', 'pipe'] });
       backend.stdout.on('data', data => { backendOutput = (backendOutput + data).slice(-4000); });
@@ -220,13 +228,13 @@ if (missing.length) {
     // forwarded unchanged. No request/response header is retained in the report.
     forwarder = createServer(async (request, response) => {
       try {
-        if (request.url !== '/v1/chat/completions') { response.writeHead(404); response.end('{}'); return; }
+        if (!['/v1/chat/completions','/v1/embeddings'].includes(request.url)) { response.writeHead(404); response.end('{}'); return; }
         const chunks = []; for await (const chunk of request) chunks.push(chunk);
         const payload = JSON.parse(Buffer.concat(chunks));
         const system = payload.messages?.[0]?.content || '';
-        const purpose = system.startsWith('你是长期记忆检索') ? 'semantic_recall'
+        const purpose = request.url === '/v1/embeddings' ? 'embedding' : system.startsWith('只审核同批候选') ? 'batch_dedup' : system.startsWith('你是长期记忆检索') ? 'semantic_recall'
           : system.startsWith('审核概括之间的关系') ? 'relation_validation' : 'consolidation';
-        const { data } = await callModel(extractionConfig, payload, purpose);
+        const { data } = await callModel(purpose === 'embedding' ? embeddingConfig : extractionConfig, payload, purpose);
         response.writeHead(200, { 'Content-Type': 'application/json' }); response.end(JSON.stringify(data));
       } catch { response.writeHead(502, { 'Content-Type': 'application/json' }); response.end('{"error":"live_model_request_failed"}'); }
     });

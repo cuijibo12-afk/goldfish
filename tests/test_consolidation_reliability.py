@@ -48,15 +48,16 @@ class ReliabilityTests(unittest.TestCase):
         self.db.db.execute('DROP TRIGGER reject_profile')
         self.assertEqual(consolidate_session(self.db, 's', self.provider(result))['summaries'], 1)
 
-    def test_invalid_late_model_field_never_commits_first_summary(self):
+    def test_invalid_late_model_field_is_quarantined_without_losing_valid_summary(self):
         mid = self.db.add_message('s', 'user', '我喜欢咖啡')
         result = self.result(mid)
         result['summaries'].append({'ref': 'n2', 'text': '另一概括',
                                     'evidence_ids': [mid], 'start_time': {'bad': 'value'}})
-        with self.assertRaises(ValueError):
-            consolidate_session(self.db, 's', self.provider(result))
-        self.assertEqual(self.db.db.execute('SELECT COUNT(*) FROM summaries').fetchone()[0], 0)
-        self.assertEqual(len(self.db.get_unprocessed_messages('s')), 1)
+        outcome=consolidate_session(self.db, 's', self.provider(result))
+        self.assertEqual(self.db.db.execute('SELECT COUNT(*) FROM summaries').fetchone()[0], 1)
+        self.assertEqual(len(outcome['rejected_items']),1)
+        self.assertEqual(self.db.db.execute('SELECT COUNT(*) FROM consolidation_rejections').fetchone()[0],1)
+        self.assertEqual(len(self.db.get_unprocessed_messages('s')), 0)
 
     def test_failed_commit_rolls_back_and_connection_can_retry(self):
         mid = self.db.add_message('s', 'user', '我喜欢咖啡')
@@ -176,7 +177,7 @@ class ReliabilityTests(unittest.TestCase):
         self.db.db.execute('PRAGMA user_version=0')
         self.db.close()
         self.db = MemoryDB(self.path)
-        self.assertEqual(self.db.db.execute('PRAGMA user_version').fetchone()[0], 2)
+        self.assertEqual(self.db.db.execute('PRAGMA user_version').fetchone()[0], 3)
         self.assertEqual(self.db.get_message(mid)['text'], '原始来源')
         self.db.close()
         self.db = MemoryDB(self.path)  # Opening the migrated DB is idempotent.

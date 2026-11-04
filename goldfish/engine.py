@@ -105,7 +105,7 @@ class MemoryDB:
         self.db = sqlite3.connect(self.path, check_same_thread=False, timeout=30, isolation_level=None)
         self.db.row_factory = sqlite3.Row
         version = self.db.execute('PRAGMA user_version').fetchone()[0]
-        if version > 2:
+        if version > 3:
             self.db.close()
             raise ValueError('Database schema is newer than this Goldfish version')
         self.db.execute('PRAGMA journal_mode=WAL')
@@ -150,12 +150,29 @@ class MemoryDB:
           link_id TEXT PRIMARY KEY REFERENCES links(id), status TEXT NOT NULL, effective_kind TEXT NOT NULL,
           reason TEXT NOT NULL, evidence_json TEXT NOT NULL, reviewer_kind TEXT NOT NULL,
           model TEXT NOT NULL, input_hash TEXT NOT NULL, reviewed_at TEXT NOT NULL);
+        CREATE TABLE IF NOT EXISTS consolidation_rejections(
+          id INTEGER PRIMARY KEY, session_id TEXT NOT NULL, last_seq INTEGER NOT NULL,
+          item_kind TEXT NOT NULL, item_index INTEGER NOT NULL, reason TEXT NOT NULL,
+          item_json TEXT NOT NULL, created_at TEXT NOT NULL);
+        CREATE TABLE IF NOT EXISTS summary_revisions(
+          summary_id TEXT NOT NULL REFERENCES summaries(id), version INTEGER NOT NULL,
+          record_json TEXT NOT NULL, archived_at TEXT NOT NULL,
+          PRIMARY KEY(summary_id,version));
+        CREATE TABLE IF NOT EXISTS auxiliary_vectors(
+          document_id TEXT PRIMARY KEY, model_identity TEXT NOT NULL, content_hash TEXT NOT NULL,
+          dim INTEGER NOT NULL, vector_json TEXT NOT NULL, indexed_at TEXT NOT NULL);
         ''')
         # v0 is the unversioned v0.2 handoff schema. This migration is additive.
         with self.transaction():
             self.db.execute('CREATE INDEX IF NOT EXISTS raw_session_seq ON raw_messages(session_id,seq)')
             self.db.execute('CREATE INDEX IF NOT EXISTS evidence_message ON evidence(message_id)')
-            self.db.execute('PRAGMA user_version=2')
+            columns={r[1] for r in self.db.execute('PRAGMA table_info(summary_vectors)')}
+            for name,definition in [('content_hash',"TEXT NOT NULL DEFAULT ''"),('summary_version','INTEGER NOT NULL DEFAULT 0')]:
+                if name not in columns: self.db.execute(f'ALTER TABLE summary_vectors ADD COLUMN {name} {definition}')
+            self.db.execute('''CREATE TRIGGER IF NOT EXISTS inactive_summary_vector
+                AFTER UPDATE OF status ON summaries WHEN NEW.status!='active'
+                BEGIN DELETE FROM summary_vectors WHERE summary_id=NEW.id; END''')
+            self.db.execute('PRAGMA user_version=3')
 
     @contextmanager
     def transaction(self):
@@ -344,37 +361,131 @@ class MemoryDB:
 
     @locked
     def missing_embeddings(self, model_identity, limit=16):
-        """Index new or outdated active summaries. Existing DBs migrate automatically."""
-        rows = self.db.execute('''SELECT s.id,s.text FROM summaries s
+        """Return source snapshots: never index a changed record with old vectors."""
+        rows = self.db.execute('''SELECT s.id,s.text,s.version,v.content_hash,v.summary_version,v.model_identity FROM summaries s
            LEFT JOIN summary_vectors v ON s.id=v.summary_id
-           WHERE s.status='active' AND (v.summary_id IS NULL OR v.model_identity!=?)
-           ORDER BY s.created_at LIMIT ?''', (model_identity,limit)).fetchall()
-        return [dict(r) for r in rows]
+           WHERE s.status='active' ORDER BY s.created_at''').fetchall()
+        result=[]
+        for row in rows:
+            digest=hashlib.sha256(row['text'].encode()).hexdigest()
+            if row['model_identity']!=model_identity or row['content_hash']!=digest or row['summary_version']!=row['version']:
+                result.append({'id':row['id'],'text':row['text'],'version':row['version'],'content_hash':digest})
+                if len(result)>=limit: break
+        return result
 
     @transactional
-    def store_embeddings(self, model_identity, pairs):
+    def store_embeddings(self, model_identity, pairs, snapshots=None):
+        indexed=0
+        snapshots={r['id']:r for r in snapshots} if snapshots is not None else None
         for sid, vector in pairs:
+            source=self.db.execute("SELECT text,version FROM summaries WHERE id=? AND status='active'",(sid,)).fetchone()
+            if not source: continue
+            digest=hashlib.sha256(source['text'].encode()).hexdigest()
+            if snapshots is not None and (sid not in snapshots or snapshots[sid]['content_hash']!=digest or snapshots[sid]['version']!=source['version']): continue
             values=[float(x) for x in vector]
             if not values or not all(math.isfinite(n) for n in values):
                 raise ValueError('Invalid vector')
-            self.db.execute('''INSERT INTO summary_vectors(summary_id,model_identity,dim,vector_json,indexed_at)
-              VALUES(?,?,?,?,?) ON CONFLICT(summary_id) DO UPDATE SET
+            norm=math.hypot(*values)
+            if norm==0: raise ValueError('Zero vector')
+            values=[x/norm for x in values]
+            self.db.execute('''INSERT INTO summary_vectors(summary_id,model_identity,dim,vector_json,indexed_at,content_hash,summary_version)
+              VALUES(?,?,?,?,?,?,?) ON CONFLICT(summary_id) DO UPDATE SET
               model_identity=excluded.model_identity,dim=excluded.dim,
-              vector_json=excluded.vector_json,indexed_at=excluded.indexed_at''',
-              (sid,model_identity,len(values),json.dumps(values),now_iso()))
+              vector_json=excluded.vector_json,indexed_at=excluded.indexed_at,
+              content_hash=excluded.content_hash,summary_version=excluded.summary_version''',
+              (sid,model_identity,len(values),json.dumps(values),now_iso(),digest,source['version']))
+            indexed+=1
+        return indexed
+
+    @transactional
+    def update_summary(self, summary_id, text, evidence_ids, start_time=None, end_time=None):
+        old=self.db.execute('SELECT * FROM summaries WHERE id=?',(summary_id,)).fetchone()
+        if not old or not text.strip() or not evidence_ids or any(not self.get_message(mid) for mid in evidence_ids):
+            raise ValueError('valid summary and source evidence required')
+        record={**dict(old),'evidence_ids':[r['id'] for r in self.evidence_for(summary_id)]}
+        self.db.execute('INSERT INTO summary_revisions VALUES(?,?,?,?)',(summary_id,old['version'],json.dumps(record,ensure_ascii=False),now_iso()))
+        self.db.execute('UPDATE summaries SET text=?,start_time=?,end_time=?,version=version+1,updated_at=? WHERE id=?',
+            (text.strip(),start_time,end_time,now_iso(),summary_id))
+        self.db.execute('DELETE FROM evidence WHERE summary_id=?',(summary_id,))
+        self.db.executemany('INSERT INTO evidence VALUES(?,?)',[(summary_id,mid) for mid in dict.fromkeys(evidence_ids)])
+        self.db.execute('DELETE FROM summary_vectors WHERE summary_id=?',(summary_id,))
+
+    @transactional
+    def archive_summary(self, summary_id):
+        """Delete from active retrieval/index, retaining immutable original evidence."""
+        self.db.execute("UPDATE summaries SET status='archived',updated_at=? WHERE id=?",(now_iso(),summary_id))
+
+    @transactional
+    def prune_vector_index(self, force=False):
+        if force:
+            self.db.execute('DELETE FROM summary_vectors');self.db.execute('DELETE FROM auxiliary_vectors')
+        else:
+            active={d['id'] for d in self.auxiliary_documents(('profile','theme','link'))}
+            for row in self.db.execute('SELECT document_id FROM auxiliary_vectors').fetchall():
+                if row['document_id'] not in active:self.db.execute('DELETE FROM auxiliary_vectors WHERE document_id=?',(row['document_id'],))
+            self.db.execute("DELETE FROM summary_vectors WHERE summary_id NOT IN (SELECT id FROM summaries WHERE status='active')")
 
     @locked
-    def semantic_scores(self, vector, model_identity):
+    def semantic_scores(self, vector, model_identity, min_score=.38):
         """Local cosine search, acceptable for personal use; provider makes embeddings."""
         result={}
-        for row in self.db.execute('''SELECT v.summary_id,v.vector_json,v.dim
+        stamp=(self.db.total_changes,self.db.execute('PRAGMA data_version').fetchone()[0],model_identity)
+        if getattr(self,'_vector_cache_stamp',None)!=stamp:
+            cached=[]
+            for row in self.db.execute('''SELECT v.summary_id,v.vector_json,v.dim,v.content_hash,v.summary_version,s.text,s.version
                  FROM summary_vectors v JOIN summaries s ON s.id=v.summary_id
                  WHERE v.model_identity=? AND s.status='active' ''',(model_identity,)):
-            if row['dim']!=len(vector): continue
-            other=json.loads(row['vector_json'])
+                if row['summary_version']==row['version'] and row['content_hash']==hashlib.sha256(row['text'].encode()).hexdigest():
+                    cached.append((row['summary_id'],json.loads(row['vector_json'])))
+            self._vector_cache=cached;self._vector_cache_stamp=stamp
+        for sid,other in self._vector_cache:
+            if len(other)!=len(vector): continue
             # Both query and stored vectors are L2-normalized by EmbeddingModel.
             cos=sum(x*y for x,y in zip(vector,other))
-            if cos>=.38: result[row['summary_id']]=min(1.0,cos)
+            if cos>=min_score: result[sid]=min(1.0,cos)
+        return result
+
+    @locked
+    def auxiliary_documents(self, kinds=('profile',)):
+        docs=[]
+        if 'profile' in kinds:
+            docs.extend({'id':'profile:'+r['id'],'text':r['text']} for r in self.db.execute("SELECT id,text FROM profile WHERE status='active'"))
+        if 'theme' in kinds:
+            docs.extend({'id':'theme:'+r['id'],'text':r['title']+'：'+r['description']} for r in self.db.execute('SELECT * FROM themes'))
+        if 'link' in kinds:
+            docs.extend({'id':'link:'+r['id'],'text':r['review_reason']} for r in self.active_reviewed_links())
+        for doc in docs: doc['content_hash']=hashlib.sha256(doc['text'].encode()).hexdigest()
+        return docs
+
+    @locked
+    def missing_aux_embeddings(self,model_identity,kinds=('profile',),limit=16):
+        result=[]
+        for doc in self.auxiliary_documents(kinds):
+            old=self.db.execute('SELECT model_identity,content_hash FROM auxiliary_vectors WHERE document_id=?',(doc['id'],)).fetchone()
+            if not old or old['model_identity']!=model_identity or old['content_hash']!=doc['content_hash']:
+                result.append(doc)
+                if len(result)>=limit:break
+        return result
+
+    @transactional
+    def store_aux_embeddings(self,model_identity,pairs,snapshots):
+        current={d['id']:d for d in self.auxiliary_documents(('profile','theme','link'))}
+        indexed=0
+        for doc,vector in zip(snapshots,pairs):
+            if doc['id'] not in current or current[doc['id']]['content_hash']!=doc['content_hash']: continue
+            norm=math.hypot(*vector)
+            if not norm or not math.isfinite(norm): raise ValueError('Invalid auxiliary vector')
+            self.db.execute('INSERT OR REPLACE INTO auxiliary_vectors VALUES(?,?,?,?,?,?)',
+                (doc['id'],model_identity,doc['content_hash'],len(vector),json.dumps([x/norm for x in vector]),now_iso()))
+            indexed+=1
+        return indexed
+
+    @locked
+    def auxiliary_scores(self,vector,model_identity,kinds=('profile',)):
+        current={d['id']:d for d in self.auxiliary_documents(kinds)};result={}
+        for row in self.db.execute('SELECT * FROM auxiliary_vectors WHERE model_identity=?',(model_identity,)):
+            if row['document_id'] not in current or row['content_hash']!=current[row['document_id']]['content_hash'] or row['dim']!=len(vector):continue
+            result[row['document_id']]=sum(a*b for a,b in zip(vector,json.loads(row['vector_json'])))
         return result
 
     @locked
@@ -453,7 +564,7 @@ class MemoryDB:
         scores=base.copy(); reasons={sid:'直接召回（关键词/主题/时间）' for sid in base}
         decisions={}
         if semantic_plan:
-            decisions={item['id']:item for item in semantic_plan['selected']}
+            decisions={item['id']:item for item in semantic_plan['selected'] if item['state']!='redundant'}
             scores={sid:1-index*.05 for index,sid in enumerate(decisions) if sid in by_id}
             reasons={sid:decisions[sid]['why'] for sid in scores}
         edges={}
@@ -480,16 +591,17 @@ class MemoryDB:
                 if marker not in seen and graph_score>.07:
                     seen.add(marker);queue.append((neighbor,graph_score,nlevel))
         selected=[]
-        profile_lines=self._profile_strings(min(350,max_chars//3), context, query)
+        profile_lines=self._profile_strings(min(500,max_chars//3), context, query);profile_ids=[]
         if semantic_plan:
-            profile_lines=[]; remaining=min(350,max_chars//3)
+            profile_lines=[]; remaining=min(500,max_chars//3)
             for item in semantic_plan['selected']:
-                if not item['id'].startswith('profile:') or item['state']=='full': continue
+                if not item['id'].startswith('profile:') or item['state'] in {'full','redundant'}: continue
                 row=self.db.execute('SELECT kind FROM profile WHERE id=?',(item['id'][8:],)).fetchone()
                 if not row: continue
                 label={'user_profile':'用户画像','interaction_expectation':'交互期望','ai_observed':'AI行为记录','feedback':'反馈'}[row['kind']]
                 line=f'[{label}] '+escape(item['text'])
-                if len(line)<=remaining: profile_lines.append(line);remaining-=len(line)+1
+                if len(line)<=remaining:
+                    profile_lines.append(line);remaining-=len(line)+1;profile_ids.append(item['id'][8:])
         zone=os.getenv('GOLDFISH_TIMEZONE','Asia/Shanghai')
         try: current_time=datetime.now(ZoneInfo(zone)).isoformat(timespec='minutes')
         except (KeyError,ValueError): current_time=datetime.now(timezone.utc).isoformat(timespec='minutes')
@@ -526,6 +638,7 @@ class MemoryDB:
         if not selected and not profile_lines: return {'results':[], 'injection':'', 'mode':'lexical+time+graph'+('+semantic' if semantic_scores else ''),'tested_context':bool(context)}
         return {'results':selected,'injection':'\n'.join(output),'mode':'lexical+time+graph'+('+semantic' if semantic_scores else ''),
                 'tested_context':bool(context),'time_filter':sorted(years),
+                **({'profile_ids':profile_ids} if semantic_plan else {}),
                 'semantic_plan':{k:v for k,v in semantic_plan.items() if k not in {'payload','raw_output'}} if semantic_plan else None}
 
     @locked

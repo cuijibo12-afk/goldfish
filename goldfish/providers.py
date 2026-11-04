@@ -97,6 +97,8 @@ class ModelConfig:
     key: str = field(default='', repr=False)
     thinking: str = ''
     max_tokens: int | None = None
+    revision: str = ''
+    query_prefix: str = ''
 
     @property
     def configured(self):
@@ -105,13 +107,18 @@ class ModelConfig:
     @property
     def identity(self):
         # Include endpoint, so swapping providers with same model name reindexes.
-        return f'{self.provider}:{self.endpoint}:{self.model}'
+        base=f'{self.provider}:{self.endpoint}:{self.model}'
+        if self.revision or self.query_prefix:
+            import hashlib
+            base+=':'+hashlib.sha256(json.dumps([self.revision,self.query_prefix]).encode()).hexdigest()[:16]
+        return base
 
     def public(self):
         """Status safe to show in diagnostics; API key is never included."""
         return {'provider': self.provider or 'disabled', 'model': self.model, 'configured': self.configured,
                 'local': bool(self.endpoint and urlsplit(self.endpoint).hostname in LOCAL_NAMES),
-                'thinking': self.thinking or 'provider_default', 'max_tokens': self.max_tokens}
+                'thinking': self.thinking or 'provider_default', 'max_tokens': self.max_tokens,
+                'revision':self.revision, 'query_prefix':self.query_prefix}
 
 
 def load_config(task: str) -> ModelConfig:
@@ -134,7 +141,8 @@ def load_config(task: str) -> ModelConfig:
         raise ValueError(prefix+'PROVIDER must be openai or ollama')
     if provider == 'ollama' and not endpoint:
         endpoint = 'http://127.0.0.1:11434'
-    return ModelConfig(task.upper(), provider, endpoint, model, key, thinking, max_tokens)
+    return ModelConfig(task.upper(), provider, endpoint, model, key, thinking, max_tokens,
+                       os.getenv(prefix+'REVISION','').strip(),os.getenv(prefix+'QUERY_PREFIX','') if task.upper()=='EMBED' else '')
 
 
 class ChatModel:
@@ -221,6 +229,10 @@ class EmbeddingModel:
     """Optional vector API. Does not require a second paid subscription."""
     def __init__(self, cfg: ModelConfig | None = None):
         self.cfg = cfg or load_config('EMBED')
+        self._measurements=threading.local()
+
+    @property
+    def last_call(self): return getattr(self._measurements,'last_call',None)
 
     @property
     def configured(self):
@@ -230,18 +242,35 @@ class EmbeddingModel:
     def identity(self):
         return self.cfg.identity
 
-    def embed(self, texts: list[str], *, timeout=45) -> list[list[float]]:
+    def embed(self, texts: list[str], *, timeout=45, purpose='document') -> list[list[float]]:
         if not self.configured:
             raise RuntimeError('Embedding model not configured')
         if not texts:
             return []
+        texts=[self.cfg.query_prefix+t for t in texts] if purpose=='query' else texts
+        started=time.perf_counter();data={};error=None
+        try:
+            return self._embed_request(texts,timeout=timeout,measurement_data=data)
+        except Exception as err:
+            error=type(err).__name__;raise
+        finally:
+            usage=data.get('usage')
+            if self.cfg.provider=='ollama' and type(data.get('prompt_eval_count')) is int:
+                usage={'prompt_tokens':data['prompt_eval_count'],'total_tokens':data['prompt_eval_count']}
+            self._measurements.last_call={'provider':self.cfg.provider,'model':data.get('model',self.cfg.model),
+                'purpose':'embedding_'+purpose,'usage':usage,'input_count':len(texts),
+                'latency_ms':round((time.perf_counter()-started)*1000,3),'error_type':error}
+
+    def _embed_request(self,texts,*,timeout,measurement_data):
         if self.cfg.provider == 'ollama':
             url = _endpoint(self.cfg.endpoint, '/api/embed')
             data = _post_json(url, {'model': self.cfg.model, 'input': texts}, self.cfg.key, timeout=timeout)
+            measurement_data.update(data if isinstance(data,dict) else {})
             vectors = data['embeddings']
         else:
             url = _endpoint(self.cfg.endpoint, '/v1/embeddings')
             data = _post_json(url, {'model': self.cfg.model, 'input': texts}, self.cfg.key, timeout=timeout)
+            measurement_data.update(data if isinstance(data,dict) else {})
             items = data.get('data') if isinstance(data, dict) else None
             if not isinstance(items, list) or len(items) != len(texts):
                 raise ValueError('Embedding service returned an unexpected number of vectors')

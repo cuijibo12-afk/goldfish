@@ -6,13 +6,15 @@ import os
 import signal
 import threading
 import time
+from collections import OrderedDict
 from concurrent.futures import ThreadPoolExecutor
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from .engine import MemoryDB
 from .consolidate import consolidate_session
 from .providers import ChatModel, EmbeddingModel
-from .semantic import plan_recall
+from .semantic import plan_recall, cover_direct_plan, deduplicate_plan
+from .retrieval import candidate_pool, direct_plan
 
 class Service:
     def __init__(self, db_path, *, retry_base=1.0):
@@ -31,6 +33,8 @@ class Service:
         self._stopping=False
         self._closed=False
         self._reindex_lock=threading.Lock()
+        self._query_vectors=OrderedDict()
+        self._query_vector_lock=threading.Lock()
         # Reindex existing summaries when the embedding provider/model changes.
         if self.embeddings.configured:
             self.pool.submit(self._background_reindex)
@@ -55,22 +59,45 @@ class Service:
         # Manual and background reindex requests must not issue duplicate model
         # requests for the same snapshot. No network request holds the DB lock.
         with self._reindex_lock:
+            self.db.prune_vector_index()
             for _ in range(max_batches):
                 with self._state:
                     if self._stopping: break
                 with self.lock:
                     missing=self.db.missing_embeddings(self.embeddings.identity,limit=16)
-                if not missing: break
-                vectors=self.embeddings.embed([s['text'] for s in missing])
-                with self.lock:
-                    self.db.store_embeddings(self.embeddings.identity,
-                        [(s['id'],v) for s,v in zip(missing,vectors)])
-                total+=len(missing)
+                if missing:
+                    vectors=self.embeddings.embed([s['text'] for s in missing])
+                    total+=self.db.store_embeddings(self.embeddings.identity,
+                        [(s['id'],v) for s,v in zip(missing,vectors)],snapshots=missing)
+                else:
+                    auxiliary=self.db.missing_aux_embeddings(self.embeddings.identity,self._aux_kinds(),limit=16)
+                    if not auxiliary:break
+                    vectors=self.embeddings.embed([s['text'] for s in auxiliary])
+                    total+=self.db.store_aux_embeddings(self.embeddings.identity,vectors,auxiliary)
         return {'indexed':total}
+
+    def _aux_kinds(self):
+        return tuple(k for k in os.getenv('GOLDFISH_EMBED_AUX','profile').split(',') if k in {'profile','theme','link'})
+
+    def _query_embedding(self,query,timeout):
+        key=(self.embeddings.identity,query);now=time.monotonic()
+        # One small local cache, bounded and keyed by exact model revision.
+        with self._query_vector_lock:
+            cached=self._query_vectors.get(key)
+            if cached and now-cached[0]<300:
+                self._query_vectors.move_to_end(key)
+                return cached[1],True,None
+            vector=self.embeddings.embed([query],timeout=timeout,purpose='query')[0]
+            measurement=getattr(self.embeddings,'last_call',None)
+            self._query_vectors[key]=(time.monotonic(),vector)
+            while len(self._query_vectors)>128:self._query_vectors.popitem(last=False)
+            return vector,False,measurement
 
     def _background_reindex(self):
         try:
-            self._reindex()
+            while not self._stopping:
+                result=self._reindex()
+                if not result.get('indexed'):break
         except Exception as err:
             print('[goldfish] embedding indexing unavailable:',type(err).__name__,flush=True)
 
@@ -174,27 +201,53 @@ class Service:
         # Network embedding calls are intentionally OUTSIDE DB locks, so an
         # Ollama cold start cannot freeze the memory event writer.
         if path=='/recall':
-            semantic={}
-            plan=None; planning_error=None
+            started=time.perf_counter();semantic={};auxiliary={};measurements=[]
+            plan=None; planning_error=None;embedding_error=None;cache_hit=False;pool=None
             depth=max(0,min(int(data.get('depth',0)),2))
-            if self.chat.configured and os.getenv('GOLDFISH_SEMANTIC_RECALL','0')=='1':
-                try:
-                    plan=plan_recall(self.db,self.chat,str(data.get('query','')),str(data.get('context','')),
-                        depth=depth,timeout=max(.1,min(float(data.get('semantic_budget_ms',10000))/1000,10)),limit=int(data.get('limit',5)))
-                except Exception as err:
-                    planning_error=type(err).__name__
-                    print('[goldfish] semantic recall fallback:',planning_error,flush=True)
-            if self.embeddings.configured:
+            mode=os.getenv('GOLDFISH_RETRIEVAL_MODE','legacy')
+            if mode not in {'legacy','embedding','hybrid','hybrid_llm'}:raise ValueError('invalid retrieval mode')
+            query=str(data.get('query',''));context=str(data.get('context',''));limit=int(data.get('limit',5))
+            allow_llm=self.chat.configured and os.getenv('GOLDFISH_SEMANTIC_RECALL','0')=='1'
+            deadline=started+max(.1,min(float(data.get('semantic_budget_ms',10000))/1000,10))
+            if self.embeddings.configured and query.strip():
                 try:
                     # Keep embedding bounded alongside the optional semantic
                     # decision. Batch indexing keeps its separate 45s limit.
                     budget=max(.05,min(float(data.get('semantic_timeout_ms',1500))/1000,1.5))
-                    q=self.embeddings.embed([str(data.get('query',''))],timeout=budget)[0]
+                    q,cache_hit,meta=self._query_embedding(query,budget)
+                    if meta:measurements.append(meta)
                     with self.lock:
                         semantic=self.db.semantic_scores(q,self.embeddings.identity)
+                        auxiliary=self.db.auxiliary_scores(q,self.embeddings.identity,self._aux_kinds())
                 except Exception as err:
                     # No external inference outage may block the main DSH chat.
                     print('[goldfish] semantic fallback:',type(err).__name__,flush=True)
+                    embedding_error=type(err).__name__
+                    if getattr(self.embeddings,'last_call',None):measurements.append(self.embeddings.last_call)
+            if mode!='legacy' and (not self.embeddings.configured or embedding_error):
+                mode='legacy';embedding_error=embedding_error or 'embedding_not_configured'
+            if mode!='legacy':
+                pool=candidate_pool(self.db,query,semantic=semantic,auxiliary=auxiliary,
+                                    mode='embedding' if mode=='embedding' else 'hybrid',depth=depth,model_identity=self.embeddings.identity)
+                plan=direct_plan(pool,query,context,min(3,limit))
+            if allow_llm:
+                try:
+                    remaining=max(.1,deadline-time.perf_counter())
+                    complex_query=any(s in query for s in ('为什么','为何','原因','变化','先后','去年','今年','比较','不同','哪些','之前','自称','希望','证据'))
+                    exact_simple=bool(pool and pool['summaries'] and pool['summaries'][0]['channels']['exact'] and not complex_query)
+                    if mode=='legacy' or mode=='hybrid_llm' and not exact_simple:
+                        ranked=plan_recall(self.db,self.chat,query,context,depth=depth,timeout=remaining,limit=limit,pool=pool)
+                        if ranked is not None or pool is None:plan=ranked
+                    elif plan:
+                        plan=cover_direct_plan(self.chat,plan,pool['summaries']+pool['profiles'],context,timeout=remaining)
+                        plan=deduplicate_plan(self.db,self.chat,plan,pool['summaries']+pool['profiles'],timeout=deadline-time.perf_counter())
+                    if plan and plan.get('measurement'):measurements.append(plan['measurement'])
+                    if plan:measurements.extend(plan.get('extra_measurements',[]))
+                except Exception as err:
+                    planning_error=type(err).__name__
+                    print('[goldfish] semantic recall fallback:',planning_error,flush=True)
+                    if mode=='legacy':plan=None
+                    if getattr(self.chat,'last_call',None):measurements.append(self.chat.last_call)
             with self.lock:
                 result={'ok':True,**self.db.recall(
                     str(data.get('query','')),str(data.get('context','')),
@@ -203,8 +256,15 @@ class Service:
                     depth,semantic_scores=semantic,semantic_plan=plan)}
                 result['semantic_fallback']=planning_error
                 if plan: result['semantic_plan']={k:v for k,v in plan.items() if k not in {'payload','raw_output'}}
+                result['retrieval']={'mode':mode,'embedding_error':embedding_error,'query_embedding_cache_hit':cache_hit,
+                    'measurements':measurements,'latency_ms':round((time.perf_counter()-started)*1000,3),
+                    'candidate_count':pool['candidate_count'] if pool else None,'active_count':pool['active_count'] if pool else None,
+                    'channels':pool['channels'] if pool else None}
                 return result
         if path=='/reindex':
+            if data.get('force'):
+                with self._reindex_lock:self.db.prune_vector_index(force=True)
+                with self._query_vector_lock:self._query_vectors.clear()
             return {'ok':True,**self._reindex()}
         if path=='/consolidate':
             sid=str(data['session_id'])

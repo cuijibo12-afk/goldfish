@@ -23,7 +23,7 @@ class PartialDateTests(unittest.TestCase):
                 self.assertEqual(dates, {'2024', '2025-08'})
             finally: db.close()
 
-    def test_invalid_partial_month_still_rejects_entire_output(self):
+    def test_invalid_partial_month_is_rejected_and_quarantined(self):
         with tempfile.TemporaryDirectory() as tmp:
             db = MemoryDB(Path(tmp) / 'm.db')
             try:
@@ -31,7 +31,8 @@ class PartialDateTests(unittest.TestCase):
                 class Model:
                     def extract(self, messages, related):
                         return {'summaries': [{'ref': 'n1', 'text': '某经历', 'evidence_ids': [mid], 'start_time': '2025-13'}], 'links': [], 'profiles': []}
-                with self.assertRaises(ValueError): consolidate_session(db, 's', Model())
+                outcome=consolidate_session(db, 's', Model())
+                self.assertEqual(len(outcome['rejected_items']),1)
                 self.assertEqual(db.db.execute('SELECT COUNT(*) FROM summaries').fetchone()[0], 0)
             finally: db.close()
 

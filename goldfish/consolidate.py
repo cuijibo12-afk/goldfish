@@ -6,6 +6,8 @@ raw dialogue is stored but not automatically turned into claims.
 import math
 import re
 from datetime import datetime
+from collections import Counter
+import json
 from .engine import MemoryDB, RELATIONS, PROFILES
 from .providers import ChatModel
 from .relations import review_relations
@@ -112,6 +114,32 @@ def _validate(result, msg_ids, related):
     return summaries, links, profiles
 
 
+def validate_items(result, msg_ids, related):
+    """Keep strict item checks, quarantine invalid items and dependent links.
+
+    Broken envelopes and excessive output still fail the request. Disk/commit
+    failures still roll back everything. Only model item errors are isolated.
+    """
+    if not isinstance(result,dict) or any(not isinstance(result.get(k),list) for k in ('summaries','links','profiles')):
+        raise ValueError('invalid model envelope')
+    if any(len(result[k])>limit for k,limit in [('summaries',20),('links',35),('profiles',12)]):
+        raise ValueError('model output exceeds extraction limits')
+    clean={'summaries':[],'links':[],'profiles':[]}; rejected=[]
+    refs=Counter(item.get('ref','').strip() for item in result['summaries'] if isinstance(item,dict) and isinstance(item.get('ref',''),str))
+    for kind in ('summaries','profiles','links'):
+        for index,item in enumerate(result[kind]):
+            try:
+                if kind=='summaries' and isinstance(item,dict) and isinstance(item.get('ref'),str) and refs[item['ref'].strip()]>1:
+                    raise ValueError('ambiguous duplicate summary ref')
+                trial={'summaries':clean['summaries'] if kind=='links' else [],'profiles':[],'links':[]}
+                trial[kind]=[item]
+                _validate(trial,msg_ids,related)
+                clean[kind].append(item)
+            except (ValueError,TypeError,KeyError):
+                rejected.append({'kind':kind,'index':index,'reason':'invalid_item_or_evidence','item':item})
+    return clean['summaries'],clean['links'],clean['profiles'],rejected
+
+
 def consolidate_session(db: MemoryDB, session_id: str, provider=None):
     provider = provider or ChatModel()
     if isinstance(provider, ChatModel) and not provider.configured:
@@ -127,7 +155,7 @@ def consolidate_session(db: MemoryDB, session_id: str, provider=None):
                 ' '.join(m['text'] for m in messages if m['role'] == 'user'))
         result = provider.extract(messages, related)
         msg_ids = {m['id']: m for m in messages}
-        summaries, links, profiles = _validate(result, msg_ids, related)
+        summaries, links, profiles, rejected = validate_items(result, msg_ids, related)
         reviews={}; review_measurement=None
         if links and callable(getattr(provider,'decide',None)) and os.getenv('GOLDFISH_RELATION_REVIEW','1')=='1':
             endpoints={item.get('ref',''):dict(item) for item in summaries}
@@ -167,8 +195,13 @@ def consolidate_session(db: MemoryDB, session_id: str, provider=None):
                 if str(index) in reviews: db.record_link_review(lid,reviews[str(index)],getattr(getattr(provider,'cfg',None),'model',''))
             for item in profiles:
                 db.add_profile(item['kind'], item['text'], item['evidence_ids'])
+            for item in rejected:
+                db.db.execute('''INSERT INTO consolidation_rejections(session_id,last_seq,item_kind,item_index,reason,item_json,created_at)
+                    VALUES(?,?,?,?,?,?,?)''',(session_id,messages[-1]['seq'],item['kind'],item['index'],item['reason'],
+                        json.dumps(item['item'],ensure_ascii=False),datetime.now().astimezone().isoformat()))
             # The outputs and cursor commit together, including on disk failures.
             db.mark_processed(session_id, messages[-1]['seq'])
         return {'ok': True, 'processed': len(messages), 'summaries': len(summaries),
                 'links_proposed': len(links), 'links': len(links), 'profiles': len(profiles),
-                'relation_review_measurement':review_measurement}
+                'relation_review_measurement':review_measurement,
+                'rejected_items':[{k:v for k,v in item.items() if k!='item'} for item in rejected]}
