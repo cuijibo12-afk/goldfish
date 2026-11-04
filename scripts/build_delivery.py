@@ -10,6 +10,7 @@ for name in filter(None,files):
  path=root/name
  if path.suffix.lower() in {'.db','.sqlite','.sqlite3','.xml'} or '.env' in path.name or any(x in path.parts for x in ('node_modules','__pycache__','artifacts')):raise SystemExit('Unexpected private/runtime file: '+name)
  data=path.read_bytes()
+ if path.suffix.lower()=='.cmd':data=data.replace(b'\r\n',b'\n').replace(b'\n',b'\r\n')
  if re.search(rb'sk-[A-Za-z0-9]{25,}',data):raise SystemExit('Possible credential in tracked project: '+name)
  selected.append((name,data))
 a.output.parent.mkdir(parents=True,exist_ok=True)

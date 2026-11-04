@@ -6,6 +6,7 @@ $Python=Join-Path $Data 'venv\Scripts\python.exe'
 $Dsh=Join-Path $Data 'tools\node_modules\.bin\dsh.cmd'
 $env:DSH_HOME=Join-Path $Data 'dsh'
 $env:PYTHONPATH=$Root
+$env:PATH=(Join-Path $Data 'tools\node_modules\.bin')+';'+$env:PATH
 function Run($Exe,$Arguments) { & $Exe @Arguments; if($LASTEXITCODE -ne 0){throw "Command failed: $Exe (exit $LASTEXITCODE)"} }
 function LoadConfig {
   $file=Join-Path $Data 'config.json'
@@ -62,7 +63,7 @@ try {
    Run $Python @('-m','pip','install','-r',(Join-Path $PSScriptRoot 'requirements.txt'))
    Run $Python @((Join-Path $Root 'scripts\download_embedding.py'),'--output',(Join-Path $Data 'models\bge-small-zh'))
    if(!(Test-Path (Join-Path $Data 'config.json'))){Copy-Item (Join-Path $PSScriptRoot 'config.example.json') (Join-Path $Data 'config.json')}
-   Run 'npm.cmd' @('install','--prefix',(Join-Path $Data 'tools'),'@deepseek-ai/dsh@0.2.1-rc.5','--no-audit','--no-fund')
+   Run 'npm.cmd' @('install','--prefix',(Join-Path $Data 'tools'),'@deepseek-ai/dsh@0.2.1-rc.5','pnpm@10','--no-audit','--no-fund')
    if(!(Test-Path (Join-Path $env:DSH_HOME 'profiles\goldfish-test'))){Run $Dsh @('--profile','goldfish-test','--from-default-profile','web','--dump-config')}
    Run $Dsh @('plugin','--profile','goldfish-test','add',('link:'+(Join-Path $Root 'dsh-plugin')))
    Run $Python @((Join-Path $Root 'scripts\migrate_database.py'),'--db',(Join-Path $Data 'memory.sqlite3'))

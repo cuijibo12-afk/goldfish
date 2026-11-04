@@ -9,3 +9,5 @@
 本环境没有PowerShell/Windows，因此不能声称Windows脚本运行或安装已通过。Windows进程管理、DPAPI凭据、npm/模型下载、DSH Web连接认证与用户硬件性能，需要在个人电脑按说明验证。脚本没有自动配置DSH主模型；提供API环境变量，DSH连接选择保持独立。
 
 卸载保留用户数据，包括DSH可能自行保存的连接凭据。若需彻底清除，必须由用户确认备份后自己删除用户数据目录。项目源码、示例与交付包不包含用户API key、个人聊天库或临时凭据。测试语料/历史评测输出是标明的虚构数据及真实模型对虚构数据的响应。
+
+GitHub发布尝试：当前GH集成账户为cuijibo12-afk；创建私有仓库的GraphQL请求服务端失败，REST创建返回HTTP403 Resource not accessible by integration。因此没有创建远端或推送成功，提供ZIP作为本次交付；不把身份登录成功等同于有建库权限。安装器会把pnpm 10与DSH一起安装在独立tools目录，无需全局安装。
