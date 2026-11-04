@@ -1,0 +1,696 @@
+{
+  "schema": "goldfish.phase_d.sealed.v1",
+  "notice": "Codex-authored fictional conversations and fixed rules. Frozen before implementation; no human adjudication. The LLM extraction outputs must be real, not fixture assistant text presented as generated replies.",
+  "sessions": [
+    {
+      "session_id": "d01",
+      "messages": [
+        {
+          "id": "d01u",
+          "role": "user",
+          "source": "human",
+          "event_time": "2026-11-04T12:00:00+08:00",
+          "text": "2023年9月17日，舅舅许承把一把黄铜钥匙交给我，用来打开松岚街旧书柜。钥匙尾部有月牙缺口。那天我们整理了旧地图，但没有搬家，也没有讨论我的职业。"
+        },
+        {
+          "id": "d01a",
+          "role": "assistant",
+          "source": "assistant_observed",
+          "event_time": "2026-11-04T12:01:00+08:00",
+          "text": "我会区分原话、限定和推测，不补写没有来源的动机。"
+        }
+      ]
+    },
+    {
+      "session_id": "d02",
+      "messages": [
+        {
+          "id": "d02u",
+          "role": "user",
+          "source": "human",
+          "event_time": "2026-11-04T12:00:00+08:00",
+          "text": "2025年4月6日，我带着许承当年给的同一把月牙缺口黄铜钥匙，去松岚街旧书柜取地图，同行的是朋友赵屿，许承没有来。这不是2023年整理地图的同一次经历。"
+        },
+        {
+          "id": "d02a",
+          "role": "assistant",
+          "source": "assistant_observed",
+          "event_time": "2026-11-04T12:01:00+08:00",
+          "text": "我会区分原话、限定和推测，不补写没有来源的动机。"
+        }
+      ]
+    },
+    {
+      "session_id": "d03",
+      "messages": [
+        {
+          "id": "d03u",
+          "role": "user",
+          "source": "human",
+          "event_time": "2026-11-04T12:00:00+08:00",
+          "text": "2024年6月我拒绝去临港做声音采样，因为我当时需要接送晚班母亲的女儿，也就是我的妹妹，而且邀请只报销单程车票、不提供住宿。我只是暂缓，不代表永久讨厌外地工作。"
+        },
+        {
+          "id": "d03a",
+          "role": "assistant",
+          "source": "assistant_observed",
+          "event_time": "2026-11-04T12:01:00+08:00",
+          "text": "我会区分原话、限定和推测，不补写没有来源的动机。"
+        }
+      ]
+    },
+    {
+      "session_id": "d04",
+      "messages": [
+        {
+          "id": "d04u",
+          "role": "user",
+          "source": "human",
+          "event_time": "2026-11-04T12:00:00+08:00",
+          "text": "到2026年3月，妹妹有校车不再需要我接送；临港的新邀请提供四个月宿舍、往返车费，工作仍是声音采样。我同意从4月1日试到7月31日，还没决定永久迁居。变化是照护和住宿条件，不是我突然勇敢。"
+        },
+        {
+          "id": "d04a",
+          "role": "assistant",
+          "source": "assistant_observed",
+          "event_time": "2026-11-04T12:01:00+08:00",
+          "text": "我会区分原话、限定和推测，不补写没有来源的动机。"
+        }
+      ]
+    },
+    {
+      "session_id": "d05",
+      "messages": [
+        {
+          "id": "d05u",
+          "role": "user",
+          "source": "human",
+          "event_time": "2026-11-04T12:00:00+08:00",
+          "text": "2026年8月12日借给赵屿的是银色LT-42手电。我起初登记成灰色，后来根据交接照片改成银色。只有一支手电，不是两件东西，也不是另一段时期喜欢灰色。"
+        },
+        {
+          "id": "d05a",
+          "role": "assistant",
+          "source": "assistant_observed",
+          "event_time": "2026-11-04T12:01:00+08:00",
+          "text": "我会区分原话、限定和推测，不补写没有来源的动机。"
+        }
+      ]
+    },
+    {
+      "session_id": "d06",
+      "messages": [
+        {
+          "id": "d06u",
+          "role": "user",
+          "source": "human",
+          "event_time": "2026-11-04T12:00:00+08:00",
+          "text": "2025年11月8日我在渡口教侄子用手摸绳结，先辨认结的形状再看名称卡；2026年5月22日社区无障碍课也用了先触摸再读名称的顺序。两次课的对象和地点不同，这只是我明确指出的相似次序，没有成绩数据证明效果更好。"
+        },
+        {
+          "id": "d06a",
+          "role": "assistant",
+          "source": "assistant_observed",
+          "event_time": "2026-11-04T12:01:00+08:00",
+          "text": "我会区分原话、限定和推测，不补写没有来源的动机。"
+        }
+      ]
+    },
+    {
+      "session_id": "d07",
+      "messages": [
+        {
+          "id": "d07u",
+          "role": "user",
+          "source": "human",
+          "event_time": "2026-11-04T12:00:00+08:00",
+          "text": "2026年9月9日我在暴雨前买了姜茶，当晚打印机卡纸。我不知道两者是否有关系，没有证据说明喝茶导致设备问题，更不能推断我是在焦虑时寻找控制感。"
+        },
+        {
+          "id": "d07a",
+          "role": "assistant",
+          "source": "assistant_observed",
+          "event_time": "2026-11-04T12:01:00+08:00",
+          "text": "我会区分原话、限定和推测，不补写没有来源的动机。"
+        }
+      ]
+    },
+    {
+      "session_id": "d08",
+      "messages": [
+        {
+          "id": "d08u",
+          "role": "user",
+          "source": "human",
+          "event_time": "2026-11-04T12:00:00+08:00",
+          "text": "以后我们讨论费用时，请把已知报价、未知项和推测分开写。别为了完整把缺失单价编出来。这是我的长期交互期望，不是说你已经永远不会出错。"
+        },
+        {
+          "id": "d08a",
+          "role": "assistant",
+          "source": "assistant_observed",
+          "event_time": "2026-11-04T12:01:00+08:00",
+          "text": "我会区分原话、限定和推测，不补写没有来源的动机。"
+        }
+      ]
+    },
+    {
+      "session_id": "d09",
+      "messages": [
+        {
+          "id": "d09u",
+          "role": "user",
+          "source": "human",
+          "event_time": "2026-11-04T12:00:00+08:00",
+          "text": "这次排版预算有8页，每页75元，只算排版、不含印刷。你刚才按8页算了600元；我随后改成6页，请只改这项。"
+        },
+        {
+          "id": "d09a",
+          "role": "assistant",
+          "source": "assistant_observed",
+          "event_time": "2026-11-04T12:01:00+08:00",
+          "text": "本次已按更正后的6页乘75元，排版费450元；原600元被替代，印刷费仍未知。这是本次实际计算，不能证明永久人格。"
+        }
+      ]
+    }
+  ],
+  "gold_facts": [
+    {
+      "fact_id": "d01",
+      "label": "2023年9月17日，舅舅许承把一把黄铜钥匙交给我，用来打开松岚街旧书柜。钥匙尾部有月牙缺口。那天我们整理了旧地图，但没有搬家，也没有讨论我的职业。",
+      "evidence_ids": [
+        "d01u"
+      ],
+      "required_detail_groups": [
+        [
+          "2023"
+        ],
+        [
+          "许承"
+        ],
+        [
+          "黄铜"
+        ],
+        [
+          "月牙"
+        ],
+        [
+          "书柜"
+        ]
+      ],
+      "time_start": "2023-09-17",
+      "time_end": "2023-09-17",
+      "themes": [
+        "钥匙与旧书柜"
+      ]
+    },
+    {
+      "fact_id": "d02",
+      "label": "2025年4月6日，我带着许承当年给的同一把月牙缺口黄铜钥匙，去松岚街旧书柜取地图，同行的是朋友赵屿，许承没有来。这不是2023年整理地图的同一次经历。",
+      "evidence_ids": [
+        "d02u"
+      ],
+      "required_detail_groups": [
+        [
+          "2025"
+        ],
+        [
+          "赵屿"
+        ],
+        [
+          "同一把",
+          "同一"
+        ],
+        [
+          "地图"
+        ],
+        [
+          "没有来",
+          "未同行"
+        ]
+      ],
+      "time_start": "2025-04-06",
+      "time_end": "2025-04-06",
+      "themes": [
+        "钥匙与旧书柜"
+      ]
+    },
+    {
+      "fact_id": "d03",
+      "label": "2024年6月我拒绝去临港做声音采样，因为我当时需要接送晚班母亲的女儿，也就是我的妹妹，而且邀请只报销单程车票、不提供住宿。我只是暂缓，不代表永久讨厌外地工作。",
+      "evidence_ids": [
+        "d03u"
+      ],
+      "required_detail_groups": [
+        [
+          "2024"
+        ],
+        [
+          "拒绝"
+        ],
+        [
+          "妹妹"
+        ],
+        [
+          "单程"
+        ],
+        [
+          "住宿"
+        ]
+      ],
+      "time_start": "2024-06",
+      "time_end": "2024-06",
+      "themes": [
+        "外地工作条件"
+      ]
+    },
+    {
+      "fact_id": "d04",
+      "label": "到2026年3月，妹妹有校车不再需要我接送；临港的新邀请提供四个月宿舍、往返车费，工作仍是声音采样。我同意从4月1日试到7月31日，还没决定永久迁居。变化是照护和住宿条件，不是我突然勇敢。",
+      "evidence_ids": [
+        "d04u"
+      ],
+      "required_detail_groups": [
+        [
+          "2026"
+        ],
+        [
+          "校车"
+        ],
+        [
+          "四个月"
+        ],
+        [
+          "往返"
+        ],
+        [
+          "7月31",
+          "07-31"
+        ]
+      ],
+      "time_start": "2026-03",
+      "time_end": "2026-03",
+      "themes": [
+        "外地工作条件"
+      ]
+    },
+    {
+      "fact_id": "d05",
+      "label": "2026年8月12日借给赵屿的是银色LT-42手电。我起初登记成灰色，后来根据交接照片改成银色。只有一支手电，不是两件东西，也不是另一段时期喜欢灰色。",
+      "evidence_ids": [
+        "d05u"
+      ],
+      "required_detail_groups": [
+        [
+          "银色"
+        ],
+        [
+          "LT-42"
+        ],
+        [
+          "灰色"
+        ],
+        [
+          "纠正",
+          "改成",
+          "更正"
+        ]
+      ],
+      "time_start": "2026-08-12",
+      "time_end": "2026-08-12",
+      "themes": [
+        "借物纠错"
+      ]
+    },
+    {
+      "fact_id": "d06",
+      "label": "2025年11月8日我在渡口教侄子用手摸绳结，先辨认结的形状再看名称卡；2026年5月22日社区无障碍课也用了先触摸再读名称的顺序。两次课的对象和地点不同，这只是我明确指出的相似次序，没有成绩数据证明效果更好。",
+      "evidence_ids": [
+        "d06u"
+      ],
+      "required_detail_groups": [
+        [
+          "2025"
+        ],
+        [
+          "2026"
+        ],
+        [
+          "触摸",
+          "摸"
+        ],
+        [
+          "名称"
+        ],
+        [
+          "不同"
+        ],
+        [
+          "没有",
+          "未"
+        ]
+      ],
+      "time_start": "2025-11-08",
+      "time_end": "2026-05-22",
+      "themes": [
+        "触摸教学"
+      ]
+    },
+    {
+      "fact_id": "d07",
+      "label": "2026年9月9日我在暴雨前买了姜茶，当晚打印机卡纸。我不知道两者是否有关系，没有证据说明喝茶导致设备问题，更不能推断我是在焦虑时寻找控制感。",
+      "evidence_ids": [
+        "d07u"
+      ],
+      "required_detail_groups": [
+        [
+          "姜茶"
+        ],
+        [
+          "卡纸"
+        ],
+        [
+          "不知道",
+          "无证据",
+          "没有证据"
+        ]
+      ],
+      "time_start": "2026-09-09",
+      "time_end": "2026-09-09",
+      "themes": [
+        "不明关联"
+      ]
+    },
+    {
+      "fact_id": "d08",
+      "label": "以后我们讨论费用时，请把已知报价、未知项和推测分开写。别为了完整把缺失单价编出来。这是我的长期交互期望，不是说你已经永远不会出错。",
+      "evidence_ids": [
+        "d08u"
+      ],
+      "required_detail_groups": [
+        [
+          "报价"
+        ],
+        [
+          "未知"
+        ],
+        [
+          "推测"
+        ]
+      ],
+      "time_start": null,
+      "time_end": null,
+      "themes": [
+        "交互期望"
+      ]
+    },
+    {
+      "fact_id": "d09",
+      "label": "这次排版预算有8页，每页75元，只算排版、不含印刷。你刚才按8页算了600元；我随后改成6页，请只改这项。",
+      "evidence_ids": [
+        "d09u",
+        "d09a"
+      ],
+      "required_detail_groups": [
+        [
+          "排版"
+        ],
+        [
+          "6"
+        ],
+        [
+          "450"
+        ],
+        [
+          "印刷"
+        ]
+      ],
+      "time_start": "2026-11-04",
+      "time_end": "2026-11-04",
+      "themes": [
+        "实际协作纠错"
+      ]
+    }
+  ],
+  "gold_profiles": [
+    {
+      "profile_id": "dp01",
+      "kind": "interaction_expectation",
+      "label": "报价未知项与推测分开",
+      "evidence_ids": [
+        "d08u"
+      ],
+      "required_detail_groups": [
+        [
+          "报价"
+        ],
+        [
+          "未知"
+        ],
+        [
+          "推测"
+        ]
+      ]
+    },
+    {
+      "profile_id": "dp02",
+      "kind": "ai_observed",
+      "label": "本次预算更正实际行为",
+      "evidence_ids": [
+        "d09a"
+      ],
+      "required_detail_groups": [
+        [
+          "450"
+        ],
+        [
+          "600"
+        ],
+        [
+          "印刷"
+        ]
+      ]
+    }
+  ],
+  "queries": [
+    {
+      "query_id": "w01",
+      "text": "那个尾端缺了一小块弧形金属齿的开柜物件，是谁交给我的？",
+      "as_of": "2026-11-04T12:00:00+08:00",
+      "expected_fact_ids": [
+        "d01"
+      ],
+      "allowed_fact_ids": [
+        "d02"
+      ],
+      "forbidden_fact_ids": [],
+      "expected_profile_ids": [],
+      "tags": [
+        "paraphrase",
+        "entity"
+      ],
+      "context": ""
+    },
+    {
+      "query_id": "w02",
+      "text": "月牙缺口钥匙先后连着哪两次取图或整理经历？同行的人有什么不同？",
+      "as_of": "2026-11-04T12:00:00+08:00",
+      "expected_fact_ids": [
+        "d01",
+        "d02"
+      ],
+      "allowed_fact_ids": [],
+      "forbidden_fact_ids": [],
+      "expected_profile_ids": [],
+      "tags": [
+        "cross_time",
+        "comparison"
+      ],
+      "context": ""
+    },
+    {
+      "query_id": "w03",
+      "text": "为什么前几年没去临港，今年却愿意试一段？",
+      "as_of": "2026-11-04T12:00:00+08:00",
+      "expected_fact_ids": [
+        "d03",
+        "d04"
+      ],
+      "allowed_fact_ids": [],
+      "forbidden_fact_ids": [],
+      "expected_profile_ids": [],
+      "tags": [
+        "reason",
+        "change"
+      ],
+      "context": ""
+    },
+    {
+      "query_id": "w04",
+      "text": "2025年4月6日，许承也和我一起去了吗？",
+      "as_of": "2026-11-04T12:00:00+08:00",
+      "expected_fact_ids": [
+        "d02"
+      ],
+      "allowed_fact_ids": [],
+      "forbidden_fact_ids": [
+        "d01"
+      ],
+      "expected_profile_ids": [],
+      "tags": [
+        "date",
+        "negation"
+      ],
+      "context": ""
+    },
+    {
+      "query_id": "w05",
+      "text": "赵屿借走那件照明工具，最终是什么颜色和型号？",
+      "as_of": "2026-11-04T12:00:00+08:00",
+      "expected_fact_ids": [
+        "d05"
+      ],
+      "allowed_fact_ids": [],
+      "forbidden_fact_ids": [
+        "d02"
+      ],
+      "expected_profile_ids": [],
+      "tags": [
+        "paraphrase",
+        "correction",
+        "item"
+      ],
+      "context": ""
+    },
+    {
+      "query_id": "w06",
+      "text": "渡口与社区那两堂课，究竟哪里像，能说效果证实更好吗？",
+      "as_of": "2026-11-04T12:00:00+08:00",
+      "expected_fact_ids": [
+        "d06"
+      ],
+      "allowed_fact_ids": [],
+      "forbidden_fact_ids": [],
+      "expected_profile_ids": [],
+      "tags": [
+        "similar_context",
+        "uncertainty"
+      ],
+      "context": ""
+    },
+    {
+      "query_id": "w07",
+      "text": "姜茶能解释打印机故障吗？",
+      "as_of": "2026-11-04T12:00:00+08:00",
+      "expected_fact_ids": [
+        "d07"
+      ],
+      "allowed_fact_ids": [],
+      "forbidden_fact_ids": [],
+      "expected_profile_ids": [],
+      "tags": [
+        "cause",
+        "uncertainty"
+      ],
+      "context": ""
+    },
+    {
+      "query_id": "w08",
+      "text": "费用不齐时，我希望你怎样区分已知与估计？",
+      "as_of": "2026-11-04T12:00:00+08:00",
+      "expected_fact_ids": [],
+      "allowed_fact_ids": [],
+      "forbidden_fact_ids": [],
+      "expected_profile_ids": [
+        "dp01"
+      ],
+      "tags": [
+        "profile",
+        "expectation"
+      ],
+      "context": ""
+    },
+    {
+      "query_id": "w09",
+      "text": "别说天生细致，你实际做过哪次数字修正？",
+      "as_of": "2026-11-04T12:00:00+08:00",
+      "expected_fact_ids": [
+        "d09"
+      ],
+      "allowed_fact_ids": [],
+      "forbidden_fact_ids": [],
+      "expected_profile_ids": [
+        "dp02"
+      ],
+      "tags": [
+        "behavior",
+        "profile"
+      ],
+      "context": ""
+    },
+    {
+      "query_id": "w10",
+      "text": "巴西的首都是哪座城市？",
+      "as_of": "2026-11-04T12:00:00+08:00",
+      "expected_fact_ids": [],
+      "allowed_fact_ids": [],
+      "forbidden_fact_ids": [
+        "d01",
+        "d02",
+        "d03",
+        "d04",
+        "d05",
+        "d06",
+        "d07",
+        "d08",
+        "d09"
+      ],
+      "expected_profile_ids": [],
+      "tags": [
+        "negative"
+      ],
+      "context": ""
+    },
+    {
+      "query_id": "w11",
+      "text": "从声音采样合同能看出我已经永久搬到外地了吗？",
+      "as_of": "2026-11-04T12:00:00+08:00",
+      "expected_fact_ids": [
+        "d04"
+      ],
+      "allowed_fact_ids": [],
+      "forbidden_fact_ids": [],
+      "expected_profile_ids": [],
+      "tags": [
+        "fact",
+        "scope"
+      ],
+      "context": ""
+    },
+    {
+      "query_id": "w12",
+      "text": "旧书柜那把黄铜钥匙、银色LT-42分别是谁相关的，能当成同一事件吗？",
+      "as_of": "2026-11-04T12:00:00+08:00",
+      "expected_fact_ids": [
+        "d01",
+        "d05"
+      ],
+      "allowed_fact_ids": [
+        "d02"
+      ],
+      "forbidden_fact_ids": [],
+      "expected_profile_ids": [],
+      "tags": [
+        "relation",
+        "entity"
+      ],
+      "context": ""
+    }
+  ],
+  "gold_relations": [],
+  "stress_design": {
+    "distractor_count": 1000,
+    "generator_version": "phase_d_noise_v1",
+    "notice": "deterministically generated fictional distractors; not real-user history"
+  }
+}
