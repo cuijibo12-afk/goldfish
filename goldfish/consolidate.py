@@ -4,6 +4,7 @@ An OpenAI-compatible chat completions endpoint is optional. Until configured,
 raw dialogue is stored but not automatically turned into claims.
 """
 import math
+import re
 from datetime import datetime
 from .engine import MemoryDB, RELATIONS, PROFILES
 from .providers import ChatModel
@@ -22,6 +23,21 @@ PROMPT = '''你是个人长期记忆的记录员，不是聊天者。只根据�
 - 保存多个具体概括而不是只写笼统主题；没有可证事实时用空列表。
 - evidence_ids 必须引用给定的消息ID，且不许将插件注入当作原始对话。
 - 可以与给定的历史摘要关联，但不要编辑或删除原始对话。
+严格输出约束：
+- summaries 只记录用户明确叙述或确认的具体经历、事实与阶段观点。每条 evidence_ids 必须至少含一条 role=user 的原始消息；不能把助手的建议、复述、承诺、自称或认错单独写成用户事件概括。需要保留的实际助手行为只放 profiles.ai_observed。
+- 用户实际参与的协作结果可以记录为事件：例如用户提供并更正数字、助手实际给出更正后的计算结果，应共同引用用户输入和助手结果，保留最终数值、单位与未计入项目。不要因结果由助手说出就把有用户证据的共同事件丢掉。
+- 用户问题、假设、请求回忆、复述已有概括，不代表新的经历。历史候选已经完整记录同一事实时，不再生成等义摘要；没有新增可证事实就返回空 summaries。不要因为助手重复提到记忆就再次记住它。
+- 一条概括围绕一件具体经历，保留人物身份、物件特征、数量、地点、时间、限制及否定。不同日期的经历分别记录；主题用可跨事件复用的短类别，不能以笼统主题代替具体概括，也不要给每条摘要造独有主题。
+- 候选历史摘要的 theme_titles 是已有主题。新概括适合已有主题时复用同一标题；同批同一经历的多个阶段也复用主题，不把不同时间、不同数量或不同物件细节各自变成独有主题。
+- start_time/end_time 写所述事件时间，不把消息发表时间一律当事件时间。相对日期按该消息 event_time 解释；只有年份就写年份对应的真实精度，不能虚构月日；不确定用 null。保留过去观点，不用当前情况覆盖。
+- 消息在周五叙述“周日活动”时，不能写成发言当天就是周日；“昨天签了”不能写成今天签了。无法可靠换算时保留原相对表述，时间字段用null；不要造出与星期不符的年月日。
+- 画像不是所有事实的副本：临时合同、某次决定和单次事件优先只存 summaries；user_profile 只保留明确长期偏好/背景。interaction_expectation 记录用户对今后交互的期望；feedback 记录单次评价及其范围。
+- 普通问题和“这轮请简短回答、先列来源、只确认话题”等本轮任务要求，不自动升级为长期交互期望；单个物件的特征、第三方身份和一次澄清不是用户画像，也不能从一次澄清概括用户一贯严谨或重视某事。
+- ai_observed 只能描述有助手原文佐证的具体已表现行为并保留范围，不能把“我天生冷静/爱反驳”等助手自称当作已证实人格，不能将用户希望助手如何做当成助手已有特征。
+- 不为普通复述、正常遵从一次请求、理解确认或承诺逐轮生成AI画像；需要保留的是有具体意义的新行为，如可查证的计算更正、实际遗漏或明确的协作纠错，并保留本次范围。
+- 建立 link 需要内容层面的可解释关联：明确同一人物/物件、用户说明的联系、具体相似情境或有时间依据的变化。仅在同一消息、同一会话、先后被提到，或都属于个人生活，不足以建立关联；用户明确要求分开的事情不要反向用关系边连起来。
+- 关系理由说明两个端点分别有哪些原文依据以及不确定性；confidence 是模型自评而非已校准事实概率。不得创建 causal_confirmed；用户否认的因果不得换成 possible_cause 保存。
+- 三个顶层字段必须均为数组，summaries最多20条、links最多35条、profiles最多12条。非空字符串字段不要用null代替；ref在本批唯一，link端点只用本批ref或给定历史ID。宁缺毋滥。
 '''
 
 class OpenAICompatible(ChatModel):
@@ -66,7 +82,10 @@ def _validate(result, msg_ids, related):
             value = item.get(key)
             if value is not None:
                 if not isinstance(value, str): raise ValueError('invalid event time')
-                try: datetime.fromisoformat(value.replace('Z', '+00:00'))
+                # Preserve source precision: a known year/month must not force
+                # a model to invent the first day merely to satisfy ISO parsing.
+                parsed = value + '-01-01' if re.fullmatch(r'\d{4}', value) else value + '-01' if re.fullmatch(r'\d{4}-\d{2}', value) else value
+                try: datetime.fromisoformat(parsed.replace('Z', '+00:00'))
                 except ValueError: raise ValueError('invalid event time') from None
     allowed = refs | {row['id'] for row in related}
     for link in links:

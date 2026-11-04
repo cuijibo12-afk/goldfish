@@ -1,0 +1,313 @@
+{
+  "fixture_origin": "constructed fictional dialogue; real model output",
+  "messages": [
+    {
+      "seq": 1,
+      "id": "smoke:0",
+      "session_id": "smoke",
+      "role": "user",
+      "event_time": "2024-04-12T19:00:00+08:00",
+      "text": "2024年4月我还在南城设计院加班，经常晚上九点才离开。那时我想转行做木工，但没有辞职。父亲会提着旧蓝布袋给我送饭，袋角有一块银色补丁。我记得这些细节，不想被概括成一句“工作焦虑”。",
+      "source": "human"
+    },
+    {
+      "seq": 2,
+      "id": "smoke:1",
+      "session_id": "smoke",
+      "role": "assistant",
+      "event_time": "2024-04-12T19:01:00+08:00",
+      "text": "你提到的是加班、转行设想，以及父亲送饭的具体场景；这些事情可以分别记录。",
+      "source": "assistant_observed"
+    },
+    {
+      "seq": 3,
+      "id": "smoke:2",
+      "session_id": "smoke",
+      "role": "user",
+      "event_time": "2025-08-20T20:00:00+08:00",
+      "text": "去年只是想学木工。到2025年8月，我实际选择了考图书馆员，已经离开设计院。不是父亲送饭促使我辞职，真正原因是长期作息紊乱。不要把同时发生的两件事写成因果。",
+      "source": "human"
+    },
+    {
+      "seq": 4,
+      "id": "smoke:3",
+      "session_id": "smoke",
+      "role": "assistant",
+      "event_time": "2025-08-20T20:01:00+08:00",
+      "text": "我会区分2024年的设想和2025年实际发生的决定，也保留你明确说明的原因。",
+      "source": "assistant_observed"
+    },
+    {
+      "seq": 5,
+      "id": "smoke:4",
+      "session_id": "smoke",
+      "role": "user",
+      "event_time": "2026-10-04T15:00:00+08:00",
+      "text": "上周在社区修理旧物，看到邻居提着有银色补丁的蓝布袋，我想起父亲以前送饭。我希望你以后不要总附和我，发现矛盾时直接提出你的判断。",
+      "source": "human"
+    },
+    {
+      "seq": 6,
+      "id": "smoke:5",
+      "session_id": "smoke",
+      "role": "assistant",
+      "event_time": "2026-10-04T15:01:00+08:00",
+      "text": "我天生就很爱反驳人。",
+      "source": "assistant_observed"
+    },
+    {
+      "seq": 7,
+      "id": "smoke:6",
+      "session_id": "smoke",
+      "role": "user",
+      "event_time": "2026-10-04T15:02:00+08:00",
+      "text": "你刚才这句太像机械表演了。我是在说今后的交互期望，不是说你已经有这种人格。也请只把“刚才机械”记成这一次反馈。",
+      "source": "human"
+    },
+    {
+      "seq": 8,
+      "id": "smoke:7",
+      "session_id": "smoke",
+      "role": "assistant",
+      "event_time": "2026-10-04T15:03:00+08:00",
+      "text": "你说得对，我刚才把你的期望说成了自己的天性；这一点应当纠正。",
+      "source": "assistant_observed"
+    }
+  ],
+  "output": {
+    "summaries": [
+      {
+        "ref": "n1",
+        "text": "2024年4月，用户仍在南城设计院加班，常晚上九点才离开；当时想转行做木工但没有辞职；父亲会提着带银色补丁的旧蓝布袋送饭。",
+        "evidence_ids": [
+          "smoke:0"
+        ],
+        "theme": "2024年工作与家庭细节",
+        "theme_description": "设计院加班、木工转行设想和父亲送饭的具体记忆",
+        "theme_reason": "概括保留了时间、地点、职业状态、转行设想及布袋补丁等具体细节",
+        "start_time": "2024-04-12T19:00:00+08:00",
+        "end_time": "2024-04-12T19:00:00+08:00"
+      },
+      {
+        "ref": "n2",
+        "text": "用户强调这些细节不应被概括成一句“工作焦虑”，希望保留具体经历。",
+        "evidence_ids": [
+          "smoke:0"
+        ],
+        "theme": "记忆概括边界",
+        "theme_description": "用户对这段经历如何被概括的具体要求",
+        "theme_reason": "概括直接反映用户拒绝笼统概括、要求保留细节的表述",
+        "start_time": "2024-04-12T19:00:00+08:00",
+        "end_time": "2024-04-12T19:00:00+08:00"
+      },
+      {
+        "ref": "n3",
+        "text": "到2025年8月，用户已离开设计院并实际选择考图书馆员；去年只是想学木工。",
+        "evidence_ids": [
+          "smoke:2"
+        ],
+        "theme": "职业选择变化",
+        "theme_description": "从木工学习设想到离开设计院并选择图书馆员考试",
+        "theme_reason": "概括保留了2024年设想与2025年实际选择之间的变化",
+        "start_time": "2025-08-20T20:00:00+08:00",
+        "end_time": "2025-08-20T20:00:00+08:00"
+      },
+      {
+        "ref": "n4",
+        "text": "用户说明辞职真正原因是长期作息紊乱，不是父亲送饭；不要把同时发生的两件事写成因果。",
+        "evidence_ids": [
+          "smoke:2"
+        ],
+        "theme": "辞职归因澄清",
+        "theme_description": "用户对辞职原因及因果误写的明确说明",
+        "theme_reason": "概括包含用户否定的因果和给出的真实原因",
+        "start_time": "2025-08-20T20:00:00+08:00",
+        "end_time": "2025-08-20T20:00:00+08:00"
+      },
+      {
+        "ref": "n5",
+        "text": "上周用户在社区修理旧物时，看到邻居提着有银色补丁的蓝布袋，想起父亲以前送饭。",
+        "evidence_ids": [
+          "smoke:4"
+        ],
+        "theme": "旧物触发记忆",
+        "theme_description": "社区修理旧物场景中由相似布袋想起父亲送饭",
+        "theme_reason": "概括保留时间、活动、物品特征和联想内容",
+        "start_time": "2026-10-04T15:00:00+08:00",
+        "end_time": "2026-10-04T15:00:00+08:00"
+      },
+      {
+        "ref": "n6",
+        "text": "用户希望AI以后不要总附和，发现矛盾时直接提出自己的判断。",
+        "evidence_ids": [
+          "smoke:4"
+        ],
+        "theme": "交互期望",
+        "theme_description": "用户对未来AI回应方式的明确期望",
+        "theme_reason": "概括直接呈现用户提出的今后交互方式",
+        "start_time": "2026-10-04T15:00:00+08:00",
+        "end_time": "2026-10-04T15:00:00+08:00"
+      },
+      {
+        "ref": "n7",
+        "text": "用户认为AI回复“我天生就很爱反驳人”太像机械表演；强调这是今后的交互期望，不是断言AI已有这种人格，并要求只把“刚才机械”记成这一次反馈。",
+        "evidence_ids": [
+          "smoke:5",
+          "smoke:6"
+        ],
+        "theme": "反馈与边界说明",
+        "theme_description": "用户对一次机械式回复的反馈，并区分交互期望与既有性格",
+        "theme_reason": "概括包含一次性反馈、对人格误读的纠正以及记录范围限定",
+        "start_time": "2026-10-04T15:02:00+08:00",
+        "end_time": "2026-10-04T15:02:00+08:00"
+      },
+      {
+        "ref": "n8",
+        "text": "助手承认刚才把用户的期望说成了自己的天性，并表示这一点应当纠正。",
+        "evidence_ids": [
+          "smoke:7"
+        ],
+        "theme": "助手纠正",
+        "theme_description": "助手对将用户交互期望误说成自身天性的回应",
+        "theme_reason": "概括描述真实助手回复中的承认与纠正内容",
+        "start_time": "2026-10-04T15:03:00+08:00",
+        "end_time": "2026-10-04T15:03:00+08:00"
+      }
+    ],
+    "links": [
+      {
+        "from": "n1",
+        "to": "n2",
+        "kind": "contextual",
+        "reason": "n2是同一用户消息中对n1所述细节如何被记录的边界说明，二者指向同一段2024年经历。",
+        "confidence": 0.95
+      },
+      {
+        "from": "n1",
+        "to": "n3",
+        "kind": "chronological",
+        "reason": "n1记录2024年仍在设计院并想学木工，n3记录2025年已离开设计院并选择考图书馆员，时间与职业状态前后相接。",
+        "confidence": 0.95
+      },
+      {
+        "from": "n1",
+        "to": "n4",
+        "kind": "contrast",
+        "reason": "n1把父亲送饭与加班、转行设想并列记录，n4明确否认父亲送饭是辞职原因，二者形成因果解释上的对照。",
+        "confidence": 0.9
+      },
+      {
+        "from": "n3",
+        "to": "n4",
+        "kind": "same_event",
+        "reason": "两条均围绕2025年离开设计院与辞职决定，n4补充了原因并纠正因果写法。",
+        "confidence": 0.95
+      },
+      {
+        "from": "n1",
+        "to": "n5",
+        "kind": "contextual",
+        "reason": "n1与n5都提到父亲和带银色补丁的蓝布袋；n5说明邻居的相似布袋触发了对父亲送饭的回忆，但不是同一事件。",
+        "confidence": 0.9
+      },
+      {
+        "from": "n5",
+        "to": "n6",
+        "kind": "contextual",
+        "reason": "两条来自同一用户消息：先叙述旧物触发的记忆，随后提出对AI今后回应的期望；没有证据表明二者存在因果。",
+        "confidence": 0.85
+      },
+      {
+        "from": "n6",
+        "to": "n7",
+        "kind": "same_topic",
+        "reason": "n6是交互期望，n7是对该期望相关回复的反馈并进一步澄清期望与人格的区别。",
+        "confidence": 0.95
+      },
+      {
+        "from": "n7",
+        "to": "n8",
+        "kind": "contextual",
+        "reason": "n8紧接n7出现，助手对n7指出的“把期望说成天性”作出承认与纠正。",
+        "confidence": 0.95
+      }
+    ],
+    "profiles": [
+      {
+        "kind": "user_profile",
+        "text": "用户曾在南城设计院工作，2024年4月经常加班到晚上九点才离开；当时想转行做木工但没有辞职。",
+        "evidence_ids": [
+          "smoke:0"
+        ]
+      },
+      {
+        "kind": "user_profile",
+        "text": "用户到2025年8月已离开设计院，并实际选择考图书馆员；说明辞职原因是长期作息紊乱，而非父亲送饭。",
+        "evidence_ids": [
+          "smoke:2"
+        ]
+      },
+      {
+        "kind": "interaction_expectation",
+        "text": "记录2024年这段经历时，用户不希望被概括成笼统的“工作焦虑”，要求保留加班、转行设想、父亲送饭和布袋补丁等具体细节。",
+        "evidence_ids": [
+          "smoke:0"
+        ]
+      },
+      {
+        "kind": "interaction_expectation",
+        "text": "用户希望AI以后不要总附和，发现矛盾时直接提出自己的判断。",
+        "evidence_ids": [
+          "smoke:4"
+        ]
+      },
+      {
+        "kind": "interaction_expectation",
+        "text": "用户强调“不要总附和、发现矛盾直接判断”是对今后交互的期望，不是断言AI已经具有这种人格。",
+        "evidence_ids": [
+          "smoke:6"
+        ]
+      },
+      {
+        "kind": "feedback",
+        "text": "用户认为AI回复“我天生就很爱反驳人”太像机械表演，并要求只把“刚才机械”记成这一次反馈。",
+        "evidence_ids": [
+          "smoke:5",
+          "smoke:6"
+        ]
+      },
+      {
+        "kind": "ai_observed",
+        "text": "助手在2026-10-04的回复中曾声称自己“天生就很爱反驳人”，随后承认这是把用户期望说成自己的天性，并表示应当纠正。",
+        "evidence_ids": [
+          "smoke:5",
+          "smoke:7"
+        ]
+      }
+    ]
+  },
+  "validation": {
+    "type": "ValueError",
+    "detail": "summary requires actual user evidence"
+  },
+  "measurement": {
+    "provider": "openai",
+    "model": "deepseek-flash",
+    "response_id": "cd36cd8e-8822-4bda-bb53-4c4fd035a600",
+    "latency_ms": 36793.449,
+    "usage": {
+      "prompt_tokens": 1209,
+      "completion_tokens": 6441,
+      "total_tokens": 7650,
+      "prompt_tokens_details": {
+        "cached_tokens": 1024
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 4633
+      },
+      "prompt_cache_hit_tokens": 1024,
+      "prompt_cache_miss_tokens": 185
+    },
+    "error_type": null
+  }
+}

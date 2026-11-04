@@ -71,3 +71,14 @@ Embedding 的 URL、模型同理；本地服务必须确实提供 /v1/embeddings
 提供的 Ollama / OpenAI-compatible 适配仍属于协议支持；本阶段使用本机合成接口做自动回归，不能据此推断真实中文模型的整理质量。真实模型测试须在阶段 C 进行，云端调用须有用户提供的配置和凭据。
 
 推理前查询向量请求会使用短超时（默认最多1.5秒，并给插件留下回退时间）；超时会继续字面/主题/时间/图关系召回。批量向量索引仍可等待45秒，整理模型请求60秒。慢本地模型首次冷启动可能暂时只用基础召回，后续真实性能调参属于阶段 C。
+
+九、真实DeepSeek评测（2026-11-04）
+
+当前环境已实际调用官方 https://api.deepseek.com 的 deepseek-flash，结果及失败案例在 docs/PHASE_B.md。仍未实测本地Ollama；DeepSeek聊天模型不能当Embedding模型使用，Embedding继续单独配置。
+
+新增可选配置：
+GOLDFISH_LLM_THINKING=enabled 或 disabled；留空遵从提供方默认。OpenAI-compatible端点必须实际支持thinking字段，未配置时不发送；Ollama对应think开关。
+GOLDFISH_LLM_MAX_TOKENS=8192；留空遵从提供方默认。兼容接口使用max_tokens，Ollama使用options.num_predict。
+
+DeepSeek官方文档当前默认启用思考；本次正式比较显式关闭思考并固定输出上限。仅当明确配置相应Provider与端点时联网。密钥从安全的运行环境设置，不写进命令历史、源码或报告。配置后重新启动服务。
+接口参考：https://api-docs.deepseek.com/api/create-chat-completion

@@ -1,0 +1,1860 @@
+{
+  "label": "validated",
+  "created_at": "2026-11-04T07:42:42.743416+00:00",
+  "git_commit": "05d6c565f2159aa09adfec79cd7706db50298583",
+  "source_sha256": "2a725f25651c37b5226ab82f53c80caf2f3fef4dc1d439108f2f93a840066a08",
+  "fixture_sha256": "8f26f516f5f33cce1248181e416a7c12f2ee46fa4d736f74903ae1b4613d0b0c",
+  "model": {
+    "provider": "openai",
+    "model": "deepseek-flash",
+    "configured": true,
+    "local": false,
+    "thinking": "disabled",
+    "max_tokens": 8192
+  },
+  "embedding": {
+    "configured": false,
+    "enabled_for_run": false
+  },
+  "runtime": {
+    "python": "3.12.14",
+    "sqlite": "3.53.1"
+  },
+  "settings": {
+    "limit": 5,
+    "max_chars": 1800,
+    "depth": 2,
+    "max_model_calls": 24
+  },
+  "elapsed_s": 52.758,
+  "model_usage_actual": {
+    "prompt_tokens": 24838,
+    "completion_tokens": 8403,
+    "total_tokens": 33241,
+    "prompt_cache_hit_tokens": 7808,
+    "prompt_cache_miss_tokens": 17030
+  },
+  "model_latency": {
+    "count": 8,
+    "total_ms": 51844.432,
+    "p50_ms": 6003.009,
+    "p95_ms": 8661.756
+  },
+  "recall_latency": {
+    "count": 24,
+    "total_ms": 81.572,
+    "p50_ms": 2.898,
+    "p95_ms": 5.764
+  },
+  "consolidation": [
+    {
+      "session_id": "s01",
+      "ok": true,
+      "processed": 8,
+      "summaries": 4,
+      "links_proposed": 2,
+      "links": 2,
+      "profiles": 3
+    },
+    {
+      "session_id": "s02",
+      "ok": true,
+      "processed": 8,
+      "summaries": 2,
+      "links_proposed": 2,
+      "links": 2,
+      "profiles": 2
+    },
+    {
+      "session_id": "s03",
+      "ok": true,
+      "processed": 8,
+      "summaries": 5,
+      "links_proposed": 4,
+      "links": 4,
+      "profiles": 3
+    },
+    {
+      "session_id": "s04",
+      "ok": true,
+      "processed": 8,
+      "summaries": 4,
+      "links_proposed": 5,
+      "links": 5,
+      "profiles": 2
+    },
+    {
+      "session_id": "s05",
+      "ok": true,
+      "processed": 8,
+      "summaries": 3,
+      "links_proposed": 3,
+      "links": 3,
+      "profiles": 3
+    },
+    {
+      "session_id": "s06",
+      "ok": true,
+      "processed": 8,
+      "summaries": 4,
+      "links_proposed": 6,
+      "links": 6,
+      "profiles": 4
+    },
+    {
+      "session_id": "s07",
+      "ok": true,
+      "processed": 8,
+      "summaries": 4,
+      "links_proposed": 7,
+      "links": 7,
+      "profiles": 0
+    },
+    {
+      "session_id": "s08",
+      "ok": true,
+      "processed": 8,
+      "summaries": 7,
+      "links_proposed": 7,
+      "links": 7,
+      "profiles": 4
+    }
+  ],
+  "failures": [],
+  "counts": {
+    "summaries": 33,
+    "profiles": 21,
+    "links": 36,
+    "themes": 10,
+    "theme_members": 33
+  },
+  "limitations": [
+    "Constructed fictional Chinese dialogue; real model outputs, not personal conversation logs.",
+    "Keyword/detail probes and evidence IDs are auditable proxies; ambiguous outputs require human review.",
+    "Provider usage is actual; injection length is characters, not an estimated token count.",
+    "No automatic substitution to another model or provider."
+  ],
+  "recall": {
+    "query_count": 24,
+    "returned_count": 81,
+    "relevant_count": 33,
+    "false_positive_count": 3,
+    "unknown_count": 45,
+    "judged_count": 36,
+    "precision": 0.9166666666666666,
+    "precision_lower_bound": 0.4074074074074074,
+    "precision_upper_bound": 0.9629629629629629,
+    "expected_fact_count": 29,
+    "hit_fact_count": 21,
+    "missed_fact_count": 8,
+    "unresolved_fact_count": 4,
+    "recall": 0.7241379310344828,
+    "recall_lower_bound": 0.7241379310344828,
+    "recall_upper_bound": 0.8620689655172413,
+    "profiles": {
+      "returned_count": 59,
+      "relevant_count": 6,
+      "false_positive_count": 0,
+      "unknown_count": 53,
+      "judged_count": 6,
+      "precision": 1.0,
+      "precision_lower_bound": 0.1016949152542373,
+      "precision_upper_bound": 1.0,
+      "expected_count": 6,
+      "hit_count": 3,
+      "missed_count": 3,
+      "unresolved_count": 1,
+      "recall": 0.5,
+      "recall_lower_bound": 0.5,
+      "recall_upper_bound": 0.6666666666666666
+    }
+  },
+  "graph_off_recall": {
+    "query_count": 24,
+    "returned_count": 59,
+    "relevant_count": 26,
+    "false_positive_count": 2,
+    "unknown_count": 31,
+    "judged_count": 28,
+    "precision": 0.9285714285714286,
+    "precision_lower_bound": 0.4406779661016949,
+    "precision_upper_bound": 0.9661016949152542,
+    "expected_fact_count": 29,
+    "hit_fact_count": 20,
+    "missed_fact_count": 9,
+    "unresolved_fact_count": 5,
+    "recall": 0.6896551724137931,
+    "recall_lower_bound": 0.6896551724137931,
+    "recall_upper_bound": 0.8620689655172413,
+    "profiles": {
+      "returned_count": 59,
+      "relevant_count": 6,
+      "false_positive_count": 0,
+      "unknown_count": 53,
+      "judged_count": 6,
+      "precision": 1.0,
+      "precision_lower_bound": 0.1016949152542373,
+      "precision_upper_bound": 1.0,
+      "expected_count": 6,
+      "hit_count": 3,
+      "missed_count": 3,
+      "unresolved_count": 1,
+      "recall": 0.5,
+      "recall_lower_bound": 0.5,
+      "recall_upper_bound": 0.6666666666666666
+    }
+  },
+  "extraction": {
+    "gold_count": 26,
+    "record_count": 33,
+    "probe_matched_count": 23,
+    "probe_matched_ids": [
+      "f01",
+      "f02",
+      "f03",
+      "f05",
+      "f08",
+      "f09",
+      "f10",
+      "f11",
+      "f12",
+      "f13",
+      "f14",
+      "f15",
+      "f16",
+      "f17",
+      "f18",
+      "f19",
+      "f20",
+      "f21",
+      "f22",
+      "f23",
+      "f24",
+      "f25",
+      "f26"
+    ],
+    "manual_review_ids": [
+      "f04",
+      "f06",
+      "f07"
+    ],
+    "no_evidence_candidate_ids": [],
+    "unmatched_ids": [
+      "f04",
+      "f06",
+      "f07"
+    ],
+    "coverage_lower_bound": 0.8846153846153846,
+    "coverage_upper_bound": 1.0,
+    "detail_probe_matched_groups": 112,
+    "detail_probe_total_groups": 116,
+    "detail_probe_coverage": 0.9655172413793104,
+    "unsupported_record_ids": [],
+    "invalid_evidence_record_ids": []
+  },
+  "profiles": {
+    "gold_count": 6,
+    "record_count": 21,
+    "probe_matched_count": 4,
+    "probe_matched_ids": [
+      "p01",
+      "p03",
+      "p04",
+      "p05"
+    ],
+    "manual_review_ids": [
+      "p02",
+      "p06"
+    ],
+    "no_evidence_candidate_ids": [],
+    "unmatched_ids": [
+      "p02",
+      "p06"
+    ],
+    "coverage_lower_bound": 0.6666666666666666,
+    "coverage_upper_bound": 1.0,
+    "detail_probe_matched_groups": 17,
+    "detail_probe_total_groups": 20,
+    "detail_probe_coverage": 0.85,
+    "unsupported_record_ids": [],
+    "invalid_evidence_record_ids": [],
+    "correctly_classified_ids": [
+      "p01",
+      "p03",
+      "p04",
+      "p05"
+    ],
+    "correctly_classified_count": 4,
+    "classification_errors": [],
+    "classification_decision_count": 4,
+    "correct_classification_decision_count": 4,
+    "classification_accuracy_on_probe_matches": 1.0
+  },
+  "relations": {
+    "record_count": 36,
+    "gold_count": 12,
+    "status_counts": {
+      "manual_review": 32,
+      "probe_match": 4
+    },
+    "with_evidence_count": 36,
+    "with_reason_count": 36,
+    "with_valid_confidence_count": 36,
+    "probe_matched_gold_ids": [
+      "r01",
+      "r04",
+      "r07",
+      "r12"
+    ],
+    "unmatched_gold_ids": [
+      "r02",
+      "r03",
+      "r05",
+      "r06",
+      "r08",
+      "r09",
+      "r10",
+      "r11"
+    ],
+    "explicitly_wrong_link_ids": [],
+    "evidence_note": "Link evidence is a source-traceability check. MemoryDB automatically cites both endpoints; this does not prove a relationship."
+  },
+  "primary_20_query_recall": {
+    "query_count": 20,
+    "returned_count": 66,
+    "relevant_count": 27,
+    "false_positive_count": 2,
+    "unknown_count": 37,
+    "judged_count": 29,
+    "precision": 0.9310344827586207,
+    "precision_lower_bound": 0.4090909090909091,
+    "precision_upper_bound": 0.9696969696969697,
+    "expected_fact_count": 23,
+    "hit_fact_count": 17,
+    "missed_fact_count": 6,
+    "unresolved_fact_count": 3,
+    "recall": 0.7391304347826086,
+    "recall_lower_bound": 0.7391304347826086,
+    "recall_upper_bound": 0.8695652173913043,
+    "profiles": {
+      "returned_count": 48,
+      "relevant_count": 4,
+      "false_positive_count": 0,
+      "unknown_count": 44,
+      "judged_count": 4,
+      "precision": 1.0,
+      "precision_lower_bound": 0.08333333333333333,
+      "precision_upper_bound": 1.0,
+      "expected_count": 4,
+      "hit_count": 2,
+      "missed_count": 2,
+      "unresolved_count": 1,
+      "recall": 0.5,
+      "recall_lower_bound": 0.5,
+      "recall_upper_bound": 0.75
+    }
+  },
+  "query_metrics": [
+    {
+      "query_id": "q01",
+      "tags": [
+        "detail",
+        "cross_year",
+        "cross_topic",
+        "graph"
+      ],
+      "as_of": "2026-11-04T12:00:00+08:00",
+      "time_anchor": {
+        "type": "none",
+        "resolved_start": null,
+        "resolved_end": null
+      },
+      "precision_unit": "unique_returned_summary",
+      "returned_count": 5,
+      "relevant_count": 3,
+      "false_positive_count": 0,
+      "unknown_count": 2,
+      "judged_count": 3,
+      "precision": 1.0,
+      "precision_lower_bound": 0.6,
+      "precision_upper_bound": 1.0,
+      "expected_fact_count": 2,
+      "hit_fact_count": 2,
+      "recall": 1.0,
+      "recall_lower_bound": 1.0,
+      "recall_upper_bound": 1.0,
+      "hit_fact_ids": [
+        "f02",
+        "f17"
+      ],
+      "missed_fact_ids": [],
+      "unresolved_fact_ids": [],
+      "no_candidate_fact_ids": [],
+      "retrieved_fact_ids": [
+        "f02",
+        "f17",
+        "f21",
+        "f25"
+      ],
+      "false_positive_ids": [],
+      "unknown_ids": [
+        "d814bc9f-9bc1-466e-9b74-2448bbebfd11",
+        "acc2df4b-d1ea-4b04-b645-193af279ee64"
+      ],
+      "status": "evaluated",
+      "profiles": {
+        "returned_count": 0,
+        "relevant_count": 0,
+        "false_positive_count": 0,
+        "unknown_count": 0,
+        "judged_count": 0,
+        "precision": null,
+        "precision_lower_bound": null,
+        "precision_upper_bound": null,
+        "expected_count": 0,
+        "hit_count": 0,
+        "recall": null,
+        "recall_upper_bound": null,
+        "hit_profile_ids": [],
+        "missed_profile_ids": [],
+        "unresolved_profile_ids": []
+      }
+    },
+    {
+      "query_id": "q02",
+      "tags": [
+        "time",
+        "historical_view"
+      ],
+      "as_of": "2026-11-04T12:00:00+08:00",
+      "time_anchor": {
+        "type": "relative_year",
+        "phrase": "去年",
+        "resolved_start": "2025-01-01",
+        "resolved_end": "2025-12-31"
+      },
+      "precision_unit": "unique_returned_summary",
+      "returned_count": 5,
+      "relevant_count": 2,
+      "false_positive_count": 0,
+      "unknown_count": 3,
+      "judged_count": 2,
+      "precision": 1.0,
+      "precision_lower_bound": 0.4,
+      "precision_upper_bound": 1.0,
+      "expected_fact_count": 1,
+      "hit_fact_count": 0,
+      "recall": 0.0,
+      "recall_lower_bound": 0.0,
+      "recall_upper_bound": 1.0,
+      "hit_fact_ids": [],
+      "missed_fact_ids": [
+        "f04"
+      ],
+      "unresolved_fact_ids": [
+        "f04"
+      ],
+      "no_candidate_fact_ids": [],
+      "retrieved_fact_ids": [
+        "f01",
+        "f03",
+        "f10"
+      ],
+      "false_positive_ids": [],
+      "unknown_ids": [
+        "f7f1f901-64d0-4e8e-bd3c-9764bd6215f6",
+        "5f2277ae-1a0f-4560-bc35-4d7dd991fdcd",
+        "8d5216e9-05c4-47c2-9ce1-c1e92d047e51"
+      ],
+      "status": "evaluated",
+      "profiles": {
+        "returned_count": 3,
+        "relevant_count": 0,
+        "false_positive_count": 0,
+        "unknown_count": 3,
+        "judged_count": 0,
+        "precision": null,
+        "precision_lower_bound": 0.0,
+        "precision_upper_bound": 1.0,
+        "expected_count": 0,
+        "hit_count": 0,
+        "recall": null,
+        "recall_upper_bound": null,
+        "hit_profile_ids": [],
+        "missed_profile_ids": [],
+        "unresolved_profile_ids": []
+      }
+    },
+    {
+      "query_id": "q03",
+      "tags": [
+        "time",
+        "contrast"
+      ],
+      "as_of": "2026-11-04T12:00:00+08:00",
+      "time_anchor": {
+        "type": "compare_years",
+        "years": [
+          2025,
+          2026
+        ],
+        "resolved_start": "2025-01-01",
+        "resolved_end": "2026-11-04"
+      },
+      "precision_unit": "unique_returned_summary",
+      "returned_count": 5,
+      "relevant_count": 1,
+      "false_positive_count": 0,
+      "unknown_count": 4,
+      "judged_count": 1,
+      "precision": 1.0,
+      "precision_lower_bound": 0.2,
+      "precision_upper_bound": 1.0,
+      "expected_fact_count": 3,
+      "hit_fact_count": 0,
+      "recall": 0.0,
+      "recall_lower_bound": 0.0,
+      "recall_upper_bound": 0.0,
+      "hit_fact_ids": [],
+      "missed_fact_ids": [
+        "f04",
+        "f10",
+        "f11"
+      ],
+      "unresolved_fact_ids": [],
+      "no_candidate_fact_ids": [
+        "f04",
+        "f10",
+        "f11"
+      ],
+      "retrieved_fact_ids": [
+        "f13",
+        "f21",
+        "f24",
+        "f25"
+      ],
+      "false_positive_ids": [],
+      "unknown_ids": [
+        "34dd0cd4-9093-4650-9cb7-fc9e39d6f302",
+        "6357d37f-ae15-44ca-98b1-11663b0031b5",
+        "ae8cfa24-55ed-4f8a-8934-51ceb988f48e",
+        "2ac9d0ac-bfa8-4993-981e-828625545294"
+      ],
+      "status": "evaluated",
+      "profiles": {
+        "returned_count": 4,
+        "relevant_count": 0,
+        "false_positive_count": 0,
+        "unknown_count": 4,
+        "judged_count": 0,
+        "precision": null,
+        "precision_lower_bound": 0.0,
+        "precision_upper_bound": 1.0,
+        "expected_count": 0,
+        "hit_count": 0,
+        "recall": null,
+        "recall_upper_bound": null,
+        "hit_profile_ids": [],
+        "missed_profile_ids": [],
+        "unresolved_profile_ids": []
+      }
+    },
+    {
+      "query_id": "q04",
+      "tags": [
+        "current_state",
+        "time"
+      ],
+      "as_of": "2026-11-04T12:00:00+08:00",
+      "time_anchor": {
+        "type": "current",
+        "resolved_start": "2026-11-04",
+        "resolved_end": "2026-11-04"
+      },
+      "precision_unit": "unique_returned_summary",
+      "returned_count": 5,
+      "relevant_count": 2,
+      "false_positive_count": 2,
+      "unknown_count": 1,
+      "judged_count": 4,
+      "precision": 0.5,
+      "precision_lower_bound": 0.4,
+      "precision_upper_bound": 0.6,
+      "expected_fact_count": 1,
+      "hit_fact_count": 1,
+      "recall": 1.0,
+      "recall_lower_bound": 1.0,
+      "recall_upper_bound": 1.0,
+      "hit_fact_ids": [
+        "f24"
+      ],
+      "missed_fact_ids": [],
+      "unresolved_fact_ids": [],
+      "no_candidate_fact_ids": [],
+      "retrieved_fact_ids": [
+        "f01",
+        "f03",
+        "f11",
+        "f16",
+        "f24"
+      ],
+      "false_positive_ids": [
+        "417a230a-ee91-4902-b459-98949949326e",
+        "8d5216e9-05c4-47c2-9ce1-c1e92d047e51"
+      ],
+      "unknown_ids": [
+        "05b504da-b573-4f2a-9105-cce67e7c0104"
+      ],
+      "status": "evaluated",
+      "profiles": {
+        "returned_count": 4,
+        "relevant_count": 0,
+        "false_positive_count": 0,
+        "unknown_count": 4,
+        "judged_count": 0,
+        "precision": null,
+        "precision_lower_bound": 0.0,
+        "precision_upper_bound": 1.0,
+        "expected_count": 0,
+        "hit_count": 0,
+        "recall": null,
+        "recall_upper_bound": null,
+        "hit_profile_ids": [],
+        "missed_profile_ids": [],
+        "unresolved_profile_ids": []
+      }
+    },
+    {
+      "query_id": "q05",
+      "tags": [
+        "time",
+        "role_distinction"
+      ],
+      "as_of": "2026-11-04T12:00:00+08:00",
+      "time_anchor": {
+        "type": "explicit_year",
+        "years": [
+          2024
+        ],
+        "resolved_start": "2024-01-01",
+        "resolved_end": "2024-12-31"
+      },
+      "precision_unit": "unique_returned_summary",
+      "returned_count": 5,
+      "relevant_count": 2,
+      "false_positive_count": 0,
+      "unknown_count": 3,
+      "judged_count": 2,
+      "precision": 1.0,
+      "precision_lower_bound": 0.4,
+      "precision_upper_bound": 1.0,
+      "expected_fact_count": 2,
+      "hit_fact_count": 2,
+      "recall": 1.0,
+      "recall_lower_bound": 1.0,
+      "recall_upper_bound": 1.0,
+      "hit_fact_ids": [
+        "f01",
+        "f03"
+      ],
+      "missed_fact_ids": [],
+      "unresolved_fact_ids": [],
+      "no_candidate_fact_ids": [],
+      "retrieved_fact_ids": [
+        "f01",
+        "f02",
+        "f03",
+        "f17"
+      ],
+      "false_positive_ids": [],
+      "unknown_ids": [
+        "4399f25d-fe45-4d32-b140-05fac9ad33de",
+        "62fb18ac-3fbf-44e5-ab21-902557510eec",
+        "f7f1f901-64d0-4e8e-bd3c-9764bd6215f6"
+      ],
+      "status": "evaluated",
+      "profiles": {
+        "returned_count": 3,
+        "relevant_count": 0,
+        "false_positive_count": 0,
+        "unknown_count": 3,
+        "judged_count": 0,
+        "precision": null,
+        "precision_lower_bound": 0.0,
+        "precision_upper_bound": 1.0,
+        "expected_count": 0,
+        "hit_count": 0,
+        "recall": null,
+        "recall_upper_bound": null,
+        "hit_profile_ids": [],
+        "missed_profile_ids": [],
+        "unresolved_profile_ids": []
+      }
+    },
+    {
+      "query_id": "q06",
+      "tags": [
+        "relative_month",
+        "detail"
+      ],
+      "as_of": "2026-11-04T12:00:00+08:00",
+      "time_anchor": {
+        "type": "relative_month",
+        "phrase": "上个月",
+        "resolved_start": "2026-10-01",
+        "resolved_end": "2026-10-31"
+      },
+      "precision_unit": "unique_returned_summary",
+      "returned_count": 5,
+      "relevant_count": 2,
+      "false_positive_count": 0,
+      "unknown_count": 3,
+      "judged_count": 2,
+      "precision": 1.0,
+      "precision_lower_bound": 0.4,
+      "precision_upper_bound": 1.0,
+      "expected_fact_count": 1,
+      "hit_fact_count": 1,
+      "recall": 1.0,
+      "recall_lower_bound": 1.0,
+      "recall_upper_bound": 1.0,
+      "hit_fact_ids": [
+        "f18"
+      ],
+      "missed_fact_ids": [],
+      "unresolved_fact_ids": [],
+      "no_candidate_fact_ids": [],
+      "retrieved_fact_ids": [
+        "f16",
+        "f17",
+        "f18",
+        "f19",
+        "f21",
+        "f25"
+      ],
+      "false_positive_ids": [],
+      "unknown_ids": [
+        "acc2df4b-d1ea-4b04-b645-193af279ee64",
+        "05b504da-b573-4f2a-9105-cce67e7c0104",
+        "2ac9d0ac-bfa8-4993-981e-828625545294"
+      ],
+      "status": "evaluated",
+      "profiles": {
+        "returned_count": 4,
+        "relevant_count": 0,
+        "false_positive_count": 0,
+        "unknown_count": 4,
+        "judged_count": 0,
+        "precision": null,
+        "precision_lower_bound": 0.0,
+        "precision_upper_bound": 1.0,
+        "expected_count": 0,
+        "hit_count": 0,
+        "recall": null,
+        "recall_upper_bound": null,
+        "hit_profile_ids": [],
+        "missed_profile_ids": [],
+        "unresolved_profile_ids": []
+      }
+    },
+    {
+      "query_id": "q07",
+      "tags": [
+        "cross_topic",
+        "unsupported_effect",
+        "graph"
+      ],
+      "as_of": "2026-11-04T12:00:00+08:00",
+      "time_anchor": {
+        "type": "none",
+        "resolved_start": null,
+        "resolved_end": null
+      },
+      "precision_unit": "unique_returned_summary",
+      "returned_count": 4,
+      "relevant_count": 3,
+      "false_positive_count": 0,
+      "unknown_count": 1,
+      "judged_count": 3,
+      "precision": 1.0,
+      "precision_lower_bound": 0.75,
+      "precision_upper_bound": 1.0,
+      "expected_fact_count": 2,
+      "hit_fact_count": 2,
+      "recall": 1.0,
+      "recall_lower_bound": 1.0,
+      "recall_upper_bound": 1.0,
+      "hit_fact_ids": [
+        "f19",
+        "f20"
+      ],
+      "missed_fact_ids": [],
+      "unresolved_fact_ids": [],
+      "no_candidate_fact_ids": [],
+      "retrieved_fact_ids": [
+        "f14",
+        "f15",
+        "f18",
+        "f19",
+        "f20"
+      ],
+      "false_positive_ids": [],
+      "unknown_ids": [
+        "7d461d08-b920-432c-a86d-3a9d132f663a"
+      ],
+      "status": "evaluated",
+      "profiles": {
+        "returned_count": 5,
+        "relevant_count": 0,
+        "false_positive_count": 0,
+        "unknown_count": 5,
+        "judged_count": 0,
+        "precision": null,
+        "precision_lower_bound": 0.0,
+        "precision_upper_bound": 1.0,
+        "expected_count": 0,
+        "hit_count": 0,
+        "recall": null,
+        "recall_upper_bound": null,
+        "hit_profile_ids": [],
+        "missed_profile_ids": [],
+        "unresolved_profile_ids": []
+      }
+    },
+    {
+      "query_id": "q08",
+      "tags": [
+        "same_name",
+        "false_association"
+      ],
+      "as_of": "2026-11-04T12:00:00+08:00",
+      "time_anchor": {
+        "type": "none",
+        "resolved_start": null,
+        "resolved_end": null
+      },
+      "precision_unit": "unique_returned_summary",
+      "returned_count": 5,
+      "relevant_count": 2,
+      "false_positive_count": 1,
+      "unknown_count": 2,
+      "judged_count": 3,
+      "precision": 0.6666666666666666,
+      "precision_lower_bound": 0.4,
+      "precision_upper_bound": 0.8,
+      "expected_fact_count": 2,
+      "hit_fact_count": 2,
+      "recall": 1.0,
+      "recall_lower_bound": 1.0,
+      "recall_upper_bound": 1.0,
+      "hit_fact_ids": [
+        "f05",
+        "f14"
+      ],
+      "missed_fact_ids": [],
+      "unresolved_fact_ids": [],
+      "no_candidate_fact_ids": [],
+      "retrieved_fact_ids": [
+        "f05",
+        "f14",
+        "f15",
+        "f16",
+        "f18",
+        "f19"
+      ],
+      "false_positive_ids": [
+        "acfb8eed-13bd-402f-ac40-21d9a22e1b39"
+      ],
+      "unknown_ids": [
+        "5c2500d0-8dca-43d2-9ea8-0c57841b7966",
+        "05b504da-b573-4f2a-9105-cce67e7c0104"
+      ],
+      "status": "evaluated",
+      "profiles": {
+        "returned_count": 0,
+        "relevant_count": 0,
+        "false_positive_count": 0,
+        "unknown_count": 0,
+        "judged_count": 0,
+        "precision": null,
+        "precision_lower_bound": null,
+        "precision_upper_bound": null,
+        "expected_count": 0,
+        "hit_count": 0,
+        "recall": null,
+        "recall_upper_bound": null,
+        "hit_profile_ids": [],
+        "missed_profile_ids": [],
+        "unresolved_profile_ids": []
+      }
+    },
+    {
+      "query_id": "q09",
+      "tags": [
+        "time",
+        "detail"
+      ],
+      "as_of": "2026-11-04T12:00:00+08:00",
+      "time_anchor": {
+        "type": "relative_year",
+        "phrase": "去年",
+        "resolved_start": "2025-01-01",
+        "resolved_end": "2025-12-31"
+      },
+      "precision_unit": "unique_returned_summary",
+      "returned_count": 5,
+      "relevant_count": 0,
+      "false_positive_count": 0,
+      "unknown_count": 5,
+      "judged_count": 0,
+      "precision": null,
+      "precision_lower_bound": 0.0,
+      "precision_upper_bound": 1.0,
+      "expected_fact_count": 1,
+      "hit_fact_count": 0,
+      "recall": 0.0,
+      "recall_lower_bound": 0.0,
+      "recall_upper_bound": 1.0,
+      "hit_fact_ids": [],
+      "missed_fact_ids": [
+        "f06"
+      ],
+      "unresolved_fact_ids": [
+        "f06"
+      ],
+      "no_candidate_fact_ids": [],
+      "retrieved_fact_ids": [
+        "f22",
+        "f23"
+      ],
+      "false_positive_ids": [],
+      "unknown_ids": [
+        "40663291-d25c-49d4-ae27-2535d40b05d8",
+        "7dd6a756-292d-4265-8cc1-3c887995afd5",
+        "d9cbbcf0-62cb-4d06-acc0-f7d9692654ec",
+        "81566ca0-f688-4261-9b9f-4a44a74abe28",
+        "ef487b4b-7cc0-4b03-9de9-6d475c63741c"
+      ],
+      "status": "evaluated",
+      "profiles": {
+        "returned_count": 1,
+        "relevant_count": 0,
+        "false_positive_count": 0,
+        "unknown_count": 1,
+        "judged_count": 0,
+        "precision": null,
+        "precision_lower_bound": 0.0,
+        "precision_upper_bound": 1.0,
+        "expected_count": 0,
+        "hit_count": 0,
+        "recall": null,
+        "recall_upper_bound": null,
+        "hit_profile_ids": [],
+        "missed_profile_ids": [],
+        "unresolved_profile_ids": []
+      }
+    },
+    {
+      "query_id": "q10",
+      "tags": [
+        "time",
+        "preference_change"
+      ],
+      "as_of": "2026-11-04T12:00:00+08:00",
+      "time_anchor": {
+        "type": "compare_years",
+        "years": [
+          2025,
+          2026
+        ],
+        "resolved_start": "2025-01-01",
+        "resolved_end": "2026-11-04"
+      },
+      "precision_unit": "unique_returned_summary",
+      "returned_count": 5,
+      "relevant_count": 2,
+      "false_positive_count": 0,
+      "unknown_count": 3,
+      "judged_count": 2,
+      "precision": 1.0,
+      "precision_lower_bound": 0.4,
+      "precision_upper_bound": 1.0,
+      "expected_fact_count": 2,
+      "hit_fact_count": 1,
+      "recall": 0.5,
+      "recall_lower_bound": 0.5,
+      "recall_upper_bound": 1.0,
+      "hit_fact_ids": [
+        "f22"
+      ],
+      "missed_fact_ids": [
+        "f07"
+      ],
+      "unresolved_fact_ids": [
+        "f07"
+      ],
+      "no_candidate_fact_ids": [],
+      "retrieved_fact_ids": [
+        "f10",
+        "f22",
+        "f23"
+      ],
+      "false_positive_ids": [],
+      "unknown_ids": [
+        "03ac7bdc-471f-4b4f-ac73-f6684e52895e",
+        "7dd6a756-292d-4265-8cc1-3c887995afd5",
+        "f7f1f901-64d0-4e8e-bd3c-9764bd6215f6"
+      ],
+      "status": "evaluated",
+      "profiles": {
+        "returned_count": 6,
+        "relevant_count": 1,
+        "false_positive_count": 0,
+        "unknown_count": 5,
+        "judged_count": 1,
+        "precision": 1.0,
+        "precision_lower_bound": 0.16666666666666666,
+        "precision_upper_bound": 1.0,
+        "expected_count": 1,
+        "hit_count": 1,
+        "recall": 1.0,
+        "recall_upper_bound": 1.0,
+        "hit_profile_ids": [
+          "p05"
+        ],
+        "missed_profile_ids": [],
+        "unresolved_profile_ids": []
+      }
+    },
+    {
+      "query_id": "q11",
+      "tags": [
+        "causality",
+        "uncertainty"
+      ],
+      "as_of": "2026-11-04T12:00:00+08:00",
+      "time_anchor": {
+        "type": "explicit_month",
+        "year": 2025,
+        "month": 10,
+        "resolved_start": "2025-10-01",
+        "resolved_end": "2025-10-31"
+      },
+      "precision_unit": "unique_returned_summary",
+      "returned_count": 2,
+      "relevant_count": 2,
+      "false_positive_count": 0,
+      "unknown_count": 0,
+      "judged_count": 2,
+      "precision": 1.0,
+      "precision_lower_bound": 1.0,
+      "precision_upper_bound": 1.0,
+      "expected_fact_count": 2,
+      "hit_fact_count": 2,
+      "recall": 1.0,
+      "recall_lower_bound": 1.0,
+      "recall_upper_bound": 1.0,
+      "hit_fact_ids": [
+        "f08",
+        "f09"
+      ],
+      "missed_fact_ids": [],
+      "unresolved_fact_ids": [],
+      "no_candidate_fact_ids": [],
+      "retrieved_fact_ids": [
+        "f08",
+        "f09"
+      ],
+      "false_positive_ids": [],
+      "unknown_ids": [],
+      "status": "evaluated",
+      "profiles": {
+        "returned_count": 1,
+        "relevant_count": 0,
+        "false_positive_count": 0,
+        "unknown_count": 1,
+        "judged_count": 0,
+        "precision": null,
+        "precision_lower_bound": 0.0,
+        "precision_upper_bound": 1.0,
+        "expected_count": 0,
+        "hit_count": 0,
+        "recall": null,
+        "recall_upper_bound": null,
+        "hit_profile_ids": [],
+        "missed_profile_ids": [],
+        "unresolved_profile_ids": []
+      }
+    },
+    {
+      "query_id": "q12",
+      "tags": [
+        "profile",
+        "expectation_vs_ai"
+      ],
+      "as_of": "2026-11-04T12:00:00+08:00",
+      "time_anchor": {
+        "type": "none",
+        "resolved_start": null,
+        "resolved_end": null
+      },
+      "precision_unit": "unique_returned_summary",
+      "returned_count": 0,
+      "relevant_count": 0,
+      "false_positive_count": 0,
+      "unknown_count": 0,
+      "judged_count": 0,
+      "precision": null,
+      "precision_lower_bound": null,
+      "precision_upper_bound": null,
+      "expected_fact_count": 0,
+      "hit_fact_count": 0,
+      "recall": null,
+      "recall_lower_bound": null,
+      "recall_upper_bound": null,
+      "hit_fact_ids": [],
+      "missed_fact_ids": [],
+      "unresolved_fact_ids": [],
+      "no_candidate_fact_ids": [],
+      "retrieved_fact_ids": [],
+      "false_positive_ids": [],
+      "unknown_ids": [],
+      "status": "evaluated",
+      "profiles": {
+        "returned_count": 5,
+        "relevant_count": 1,
+        "false_positive_count": 0,
+        "unknown_count": 4,
+        "judged_count": 1,
+        "precision": 1.0,
+        "precision_lower_bound": 0.2,
+        "precision_upper_bound": 1.0,
+        "expected_count": 1,
+        "hit_count": 0,
+        "recall": 0.0,
+        "recall_upper_bound": 0.0,
+        "hit_profile_ids": [],
+        "missed_profile_ids": [
+          "p01"
+        ],
+        "unresolved_profile_ids": []
+      }
+    },
+    {
+      "query_id": "q13",
+      "tags": [
+        "profile",
+        "feedback_scope"
+      ],
+      "as_of": "2026-11-04T12:00:00+08:00",
+      "time_anchor": {
+        "type": "none",
+        "resolved_start": null,
+        "resolved_end": null
+      },
+      "precision_unit": "unique_returned_summary",
+      "returned_count": 0,
+      "relevant_count": 0,
+      "false_positive_count": 0,
+      "unknown_count": 0,
+      "judged_count": 0,
+      "precision": null,
+      "precision_lower_bound": null,
+      "precision_upper_bound": null,
+      "expected_fact_count": 0,
+      "hit_fact_count": 0,
+      "recall": null,
+      "recall_lower_bound": null,
+      "recall_upper_bound": null,
+      "hit_fact_ids": [],
+      "missed_fact_ids": [],
+      "unresolved_fact_ids": [],
+      "no_candidate_fact_ids": [],
+      "retrieved_fact_ids": [],
+      "false_positive_ids": [],
+      "unknown_ids": [],
+      "status": "evaluated",
+      "profiles": {
+        "returned_count": 4,
+        "relevant_count": 1,
+        "false_positive_count": 0,
+        "unknown_count": 3,
+        "judged_count": 1,
+        "precision": 1.0,
+        "precision_lower_bound": 0.25,
+        "precision_upper_bound": 1.0,
+        "expected_count": 1,
+        "hit_count": 0,
+        "recall": 0.0,
+        "recall_upper_bound": 1.0,
+        "hit_profile_ids": [],
+        "missed_profile_ids": [
+          "p02"
+        ],
+        "unresolved_profile_ids": [
+          "p02"
+        ]
+      }
+    },
+    {
+      "query_id": "q14",
+      "tags": [
+        "profile",
+        "self_claim_vs_behavior"
+      ],
+      "as_of": "2026-11-04T12:00:00+08:00",
+      "time_anchor": {
+        "type": "none",
+        "resolved_start": null,
+        "resolved_end": null
+      },
+      "precision_unit": "unique_returned_summary",
+      "returned_count": 0,
+      "relevant_count": 0,
+      "false_positive_count": 0,
+      "unknown_count": 0,
+      "judged_count": 0,
+      "precision": null,
+      "precision_lower_bound": null,
+      "precision_upper_bound": null,
+      "expected_fact_count": 1,
+      "hit_fact_count": 0,
+      "recall": 0.0,
+      "recall_lower_bound": 0.0,
+      "recall_upper_bound": 0.0,
+      "hit_fact_ids": [],
+      "missed_fact_ids": [
+        "f13"
+      ],
+      "unresolved_fact_ids": [],
+      "no_candidate_fact_ids": [
+        "f13"
+      ],
+      "retrieved_fact_ids": [],
+      "false_positive_ids": [],
+      "unknown_ids": [],
+      "status": "evaluated",
+      "profiles": {
+        "returned_count": 1,
+        "relevant_count": 1,
+        "false_positive_count": 0,
+        "unknown_count": 0,
+        "judged_count": 1,
+        "precision": 1.0,
+        "precision_lower_bound": 1.0,
+        "precision_upper_bound": 1.0,
+        "expected_count": 1,
+        "hit_count": 0,
+        "recall": 0.0,
+        "recall_upper_bound": 0.0,
+        "hit_profile_ids": [],
+        "missed_profile_ids": [
+          "p04"
+        ],
+        "unresolved_profile_ids": []
+      }
+    },
+    {
+      "query_id": "q15",
+      "tags": [
+        "correction",
+        "detail"
+      ],
+      "as_of": "2026-11-04T12:00:00+08:00",
+      "time_anchor": {
+        "type": "explicit_month",
+        "year": 2026,
+        "month": 4,
+        "resolved_start": "2026-04-01",
+        "resolved_end": "2026-04-30"
+      },
+      "precision_unit": "unique_returned_summary",
+      "returned_count": 3,
+      "relevant_count": 1,
+      "false_positive_count": 0,
+      "unknown_count": 2,
+      "judged_count": 1,
+      "precision": 1.0,
+      "precision_lower_bound": 0.3333333333333333,
+      "precision_upper_bound": 1.0,
+      "expected_fact_count": 1,
+      "hit_fact_count": 1,
+      "recall": 1.0,
+      "recall_lower_bound": 1.0,
+      "recall_upper_bound": 1.0,
+      "hit_fact_ids": [
+        "f13"
+      ],
+      "missed_fact_ids": [],
+      "unresolved_fact_ids": [],
+      "no_candidate_fact_ids": [],
+      "retrieved_fact_ids": [
+        "f13"
+      ],
+      "false_positive_ids": [],
+      "unknown_ids": [
+        "ae8cfa24-55ed-4f8a-8934-51ceb988f48e",
+        "34dd0cd4-9093-4650-9cb7-fc9e39d6f302"
+      ],
+      "status": "evaluated",
+      "profiles": {
+        "returned_count": 2,
+        "relevant_count": 0,
+        "false_positive_count": 0,
+        "unknown_count": 2,
+        "judged_count": 0,
+        "precision": null,
+        "precision_lower_bound": 0.0,
+        "precision_upper_bound": 1.0,
+        "expected_count": 0,
+        "hit_count": 0,
+        "recall": null,
+        "recall_upper_bound": null,
+        "hit_profile_ids": [],
+        "missed_profile_ids": [],
+        "unresolved_profile_ids": []
+      }
+    },
+    {
+      "query_id": "q16",
+      "tags": [
+        "profile",
+        "scoped_habit"
+      ],
+      "as_of": "2026-11-04T12:00:00+08:00",
+      "time_anchor": {
+        "type": "none",
+        "resolved_start": null,
+        "resolved_end": null
+      },
+      "precision_unit": "unique_returned_summary",
+      "returned_count": 2,
+      "relevant_count": 1,
+      "false_positive_count": 0,
+      "unknown_count": 1,
+      "judged_count": 1,
+      "precision": 1.0,
+      "precision_lower_bound": 0.5,
+      "precision_upper_bound": 1.0,
+      "expected_fact_count": 0,
+      "hit_fact_count": 0,
+      "recall": null,
+      "recall_lower_bound": null,
+      "recall_upper_bound": null,
+      "hit_fact_ids": [],
+      "missed_fact_ids": [],
+      "unresolved_fact_ids": [],
+      "no_candidate_fact_ids": [],
+      "retrieved_fact_ids": [
+        "f15"
+      ],
+      "false_positive_ids": [],
+      "unknown_ids": [
+        "e0bcba89-1ed9-4a3d-9d59-9c8274ad4d6d"
+      ],
+      "status": "evaluated",
+      "profiles": {
+        "returned_count": 2,
+        "relevant_count": 1,
+        "false_positive_count": 0,
+        "unknown_count": 1,
+        "judged_count": 1,
+        "precision": 1.0,
+        "precision_lower_bound": 0.5,
+        "precision_upper_bound": 1.0,
+        "expected_count": 1,
+        "hit_count": 1,
+        "recall": 1.0,
+        "recall_upper_bound": 1.0,
+        "hit_profile_ids": [
+          "p03"
+        ],
+        "missed_profile_ids": [],
+        "unresolved_profile_ids": []
+      }
+    },
+    {
+      "query_id": "q17",
+      "tags": [
+        "employment_vs_volunteer"
+      ],
+      "as_of": "2026-11-04T12:00:00+08:00",
+      "time_anchor": {
+        "type": "none",
+        "resolved_start": null,
+        "resolved_end": null
+      },
+      "precision_unit": "unique_returned_summary",
+      "returned_count": 5,
+      "relevant_count": 2,
+      "false_positive_count": 0,
+      "unknown_count": 3,
+      "judged_count": 2,
+      "precision": 1.0,
+      "precision_lower_bound": 0.4,
+      "precision_upper_bound": 1.0,
+      "expected_fact_count": 1,
+      "hit_fact_count": 1,
+      "recall": 1.0,
+      "recall_lower_bound": 1.0,
+      "recall_upper_bound": 1.0,
+      "hit_fact_ids": [
+        "f12"
+      ],
+      "missed_fact_ids": [],
+      "unresolved_fact_ids": [],
+      "no_candidate_fact_ids": [],
+      "retrieved_fact_ids": [
+        "f01",
+        "f03",
+        "f11",
+        "f12"
+      ],
+      "false_positive_ids": [],
+      "unknown_ids": [
+        "d3b47d62-836e-47fa-8937-705e5c301f8a",
+        "417a230a-ee91-4902-b459-98949949326e",
+        "8d5216e9-05c4-47c2-9ce1-c1e92d047e51"
+      ],
+      "status": "evaluated",
+      "profiles": {
+        "returned_count": 3,
+        "relevant_count": 0,
+        "false_positive_count": 0,
+        "unknown_count": 3,
+        "judged_count": 0,
+        "precision": null,
+        "precision_lower_bound": 0.0,
+        "precision_upper_bound": 1.0,
+        "expected_count": 0,
+        "hit_count": 0,
+        "recall": null,
+        "recall_upper_bound": null,
+        "hit_profile_ids": [],
+        "missed_profile_ids": [],
+        "unresolved_profile_ids": []
+      }
+    },
+    {
+      "query_id": "q18",
+      "tags": [
+        "cross_year",
+        "emotion_echo",
+        "no_psychologizing"
+      ],
+      "as_of": "2026-11-04T12:00:00+08:00",
+      "time_anchor": {
+        "type": "none",
+        "resolved_start": null,
+        "resolved_end": null
+      },
+      "precision_unit": "unique_returned_summary",
+      "returned_count": 5,
+      "relevant_count": 3,
+      "false_positive_count": 0,
+      "unknown_count": 2,
+      "judged_count": 3,
+      "precision": 1.0,
+      "precision_lower_bound": 0.6,
+      "precision_upper_bound": 1.0,
+      "expected_fact_count": 3,
+      "hit_fact_count": 3,
+      "recall": 1.0,
+      "recall_lower_bound": 1.0,
+      "recall_upper_bound": 1.0,
+      "hit_fact_ids": [
+        "f02",
+        "f17",
+        "f21"
+      ],
+      "missed_fact_ids": [],
+      "unresolved_fact_ids": [],
+      "no_candidate_fact_ids": [],
+      "retrieved_fact_ids": [
+        "f02",
+        "f17",
+        "f21",
+        "f25"
+      ],
+      "false_positive_ids": [],
+      "unknown_ids": [
+        "d814bc9f-9bc1-466e-9b74-2448bbebfd11",
+        "acc2df4b-d1ea-4b04-b645-193af279ee64"
+      ],
+      "status": "evaluated",
+      "profiles": {
+        "returned_count": 2,
+        "relevant_count": 0,
+        "false_positive_count": 0,
+        "unknown_count": 2,
+        "judged_count": 0,
+        "precision": null,
+        "precision_lower_bound": 0.0,
+        "precision_upper_bound": 1.0,
+        "expected_count": 0,
+        "hit_count": 0,
+        "recall": null,
+        "recall_upper_bound": null,
+        "hit_profile_ids": [],
+        "missed_profile_ids": [],
+        "unresolved_profile_ids": []
+      }
+    },
+    {
+      "query_id": "q19",
+      "tags": [
+        "negative",
+        "unknown_equipment"
+      ],
+      "as_of": "2026-11-04T12:00:00+08:00",
+      "time_anchor": {
+        "type": "none",
+        "resolved_start": null,
+        "resolved_end": null
+      },
+      "precision_unit": "unique_returned_summary",
+      "returned_count": 0,
+      "relevant_count": 0,
+      "false_positive_count": 0,
+      "unknown_count": 0,
+      "judged_count": 0,
+      "precision": null,
+      "precision_lower_bound": null,
+      "precision_upper_bound": null,
+      "expected_fact_count": 0,
+      "hit_fact_count": 0,
+      "recall": null,
+      "recall_lower_bound": null,
+      "recall_upper_bound": null,
+      "hit_fact_ids": [],
+      "missed_fact_ids": [],
+      "unresolved_fact_ids": [],
+      "no_candidate_fact_ids": [],
+      "retrieved_fact_ids": [],
+      "false_positive_ids": [],
+      "unknown_ids": [],
+      "status": "evaluated",
+      "profiles": {
+        "returned_count": 0,
+        "relevant_count": 0,
+        "false_positive_count": 0,
+        "unknown_count": 0,
+        "judged_count": 0,
+        "precision": null,
+        "precision_lower_bound": null,
+        "precision_upper_bound": null,
+        "expected_count": 0,
+        "hit_count": 0,
+        "recall": null,
+        "recall_upper_bound": null,
+        "hit_profile_ids": [],
+        "missed_profile_ids": [],
+        "unresolved_profile_ids": []
+      }
+    },
+    {
+      "query_id": "q20",
+      "tags": [
+        "negative",
+        "unrelated"
+      ],
+      "as_of": "2026-11-04T12:00:00+08:00",
+      "time_anchor": {
+        "type": "none",
+        "resolved_start": null,
+        "resolved_end": null
+      },
+      "precision_unit": "unique_returned_summary",
+      "returned_count": 0,
+      "relevant_count": 0,
+      "false_positive_count": 0,
+      "unknown_count": 0,
+      "judged_count": 0,
+      "precision": null,
+      "precision_lower_bound": null,
+      "precision_upper_bound": null,
+      "expected_fact_count": 0,
+      "hit_fact_count": 0,
+      "recall": null,
+      "recall_lower_bound": null,
+      "recall_upper_bound": null,
+      "hit_fact_ids": [],
+      "missed_fact_ids": [],
+      "unresolved_fact_ids": [],
+      "no_candidate_fact_ids": [],
+      "retrieved_fact_ids": [],
+      "false_positive_ids": [],
+      "unknown_ids": [],
+      "status": "evaluated",
+      "profiles": {
+        "returned_count": 1,
+        "relevant_count": 0,
+        "false_positive_count": 0,
+        "unknown_count": 1,
+        "judged_count": 0,
+        "precision": null,
+        "precision_lower_bound": 0.0,
+        "precision_upper_bound": 1.0,
+        "expected_count": 0,
+        "hit_count": 0,
+        "recall": null,
+        "recall_upper_bound": null,
+        "hit_profile_ids": [],
+        "missed_profile_ids": [],
+        "unresolved_profile_ids": []
+      }
+    },
+    {
+      "query_id": "q21",
+      "tags": [
+        "negative",
+        "ordinary_chat"
+      ],
+      "as_of": "2026-11-04T12:00:00+08:00",
+      "time_anchor": {
+        "type": "none",
+        "resolved_start": null,
+        "resolved_end": null
+      },
+      "precision_unit": "unique_returned_summary",
+      "returned_count": 1,
+      "relevant_count": 0,
+      "false_positive_count": 0,
+      "unknown_count": 1,
+      "judged_count": 0,
+      "precision": null,
+      "precision_lower_bound": 0.0,
+      "precision_upper_bound": 1.0,
+      "expected_fact_count": 0,
+      "hit_fact_count": 0,
+      "recall": null,
+      "recall_lower_bound": null,
+      "recall_upper_bound": null,
+      "hit_fact_ids": [],
+      "missed_fact_ids": [],
+      "unresolved_fact_ids": [],
+      "no_candidate_fact_ids": [],
+      "retrieved_fact_ids": [
+        "f26"
+      ],
+      "false_positive_ids": [],
+      "unknown_ids": [
+        "9bdd446d-650d-4ec1-8256-08cb17ea36ff"
+      ],
+      "status": "evaluated",
+      "profiles": {
+        "returned_count": 0,
+        "relevant_count": 0,
+        "false_positive_count": 0,
+        "unknown_count": 0,
+        "judged_count": 0,
+        "precision": null,
+        "precision_lower_bound": null,
+        "precision_upper_bound": null,
+        "expected_count": 0,
+        "hit_count": 0,
+        "recall": null,
+        "recall_upper_bound": null,
+        "hit_profile_ids": [],
+        "missed_profile_ids": [],
+        "unresolved_profile_ids": []
+      }
+    },
+    {
+      "query_id": "q22",
+      "tags": [
+        "current",
+        "expectation"
+      ],
+      "as_of": "2026-11-04T12:00:00+08:00",
+      "time_anchor": {
+        "type": "next_week",
+        "resolved_start": "2026-11-09",
+        "resolved_end": "2026-11-15"
+      },
+      "precision_unit": "unique_returned_summary",
+      "returned_count": 4,
+      "relevant_count": 2,
+      "false_positive_count": 0,
+      "unknown_count": 2,
+      "judged_count": 2,
+      "precision": 1.0,
+      "precision_lower_bound": 0.5,
+      "precision_upper_bound": 1.0,
+      "expected_fact_count": 2,
+      "hit_fact_count": 2,
+      "recall": 1.0,
+      "recall_lower_bound": 1.0,
+      "recall_upper_bound": 1.0,
+      "hit_fact_ids": [
+        "f22",
+        "f23"
+      ],
+      "missed_fact_ids": [],
+      "unresolved_fact_ids": [],
+      "no_candidate_fact_ids": [],
+      "retrieved_fact_ids": [
+        "f22",
+        "f23"
+      ],
+      "false_positive_ids": [],
+      "unknown_ids": [
+        "d6d4e9b6-6a80-4771-81b3-b19a472e1a39",
+        "7dd6a756-292d-4265-8cc1-3c887995afd5"
+      ],
+      "status": "evaluated",
+      "profiles": {
+        "returned_count": 6,
+        "relevant_count": 1,
+        "false_positive_count": 0,
+        "unknown_count": 5,
+        "judged_count": 1,
+        "precision": 1.0,
+        "precision_lower_bound": 0.16666666666666666,
+        "precision_upper_bound": 1.0,
+        "expected_count": 1,
+        "hit_count": 1,
+        "recall": 1.0,
+        "recall_upper_bound": 1.0,
+        "hit_profile_ids": [
+          "p05"
+        ],
+        "missed_profile_ids": [],
+        "unresolved_profile_ids": []
+      }
+    },
+    {
+      "query_id": "q23",
+      "tags": [
+        "context",
+        "compaction_missing"
+      ],
+      "as_of": "2026-11-04T12:00:00+08:00",
+      "time_anchor": {
+        "type": "none",
+        "resolved_start": null,
+        "resolved_end": null
+      },
+      "precision_unit": "unique_returned_summary",
+      "returned_count": 5,
+      "relevant_count": 2,
+      "false_positive_count": 0,
+      "unknown_count": 3,
+      "judged_count": 2,
+      "precision": 1.0,
+      "precision_lower_bound": 0.4,
+      "precision_upper_bound": 1.0,
+      "expected_fact_count": 1,
+      "hit_fact_count": 1,
+      "recall": 1.0,
+      "recall_lower_bound": 1.0,
+      "recall_upper_bound": 1.0,
+      "hit_fact_ids": [
+        "f17"
+      ],
+      "missed_fact_ids": [],
+      "unresolved_fact_ids": [],
+      "no_candidate_fact_ids": [],
+      "retrieved_fact_ids": [
+        "f02",
+        "f17",
+        "f21",
+        "f25"
+      ],
+      "false_positive_ids": [],
+      "unknown_ids": [
+        "4399f25d-fe45-4d32-b140-05fac9ad33de",
+        "acc2df4b-d1ea-4b04-b645-193af279ee64",
+        "d814bc9f-9bc1-466e-9b74-2448bbebfd11"
+      ],
+      "status": "evaluated",
+      "profiles": {
+        "returned_count": 0,
+        "relevant_count": 0,
+        "false_positive_count": 0,
+        "unknown_count": 0,
+        "judged_count": 0,
+        "precision": null,
+        "precision_lower_bound": null,
+        "precision_upper_bound": null,
+        "expected_count": 0,
+        "hit_count": 0,
+        "recall": null,
+        "recall_upper_bound": null,
+        "hit_profile_ids": [],
+        "missed_profile_ids": [],
+        "unresolved_profile_ids": []
+      }
+    },
+    {
+      "query_id": "q24",
+      "tags": [
+        "historical_view",
+        "time"
+      ],
+      "as_of": "2026-11-04T12:00:00+08:00",
+      "time_anchor": {
+        "type": "explicit_year",
+        "years": [
+          2025
+        ],
+        "resolved_start": "2025-01-01",
+        "resolved_end": "2025-12-31"
+      },
+      "precision_unit": "unique_returned_summary",
+      "returned_count": 5,
+      "relevant_count": 1,
+      "false_positive_count": 0,
+      "unknown_count": 4,
+      "judged_count": 1,
+      "precision": 1.0,
+      "precision_lower_bound": 0.2,
+      "precision_upper_bound": 1.0,
+      "expected_fact_count": 1,
+      "hit_fact_count": 0,
+      "recall": 0.0,
+      "recall_lower_bound": 0.0,
+      "recall_upper_bound": 1.0,
+      "hit_fact_ids": [],
+      "missed_fact_ids": [
+        "f04"
+      ],
+      "unresolved_fact_ids": [
+        "f04"
+      ],
+      "no_candidate_fact_ids": [],
+      "retrieved_fact_ids": [
+        "f08",
+        "f09",
+        "f10"
+      ],
+      "false_positive_ids": [],
+      "unknown_ids": [
+        "f7f1f901-64d0-4e8e-bd3c-9764bd6215f6",
+        "40663291-d25c-49d4-ae27-2535d40b05d8",
+        "600059be-3a44-438a-86e6-2aa5703d3d19",
+        "7bfe4403-bfce-4bd0-9e39-406f102abfe5"
+      ],
+      "status": "evaluated",
+      "profiles": {
+        "returned_count": 2,
+        "relevant_count": 0,
+        "false_positive_count": 0,
+        "unknown_count": 2,
+        "judged_count": 0,
+        "precision": null,
+        "precision_lower_bound": 0.0,
+        "precision_upper_bound": 1.0,
+        "expected_count": 0,
+        "hit_count": 0,
+        "recall": null,
+        "recall_upper_bound": null,
+        "hit_profile_ids": [],
+        "missed_profile_ids": [],
+        "unresolved_profile_ids": []
+      }
+    }
+  ],
+  "scorer_sha256": "a8036ed0b383bb549f78faf370d398b54ffb1e6f557d20695d53ae4e8170f614",
+  "method_note": "Scores recomputed with one final scorer over unchanged recorded real model outputs. Unknown is not wrong; these are lexical/evidence probes, not semantic quality scores."
+}

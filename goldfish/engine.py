@@ -22,6 +22,11 @@ from pathlib import Path
 
 RELATIONS = {"same_topic", "same_person", "same_event", "chronological", "contrast", "emotion_echo", "contextual", "possible_cause", "causal_confirmed"}
 PROFILES = {"user_profile", "interaction_expectation", "ai_observed", "feedback"}
+# Generic question words are not sufficient evidence of a shared experience.
+# This remains a lexical fallback, not Chinese word segmentation or semantics.
+QUESTION_TOKENS = {'什么', '怎么', '为何', '原因', '以前', '记得', '当时', '现在', '还是',
+                   '已经', '一下', '请问', '是否', '可以', '最近', '今天', '明天', '去年', '今年',
+                   '这次', '那次', '时候', '事情', '有没有', '我们', '用户', '助手', '回答', '一次', '一条'}
 
 def now_iso():
     return datetime.now(timezone.utc).isoformat()
@@ -39,20 +44,28 @@ def tokens(text: str) -> set[str]:
             out.add(c)
     return out
 
-def similarity(a: str, b: str) -> float:
+def similarity(a: str, b: str, content_only=False) -> float:
     ta, tb = tokens(a), tokens(b)
+    if content_only:
+        ta, tb = ta - QUESTION_TOKENS, tb - QUESTION_TOKENS
     if not ta or not tb: return 0.0
     # Containment supports short questions vs longer episode summaries.
     return len(ta & tb) / max(1, min(len(ta), len(tb)))
 
 def year_filter(text: str, today: date | None = None):
     today = today or date.today()
-    yrs = [int(y) for y in re.findall(r'(?<!\d)(20\d{2})\s*年?', text)]
-    if yrs: return set(yrs)
-    if '去年' in text: return {today.year - 1}
-    if '前年' in text: return {today.year - 2}
-    if '今年' in text: return {today.year}
-    return set()
+    yrs = {int(y) for y in re.findall(r'(?<!\d)(20\d{2})\s*年?', text)}
+    # "去年和今年" requests two periods; "别拿今年替代去年" does not.
+    relative = re.sub(r'(?:别拿|别用|不要用|不要拿|不能用|别把)(今年|去年|前年)', '', text)
+    for phrase, offset in [('去年', -1), ('前年', -2), ('今年', 0)]:
+        if phrase in relative: yrs.add(today.year + offset)
+    return yrs
+
+def _time_only_query(text):
+    remaining = re.sub(r'20\d{2}\s*年?|今年|去年|前年', '', text)
+    for phrase in ('我', '有', '什么', '的', '当时', '想法', '事情', '经历', '发生', '记得', '还', '请问', '回顾', '哪些'):
+        remaining = remaining.replace(phrase, '')
+    return not re.search(r'[\w\u4e00-\u9fff]', remaining)
 
 def locked(method):
     @wraps(method)
@@ -319,7 +332,11 @@ class MemoryDB:
 
     @locked
     def recent_summaries_for_extraction(self, query, limit=10):
-        arr = [dict(r) for r in self.db.execute("SELECT id,text,start_time,end_time FROM summaries WHERE status='active' ORDER BY created_at DESC LIMIT 150")]
+        arr = [dict(r) for r in self.db.execute('''SELECT s.id,s.text,s.start_time,s.end_time,
+            GROUP_CONCAT(DISTINCT t.title) AS theme_titles FROM summaries s
+            LEFT JOIN theme_members tm ON tm.summary_id=s.id
+            LEFT JOIN themes t ON t.id=tm.theme_id
+            WHERE s.status='active' GROUP BY s.id ORDER BY s.created_at DESC LIMIT 150''')]
         return sorted(arr,key=lambda r:similarity(query,r['text']),reverse=True)[:limit]
 
     @locked
@@ -332,10 +349,23 @@ class MemoryDB:
         return [dict(x) for x in rows]
 
     @locked
-    def _profile_strings(self, budget=350, context=''):
+    def _profile_strings(self, budget=350, context='', query=''):
         res=[]; remain=budget; seen=set()
+        candidates=[]
+        interaction_query=any(cue in query for cue in ('聊天', '沟通', '交互', '语气'))
+        behavior_query=any(cue in query for cue in ('自称', '自身画像', '行为证据', '表现过'))
+        feedback_query=any(cue in query for cue in ('反馈', '刚才', '上一条', '机械', '那次回答', '评价'))
         for r in self.db.execute("SELECT kind,text FROM profile WHERE status='active' ORDER BY created_at DESC LIMIT 50"):
-            if r['kind']=='feedback' or _covered(r['text'], context): continue
+            if _covered(r['text'], context): continue
+            if r['kind']=='feedback' and not feedback_query: continue
+            relevance=similarity(query, r['text'], content_only=True) if query else 0
+            if interaction_query and r['kind'] in {'interaction_expectation','ai_observed'}:
+                relevance=max(relevance,.1)
+            if behavior_query and r['kind']=='ai_observed': relevance=max(relevance,.2)
+            if relevance<.05: continue
+            candidates.append((relevance, r))
+        # Relevance, rather than insertion recency, owns the small profile budget.
+        for _, r in sorted(candidates, key=lambda item:item[0], reverse=True):
             label={'user_profile':'用户画像','interaction_expectation':'交互期望','ai_observed':'AI行为记录'}.get(r['kind'],r['kind'])
             line=f'[{label}] {escape(r["text"])}'
             if len(line)>remain or line in seen: continue
@@ -353,18 +383,25 @@ class MemoryDB:
         summaries = self._summary_with_context()
         by_id = {s['id']:s for s in summaries}
         years=year_filter(query,today)
+        time_only=bool(years) and _time_only_query(query)
         semantic_scores=semantic_scores or {}
         base={}
         for s in summaries:
-            lexical=similarity(query, s['text'])
-            topical=similarity(query, s['theme_titles'] or '')
+            lexical=similarity(query, s['text'], content_only=True)
+            topical=similarity(query, s['theme_titles'] or '', content_only=True)
             temporal=0.0
             if years and any(str(y) in (s['start_time'] or '') or str(y) in (s['end_time'] or '') for y in years):
                 temporal=.7
             # Time, topic and optional semantic signals are parallel.
             sem=semantic_scores.get(s['id'],0.0)
             sem_contribution=max(0,sem-.38)*.88
-            score=min(1.0,.68*lexical+.22*topical+.5*temporal+sem_contribution)
+            content=.68*lexical+.22*topical+sem_contribution
+            # A year stays an independent entry for a temporal overview. For a
+            # specific question it supports content matches rather than filling
+            # the budget with every unrelated event from that year.
+            time_bonus=.5*temporal if time_only else .25*temporal if content>0 else 0
+            score=min(1.0,content+time_bonus)
+            if years and not temporal and (s['start_time'] or s['end_time']): score*=.5
             if score >= .09: base[s['id']] = score
         scores=base.copy(); reasons={sid:'直接召回（关键词/主题/时间）' for sid in base}
         edges={}
@@ -391,7 +428,7 @@ class MemoryDB:
                 if marker not in seen and graph_score>.07:
                     seen.add(marker);queue.append((neighbor,graph_score,nlevel))
         selected=[]
-        profile_lines=self._profile_strings(min(350,max_chars//3), context)
+        profile_lines=self._profile_strings(min(350,max_chars//3), context, query)
         zone=os.getenv('GOLDFISH_TIMEZONE','Asia/Shanghai')
         try: current_time=datetime.now(ZoneInfo(zone)).isoformat(timespec='minutes')
         except (KeyError,ValueError): current_time=datetime.now(timezone.utc).isoformat(timespec='minutes')

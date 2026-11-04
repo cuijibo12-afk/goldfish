@@ -1,0 +1,754 @@
+{
+  "schema_version": 1,
+  "review_type": "human_style_manual_profile_review",
+  "reviewer": "phase_b_corpus/review_fixture agent",
+  "source_files": {
+    "memory_sha256": "34f94effe3ccf8659fdba319448a3c6a800de8f26e0ae858f3d2cb3d2da671ba",
+    "model_calls_sha256": "ecc475a7e80aef072beaf0f0f03dcee5bddcc631f6a64767c99a20f55aaff5cf",
+    "fixture_sha256": "8f26f516f5f33cce1248181e416a7c12f2ee46fa4d736f74903ae1b4613d0b0c",
+    "fixture_path": "artifacts/real-memory/baseline/corpus.json"
+  },
+  "scope": "baseline memory.json已入库的全部39条画像；只读人工语义审查，未调用外部API。源对话全为人工构造虚构fixture。",
+  "rubric_interpretation": "user_profile可包含带时间/场景的持续职业、照护、资金与重复安排等背景属性，不限于人格；一次事件或第三方物品细节应留在概括。一次行为只有在写成一般倾向时判single_instance_generalization；明确写成该次可观察回复的ai_observed可接受。",
+  "summary": {
+    "profile_count": 39,
+    "classification_counts": {
+      "correct_kind": 32,
+      "wrong_kind": 5,
+      "single_instance_generalization": 2,
+      "insufficient_evidence": 0
+    },
+    "notes": [
+      "correct_kind表示分类及主要事实有依据，不等于无任何文字或时效问题；flags另外标明。",
+      "已入库39条没有将天生毒舌自称直接保存为AI人格。s05真实整理调用提出5条画像，但整个批次因summary仅引用assistant被校验拒绝，未入库，故不能将核心预算场景记为通过。",
+      "第三方身份、具体物品外观和单次预约被写入user_profile，以及单次表达泛化为用户特质，是本批主要画像边界问题。",
+      "历史提醒期望和无日期财务背景存在长期常驻注入时效风险，已单独标记，未把准确的旧事实判成事实错误。",
+      "本审查引用baseline/corpus.json的冻结运行快照；其64条原始消息的id、role、event_time、text与当前fixture逐项一致，source标签与查询评分附注差异不影响本画像原话审查。"
+    ]
+  },
+  "profiles": [
+    {
+      "profile_id": "cef88650-cee6-4bc2-aceb-8998f67bf419",
+      "kind": "interaction_expectation",
+      "text": "用户不希望AI把同一天谈到的不同事情强行分析成因果关系，尤其不要推断工作选择是因为爸爸或家庭修理经历。",
+      "classification": "correct_kind",
+      "flags": [],
+      "reason": "原话明确要求不要把当天两件事强行写成因果，并指明工作与父亲修理场景；属于有范围的交互期望。助理消息只是附加确认，用户证据已充分。",
+      "evidence_ids": [
+        "s01_m07",
+        "s01_m08"
+      ],
+      "evidence_roles": {
+        "s01_m07": "user",
+        "s01_m08": "assistant"
+      },
+      "recommended_kind_or_location": "interaction_expectation",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "1aacf1de-882e-4cc3-b5d3-8dc7eb397401",
+      "kind": "user_profile",
+      "text": "用户2024年保留市博物馆全职展签编辑工作，周二和周四到馆、单程通勤九十分钟，另外三个工作日在家校稿；2024年不接自由插画单。",
+      "classification": "correct_kind",
+      "flags": [
+        "time_bound_attribute",
+        "duplicates_summary"
+      ],
+      "reason": "职业及固定办公安排可作为带年份的用户背景属性；保留2024年限定，没有把混合办公误写成自由职业。此处不是永久人格。",
+      "evidence_ids": [
+        "s01_m01",
+        "s01_m03"
+      ],
+      "evidence_roles": {
+        "s01_m01": "user",
+        "s01_m03": "user"
+      },
+      "recommended_kind_or_location": "user_profile",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "3213cabf-6de0-42ce-86b0-b63c15e749f9",
+      "kind": "user_profile",
+      "text": "用户提到每月固定工资用于安排妈妈复诊，生活备用金可支撑十二周。",
+      "classification": "correct_kind",
+      "flags": [
+        "missing_explicit_time_in_text",
+        "time_sensitive_attribute"
+      ],
+      "reason": "用户明确提供固定工资与十二周备用金，属于当期财务/照护背景，分类可接受；文本未写2024年，长期注入时易与后来周转金变化混淆。",
+      "evidence_ids": [
+        "s01_m01",
+        "s01_m03"
+      ],
+      "evidence_roles": {
+        "s01_m01": "user",
+        "s01_m03": "user"
+      },
+      "recommended_kind_or_location": "user_profile",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "d535508e-c3cc-4916-842e-c27b43c94c72",
+      "kind": "user_profile",
+      "text": "用户记得爸爸给的蓝布袋有铜拉链、左下角橙色补丁和缠铜线的提手，并因小时候觉得补丁像橘子皮而特别记得它。",
+      "classification": "wrong_kind",
+      "flags": [
+        "event_detail_as_profile"
+      ],
+      "reason": "证据支持一次家庭物品回忆及袋子外观；并无长期习惯或用户特征。内容应保留在事件概括，放入常驻用户画像会把物品细节当人物属性。",
+      "evidence_ids": [
+        "s01_m05"
+      ],
+      "evidence_roles": {
+        "s01_m05": "user"
+      },
+      "recommended_kind_or_location": "event_summary",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "b5ba2734-9828-42b3-8e2b-a513cf262dba",
+      "kind": "user_profile",
+      "text": "用户喜欢爸爸一边拧螺丝一边讲怎么判断接触不良，而不是以收音机的价值为关注点。",
+      "classification": "correct_kind",
+      "flags": [
+        "episode_bound_preference"
+      ],
+      "reason": "用户直接说喜欢的是父亲边修边讲解、而非收音机值多少钱；文本保留父亲和这件事的范围，可作有限偏好记录，不能再推成对所有物品不重价值。",
+      "evidence_ids": [
+        "s01_m07"
+      ],
+      "evidence_roles": {
+        "s01_m07": "user"
+      },
+      "recommended_kind_or_location": "user_profile",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "67e74e24-df9d-4aa3-9fcc-929d823af459",
+      "kind": "interaction_expectation",
+      "text": "用户希望AI在讨论辞职、接单等重要判断时，先指出证据不足的地方再给建议；不同意时说明具体依据，不必为显得有个性而故意反着说；这是长期期望而非一次性安慰。",
+      "classification": "correct_kind",
+      "flags": [],
+      "reason": "用户明确说“以后”“长期讨论方式”，并限定辞职接单等重要判断；分类为交互期望准确，未变成AI天生反驳。",
+      "evidence_ids": [
+        "s02_m05"
+      ],
+      "evidence_roles": {
+        "s02_m05": "user"
+      },
+      "recommended_kind_or_location": "interaction_expectation",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "97efb57d-6419-4cee-8068-3147d3f39f12",
+      "kind": "feedback",
+      "text": "用户认为AI上一条回答把每句话拆成一排标签、读着机械；该意见仅针对那一个回答，不表示长期排斥清单或表格，材料清单等仍可列。",
+      "classification": "correct_kind",
+      "flags": [],
+      "reason": "准确保留“上一条”“那一个回答”与仍可列材料清单，属于一次互动反馈，未永久改写风格。",
+      "evidence_ids": [
+        "s02_m07"
+      ],
+      "evidence_roles": {
+        "s02_m07": "user"
+      },
+      "recommended_kind_or_location": "feedback",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "29a8ca08-dbe2-46af-9859-fa86f723eb2f",
+      "kind": "user_profile",
+      "text": "用户另攒的接单周转金仅够三周生活费，与十二周家庭备用金分属两个账户，用户坚持不混算。",
+      "classification": "correct_kind",
+      "flags": [
+        "missing_explicit_time_in_text",
+        "time_sensitive_attribute"
+      ],
+      "reason": "三周接单周转金、十二周家庭备用金及分账均有用户证据，可作当期用户财务背景；需注明这是2025年2月，而非2026年现状。",
+      "evidence_ids": [
+        "s02_m01"
+      ],
+      "evidence_roles": {
+        "s02_m01": "user"
+      },
+      "recommended_kind_or_location": "user_profile",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "4f7cab2f-d2af-4efe-86c8-b22e284ced33",
+      "kind": "user_profile",
+      "text": "用户于2025年2月6日回绝朋友邀其辞职做独立插画的提议，计划先做到2025年底再评估；朋友未提供项目周期。",
+      "classification": "wrong_kind",
+      "flags": [
+        "single_decision_as_profile"
+      ],
+      "reason": "这是2025年2月6日的一次邀约拒绝与阶段计划，证据充分但信息单元属于事件概括；没有给出可概括为长期用户习惯的依据。",
+      "evidence_ids": [
+        "s02_m01",
+        "s02_m03"
+      ],
+      "evidence_roles": {
+        "s02_m01": "user",
+        "s02_m03": "user"
+      },
+      "recommended_kind_or_location": "event_summary",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "b885833e-351c-4f98-9f33-7fd18bb6a20b",
+      "kind": "user_profile",
+      "text": "周宁是用户所在展陈组的同事，负责文字审核，不是项目出资人。",
+      "classification": "wrong_kind",
+      "flags": [
+        "third_party_identity_as_user_profile"
+      ],
+      "reason": "文本主体是同事周宁的职务和非出资人身份，非用户画像或交互期望，应在人物/校稿事件概括中保留，避免第三方资料常驻为用户属性。",
+      "evidence_ids": [
+        "s02_m03"
+      ],
+      "evidence_roles": {
+        "s02_m03": "user"
+      },
+      "recommended_kind_or_location": "event_summary",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "0e180eea-7d30-4fb9-88c3-d124ae81c2fe",
+      "kind": "interaction_expectation",
+      "text": "用户希望医院预约用日历提醒，但不要把所有生活事项都做成提醒，提醒范围限于当前阶段需要的预约。",
+      "classification": "correct_kind",
+      "flags": [
+        "historical_scope_needs_calendar_date"
+      ],
+      "reason": "用户明确希望医院预约用日历提醒并限制到2025阶段和医院预约。交互期望分类可接受，但仅写“当前阶段”不足以防止2026仍当作当前要求。",
+      "evidence_ids": [
+        "s03_m01",
+        "s03_m03"
+      ],
+      "evidence_roles": {
+        "s03_m01": "user",
+        "s03_m03": "user"
+      },
+      "recommended_kind_or_location": "interaction_expectation",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "41688d5a-40ed-461a-bfd2-f370339f4918",
+      "kind": "interaction_expectation",
+      "text": "用户希望膝盖提醒与头痛记录分开，不同事项不要混在一起回答或推断因果。",
+      "classification": "correct_kind",
+      "flags": [],
+      "reason": "原话明确要求未来问膝盖时不要混入咖啡头痛因果；记录保留了事项分开的范围，没有扩成所有回答固定风格。",
+      "evidence_ids": [
+        "s03_m07"
+      ],
+      "evidence_roles": {
+        "s03_m07": "user"
+      },
+      "recommended_kind_or_location": "interaction_expectation",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "b9f8159f-bf50-437b-84dd-66ba7fb5ff81",
+      "kind": "feedback",
+      "text": "用户明确反对把10月9日截止延后与10月11日头痛减轻写成“延期治好了头痛”，要求原因留空。",
+      "classification": "correct_kind",
+      "flags": [
+        "feedback_vs_recording_constraint_boundary"
+      ],
+      "reason": "用户本次明确纠正拟记录的“延期治好了头痛”解释，feedback在本次互动纠正的宽口径下可接受；也可记为有证据的记录边界，不宜据此推长期人格。",
+      "evidence_ids": [
+        "s03_m05"
+      ],
+      "evidence_roles": {
+        "s03_m05": "user"
+      },
+      "recommended_kind_or_location": "feedback",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "62177a82-0c2b-4206-9f97-40a3c586dc5a",
+      "kind": "feedback",
+      "text": "用户说明没记每天喝水和睡眠，不能把停咖啡或压力当作头痛原因，要求不直接下结论。",
+      "classification": "correct_kind",
+      "flags": [
+        "feedback_vs_recording_constraint_boundary"
+      ],
+      "reason": "这条保留用户本次对因果结论的明确保留，按本次互动中的纠正/反馈可接受；其本质仍是该次头痛证据不足，不应升级为普遍医学或用户人格结论。",
+      "evidence_ids": [
+        "s03_m03"
+      ],
+      "evidence_roles": {
+        "s03_m03": "user"
+      },
+      "recommended_kind_or_location": "feedback",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "80765714-3cef-4a7c-8a40-145e800dd657",
+      "kind": "ai_observed",
+      "text": "助理在回复中按日期保留并存变化，明确时间顺序有记录但因果没有结论，并建议向医生说明而非当作已证实的治疗效果。",
+      "classification": "correct_kind",
+      "flags": [
+        "single_reply_observation"
+      ],
+      "reason": "s03_m06实际按9日与11日列先后，明确因果无结论并建议向医生说明；文字描述本条实际回复，没有泛化成AI永远审慎。",
+      "evidence_ids": [
+        "s03_m06"
+      ],
+      "evidence_roles": {
+        "s03_m06": "assistant"
+      },
+      "recommended_kind_or_location": "ai_observed",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "e9f4dbfd-8219-4f15-ab77-99fa293bc859",
+      "kind": "ai_observed",
+      "text": "助理表示会把身体部位、就诊安排和工作调整分开，并指出一次冲突后改为远程校稿不能推成辞职。",
+      "classification": "correct_kind",
+      "flags": [
+        "prospective_commitment_not_completed_action"
+      ],
+      "reason": "s03_m08确实“表示会分开”，并实际指出远程调整不能推成辞职。作为表达行为的观察有证据；“会分开”部分只是承诺，不能据此验证将来已经执行。",
+      "evidence_ids": [
+        "s03_m08"
+      ],
+      "evidence_roles": {
+        "s03_m08": "assistant"
+      },
+      "recommended_kind_or_location": "ai_observed",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "0de3fb93-9ec3-4821-82ba-c91f1efc89cb",
+      "kind": "interaction_expectation",
+      "text": "用户希望记录时区分正式劳动关系、独立合同和志愿协助，不把“回馆里”志愿核对展签理解为反悔回去上班。",
+      "classification": "correct_kind",
+      "flags": [
+        "episode_specific_expectation"
+      ],
+      "reason": "用户明确不希望“回馆里”被理解为恢复全职，分类为带工作场景的记录/交互期望可接受；助手补充不能独立成为用户意愿证据，但已有用户原话。",
+      "evidence_ids": [
+        "s04_m05",
+        "s04_m06"
+      ],
+      "evidence_roles": {
+        "s04_m05": "user",
+        "s04_m06": "assistant"
+      },
+      "recommended_kind_or_location": "interaction_expectation",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "ea8f7314-317e-45e5-afe0-302080caf59c",
+      "kind": "interaction_expectation",
+      "text": "用户希望不要仅凭“去年拒绝今年接受”就给自己贴优柔寡断或突然大胆的性格标签，风险判断变化可以讨论。",
+      "classification": "correct_kind",
+      "flags": [],
+      "reason": "原话明确反对仅凭跨年两次选择贴人格标签，并允许讨论风险判断变化；记录范围准确，没有替用户制造稳定人格。",
+      "evidence_ids": [
+        "s04_m07",
+        "s04_m08"
+      ],
+      "evidence_roles": {
+        "s04_m07": "user",
+        "s04_m08": "assistant"
+      },
+      "recommended_kind_or_location": "interaction_expectation",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "7e8e7989-3648-4908-8103-408790c39242",
+      "kind": "interaction_expectation",
+      "text": "用户希望不要把自己写成已是不受期限限制的自由职业者，需保留项目的起止日和工作量上限。",
+      "classification": "correct_kind",
+      "flags": [
+        "episode_specific_expectation"
+      ],
+      "reason": "用户直接要求不写成无限期自由职业，保留项目期限和上限是本项目范围的记录期望。不得脱离这份合同扩成永远限期工作。",
+      "evidence_ids": [
+        "s04_m03",
+        "s04_m04"
+      ],
+      "evidence_roles": {
+        "s04_m03": "user",
+        "s04_m04": "assistant"
+      },
+      "recommended_kind_or_location": "interaction_expectation",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "4efc6ad3-b585-4765-9c9f-1f24d96c3601",
+      "kind": "user_profile",
+      "text": "用户自设独立项目工作量上限为每周三个工作日、同时最多两个项目，合同按周结算。",
+      "classification": "correct_kind",
+      "flags": [
+        "phase_bound_work_limit"
+      ],
+      "reason": "用户明确为独立项目设每周三工作日、最多两项目上限，属于持续执行的当期工作限制，可作有范围用户画像；按周结算是这份合同条件，不是永久习惯。",
+      "evidence_ids": [
+        "s04_m03"
+      ],
+      "evidence_roles": {
+        "s04_m03": "user"
+      },
+      "recommended_kind_or_location": "user_profile",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "e6f444c2-72df-4e13-8197-4fadf568816a",
+      "kind": "user_profile",
+      "text": "用户妈妈自2025年12月起复诊稳定，不再需要用户每周陪同。",
+      "classification": "correct_kind",
+      "flags": [
+        "time_sensitive_family_context"
+      ],
+      "reason": "妈妈自2025年12月复诊稳定、不再每周陪同有直接证据且保留起始时间，可作用户照护背景；不应当作妈妈疾病或永久无需照护的诊断。",
+      "evidence_ids": [
+        "s04_m01"
+      ],
+      "evidence_roles": {
+        "s04_m01": "user"
+      },
+      "recommended_kind_or_location": "user_profile",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "36a88153-70c8-423a-85a5-1734e3122965",
+      "kind": "user_profile",
+      "text": "用户到2026年2月10日接单周转金攒到十四周生活费，家庭备用金另放。",
+      "classification": "correct_kind",
+      "flags": [
+        "time_sensitive_attribute"
+      ],
+      "reason": "财务背景有明确2026年2月10日时间与十四周周转金口径，且保留家庭备用金另放，没有把账户混算。",
+      "evidence_ids": [
+        "s04_m01"
+      ],
+      "evidence_roles": {
+        "s04_m01": "user"
+      },
+      "recommended_kind_or_location": "user_profile",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "becd45f9-41a1-4299-8254-626b752c479b",
+      "kind": "user_profile",
+      "text": "用户已签博物馆音频脚本独立项目，2026年4月1日至9月30日，全职展签岗位计划3月底结束。",
+      "classification": "correct_kind",
+      "flags": [
+        "time_bound_occupation_attribute",
+        "duplicates_summary"
+      ],
+      "reason": "带起止日的当前职业/合同身份可作用户背景；准确保留未来开工与3月底结束全职，不能由这条声称2月已开工。",
+      "evidence_ids": [
+        "s04_m03"
+      ],
+      "evidence_roles": {
+        "s04_m03": "user"
+      },
+      "recommended_kind_or_location": "user_profile",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "c30e9db9-5b8b-47a3-8268-91390cc8686a",
+      "kind": "user_profile",
+      "text": "用户答应每月两次无薪回馆志愿核对儿童展签。",
+      "classification": "correct_kind",
+      "flags": [
+        "recurring_volunteer_arrangement"
+      ],
+      "reason": "每月两次、无薪、志愿核展签是已答应的重复安排，属于有范围的用户背景；无薪性质和频率均有直接证据。",
+      "evidence_ids": [
+        "s04_m05"
+      ],
+      "evidence_roles": {
+        "s04_m05": "user"
+      },
+      "recommended_kind_or_location": "user_profile",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "7f3f6008-e062-46d0-a625-0938464002b3",
+      "kind": "user_profile",
+      "text": "用户自2023年起在带人步行前会提前打印路线，临时改道写在纸边，以减少路上反复取手机；在家查路线仍用手机。",
+      "classification": "correct_kind",
+      "flags": [],
+      "reason": "用户明说从2023年以来带路前打印路线，原因是减少路上取手机，并限定家中仍用手机；是稳定且有场景边界的用户习惯。",
+      "evidence_ids": [
+        "s06_m05"
+      ],
+      "evidence_roles": {
+        "s06_m05": "user"
+      },
+      "recommended_kind_or_location": "user_profile",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "b27c211e-8b9f-4fa4-9ff0-230c59f09fee",
+      "kind": "interaction_expectation",
+      "text": "用户希望不要将周宁对大字版图的个人反馈推广为所有视障者适用的普遍结论。",
+      "classification": "correct_kind",
+      "flags": [
+        "case_specific_generalization_boundary"
+      ],
+      "reason": "原话直接要求不要从一位周宁对一份材料的反馈推广至所有视障者；作为该材料场景的交互/记录期望准确，不是用户或AI人格。",
+      "evidence_ids": [
+        "s06_m03"
+      ],
+      "evidence_roles": {
+        "s06_m03": "user"
+      },
+      "recommended_kind_or_location": "interaction_expectation",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "71b790c7-7a3d-49d5-9297-115dcfbdafe4",
+      "kind": "interaction_expectation",
+      "text": "用户希望不要因自己使用纸本路线就推断其排斥电子产品或有视觉障碍诊断。",
+      "classification": "correct_kind",
+      "flags": [],
+      "reason": "用户明确否定排斥电子产品和视觉障碍推断，记录为对自身信息表述的期望可接受；没有把第三方健康信息误移给用户。",
+      "evidence_ids": [
+        "s06_m05"
+      ],
+      "evidence_roles": {
+        "s06_m05": "user"
+      },
+      "recommended_kind_or_location": "interaction_expectation",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "0aac4f73-ad51-4d6c-9e89-8fc1d0e2a9a4",
+      "kind": "interaction_expectation",
+      "text": "用户希望将社区免费音频尝试与馆里付费音频脚本分开记录，不写入付费合同交付清单。",
+      "classification": "correct_kind",
+      "flags": [
+        "contract_specific_expectation"
+      ],
+      "reason": "用户直接要求社区免费试作不列付费合同交付，身份、费用与目标分开均有依据；属于有范围的交互期望。",
+      "evidence_ids": [
+        "s06_m07"
+      ],
+      "evidence_roles": {
+        "s06_m07": "user"
+      },
+      "recommended_kind_or_location": "interaction_expectation",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "09946b5b-2960-427c-b345-b2289dec6071",
+      "kind": "ai_observed",
+      "text": "助理在回应中主动区分两位同名周宁，并复述用户设定的推广边界与合同边界。",
+      "classification": "correct_kind",
+      "flags": [
+        "proactive_wording_overstates_initiative"
+      ],
+      "reason": "四条实际助手回复确实区分同名人物、复述个人反馈/电子产品/合同边界；分类有行为证据。但这些边界由用户先明确提出，“主动”略夸大来源，应写“回应时区分”。",
+      "evidence_ids": [
+        "s06_m02",
+        "s06_m04",
+        "s06_m06",
+        "s06_m08"
+      ],
+      "evidence_roles": {
+        "s06_m02": "assistant",
+        "s06_m04": "assistant",
+        "s06_m06": "assistant",
+        "s06_m08": "assistant"
+      },
+      "recommended_kind_or_location": "ai_observed",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "03c368f1-8ed3-4a76-ba66-67b3ae67be98",
+      "kind": "user_profile",
+      "text": "用户重视区分已验证事实与推测：明确说明馆内三秒停顿迁移尚未与馆方试过，不能写成参观体验已改善。",
+      "classification": "single_instance_generalization",
+      "flags": [
+        "trait_from_one_cited_event"
+      ],
+      "reason": "单条证据只是用户指出馆内迁移未实施，写成“用户重视区分已验证事实与推测”已向一般特质移动。全语料虽多次有类似限定，此条引用没有呈现跨次证据，也没有限制为本次表达；更稳妥写本次记录边界。",
+      "evidence_ids": [
+        "s07_m05"
+      ],
+      "evidence_roles": {
+        "s07_m05": "user"
+      },
+      "recommended_kind_or_location": "interaction_expectation_or_event_summary",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "0de028dc-32d4-464d-ae48-adb98724b667",
+      "kind": "user_profile",
+      "text": "用户会主动否认未经证实的因果推断，如否认爸爸修收音机导致自己后来做音频工作。",
+      "classification": "single_instance_generalization",
+      "flags": [
+        "habit_from_one_cited_event"
+      ],
+      "reason": "原话只明确否定这一条父亲修收音机→职业的因果，画像用“用户会主动否认”表成一般行为倾向；同语料有相似要求但未引用。应保留本次否定或补足跨次观察证据并限定范围。",
+      "evidence_ids": [
+        "s07_m07"
+      ],
+      "evidence_roles": {
+        "s07_m07": "user"
+      },
+      "recommended_kind_or_location": "interaction_expectation_or_event_summary",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "8719c61c-8ade-4158-a40b-216a9266c589",
+      "kind": "user_profile",
+      "text": "用户强调物品的私人归属，说明蓝布袋不属于博物馆，也不是项目统一工具包。",
+      "classification": "wrong_kind",
+      "flags": [
+        "object_ownership_as_profile"
+      ],
+      "reason": "原话支持蓝袋属于私人而非博物馆的具体归属；“用户强调”不构成长久人物属性，应归入蓝布袋事件概括，不能常驻成用户重视产权的特质。",
+      "evidence_ids": [
+        "s07_m07"
+      ],
+      "evidence_roles": {
+        "s07_m07": "user"
+      },
+      "recommended_kind_or_location": "event_summary",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "0eec1e34-2b26-4377-b9da-3a050ba7be1a",
+      "kind": "interaction_expectation",
+      "text": "用户希望记录时保留她自述的感受联系，但不将其写成已证实的职业因果。",
+      "classification": "correct_kind",
+      "flags": [
+        "unsupported_gender_pronoun"
+      ],
+      "reason": "保留自述感受联系、拒绝职业因果符合用户明确要求，分类为交互期望可接受；文本“她”没有任何用户性别证据，应使用中性“用户”。",
+      "evidence_ids": [
+        "s07_m07",
+        "s07_m08"
+      ],
+      "evidence_roles": {
+        "s07_m07": "user",
+        "s07_m08": "assistant"
+      },
+      "recommended_kind_or_location": "interaction_expectation",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "9c8f7fab-f410-4884-9254-e6a02aedcf7a",
+      "kind": "interaction_expectation",
+      "text": "用户希望涉及就医时先整理要问专业人员的问题，不把症状描述写成诊断；只有用户明确说要排时间时才一起安排；日常列材料、核预算仍可直接给清单，不要求所有回答先反问。",
+      "classification": "correct_kind",
+      "flags": [],
+      "reason": "用户明确说变化以后也适用，且限定就医、按需排期并允许材料预算清单；长期交互期望分类准确，未扩成所有回复都反问。",
+      "evidence_ids": [
+        "s08_m03",
+        "s08_m04"
+      ],
+      "evidence_roles": {
+        "s08_m03": "user",
+        "s08_m04": "assistant"
+      },
+      "recommended_kind_or_location": "interaction_expectation",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "bed7b71a-0cdc-43c1-8676-7c11ca0c0af2",
+      "kind": "interaction_expectation",
+      "text": "用户希望AI对没有记录的信息（如家里是否有烤箱）直接说明没有记录，不要为显得记得而补出细节。",
+      "classification": "correct_kind",
+      "flags": [],
+      "reason": "用户直接要求不记得设备信息就说明没有记录，不补细节；作为未知信息处理期望准确，烤箱只是例子，未捏造型号。",
+      "evidence_ids": [
+        "s08_m07",
+        "s08_m08"
+      ],
+      "evidence_roles": {
+        "s08_m07": "user",
+        "s08_m08": "assistant"
+      },
+      "recommended_kind_or_location": "interaction_expectation",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "7d9ed1f8-6722-4628-9325-2e5d7141d8e2",
+      "kind": "feedback",
+      "text": "用户指出10月18日修理日不应与今年八月口述史活动混算，普通煮番茄面也不需要牵扯爸爸、换工作等往事。",
+      "classification": "correct_kind",
+      "flags": [
+        "feedback_vs_recording_constraint_boundary"
+      ],
+      "reason": "用户本次纠正修理日日期并说明普通番茄面无须串联往事，反馈保留具体范围；没有写成永久拒绝聊家庭或工作。",
+      "evidence_ids": [
+        "s08_m07",
+        "s08_m08"
+      ],
+      "evidence_roles": {
+        "s08_m07": "user",
+        "s08_m08": "assistant"
+      },
+      "recommended_kind_or_location": "feedback",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "abdd5f6a-3fd4-4ec1-9ee5-19e7fa0b972a",
+      "kind": "user_profile",
+      "text": "用户当前音频脚本合同为原六个月合同后续签两个月，至2026年11月30日；仍做独立项目，每周最多三个工作日、同时最多两个项目，暂无回全职岗计划。",
+      "classification": "correct_kind",
+      "flags": [
+        "time_bound_occupation_attribute"
+      ],
+      "reason": "直接用户证据包含续两月到2026年11月30日、仍独立项目、工作量上限和暂无回全职计划，属于准确的当前职业背景；“暂时”范围保留。",
+      "evidence_ids": [
+        "s08_m05",
+        "s08_m06"
+      ],
+      "evidence_roles": {
+        "s08_m05": "user",
+        "s08_m06": "assistant"
+      },
+      "recommended_kind_or_location": "user_profile",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "17bea360-b062-40d0-ace8-b6a3c306a2f3",
+      "kind": "user_profile",
+      "text": "用户每月两次回馆核儿童展签仍为志愿，不计入续约合同的有偿工时。",
+      "classification": "correct_kind",
+      "flags": [
+        "recurring_volunteer_arrangement"
+      ],
+      "reason": "每月两次志愿回馆与不计入续约有偿工时均有直接证据，是重复安排的用户背景，没有误为恢复全职。",
+      "evidence_ids": [
+        "s08_m05",
+        "s08_m06"
+      ],
+      "evidence_roles": {
+        "s08_m05": "user",
+        "s08_m06": "assistant"
+      },
+      "recommended_kind_or_location": "user_profile",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    },
+    {
+      "profile_id": "8006f6b0-354f-472b-96b9-b6622f2ce676",
+      "kind": "user_profile",
+      "text": "用户2026年11月4日准备下周康复复查，关注负重增加、下楼疼痛记录和提前复诊指征。",
+      "classification": "wrong_kind",
+      "flags": [
+        "upcoming_single_appointment_as_profile"
+      ],
+      "reason": "一次下周复查的准备事项是事件/任务信息，不是长期个人习惯或特征；应进康复概括，长期就医讨论方式已有另一条interaction_expectation保存。",
+      "evidence_ids": [
+        "s08_m01"
+      ],
+      "evidence_roles": {
+        "s08_m01": "user"
+      },
+      "recommended_kind_or_location": "event_summary",
+      "review_scope": "逐条对照所引用原话；未列为gold的额外画像不因缺少gold自动判错。"
+    }
+  ],
+  "reviewer_disclosure": "Codex source reading; no independent human adjudicator. Does not override frozen gold or automatically certify semantic truth."
+}

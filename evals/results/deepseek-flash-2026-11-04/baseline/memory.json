@@ -1,0 +1,2011 @@
+{
+  "summaries": [
+    {
+      "id": "1495ff6c-e7a3-4fb8-acd2-e243588e1f3f",
+      "text": "用户填写明年工作意向表，选择继续留在市博物馆做全职展签编辑；2024年不接自由插画单，原因是每月固定工资能安排妈妈复诊，手头存款只够十二周生活；用户表示等妈妈恢复、备用金更充足后可能重新考虑。",
+      "start_time": "2024-12-18T09:00:00+08:00",
+      "end_time": null,
+      "confidence": 0.7,
+      "status": "active",
+      "created_at": "2026-11-04T07:19:03.875759+00:00",
+      "updated_at": "2026-11-04T07:19:03.875770+00:00",
+      "version": 1,
+      "evidence_ids": [
+        "s01_m01"
+      ]
+    },
+    {
+      "id": "b54abed3-7b62-4797-a19b-5d230a7b38fd",
+      "text": "用户澄清十二周是指生活备用金可支撑的时长，不是失业十二周；劳动合同仍为全职，周二和周四到馆、单程通勤九十分钟，另外三个工作日在家校稿；用户不再把这种安排称为自由职业。",
+      "start_time": "2024-12-18T09:06:00+08:00",
+      "end_time": null,
+      "confidence": 0.7,
+      "status": "active",
+      "created_at": "2026-11-04T07:19:03.875948+00:00",
+      "updated_at": "2026-11-04T07:19:03.875951+00:00",
+      "version": 1,
+      "evidence_ids": [
+        "s01_m03"
+      ]
+    },
+    {
+      "id": "3812ac9d-1159-4706-a2ff-025f5b158d38",
+      "text": "2024年12月15日用户去爸爸家，爸爸从蓝布袋里拿出修好的旧收音机让用户带走；袋子有铜拉链、左下角橙色补丁、提手缠铜线，用户因小时候觉得补丁像橘子皮而特别记得它。",
+      "start_time": "2024-12-15T00:00:00+08:00",
+      "end_time": null,
+      "confidence": 0.7,
+      "status": "active",
+      "created_at": "2026-11-04T07:19:03.876049+00:00",
+      "updated_at": "2026-11-04T07:19:03.876051+00:00",
+      "version": 1,
+      "evidence_ids": [
+        "s01_m05"
+      ]
+    },
+    {
+      "id": "c6fc86b9-3e84-4ba2-98dc-d32f588d471e",
+      "text": "用户说明袋子也给了自己，爸爸说修东西的零件放里面方便；用户喜欢的是爸爸一边拧螺丝一边讲怎么判断接触不良，而不是收音机的价值；用户明确表示工作选择和这次修理只是今天都聊到，不要分析前者由后者导致。",
+      "start_time": "2024-12-18T09:18:00+08:00",
+      "end_time": null,
+      "confidence": 0.7,
+      "status": "active",
+      "created_at": "2026-11-04T07:19:03.876113+00:00",
+      "updated_at": "2026-11-04T07:19:03.876115+00:00",
+      "version": 1,
+      "evidence_ids": [
+        "s01_m07"
+      ]
+    },
+    {
+      "id": "59c27b4e-0e1e-4839-b4ae-61adde1847eb",
+      "text": "2025年2月6日，用户回绝朋友邀其辞职做独立插画项目的提议，决定先做到2025年底再评估；朋友未给出项目周期。用户说明接单周转金仅够三周生活费，与去年提到的十二周家庭备用金是两个独立账户，不能混算；在没有稳定客户时，不愿动用照护妈妈的备用金冒险。",
+      "start_time": "2025-02-07T09:00:00+08:00",
+      "end_time": null,
+      "confidence": 0.7,
+      "status": "active",
+      "created_at": "2026-11-04T07:19:11.111774+00:00",
+      "updated_at": "2026-11-04T07:19:11.111786+00:00",
+      "version": 1,
+      "evidence_ids": [
+        "s02_m01",
+        "s02_m03"
+      ]
+    },
+    {
+      "id": "cfff4ab8-d2e0-47af-aed4-5b1a7c2da32f",
+      "text": "2025年2月6日，展陈组同事周宁用绿铅笔帮用户校对儿童展览说明，圈出“翼展”与“身长”混用，用户由此发现图例也写错；周宁负责文字审核，不是项目出资人。",
+      "start_time": "2025-02-07T09:06:00+08:00",
+      "end_time": null,
+      "confidence": 0.7,
+      "status": "active",
+      "created_at": "2026-11-04T07:19:11.111879+00:00",
+      "updated_at": "2026-11-04T07:19:11.111880+00:00",
+      "version": 1,
+      "evidence_ids": [
+        "s02_m03"
+      ]
+    },
+    {
+      "id": "be1b1c8f-800e-41f0-ad4f-e5194863bc45",
+      "text": "用户提出长期交互期望：不要因其本人而总附和；讨论辞职、接单等判断时先指出证据不足处再给建议，不同意时讲具体依据，不必为显得有个性而故意反着说；强调这是长期讨论方式而非一次性安慰。",
+      "start_time": "2025-02-07T09:12:00+08:00",
+      "end_time": null,
+      "confidence": 0.7,
+      "status": "active",
+      "created_at": "2026-11-04T07:19:11.111931+00:00",
+      "updated_at": "2026-11-04T07:19:11.111932+00:00",
+      "version": 1,
+      "evidence_ids": [
+        "s02_m05"
+      ]
+    },
+    {
+      "id": "ec0a39d2-d6a2-4747-91f0-c6c229a42580",
+      "text": "用户反馈上一条回答把每句话拆成一排标签、读着机械；说明该抱怨仅针对刚才那一个回答，不要求以后永远不列清单，材料清单等仍可列，今天这段讨论用两段话讲清即可。",
+      "start_time": "2025-02-07T09:18:00+08:00",
+      "end_time": null,
+      "confidence": 0.7,
+      "status": "active",
+      "created_at": "2026-11-04T07:19:11.112016+00:00",
+      "updated_at": "2026-11-04T07:19:11.112018+00:00",
+      "version": 1,
+      "evidence_ids": [
+        "s02_m07"
+      ]
+    },
+    {
+      "id": "18151c4c-77e1-4afd-9f6a-51bf9fed3dca",
+      "text": "用户补充膝盖情况：9月28日下楼踩空后一直不舒服，医生让先做康复，尚未决定手术；预约每周三早上七点，从市二院东门进。",
+      "start_time": "2025-09-28T00:00:00+08:00",
+      "end_time": null,
+      "confidence": 0.7,
+      "status": "active",
+      "created_at": "2026-11-04T07:19:22.133716+00:00",
+      "updated_at": "2026-11-04T07:19:22.133728+00:00",
+      "version": 1,
+      "evidence_ids": [
+        "s03_m01"
+      ]
+    },
+    {
+      "id": "907ea28c-6e54-470a-b5fc-fdb9e6c0b47f",
+      "text": "用户希望把医院预约放进日历提醒，并明确别的生活事项先不要一股脑也做成提醒。",
+      "start_time": "2025-10-12T09:00:00+08:00",
+      "end_time": null,
+      "confidence": 0.7,
+      "status": "active",
+      "created_at": "2026-11-04T07:19:22.133828+00:00",
+      "updated_at": "2026-11-04T07:19:22.133830+00:00",
+      "version": 1,
+      "evidence_ids": [
+        "s03_m01"
+      ]
+    },
+    {
+      "id": "44bb209f-2981-4191-981d-48770be46ead",
+      "text": "用户确认预约提醒是2025年这个阶段需要的办法，先留着。",
+      "start_time": "2025-10-12T09:06:00+08:00",
+      "end_time": null,
+      "confidence": 0.7,
+      "status": "active",
+      "created_at": "2026-11-04T07:19:22.133876+00:00",
+      "updated_at": "2026-11-04T07:19:22.133878+00:00",
+      "version": 1,
+      "evidence_ids": [
+        "s03_m03"
+      ]
+    },
+    {
+      "id": "71875245-125f-4411-be2f-77f0187bff92",
+      "text": "用户10月1日起没喝咖啡，同一周头痛得厉害，儿童展览文案又在10月2日突然提前截止；用户说明没记每天喝水和睡眠，不能断定停咖啡或压力是头痛原因。",
+      "start_time": "2025-10-01T00:00:00+08:00",
+      "end_time": "2025-10-02T00:00:00+08:00",
+      "confidence": 0.7,
+      "status": "active",
+      "created_at": "2026-11-04T07:19:22.133935+00:00",
+      "updated_at": "2026-11-04T07:19:22.133937+00:00",
+      "version": 1,
+      "evidence_ids": [
+        "s03_m03"
+      ]
+    },
+    {
+      "id": "715fe5f1-9ca9-46e7-ace7-f96e1845ce25",
+      "text": "10月9日负责人把文案截止日期往后挪，10月11日晚用户感觉头痛轻了一些，至今仍未恢复喝咖啡；用户要求不写成延期治好了头痛，原因留空。",
+      "start_time": "2025-10-09T00:00:00+08:00",
+      "end_time": "2025-10-11T00:00:00+08:00",
+      "confidence": 0.7,
+      "status": "active",
+      "created_at": "2026-11-04T07:19:22.134025+00:00",
+      "updated_at": "2026-11-04T07:19:22.134027+00:00",
+      "version": 1,
+      "evidence_ids": [
+        "s03_m05"
+      ]
+    },
+    {
+      "id": "4eaf4663-8a89-41ed-92e1-28a0a540d2b6",
+      "text": "用户要求膝盖提醒和头痛记录分开，避免以后问膝盖时被回答成戒咖啡后膝盖疼。",
+      "start_time": "2025-10-12T09:18:00+08:00",
+      "end_time": null,
+      "confidence": 0.7,
+      "status": "active",
+      "created_at": "2026-11-04T07:19:22.134083+00:00",
+      "updated_at": "2026-11-04T07:19:22.134086+00:00",
+      "version": 1,
+      "evidence_ids": [
+        "s03_m07"
+      ]
+    },
+    {
+      "id": "3f96d5f8-deca-47ec-896e-fa36dde2ceb0",
+      "text": "周三早上七点的康复预约与用户到馆那天冲突过一次，用户跟组里调了远程校稿，没有改成长期辞职。",
+      "start_time": null,
+      "end_time": null,
+      "confidence": 0.7,
+      "status": "active",
+      "created_at": "2026-11-04T07:19:22.134445+00:00",
+      "updated_at": "2026-11-04T07:19:22.134450+00:00",
+      "version": 1,
+      "evidence_ids": [
+        "s03_m07"
+      ]
+    },
+    {
+      "id": "2d7eda2d-3695-433b-8dfe-93758844b433",
+      "text": "用户表示最近事情多，混在一起特别容易说错。",
+      "start_time": "2025-10-12T09:18:00+08:00",
+      "end_time": null,
+      "confidence": 0.7,
+      "status": "active",
+      "created_at": "2026-11-04T07:19:22.134517+00:00",
+      "updated_at": "2026-11-04T07:19:22.134519+00:00",
+      "version": 1,
+      "evidence_ids": [
+        "s03_m07"
+      ]
+    },
+    {
+      "id": "b7a10c99-2669-4d98-9184-48eca53a893b",
+      "text": "2026年2月20日，用户说明工作条件已部分变化：妈妈自2025年12月起复诊稳定，不再需要每周陪同；到2026年2月10日，接单周转金已攒到十四周生活费，家庭备用金仍另放；用户强调并非忘记去年说不辞职，而是当时未满足的条件现在有一部分满足了。",
+      "start_time": "2026-02-20T09:00:00+08:00",
+      "end_time": null,
+      "confidence": 0.7,
+      "status": "active",
+      "created_at": "2026-11-04T07:19:30.874680+00:00",
+      "updated_at": "2026-11-04T07:19:30.874691+00:00",
+      "version": 1,
+      "evidence_ids": [
+        "s04_m01"
+      ]
+    },
+    {
+      "id": "0aab3f32-91f3-4f20-ad59-984bff578ceb",
+      "text": "2026年2月20日，用户说明已签一个博物馆音频脚本独立项目，2026年4月1日开始、做到9月30日共六个月，合同按周结算；用户自设上限为每周三个工作日、同时最多两个项目；全职展签岗位将在3月底结束；用户要求不要写成自己已成为不受期限限制的自由职业者。",
+      "start_time": "2026-02-20T09:06:00+08:00",
+      "end_time": null,
+      "confidence": 0.7,
+      "status": "active",
+      "created_at": "2026-11-04T07:19:30.875009+00:00",
+      "updated_at": "2026-11-04T07:19:30.875014+00:00",
+      "version": 1,
+      "evidence_ids": [
+        "s04_m03"
+      ]
+    },
+    {
+      "id": "6954d37a-1102-4f64-965c-ae58a1054042",
+      "text": "2026年2月20日，用户说明答应馆里每月回去两次志愿核对儿童展签，无薪，不是恢复全职劳动关系；用户愿意保留与老同事一起核文字的机会，但不希望以后看到“回馆里”就被认为反悔回去上班。",
+      "start_time": "2026-02-20T09:12:00+08:00",
+      "end_time": null,
+      "confidence": 0.7,
+      "status": "active",
+      "created_at": "2026-11-04T07:19:30.875093+00:00",
+      "updated_at": "2026-11-04T07:19:30.875095+00:00",
+      "version": 1,
+      "evidence_ids": [
+        "s04_m05"
+      ]
+    },
+    {
+      "id": "abeaea13-c34a-4f00-a5dd-e31e780c5e0a",
+      "text": "2026年2月20日，用户说明去年拒绝的是辞职做朋友那个没有周期保障的插画项目，这次接的是明确六个月的音频脚本，不是同一个单子；用户表示风险判断是否变化可以讨论，但不能仅凭“去年拒绝今年接受”就给自己贴优柔寡断或突然大胆的性格标签。",
+      "start_time": "2026-02-20T09:18:00+08:00",
+      "end_time": null,
+      "confidence": 0.7,
+      "status": "active",
+      "created_at": "2026-11-04T07:19:30.875139+00:00",
+      "updated_at": "2026-11-04T07:19:30.875141+00:00",
+      "version": 1,
+      "evidence_ids": [
+        "s04_m07"
+      ]
+    },
+    {
+      "id": "0719246c-9f9b-4ac0-830c-7ad9c63d556c",
+      "text": "2026年8月14日，用户在周日社区口述史活动认识周宁：六十多岁，以前开自行车修理铺，现在视力不太好，想录一段街道声音给孙女听；用户明确此人不是2025年馆里拿绿铅笔帮校稿的同事，只是同名，且两人工作经历无合作。",
+      "start_time": "2026-08-14T09:00:00+08:00",
+      "end_time": null,
+      "confidence": 0.7,
+      "status": "active",
+      "created_at": "2026-11-04T07:19:51.226764+00:00",
+      "updated_at": "2026-11-04T07:19:51.226775+00:00",
+      "version": 1,
+      "evidence_ids": [
+        "s06_m01"
+      ]
+    },
+    {
+      "id": "6ebe58aa-9f0f-43eb-a736-207c96eb4f14",
+      "text": "试走活动路线时，用户做了大字版路口图：字号十八、黑字白底、蓝色螺旋装订，含菜市场、旧车站、河边木桥三个停靠点；周宁说能看清这一份，手机地图缩放反而让他迷糊；用户强调不能推广为所有视障者都适合该版式。",
+      "start_time": "2026-08-14T09:06:00+08:00",
+      "end_time": null,
+      "confidence": 0.7,
+      "status": "active",
+      "created_at": "2026-11-04T07:19:51.226989+00:00",
+      "updated_at": "2026-11-04T07:19:51.226994+00:00",
+      "version": 1,
+      "evidence_ids": [
+        "s06_m03"
+      ]
+    },
+    {
+      "id": "0343abff-ec59-41e0-80b3-26c0dd372ca3",
+      "text": "用户自2023年起，只要边走路边带人，都会提前打印路线，临时改道写在纸边，以免路上反复掏手机；在家查路线仍用手机；用户说明这不是排斥电子产品，也不是被诊断有视觉障碍。",
+      "start_time": "2026-08-14T09:12:00+08:00",
+      "end_time": null,
+      "confidence": 0.7,
+      "status": "active",
+      "created_at": "2026-11-04T07:19:51.227075+00:00",
+      "updated_at": "2026-11-04T07:19:51.227076+00:00",
+      "version": 1,
+      "evidence_ids": [
+        "s06_m05"
+      ]
+    },
+    {
+      "id": "0c944277-ce75-49de-ba6b-2e4ccf5d2f36",
+      "text": "周宁拿小录音机问路口报站能否说慢一点；用户没有答应做整套，准备十月社区修理日再试一段；用户说明馆里付费音频脚本与此免费尝试可借用技术，但客户、报酬、目标不同，不应写进付费合同交付清单。",
+      "start_time": "2026-08-14T09:18:00+08:00",
+      "end_time": null,
+      "confidence": 0.7,
+      "status": "active",
+      "created_at": "2026-11-04T07:19:51.227120+00:00",
+      "updated_at": "2026-11-04T07:19:51.227122+00:00",
+      "version": 1,
+      "evidence_ids": [
+        "s06_m07"
+      ]
+    },
+    {
+      "id": "dcf693f4-fa23-47c1-a98a-4031a2e921b3",
+      "text": "2026年10月18日社区修理日，用户带去2024年12月15日爸爸装旧收音机送她的同一个蓝布袋，铜拉链、左下角橙色补丁仍在，提手铜线有点松，袋内放螺丝刀和备用电池；用户强调是同一件用了近两年的物品，不是相似的新袋。",
+      "start_time": "2026-10-18T09:00:00+08:00",
+      "end_time": null,
+      "confidence": 0.7,
+      "status": "active",
+      "created_at": "2026-11-04T07:20:00.206252+00:00",
+      "updated_at": "2026-11-04T07:20:00.206264+00:00",
+      "version": 1,
+      "evidence_ids": [
+        "s07_m01"
+      ]
+    },
+    {
+      "id": "6eeba85f-7d43-42c2-b986-7825ecd25899",
+      "text": "社区修理日上，退休修车的周宁带来小录音机，按播放无声，原因是电池方向放反，换正后恢复播放；他听了用户试录的三个路口报站，建议在菜市场、旧车站、河边木桥等地名后留三秒停顿，以便在纸本图上找到对应点。",
+      "start_time": "2026-10-18T09:06:00+08:00",
+      "end_time": null,
+      "confidence": 0.7,
+      "status": "active",
+      "created_at": "2026-11-04T07:20:00.206484+00:00",
+      "updated_at": "2026-11-04T07:20:00.206488+00:00",
+      "version": 1,
+      "evidence_ids": [
+        "s07_m03"
+      ]
+    },
+    {
+      "id": "60361b9a-b13d-46cc-973e-d7a75b0d7166",
+      "text": "用户当场把报站改为地点名后停三秒，周宁再听一遍说这次能跟上；用户由此联想到馆里四月开始的音频也有边听边找展柜的段落，但明确只是记录相似情境，尚未与馆方试过，不能写成馆里采用三秒后参观体验已改善。",
+      "start_time": "2026-10-18T09:12:00+08:00",
+      "end_time": null,
+      "confidence": 0.7,
+      "status": "active",
+      "created_at": "2026-11-04T07:20:00.206622+00:00",
+      "updated_at": "2026-11-04T07:20:00.206624+00:00",
+      "version": 1,
+      "evidence_ids": [
+        "s07_m05"
+      ]
+    },
+    {
+      "id": "e4f5c4a1-594d-468b-b3a7-9d13a1dbf675",
+      "text": "用户说修理结束的感觉有点像爸爸当年慢慢解释接触不良的那个下午，让她觉得踏实；她明确这是自己说的感受联系，不等于爸爸修收音机导致她后来做音频工作，并说明蓝布袋是私人用品，不属于博物馆，也不是项目统一工具包。",
+      "start_time": "2026-10-18T09:18:00+08:00",
+      "end_time": null,
+      "confidence": 0.7,
+      "status": "active",
+      "created_at": "2026-11-04T07:20:00.206670+00:00",
+      "updated_at": "2026-11-04T07:20:00.206671+00:00",
+      "version": 1,
+      "evidence_ids": [
+        "s07_m07"
+      ]
+    },
+    {
+      "id": "4f56f60f-033f-41ea-aede-c411ce991c41",
+      "text": "2026年11月4日，用户准备下周康复复查，要求AI帮整理三个问康复师的问题：负重怎么加、下楼仍疼要记录什么、哪些情况该提前复诊，并明确不是要远程诊断。",
+      "start_time": "2026-11-04T09:00:00+08:00",
+      "end_time": null,
+      "confidence": 0.7,
+      "status": "active",
+      "created_at": "2026-11-04T07:20:11.277793+00:00",
+      "updated_at": "2026-11-04T07:20:11.277806+00:00",
+      "version": 1,
+      "evidence_ids": [
+        "s08_m01"
+      ]
+    },
+    {
+      "id": "40482c80-459e-46a4-8675-7fde0fb0c578",
+      "text": "用户说明今年这次复查不需要AI另排医院预约提醒，医院短信已足够；去年希望日历提醒是当时的需求。",
+      "start_time": "2026-11-04T09:00:00+08:00",
+      "end_time": null,
+      "confidence": 0.7,
+      "status": "active",
+      "created_at": "2026-11-04T07:20:11.277988+00:00",
+      "updated_at": "2026-11-04T07:20:11.277992+00:00",
+      "version": 1,
+      "evidence_ids": [
+        "s08_m01",
+        "s08_m02"
+      ]
+    },
+    {
+      "id": "a57e81b3-3fec-4b75-b28e-e455f07e0703",
+      "text": "用户提出有范围的长期交互期望：涉及就医时先整理要问专业人员的问题，不把症状描述写成诊断；明确说要排时间时再一起排；日常列材料、核预算仍可直接给清单，不要求所有回答先反问。",
+      "start_time": "2026-11-04T09:06:00+08:00",
+      "end_time": null,
+      "confidence": 0.7,
+      "status": "active",
+      "created_at": "2026-11-04T07:20:11.278092+00:00",
+      "updated_at": "2026-11-04T07:20:11.278095+00:00",
+      "version": 1,
+      "evidence_ids": [
+        "s08_m03",
+        "s08_m04"
+      ]
+    },
+    {
+      "id": "fae6e2f5-dad0-4ed0-8990-10dd53e102e4",
+      "text": "用户说明音频脚本合同在原4月1日至9月30日六个月结束后续签两个月，至2026年11月30日；仍做独立项目，每周最多三个工作日、同时最多两个项目，暂无回全职岗计划。",
+      "start_time": "2026-11-04T09:12:00+08:00",
+      "end_time": null,
+      "confidence": 0.7,
+      "status": "active",
+      "created_at": "2026-11-04T07:20:11.278154+00:00",
+      "updated_at": "2026-11-04T07:20:11.278156+00:00",
+      "version": 1,
+      "evidence_ids": [
+        "s08_m05",
+        "s08_m06"
+      ]
+    },
+    {
+      "id": "8fa8aa9e-3cc0-4613-b7eb-759ccca486c8",
+      "text": "用户说明每月两次回馆核儿童展签仍是志愿，不计入续约合同的有偿工时。",
+      "start_time": "2026-11-04T09:12:00+08:00",
+      "end_time": null,
+      "confidence": 0.7,
+      "status": "active",
+      "created_at": "2026-11-04T07:20:11.278205+00:00",
+      "updated_at": "2026-11-04T07:20:11.278206+00:00",
+      "version": 1,
+      "evidence_ids": [
+        "s08_m05",
+        "s08_m06"
+      ]
+    },
+    {
+      "id": "73ed3c0f-02b8-465b-b4cd-540bba93a54e",
+      "text": "用户说明上个月带蓝布袋参加修理日的日期是10月18日，要求不要与今年八月的口述史活动混为一谈。",
+      "start_time": "2026-11-04T09:18:00+08:00",
+      "end_time": null,
+      "confidence": 0.7,
+      "status": "active",
+      "created_at": "2026-11-04T07:20:11.278260+00:00",
+      "updated_at": "2026-11-04T07:20:11.278262+00:00",
+      "version": 1,
+      "evidence_ids": [
+        "s08_m07",
+        "s08_m08"
+      ]
+    },
+    {
+      "id": "db6ab372-cbb4-4a86-a66c-b106771bdea8",
+      "text": "用户说明明天只想煮一锅普通番茄面，不希望把爸爸、换工作和每顿饭串成一个故事。",
+      "start_time": "2026-11-04T09:18:00+08:00",
+      "end_time": null,
+      "confidence": 0.7,
+      "status": "active",
+      "created_at": "2026-11-04T07:20:11.278307+00:00",
+      "updated_at": "2026-11-04T07:20:11.278308+00:00",
+      "version": 1,
+      "evidence_ids": [
+        "s08_m07",
+        "s08_m08"
+      ]
+    },
+    {
+      "id": "6245747d-bad8-4532-9369-cbd474302c6c",
+      "text": "用户指出自己没在这些对话里讲过家里有没有烤箱，要求AI记不得就直说没有记录。",
+      "start_time": "2026-11-04T09:18:00+08:00",
+      "end_time": null,
+      "confidence": 0.7,
+      "status": "active",
+      "created_at": "2026-11-04T07:20:11.278368+00:00",
+      "updated_at": "2026-11-04T07:20:11.278370+00:00",
+      "version": 1,
+      "evidence_ids": [
+        "s08_m07",
+        "s08_m08"
+      ]
+    }
+  ],
+  "profiles": [
+    {
+      "id": "cef88650-cee6-4bc2-aceb-8998f67bf419",
+      "kind": "interaction_expectation",
+      "text": "用户不希望AI把同一天谈到的不同事情强行分析成因果关系，尤其不要推断工作选择是因为爸爸或家庭修理经历。",
+      "evidence_ids": [
+        "s01_m07",
+        "s01_m08"
+      ],
+      "created_at": "2026-11-04T07:19:03.877072+00:00",
+      "status": "active"
+    },
+    {
+      "id": "1aacf1de-882e-4cc3-b5d3-8dc7eb397401",
+      "kind": "user_profile",
+      "text": "用户2024年保留市博物馆全职展签编辑工作，周二和周四到馆、单程通勤九十分钟，另外三个工作日在家校稿；2024年不接自由插画单。",
+      "evidence_ids": [
+        "s01_m01",
+        "s01_m03"
+      ],
+      "created_at": "2026-11-04T07:19:03.877119+00:00",
+      "status": "active"
+    },
+    {
+      "id": "3213cabf-6de0-42ce-86b0-b63c15e749f9",
+      "kind": "user_profile",
+      "text": "用户提到每月固定工资用于安排妈妈复诊，生活备用金可支撑十二周。",
+      "evidence_ids": [
+        "s01_m01",
+        "s01_m03"
+      ],
+      "created_at": "2026-11-04T07:19:03.877150+00:00",
+      "status": "active"
+    },
+    {
+      "id": "d535508e-c3cc-4916-842e-c27b43c94c72",
+      "kind": "user_profile",
+      "text": "用户记得爸爸给的蓝布袋有铜拉链、左下角橙色补丁和缠铜线的提手，并因小时候觉得补丁像橘子皮而特别记得它。",
+      "evidence_ids": [
+        "s01_m05"
+      ],
+      "created_at": "2026-11-04T07:19:03.877172+00:00",
+      "status": "active"
+    },
+    {
+      "id": "b5ba2734-9828-42b3-8e2b-a513cf262dba",
+      "kind": "user_profile",
+      "text": "用户喜欢爸爸一边拧螺丝一边讲怎么判断接触不良，而不是以收音机的价值为关注点。",
+      "evidence_ids": [
+        "s01_m07"
+      ],
+      "created_at": "2026-11-04T07:19:03.877214+00:00",
+      "status": "active"
+    },
+    {
+      "id": "67e74e24-df9d-4aa3-9fcc-929d823af459",
+      "kind": "interaction_expectation",
+      "text": "用户希望AI在讨论辞职、接单等重要判断时，先指出证据不足的地方再给建议；不同意时说明具体依据，不必为显得有个性而故意反着说；这是长期期望而非一次性安慰。",
+      "evidence_ids": [
+        "s02_m05"
+      ],
+      "created_at": "2026-11-04T07:19:11.112602+00:00",
+      "status": "active"
+    },
+    {
+      "id": "97efb57d-6419-4cee-8068-3147d3f39f12",
+      "kind": "feedback",
+      "text": "用户认为AI上一条回答把每句话拆成一排标签、读着机械；该意见仅针对那一个回答，不表示长期排斥清单或表格，材料清单等仍可列。",
+      "evidence_ids": [
+        "s02_m07"
+      ],
+      "created_at": "2026-11-04T07:19:11.112636+00:00",
+      "status": "active"
+    },
+    {
+      "id": "29a8ca08-dbe2-46af-9859-fa86f723eb2f",
+      "kind": "user_profile",
+      "text": "用户另攒的接单周转金仅够三周生活费，与十二周家庭备用金分属两个账户，用户坚持不混算。",
+      "evidence_ids": [
+        "s02_m01"
+      ],
+      "created_at": "2026-11-04T07:19:11.112660+00:00",
+      "status": "active"
+    },
+    {
+      "id": "4f7cab2f-d2af-4efe-86c8-b22e284ced33",
+      "kind": "user_profile",
+      "text": "用户于2025年2月6日回绝朋友邀其辞职做独立插画的提议，计划先做到2025年底再评估；朋友未提供项目周期。",
+      "evidence_ids": [
+        "s02_m01",
+        "s02_m03"
+      ],
+      "created_at": "2026-11-04T07:19:11.112687+00:00",
+      "status": "active"
+    },
+    {
+      "id": "b885833e-351c-4f98-9f33-7fd18bb6a20b",
+      "kind": "user_profile",
+      "text": "周宁是用户所在展陈组的同事，负责文字审核，不是项目出资人。",
+      "evidence_ids": [
+        "s02_m03"
+      ],
+      "created_at": "2026-11-04T07:19:11.112705+00:00",
+      "status": "active"
+    },
+    {
+      "id": "0e180eea-7d30-4fb9-88c3-d124ae81c2fe",
+      "kind": "interaction_expectation",
+      "text": "用户希望医院预约用日历提醒，但不要把所有生活事项都做成提醒，提醒范围限于当前阶段需要的预约。",
+      "evidence_ids": [
+        "s03_m01",
+        "s03_m03"
+      ],
+      "created_at": "2026-11-04T07:19:22.135235+00:00",
+      "status": "active"
+    },
+    {
+      "id": "41688d5a-40ed-461a-bfd2-f370339f4918",
+      "kind": "interaction_expectation",
+      "text": "用户希望膝盖提醒与头痛记录分开，不同事项不要混在一起回答或推断因果。",
+      "evidence_ids": [
+        "s03_m07"
+      ],
+      "created_at": "2026-11-04T07:19:22.135267+00:00",
+      "status": "active"
+    },
+    {
+      "id": "b9f8159f-bf50-437b-84dd-66ba7fb5ff81",
+      "kind": "feedback",
+      "text": "用户明确反对把10月9日截止延后与10月11日头痛减轻写成“延期治好了头痛”，要求原因留空。",
+      "evidence_ids": [
+        "s03_m05"
+      ],
+      "created_at": "2026-11-04T07:19:22.135289+00:00",
+      "status": "active"
+    },
+    {
+      "id": "62177a82-0c2b-4206-9f97-40a3c586dc5a",
+      "kind": "feedback",
+      "text": "用户说明没记每天喝水和睡眠，不能把停咖啡或压力当作头痛原因，要求不直接下结论。",
+      "evidence_ids": [
+        "s03_m03"
+      ],
+      "created_at": "2026-11-04T07:19:22.135308+00:00",
+      "status": "active"
+    },
+    {
+      "id": "80765714-3cef-4a7c-8a40-145e800dd657",
+      "kind": "ai_observed",
+      "text": "助理在回复中按日期保留并存变化，明确时间顺序有记录但因果没有结论，并建议向医生说明而非当作已证实的治疗效果。",
+      "evidence_ids": [
+        "s03_m06"
+      ],
+      "created_at": "2026-11-04T07:19:22.135330+00:00",
+      "status": "active"
+    },
+    {
+      "id": "e9f4dbfd-8219-4f15-ab77-99fa293bc859",
+      "kind": "ai_observed",
+      "text": "助理表示会把身体部位、就诊安排和工作调整分开，并指出一次冲突后改为远程校稿不能推成辞职。",
+      "evidence_ids": [
+        "s03_m08"
+      ],
+      "created_at": "2026-11-04T07:19:22.135351+00:00",
+      "status": "active"
+    },
+    {
+      "id": "0de3fb93-9ec3-4821-82ba-c91f1efc89cb",
+      "kind": "interaction_expectation",
+      "text": "用户希望记录时区分正式劳动关系、独立合同和志愿协助，不把“回馆里”志愿核对展签理解为反悔回去上班。",
+      "evidence_ids": [
+        "s04_m05",
+        "s04_m06"
+      ],
+      "created_at": "2026-11-04T07:19:30.875437+00:00",
+      "status": "active"
+    },
+    {
+      "id": "ea8f7314-317e-45e5-afe0-302080caf59c",
+      "kind": "interaction_expectation",
+      "text": "用户希望不要仅凭“去年拒绝今年接受”就给自己贴优柔寡断或突然大胆的性格标签，风险判断变化可以讨论。",
+      "evidence_ids": [
+        "s04_m07",
+        "s04_m08"
+      ],
+      "created_at": "2026-11-04T07:19:30.875475+00:00",
+      "status": "active"
+    },
+    {
+      "id": "7e8e7989-3648-4908-8103-408790c39242",
+      "kind": "interaction_expectation",
+      "text": "用户希望不要把自己写成已是不受期限限制的自由职业者，需保留项目的起止日和工作量上限。",
+      "evidence_ids": [
+        "s04_m03",
+        "s04_m04"
+      ],
+      "created_at": "2026-11-04T07:19:30.875499+00:00",
+      "status": "active"
+    },
+    {
+      "id": "4efc6ad3-b585-4765-9c9f-1f24d96c3601",
+      "kind": "user_profile",
+      "text": "用户自设独立项目工作量上限为每周三个工作日、同时最多两个项目，合同按周结算。",
+      "evidence_ids": [
+        "s04_m03"
+      ],
+      "created_at": "2026-11-04T07:19:30.875518+00:00",
+      "status": "active"
+    },
+    {
+      "id": "e6f444c2-72df-4e13-8197-4fadf568816a",
+      "kind": "user_profile",
+      "text": "用户妈妈自2025年12月起复诊稳定，不再需要用户每周陪同。",
+      "evidence_ids": [
+        "s04_m01"
+      ],
+      "created_at": "2026-11-04T07:19:30.875539+00:00",
+      "status": "active"
+    },
+    {
+      "id": "36a88153-70c8-423a-85a5-1734e3122965",
+      "kind": "user_profile",
+      "text": "用户到2026年2月10日接单周转金攒到十四周生活费，家庭备用金另放。",
+      "evidence_ids": [
+        "s04_m01"
+      ],
+      "created_at": "2026-11-04T07:19:30.875556+00:00",
+      "status": "active"
+    },
+    {
+      "id": "becd45f9-41a1-4299-8254-626b752c479b",
+      "kind": "user_profile",
+      "text": "用户已签博物馆音频脚本独立项目，2026年4月1日至9月30日，全职展签岗位计划3月底结束。",
+      "evidence_ids": [
+        "s04_m03"
+      ],
+      "created_at": "2026-11-04T07:19:30.875574+00:00",
+      "status": "active"
+    },
+    {
+      "id": "c30e9db9-5b8b-47a3-8268-91390cc8686a",
+      "kind": "user_profile",
+      "text": "用户答应每月两次无薪回馆志愿核对儿童展签。",
+      "evidence_ids": [
+        "s04_m05"
+      ],
+      "created_at": "2026-11-04T07:19:30.875594+00:00",
+      "status": "active"
+    },
+    {
+      "id": "7f3f6008-e062-46d0-a625-0938464002b3",
+      "kind": "user_profile",
+      "text": "用户自2023年起在带人步行前会提前打印路线，临时改道写在纸边，以减少路上反复取手机；在家查路线仍用手机。",
+      "evidence_ids": [
+        "s06_m05"
+      ],
+      "created_at": "2026-11-04T07:19:51.227418+00:00",
+      "status": "active"
+    },
+    {
+      "id": "b27c211e-8b9f-4fa4-9ff0-230c59f09fee",
+      "kind": "interaction_expectation",
+      "text": "用户希望不要将周宁对大字版图的个人反馈推广为所有视障者适用的普遍结论。",
+      "evidence_ids": [
+        "s06_m03"
+      ],
+      "created_at": "2026-11-04T07:19:51.227447+00:00",
+      "status": "active"
+    },
+    {
+      "id": "71b790c7-7a3d-49d5-9297-115dcfbdafe4",
+      "kind": "interaction_expectation",
+      "text": "用户希望不要因自己使用纸本路线就推断其排斥电子产品或有视觉障碍诊断。",
+      "evidence_ids": [
+        "s06_m05"
+      ],
+      "created_at": "2026-11-04T07:19:51.227468+00:00",
+      "status": "active"
+    },
+    {
+      "id": "0aac4f73-ad51-4d6c-9e89-8fc1d0e2a9a4",
+      "kind": "interaction_expectation",
+      "text": "用户希望将社区免费音频尝试与馆里付费音频脚本分开记录，不写入付费合同交付清单。",
+      "evidence_ids": [
+        "s06_m07"
+      ],
+      "created_at": "2026-11-04T07:19:51.227488+00:00",
+      "status": "active"
+    },
+    {
+      "id": "09946b5b-2960-427c-b345-b2289dec6071",
+      "kind": "ai_observed",
+      "text": "助理在回应中主动区分两位同名周宁，并复述用户设定的推广边界与合同边界。",
+      "evidence_ids": [
+        "s06_m02",
+        "s06_m04",
+        "s06_m06",
+        "s06_m08"
+      ],
+      "created_at": "2026-11-04T07:19:51.227522+00:00",
+      "status": "active"
+    },
+    {
+      "id": "03c368f1-8ed3-4a76-ba66-67b3ae67be98",
+      "kind": "user_profile",
+      "text": "用户重视区分已验证事实与推测：明确说明馆内三秒停顿迁移尚未与馆方试过，不能写成参观体验已改善。",
+      "evidence_ids": [
+        "s07_m05"
+      ],
+      "created_at": "2026-11-04T07:20:00.214682+00:00",
+      "status": "active"
+    },
+    {
+      "id": "0de028dc-32d4-464d-ae48-adb98724b667",
+      "kind": "user_profile",
+      "text": "用户会主动否认未经证实的因果推断，如否认爸爸修收音机导致自己后来做音频工作。",
+      "evidence_ids": [
+        "s07_m07"
+      ],
+      "created_at": "2026-11-04T07:20:00.214712+00:00",
+      "status": "active"
+    },
+    {
+      "id": "8719c61c-8ade-4158-a40b-216a9266c589",
+      "kind": "user_profile",
+      "text": "用户强调物品的私人归属，说明蓝布袋不属于博物馆，也不是项目统一工具包。",
+      "evidence_ids": [
+        "s07_m07"
+      ],
+      "created_at": "2026-11-04T07:20:00.214731+00:00",
+      "status": "active"
+    },
+    {
+      "id": "0eec1e34-2b26-4377-b9da-3a050ba7be1a",
+      "kind": "interaction_expectation",
+      "text": "用户希望记录时保留她自述的感受联系，但不将其写成已证实的职业因果。",
+      "evidence_ids": [
+        "s07_m07",
+        "s07_m08"
+      ],
+      "created_at": "2026-11-04T07:20:00.214756+00:00",
+      "status": "active"
+    },
+    {
+      "id": "9c8f7fab-f410-4884-9254-e6a02aedcf7a",
+      "kind": "interaction_expectation",
+      "text": "用户希望涉及就医时先整理要问专业人员的问题，不把症状描述写成诊断；只有用户明确说要排时间时才一起安排；日常列材料、核预算仍可直接给清单，不要求所有回答先反问。",
+      "evidence_ids": [
+        "s08_m03",
+        "s08_m04"
+      ],
+      "created_at": "2026-11-04T07:20:11.279132+00:00",
+      "status": "active"
+    },
+    {
+      "id": "bed7b71a-0cdc-43c1-8676-7c11ca0c0af2",
+      "kind": "interaction_expectation",
+      "text": "用户希望AI对没有记录的信息（如家里是否有烤箱）直接说明没有记录，不要为显得记得而补出细节。",
+      "evidence_ids": [
+        "s08_m07",
+        "s08_m08"
+      ],
+      "created_at": "2026-11-04T07:20:11.279170+00:00",
+      "status": "active"
+    },
+    {
+      "id": "7d9ed1f8-6722-4628-9325-2e5d7141d8e2",
+      "kind": "feedback",
+      "text": "用户指出10月18日修理日不应与今年八月口述史活动混算，普通煮番茄面也不需要牵扯爸爸、换工作等往事。",
+      "evidence_ids": [
+        "s08_m07",
+        "s08_m08"
+      ],
+      "created_at": "2026-11-04T07:20:11.279196+00:00",
+      "status": "active"
+    },
+    {
+      "id": "abdd5f6a-3fd4-4ec1-9ee5-19e7fa0b972a",
+      "kind": "user_profile",
+      "text": "用户当前音频脚本合同为原六个月合同后续签两个月，至2026年11月30日；仍做独立项目，每周最多三个工作日、同时最多两个项目，暂无回全职岗计划。",
+      "evidence_ids": [
+        "s08_m05",
+        "s08_m06"
+      ],
+      "created_at": "2026-11-04T07:20:11.279221+00:00",
+      "status": "active"
+    },
+    {
+      "id": "17bea360-b062-40d0-ace8-b6a3c306a2f3",
+      "kind": "user_profile",
+      "text": "用户每月两次回馆核儿童展签仍为志愿，不计入续约合同的有偿工时。",
+      "evidence_ids": [
+        "s08_m05",
+        "s08_m06"
+      ],
+      "created_at": "2026-11-04T07:20:11.279244+00:00",
+      "status": "active"
+    },
+    {
+      "id": "8006f6b0-354f-472b-96b9-b6622f2ce676",
+      "kind": "user_profile",
+      "text": "用户2026年11月4日准备下周康复复查，关注负重增加、下楼疼痛记录和提前复诊指征。",
+      "evidence_ids": [
+        "s08_m01"
+      ],
+      "created_at": "2026-11-04T07:20:11.279272+00:00",
+      "status": "active"
+    }
+  ],
+  "links": [
+    {
+      "id": "6ef75012-0796-4d1d-9405-34cb03b6a0a0",
+      "left_id": "1495ff6c-e7a3-4fb8-acd2-e243588e1f3f",
+      "right_id": "b54abed3-7b62-4797-a19b-5d230a7b38fd",
+      "kind": "same_topic",
+      "reason": "两条概括都涉及用户2024年的工作安排，n1讲选择全职和理由，n2澄清全职合同、通勤与远程办公的具体安排",
+      "confidence": 0.95,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:19:03.876175+00:00",
+      "evidence_ids": [
+        "s01_m01",
+        "s01_m03"
+      ]
+    },
+    {
+      "id": "f7c65715-d0b0-49d5-8cf4-cae119eea07b",
+      "left_id": "1495ff6c-e7a3-4fb8-acd2-e243588e1f3f",
+      "right_id": "c6fc86b9-3e84-4ba2-98dc-d32f588d471e",
+      "kind": "contrast",
+      "reason": "用户在同一次对话中先谈工作选择、后谈爸爸修理收音机，并明确说两件事只是今天都聊到、不要分析因果；这是对可能因果联想的明确否定",
+      "confidence": 0.9,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:19:03.876340+00:00",
+      "evidence_ids": [
+        "s01_m01",
+        "s01_m07"
+      ]
+    },
+    {
+      "id": "9749242d-c455-469a-b9a3-9b7c7967b1f5",
+      "left_id": "3812ac9d-1159-4706-a2ff-025f5b158d38",
+      "right_id": "c6fc86b9-3e84-4ba2-98dc-d32f588d471e",
+      "kind": "same_event",
+      "reason": "两条概括都围绕12月15日爸爸交付修好收音机和蓝布袋这件事，n3描述物品与外观，n4补充袋子归属和修理讲解",
+      "confidence": 0.95,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:19:03.876377+00:00",
+      "evidence_ids": [
+        "s01_m05",
+        "s01_m07"
+      ]
+    },
+    {
+      "id": "3bf3ad70-7026-436e-ae48-9b8a52bd8107",
+      "left_id": "1495ff6c-e7a3-4fb8-acd2-e243588e1f3f",
+      "right_id": "b54abed3-7b62-4797-a19b-5d230a7b38fd",
+      "kind": "contextual",
+      "reason": "n2对备用金含义和劳动关系性质的澄清，是对n1中工作选择背景的补充说明",
+      "confidence": 0.85,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:19:03.876979+00:00",
+      "evidence_ids": [
+        "s01_m01",
+        "s01_m03"
+      ]
+    },
+    {
+      "id": "5ebd7929-4971-4c23-bf1d-cd8e81c1a223",
+      "left_id": "1495ff6c-e7a3-4fb8-acd2-e243588e1f3f",
+      "right_id": "59c27b4e-0e1e-4839-b4ae-61adde1847eb",
+      "kind": "same_topic",
+      "reason": "两条都涉及用户是否接自由插画单及十二周生活备用金；本次用户再次以资金不足为由暂不接单，并区分出接单周转金账户",
+      "confidence": 0.85,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:19:11.112070+00:00",
+      "evidence_ids": [
+        "s01_m01",
+        "s02_m01",
+        "s02_m03"
+      ]
+    },
+    {
+      "id": "aad17881-db64-4872-ba7d-c25043b663c8",
+      "left_id": "59c27b4e-0e1e-4839-b4ae-61adde1847eb",
+      "right_id": "b54abed3-7b62-4797-a19b-5d230a7b38fd",
+      "kind": "same_topic",
+      "reason": "两条都提到十二周备用金；本次用户明确其为家庭备用金账户，与接单周转金分开",
+      "confidence": 0.8,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:19:11.112444+00:00",
+      "evidence_ids": [
+        "s01_m03",
+        "s02_m01",
+        "s02_m03"
+      ]
+    },
+    {
+      "id": "38d8784b-b31f-4d28-bdbb-d2c87fd2777b",
+      "left_id": "59c27b4e-0e1e-4839-b4ae-61adde1847eb",
+      "right_id": "cfff4ab8-d2e0-47af-aed4-5b1a7c2da32f",
+      "kind": "contextual",
+      "reason": "两条同属2025年2月7日同一段对话，但用户分别陈述朋友邀约与同事校对两件事，未说明二者有因果",
+      "confidence": 0.5,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:19:11.112486+00:00",
+      "evidence_ids": [
+        "s02_m01",
+        "s02_m03"
+      ]
+    },
+    {
+      "id": "6b120035-107e-4043-8244-6d1790816fe2",
+      "left_id": "be1b1c8f-800e-41f0-ad4f-e5194863bc45",
+      "right_id": "ec0a39d2-d6a2-4747-91f0-c6c229a42580",
+      "kind": "same_topic",
+      "reason": "两条都是用户对AI回答方式的期望与反馈，前者为长期讨论原则，后者为对单次表达形式的局部意见",
+      "confidence": 0.7,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:19:11.112516+00:00",
+      "evidence_ids": [
+        "s02_m05",
+        "s02_m07"
+      ]
+    },
+    {
+      "id": "7fcb6b58-b6ef-4313-ac0f-b9618e04fb1e",
+      "left_id": "59c27b4e-0e1e-4839-b4ae-61adde1847eb",
+      "right_id": "be1b1c8f-800e-41f0-ad4f-e5194863bc45",
+      "kind": "contextual",
+      "reason": "用户在同一次对话中先谈辞职接单判断，随后提出讨论此类判断时应先查证据，二者在话题上相邻",
+      "confidence": 0.55,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:19:11.112542+00:00",
+      "evidence_ids": [
+        "s02_m01",
+        "s02_m03",
+        "s02_m05"
+      ]
+    },
+    {
+      "id": "e335bea5-7dcf-4e4b-ad70-42ddfbedee67",
+      "left_id": "18151c4c-77e1-4afd-9f6a-51bf9fed3dca",
+      "right_id": "4eaf4663-8a89-41ed-92e1-28a0a540d2b6",
+      "kind": "same_topic",
+      "reason": "n1记录膝盖康复就诊安排，n6要求膝盖提醒与头痛记录分开，均涉及膝盖事项的记录方式",
+      "confidence": 0.85,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:19:22.134566+00:00",
+      "evidence_ids": [
+        "s03_m01",
+        "s03_m07"
+      ]
+    },
+    {
+      "id": "a5106a05-8f6b-40f2-b0dd-71a88f15bdb2",
+      "left_id": "715fe5f1-9ca9-46e7-ace7-f96e1845ce25",
+      "right_id": "71875245-125f-4411-be2f-77f0187bff92",
+      "kind": "chronological",
+      "reason": "n4记录10月1日至2日的停咖啡、头痛与截止提前，n5记录10月9日截止延后和10月11日头痛减轻，属同一组时间线的后续",
+      "confidence": 0.9,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:19:22.134929+00:00",
+      "evidence_ids": [
+        "s03_m03",
+        "s03_m05"
+      ]
+    },
+    {
+      "id": "3e580691-81fe-4e84-93f3-d747fff061b3",
+      "left_id": "4eaf4663-8a89-41ed-92e1-28a0a540d2b6",
+      "right_id": "71875245-125f-4411-be2f-77f0187bff92",
+      "kind": "same_topic",
+      "reason": "n4涉及停咖啡与头痛记录，n6要求头痛记录与膝盖提醒分开，均涉及头痛记录的归属",
+      "confidence": 0.8,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:19:22.135016+00:00",
+      "evidence_ids": [
+        "s03_m03",
+        "s03_m07"
+      ]
+    },
+    {
+      "id": "1829360d-9312-4727-8608-3aa476c6dcf1",
+      "left_id": "4eaf4663-8a89-41ed-92e1-28a0a540d2b6",
+      "right_id": "715fe5f1-9ca9-46e7-ace7-f96e1845ce25",
+      "kind": "same_topic",
+      "reason": "n5是头痛相关时间记录，n6要求其与膝盖提醒分开，均涉及头痛记录的归属",
+      "confidence": 0.8,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:19:22.135047+00:00",
+      "evidence_ids": [
+        "s03_m05",
+        "s03_m07"
+      ]
+    },
+    {
+      "id": "0c0cb5ed-6b64-4135-8ddc-2a79ad768423",
+      "left_id": "18151c4c-77e1-4afd-9f6a-51bf9fed3dca",
+      "right_id": "3f96d5f8-deca-47ec-896e-fa36dde2ceb0",
+      "kind": "same_event",
+      "reason": "n1的每周三早七点预约与n7所述周三早七点康复预约冲突为同一就诊安排，n7补充了与到馆工作冲突一次及改为远程校稿",
+      "confidence": 0.85,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:19:22.135085+00:00",
+      "evidence_ids": [
+        "s03_m01",
+        "s03_m07"
+      ]
+    },
+    {
+      "id": "d41480ec-d8eb-47dc-a365-6178dfb0bfdc",
+      "left_id": "44bb209f-2981-4191-981d-48770be46ead",
+      "right_id": "907ea28c-6e54-470a-b5fc-fdb9e6c0b47f",
+      "kind": "same_topic",
+      "reason": "n2提出医院预约用日历提醒且不扩展到生活事项，n3确认该提醒是2025年阶段需要并先留着",
+      "confidence": 0.9,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:19:22.135112+00:00",
+      "evidence_ids": [
+        "s03_m01",
+        "s03_m03"
+      ]
+    },
+    {
+      "id": "c4f773e8-17bf-4867-8253-f0acf92ae52f",
+      "left_id": "3f96d5f8-deca-47ec-896e-fa36dde2ceb0",
+      "right_id": "59c27b4e-0e1e-4839-b4ae-61adde1847eb",
+      "kind": "contrast",
+      "reason": "n7明确没有改成长期辞职，历史摘要记录用户此前决定先做到2025年底再评估、不辞职做独立插画项目，两者都涉及是否辞职但方向一致而非冲突，此处仅作上下文关联",
+      "confidence": 0.5,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:19:22.135139+00:00",
+      "evidence_ids": [
+        "s02_m01",
+        "s02_m03",
+        "s03_m07"
+      ]
+    },
+    {
+      "id": "fb24f0ec-0022-4c80-9e01-10a8e5113981",
+      "left_id": "3f96d5f8-deca-47ec-896e-fa36dde2ceb0",
+      "right_id": "b54abed3-7b62-4797-a19b-5d230a7b38fd",
+      "kind": "contextual",
+      "reason": "n7提到远程校稿，历史摘要记录用户周二周四到馆、另外三个工作日在家的安排，可观察到的关联是工作方式，但无法确认是否为同一安排",
+      "confidence": 0.55,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:19:22.135168+00:00",
+      "evidence_ids": [
+        "s01_m03",
+        "s03_m07"
+      ]
+    },
+    {
+      "id": "9440f759-1e29-4054-acef-5ada0a78f796",
+      "left_id": "59c27b4e-0e1e-4839-b4ae-61adde1847eb",
+      "right_id": "b7a10c99-2669-4d98-9184-48eca53a893b",
+      "kind": "same_topic",
+      "reason": "两条都涉及用户对是否辞职做独立项目的评估；历史摘要记录2025年2月因周转金仅够三周而拒绝，n1记录2026年2月周转金达十四周后重新评估，属同一决策主题下的条件变化。",
+      "confidence": 0.9,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:19:30.875196+00:00",
+      "evidence_ids": [
+        "s02_m01",
+        "s02_m03",
+        "s04_m01"
+      ]
+    },
+    {
+      "id": "a5e62ded-18df-4adb-b29e-fc7e2a861da9",
+      "left_id": "1495ff6c-e7a3-4fb8-acd2-e243588e1f3f",
+      "right_id": "b7a10c99-2669-4d98-9184-48eca53a893b",
+      "kind": "same_topic",
+      "reason": "历史摘要记录2024年12月因妈妈复诊和存款十二周而选择留全职；n1记录妈妈复诊稳定、周转金十四周，是同一考量因素在后续时间的变化。",
+      "confidence": 0.85,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:19:30.875275+00:00",
+      "evidence_ids": [
+        "s01_m01",
+        "s04_m01"
+      ]
+    },
+    {
+      "id": "6d3fb281-57ca-4af0-8e4a-30532a047a96",
+      "left_id": "0aab3f32-91f3-4f20-ad59-984bff578ceb",
+      "right_id": "abeaea13-c34a-4f00-a5dd-e31e780c5e0a",
+      "kind": "same_event",
+      "reason": "n2记录新签的六个月音频脚本项目，n4明确将该项目与去年拒绝的插画项目作对比，指向同一签约事件。",
+      "confidence": 0.9,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:19:30.875305+00:00",
+      "evidence_ids": [
+        "s04_m03",
+        "s04_m07"
+      ]
+    },
+    {
+      "id": "14c8e5bc-c1f2-451a-a9bd-57147261c1e5",
+      "left_id": "0aab3f32-91f3-4f20-ad59-984bff578ceb",
+      "right_id": "59c27b4e-0e1e-4839-b4ae-61adde1847eb",
+      "kind": "contrast",
+      "reason": "历史摘要中用户拒绝的是无周期保障的插画项目，n2中用户接受的是明确六个月的音频项目；n4也明确说明两者不是同一个单子，构成可观察的对比。",
+      "confidence": 0.85,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:19:30.875331+00:00",
+      "evidence_ids": [
+        "s02_m01",
+        "s02_m03",
+        "s04_m03"
+      ]
+    },
+    {
+      "id": "005e63d6-3fc5-47a7-b4a8-90e1386341c1",
+      "left_id": "0aab3f32-91f3-4f20-ad59-984bff578ceb",
+      "right_id": "6954d37a-1102-4f64-965c-ae58a1054042",
+      "kind": "contextual",
+      "reason": "n3的志愿回馆安排与n2的独立项目同在2026年2月20日说明，且用户强调志愿工作可与独立项目并存、不等于恢复全职，两者共同构成用户当前工作安排的说明。",
+      "confidence": 0.75,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:19:30.875358+00:00",
+      "evidence_ids": [
+        "s04_m03",
+        "s04_m05"
+      ]
+    },
+    {
+      "id": "897cabb7-5e47-4ebb-89d7-48f45afe63e8",
+      "left_id": "0aab3f32-91f3-4f20-ad59-984bff578ceb",
+      "right_id": "b7a10c99-2669-4d98-9184-48eca53a893b",
+      "kind": "chronological",
+      "reason": "n1先说明条件变化，n2随后说明基于新条件已签约独立项目，时间顺序相邻且同属一次工作安排说明。",
+      "confidence": 0.7,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:19:30.875382+00:00",
+      "evidence_ids": [
+        "s04_m01",
+        "s04_m03"
+      ]
+    },
+    {
+      "id": "bac3255d-f427-4884-a2ba-56ba1da4eacb",
+      "left_id": "0719246c-9f9b-4ac0-830c-7ad9c63d556c",
+      "right_id": "cfff4ab8-d2e0-47af-aed4-5b1a7c2da32f",
+      "kind": "contrast",
+      "reason": "用户明确说明新认识的周宁与2025年用绿铅笔校稿的同事周宁只是同名、无合作，构成对同一姓名的区分关系",
+      "confidence": 0.95,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:19:51.227177+00:00",
+      "evidence_ids": [
+        "s02_m03",
+        "s06_m01"
+      ]
+    },
+    {
+      "id": "e7a92e05-9a1b-40cc-b1eb-9bd746fd3ba3",
+      "left_id": "0719246c-9f9b-4ac0-830c-7ad9c63d556c",
+      "right_id": "6ebe58aa-9f0f-43eb-a736-207c96eb4f14",
+      "kind": "same_person",
+      "reason": "n2中的周宁即n1新认识的社区活动对象，用户在同一会话中连续描述其反馈",
+      "confidence": 0.9,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:19:51.227260+00:00",
+      "evidence_ids": [
+        "s06_m01",
+        "s06_m03"
+      ]
+    },
+    {
+      "id": "45f6e9b7-f711-4366-865a-7baffe3241cb",
+      "left_id": "0343abff-ec59-41e0-80b3-26c0dd372ca3",
+      "right_id": "6ebe58aa-9f0f-43eb-a736-207c96eb4f14",
+      "kind": "contrast",
+      "reason": "n2是周宁对大字版图的个人反馈，n3是用户自己带路时打印路线的习惯；用户分别说明两者理由不同，不宜混同",
+      "confidence": 0.8,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:19:51.227288+00:00",
+      "evidence_ids": [
+        "s06_m03",
+        "s06_m05"
+      ]
+    },
+    {
+      "id": "515c9d2b-ed63-49ff-a360-903f942923e0",
+      "left_id": "0719246c-9f9b-4ac0-830c-7ad9c63d556c",
+      "right_id": "0c944277-ce75-49de-ba6b-2e4ccf5d2f36",
+      "kind": "same_person",
+      "reason": "n4中拿小录音机的“他”与n1的周宁为同一人，均出现在社区活动与十月修理日语境",
+      "confidence": 0.85,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:19:51.227315+00:00",
+      "evidence_ids": [
+        "s06_m01",
+        "s06_m07"
+      ]
+    },
+    {
+      "id": "1d2a6e0c-e54a-4c59-b596-26a0aef5cad4",
+      "left_id": "0c944277-ce75-49de-ba6b-2e4ccf5d2f36",
+      "right_id": "abeaea13-c34a-4f00-a5dd-e31e780c5e0a",
+      "kind": "contextual",
+      "reason": "n4提到馆里付费音频脚本，与已有摘要中2026年2月签署的博物馆音频脚本项目可能相关，但用户未明确指同一合同",
+      "confidence": 0.5,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:19:51.227341+00:00",
+      "evidence_ids": [
+        "s04_m07",
+        "s06_m07"
+      ]
+    },
+    {
+      "id": "79fc3ebe-d59a-408d-82db-6f999cc38054",
+      "left_id": "0aab3f32-91f3-4f20-ad59-984bff578ceb",
+      "right_id": "0c944277-ce75-49de-ba6b-2e4ccf5d2f36",
+      "kind": "contextual",
+      "reason": "n4强调免费尝试不写入付费合同交付清单，已有摘要记录了博物馆音频脚本独立项目的合同期限与结算方式，二者可能指向同一付费项目，但未直接确认",
+      "confidence": 0.45,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:19:51.227367+00:00",
+      "evidence_ids": [
+        "s04_m03",
+        "s06_m07"
+      ]
+    },
+    {
+      "id": "e1b8e5ab-f110-41a4-9778-8e2a8ef53467",
+      "left_id": "3812ac9d-1159-4706-a2ff-025f5b158d38",
+      "right_id": "dcf693f4-fa23-47c1-a98a-4031a2e921b3",
+      "kind": "same_event",
+      "reason": "两条都描述同一蓝布袋（铜拉链、橙色补丁、提手铜线）及2024年12月15日爸爸装旧收音机的事件，n1明确称是同一件物品",
+      "confidence": 0.95,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:20:00.214348+00:00",
+      "evidence_ids": [
+        "s01_m05",
+        "s07_m01"
+      ]
+    },
+    {
+      "id": "6167cb3c-c3ef-4cde-8b38-62b53bdedf73",
+      "left_id": "c6fc86b9-3e84-4ba2-98dc-d32f588d471e",
+      "right_id": "dcf693f4-fa23-47c1-a98a-4031a2e921b3",
+      "kind": "same_topic",
+      "reason": "均涉及蓝布袋的归属与用途，n1补充袋子在2026年修理日的继续使用",
+      "confidence": 0.8,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:20:00.214414+00:00",
+      "evidence_ids": [
+        "s01_m07",
+        "s07_m01"
+      ]
+    },
+    {
+      "id": "ddd86a63-f7a6-4379-97b6-e29663df6279",
+      "left_id": "0c944277-ce75-49de-ba6b-2e4ccf5d2f36",
+      "right_id": "6eeba85f-7d43-42c2-b986-7825ecd25899",
+      "kind": "same_event",
+      "reason": "历史摘要提到周宁问路口报站能否说慢一点、准备十月社区修理日再试一段；n2正是该修理日试听并给出三秒停顿建议的结果",
+      "confidence": 0.9,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:20:00.214446+00:00",
+      "evidence_ids": [
+        "s06_m07",
+        "s07_m03"
+      ]
+    },
+    {
+      "id": "0d5e7732-2e49-463e-b61c-e331a3b23ced",
+      "left_id": "6ebe58aa-9f0f-43eb-a736-207c96eb4f14",
+      "right_id": "6eeba85f-7d43-42c2-b986-7825ecd25899",
+      "kind": "same_topic",
+      "reason": "n2中周宁需在纸本图上定位菜市场、旧车站、河边木桥三点，与历史摘要的大字版路口图含同样三个停靠点相呼应",
+      "confidence": 0.85,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:20:00.214474+00:00",
+      "evidence_ids": [
+        "s06_m03",
+        "s07_m03"
+      ]
+    },
+    {
+      "id": "bb3690f8-1d39-4fe1-b192-4c2183cf9c8f",
+      "left_id": "0719246c-9f9b-4ac0-830c-7ad9c63d556c",
+      "right_id": "6eeba85f-7d43-42c2-b986-7825ecd25899",
+      "kind": "same_person",
+      "reason": "两处周宁均为社区场景中视力不佳、与路口报站相关的老人；历史摘要已澄清其与馆内校稿同事同名不同人",
+      "confidence": 0.85,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:20:00.214500+00:00",
+      "evidence_ids": [
+        "s06_m01",
+        "s07_m03"
+      ]
+    },
+    {
+      "id": "0cdf9546-f0c3-4442-902a-6a6c05c6d5ba",
+      "left_id": "60361b9a-b13d-46cc-973e-d7a75b0d7166",
+      "right_id": "6eeba85f-7d43-42c2-b986-7825ecd25899",
+      "kind": "chronological",
+      "reason": "n3的当场改三秒停顿与周宁再听反馈，发生在n2提出建议之后",
+      "confidence": 0.95,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:20:00.214527+00:00",
+      "evidence_ids": [
+        "s07_m03",
+        "s07_m05"
+      ]
+    },
+    {
+      "id": "547eb3aa-97f9-44e9-b6ff-3375a7c2e7a8",
+      "left_id": "0aab3f32-91f3-4f20-ad59-984bff578ceb",
+      "right_id": "60361b9a-b13d-46cc-973e-d7a75b0d7166",
+      "kind": "contextual",
+      "reason": "n3提到馆里四月开始的音频，与历史摘要中2026年4月1日开始的博物馆音频脚本项目时间吻合，但消息未明说二者是同一项目",
+      "confidence": 0.6,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:20:00.214559+00:00",
+      "evidence_ids": [
+        "s04_m03",
+        "s07_m05"
+      ]
+    },
+    {
+      "id": "76418228-fe62-414d-86a3-084c241a01b0",
+      "left_id": "c6fc86b9-3e84-4ba2-98dc-d32f588d471e",
+      "right_id": "e4f5c4a1-594d-468b-b3a7-9d13a1dbf675",
+      "kind": "emotion_echo",
+      "reason": "两处都涉及爸爸修东西时的解释场景与用户感受，且都明确否认工作选择由该经历导致",
+      "confidence": 0.85,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:20:00.214588+00:00",
+      "evidence_ids": [
+        "s01_m07",
+        "s07_m07"
+      ]
+    },
+    {
+      "id": "6c931260-3c3a-4578-83d2-e3a172391d10",
+      "left_id": "dcf693f4-fa23-47c1-a98a-4031a2e921b3",
+      "right_id": "e4f5c4a1-594d-468b-b3a7-9d13a1dbf675",
+      "kind": "same_event",
+      "reason": "n4的修理日感受与袋子归属澄清均针对n1所述同一次社区修理日",
+      "confidence": 0.9,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:20:00.214614+00:00",
+      "evidence_ids": [
+        "s07_m01",
+        "s07_m07"
+      ]
+    },
+    {
+      "id": "0daeb078-661c-4883-ae98-a22061c14478",
+      "left_id": "4f56f60f-033f-41ea-aede-c411ce991c41",
+      "right_id": "a57e81b3-3fec-4b75-b28e-e455f07e0703",
+      "kind": "same_topic",
+      "reason": "n1是本次就医问题整理的具体实例，n3是用户随后提出的就医讨论长期规则，两者都涉及就医前整理专业咨询问题",
+      "confidence": 0.9,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:20:11.278420+00:00",
+      "evidence_ids": [
+        "s08_m01",
+        "s08_m03",
+        "s08_m04"
+      ]
+    },
+    {
+      "id": "e77d8505-44c3-49e2-a696-ae861417bd3a",
+      "left_id": "40482c80-459e-46a4-8675-7fde0fb0c578",
+      "right_id": "907ea28c-6e54-470a-b5fc-fdb9e6c0b47f",
+      "kind": "contrast",
+      "reason": "历史摘要记录2025年用户希望把医院预约放日历提醒，n2记录2026年11月用户表示不再需要AI安排提醒，属同一事项前后需求变化",
+      "confidence": 0.9,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:20:11.278492+00:00",
+      "evidence_ids": [
+        "s03_m01",
+        "s08_m01",
+        "s08_m02"
+      ]
+    },
+    {
+      "id": "2a68adba-122b-4f53-b38c-96bdab5cb44d",
+      "left_id": "40482c80-459e-46a4-8675-7fde0fb0c578",
+      "right_id": "44bb209f-2981-4191-981d-48770be46ead",
+      "kind": "contrast",
+      "reason": "历史摘要称预约提醒是2025年阶段办法，n2说明今年改用医院短信，构成阶段对比",
+      "confidence": 0.85,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:20:11.278529+00:00",
+      "evidence_ids": [
+        "s03_m03",
+        "s08_m01",
+        "s08_m02"
+      ]
+    },
+    {
+      "id": "7224c550-f597-4003-a362-0ccdddde3c93",
+      "left_id": "0aab3f32-91f3-4f20-ad59-984bff578ceb",
+      "right_id": "fae6e2f5-dad0-4ed0-8990-10dd53e102e4",
+      "kind": "same_event",
+      "reason": "历史摘要记录原六个月音频合同（4月1日至9月30日），n4记录该合同结束后续两个月至11月30日，属同一合同的延续",
+      "confidence": 0.95,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:20:11.278559+00:00",
+      "evidence_ids": [
+        "s04_m03",
+        "s08_m05",
+        "s08_m06"
+      ]
+    },
+    {
+      "id": "aa4c6956-5c2a-4d58-ad24-ad668ad70057",
+      "left_id": "abeaea13-c34a-4f00-a5dd-e31e780c5e0a",
+      "right_id": "fae6e2f5-dad0-4ed0-8990-10dd53e102e4",
+      "kind": "same_topic",
+      "reason": "两者都涉及音频脚本独立项目的合同期限与风险判断，n4补充了续约后的现状",
+      "confidence": 0.7,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:20:11.278594+00:00",
+      "evidence_ids": [
+        "s04_m07",
+        "s08_m05",
+        "s08_m06"
+      ]
+    },
+    {
+      "id": "261d9fcc-2caa-46ca-91b6-24378e55aaa3",
+      "left_id": "6954d37a-1102-4f64-965c-ae58a1054042",
+      "right_id": "8fa8aa9e-3cc0-4613-b7eb-759ccca486c8",
+      "kind": "same_event",
+      "reason": "历史摘要记录每月两次志愿核儿童展签无薪，n5再次确认其不计入有偿工时，属同一志愿安排",
+      "confidence": 0.95,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:20:11.278896+00:00",
+      "evidence_ids": [
+        "s04_m05",
+        "s08_m05",
+        "s08_m06"
+      ]
+    },
+    {
+      "id": "24cfb389-1185-4f84-bd06-821823a68709",
+      "left_id": "73ed3c0f-02b8-465b-b4cd-540bba93a54e",
+      "right_id": "dcf693f4-fa23-47c1-a98a-4031a2e921b3",
+      "kind": "same_event",
+      "reason": "历史摘要记录2026年10月18日社区修理日带蓝布袋，n6确认该日期并要求与八月口述史活动区分，属同一事件",
+      "confidence": 0.95,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:20:11.278936+00:00",
+      "evidence_ids": [
+        "s07_m01",
+        "s08_m07",
+        "s08_m08"
+      ]
+    },
+    {
+      "id": "2fe2c03e-9fa7-422a-86fe-91d4383b18ac",
+      "left_id": "0719246c-9f9b-4ac0-830c-7ad9c63d556c",
+      "right_id": "73ed3c0f-02b8-465b-b4cd-540bba93a54e",
+      "kind": "contrast",
+      "reason": "历史摘要记录2026年8月14日口述史活动认识周宁，n6要求把10月18日修理日与八月口述史活动分开，构成事件区分",
+      "confidence": 0.85,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:20:11.279007+00:00",
+      "evidence_ids": [
+        "s06_m01",
+        "s08_m07",
+        "s08_m08"
+      ]
+    },
+    {
+      "id": "530a1978-bd31-41e9-8414-de881fe800bb",
+      "left_id": "6245747d-bad8-4532-9369-cbd474302c6c",
+      "right_id": "db6ab372-cbb4-4a86-a66c-b106771bdea8",
+      "kind": "same_topic",
+      "reason": "两条都出自同一段用户说明，均要求AI不要补出未讲过的内容或强行串联叙事",
+      "confidence": 0.75,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:20:11.279037+00:00",
+      "evidence_ids": [
+        "s08_m07",
+        "s08_m08"
+      ]
+    },
+    {
+      "id": "8fb6a886-80e9-47cb-861d-26b141bfbf96",
+      "left_id": "a57e81b3-3fec-4b75-b28e-e455f07e0703",
+      "right_id": "ec0a39d2-d6a2-4747-91f0-c6c229a42580",
+      "kind": "same_topic",
+      "reason": "历史摘要记录用户不要求永远不列清单、材料清单仍可列，n3同样限定就医讨论规则不扩展到所有任务，边界一致",
+      "confidence": 0.8,
+      "origin": "model_hypothesis",
+      "confirmed": 0,
+      "created_at": "2026-11-04T07:20:11.279067+00:00",
+      "evidence_ids": [
+        "s02_m07",
+        "s08_m03",
+        "s08_m04"
+      ]
+    }
+  ],
+  "themes": [
+    {
+      "id": "b9decfdd-dd0d-4645-b7fb-5f7a210c02ea",
+      "title": "三秒停顿的当场验证与馆内迁移的未验证性",
+      "description": "社区场景中停顿调整的即时反馈，以及向博物馆展柜音频迁移仅为设想、无实施证据"
+    },
+    {
+      "id": "329f9e84-474b-43d5-b7ee-af8b34feaf4b",
+      "title": "不同事项分开记录",
+      "description": "用户要求身体部位、就诊安排与工作调整等事项分开，不混为因果"
+    },
+    {
+      "id": "4d9414d5-7b19-4f68-86c2-11d6a2136132",
+      "title": "两次项目选择的区别与拒绝人格标签",
+      "description": "用户区分去年拒绝的插画项目与今年接受的音频项目，并反对据此推断性格"
+    },
+    {
+      "id": "4a5aa924-ae86-4655-80d3-c4654a7d51c5",
+      "title": "修理日与口述史活动日期区分",
+      "description": "两个不同活动的日期与事件区分"
+    },
+    {
+      "id": "3e8eed23-f544-4b3c-ae09-f3183014595c",
+      "title": "修理讲解与拒绝因果推断",
+      "description": "用户对袋子归属、喜欢修理讲解的原因，以及对两件事关系的明确限定"
+    },
+    {
+      "id": "5a043d46-07aa-4783-b0bb-af19830d29e2",
+      "title": "停咖啡、头痛与文案截止的时间重叠",
+      "description": "同一周内停咖啡、头痛和文案截止提前并存，但因果未定"
+    },
+    {
+      "id": "db8b572d-5174-4646-9ec7-f4830c16bf51",
+      "title": "全职劳动关系与远程办公安排",
+      "description": "用户对劳动关系性质、到馆通勤和远程校稿的具体说明"
+    },
+    {
+      "id": "bdf8fb38-7e7b-4cc5-9804-967fc588dbfd",
+      "title": "十月免费试录与付费项目区分",
+      "description": "社区免费音频尝试的当前范围及与付费合同的边界"
+    },
+    {
+      "id": "4db7756a-ff95-49fc-aab8-c0c4ddd8ba7c",
+      "title": "同一蓝布袋的连续使用",
+      "description": "蓝布袋从2024年爸爸送收音机到2026年社区修理日的实物连续性及辨认细节"
+    },
+    {
+      "id": "4ec5d415-89b6-47be-8ad7-391ece6ef8ee",
+      "title": "同事协助校对展览文字",
+      "description": "周宁在校对儿童展览说明中的具体发现及其角色"
+    },
+    {
+      "id": "d979da47-1a23-4b52-b947-f822456f1bc1",
+      "title": "周宁的录音机修复与报站停顿建议",
+      "description": "修理日现场的具体修理结果及周宁基于纸本图定位需求提出的三秒停顿意见"
+    },
+    {
+      "id": "cd5d8aa8-187d-467a-9e53-0f281e12f389",
+      "title": "大字版路口图与个人反馈",
+      "description": "具体无障碍材料的规格、停靠点及个人适用边界"
+    },
+    {
+      "id": "0f3c8ce2-f44f-4adc-bd5a-c02dc3dde110",
+      "title": "对标签式表达的局部反馈",
+      "description": "用户对单次回答形式的意见及适用范围"
+    },
+    {
+      "id": "1f3a05c8-4158-4861-abee-33c32892d733",
+      "title": "就医讨论的处理方式",
+      "description": "就医类话题的长期交互规则及其边界"
+    },
+    {
+      "id": "d9f38201-51db-4018-b245-3592f05d74ab",
+      "title": "就诊与工作安排的冲突处理",
+      "description": "一次康复预约与到馆工作的冲突及临时调整方式"
+    },
+    {
+      "id": "4cd81a79-ee1e-4200-b9df-2b24e96500c1",
+      "title": "带路时打印路线的个人习惯",
+      "description": "用户带人步行时的工具偏好及其范围与理由"
+    },
+    {
+      "id": "6425877c-bf12-4d4e-81ae-fef404fa8695",
+      "title": "康复复查问题准备",
+      "description": "就医前整理向专业人员提问的内容"
+    },
+    {
+      "id": "662ba223-d00c-417a-ba62-d6357efc6355",
+      "title": "志愿核展签与有偿工时区分",
+      "description": "志愿活动与合同工时的边界"
+    },
+    {
+      "id": "79ae706e-44a3-48ed-a6cc-66ec29675388",
+      "title": "感受呼应、因果否认与袋子归属澄清",
+      "description": "用户对修理日与父亲修理下午的情感呼应，同时否认职业因果并澄清袋子私人属性"
+    },
+    {
+      "id": "115bb5de-bf7a-4a70-bd56-628c41e264c2",
+      "title": "提醒范围限定",
+      "description": "用户对日历提醒适用范围的限定"
+    },
+    {
+      "id": "125b88b9-26d7-44aa-9bfa-d8f94a02f50d",
+      "title": "新认识的同名周宁",
+      "description": "社区活动中新认识的人物身份与同名区分"
+    },
+    {
+      "id": "69a892b6-dae6-4637-8d27-df6afcc2298d",
+      "title": "无薪志愿协助与全职劳动关系的区分",
+      "description": "用户对回馆志愿工作的性质说明及不希望被误读的期待"
+    },
+    {
+      "id": "843fee2c-6bac-4715-b5de-89a4569fc396",
+      "title": "日常小事不需叙事串联",
+      "description": "普通生活事项与家庭、工作往事的边界"
+    },
+    {
+      "id": "754d82eb-30f1-430b-9024-6154de24955d",
+      "title": "有期限的独立项目签约",
+      "description": "用户新签独立项目的起止时间、结算方式、工作量上限及现有全职岗位结束安排"
+    },
+    {
+      "id": "513e61e3-57cd-42c4-928c-f0b53129a3b3",
+      "title": "有条件的全职工作选择",
+      "description": "用户2024年的工作安排及其明确考虑因素"
+    },
+    {
+      "id": "6099b585-f5c2-4b90-86ac-9b0508a08fc4",
+      "title": "未知信息应如实说明",
+      "description": "对无记录事实的处理要求"
+    },
+    {
+      "id": "a7fb4314-46ef-475d-9936-35a9c82f68b4",
+      "title": "爸爸家的旧收音机与蓝布袋",
+      "description": "用户对12月15日爸爸交付修好收音机及袋子外观细节的回忆"
+    },
+    {
+      "id": "f25ecbcb-65f5-45cc-a5b3-1f5029578d67",
+      "title": "膝盖伤情与康复就诊安排",
+      "description": "膝盖受伤经过、当前医疗处置和固定就诊时间地点"
+    },
+    {
+      "id": "065c01b8-3426-4982-8127-bdd7e1d2f2c2",
+      "title": "辞职邀约与资金边界",
+      "description": "用户对独立插画邀约的回应及两笔资金账户的区分"
+    },
+    {
+      "id": "f5bd2e25-0745-4c40-bd71-9bbc92a9e2e5",
+      "title": "重新评估工作的条件变化",
+      "description": "用户说明促使自己重新评估工作选择的具体条件变化"
+    },
+    {
+      "id": "7c8b3773-db25-4dd9-a980-a3a0760b1e52",
+      "title": "长期讨论方式期望",
+      "description": "用户希望AI在重要判断上先查证据再建议"
+    },
+    {
+      "id": "3b2be549-2683-4b99-98d1-3d535795b461",
+      "title": "音频合同续约与工作上限",
+      "description": "当前合同期限与工作量限制"
+    },
+    {
+      "id": "dfe4887b-4dc0-44f1-ac43-642b5338b632",
+      "title": "预约提醒需求变化",
+      "description": "就医提醒方式从AI日历提醒转为医院短信"
+    }
+  ],
+  "theme_members": [
+    {
+      "theme_id": "513e61e3-57cd-42c4-928c-f0b53129a3b3",
+      "summary_id": "1495ff6c-e7a3-4fb8-acd2-e243588e1f3f",
+      "reason": "概括直接来自用户对工作意向表选择和理由的陈述"
+    },
+    {
+      "theme_id": "db8b572d-5174-4646-9ec7-f4830c16bf51",
+      "summary_id": "b54abed3-7b62-4797-a19b-5d230a7b38fd",
+      "reason": "概括保留用户对备用金含义、合同性质和办公地点的澄清"
+    },
+    {
+      "theme_id": "a7fb4314-46ef-475d-9936-35a9c82f68b4",
+      "summary_id": "3812ac9d-1159-4706-a2ff-025f5b158d38",
+      "reason": "概括来自用户对具体日期、物品和外观细节的描述"
+    },
+    {
+      "theme_id": "3e8eed23-f544-4b3c-ae09-f3183014595c",
+      "summary_id": "c6fc86b9-3e84-4ba2-98dc-d32f588d471e",
+      "reason": "概括保留用户对物品归属、关注点和因果关系的直接表述"
+    },
+    {
+      "theme_id": "065c01b8-3426-4982-8127-bdd7e1d2f2c2",
+      "summary_id": "59c27b4e-0e1e-4839-b4ae-61adde1847eb",
+      "reason": "概括直接来自用户对回绝决定、时间节点和资金口径的陈述"
+    },
+    {
+      "theme_id": "4ec5d415-89b6-47be-8ad7-391ece6ef8ee",
+      "summary_id": "cfff4ab8-d2e0-47af-aed4-5b1a7c2da32f",
+      "reason": "概括仅复述用户描述的校对事件与周宁职责"
+    },
+    {
+      "theme_id": "7c8b3773-db25-4dd9-a980-a3a0760b1e52",
+      "summary_id": "be1b1c8f-800e-41f0-ad4f-e5194863bc45",
+      "reason": "概括对应用户明确声明的长期交互偏好"
+    },
+    {
+      "theme_id": "0f3c8ce2-f44f-4adc-bd5a-c02dc3dde110",
+      "summary_id": "ec0a39d2-d6a2-4747-91f0-c6c229a42580",
+      "reason": "概括复述用户对具体回答的反馈和明确限定的范围"
+    },
+    {
+      "theme_id": "f25ecbcb-65f5-45cc-a5b3-1f5029578d67",
+      "summary_id": "18151c4c-77e1-4afd-9f6a-51bf9fed3dca",
+      "reason": "概括直接来自用户对膝盖时间线和就诊安排的补充"
+    },
+    {
+      "theme_id": "115bb5de-bf7a-4a70-bd56-628c41e264c2",
+      "summary_id": "907ea28c-6e54-470a-b5fc-fdb9e6c0b47f",
+      "reason": "概括的是用户对提醒功能使用范围的明确要求"
+    },
+    {
+      "theme_id": "115bb5de-bf7a-4a70-bd56-628c41e264c2",
+      "summary_id": "44bb209f-2981-4191-981d-48770be46ead",
+      "reason": "概括延续用户对提醒办法的阶段性确认"
+    },
+    {
+      "theme_id": "5a043d46-07aa-4783-b0bb-af19830d29e2",
+      "summary_id": "71875245-125f-4411-be2f-77f0187bff92",
+      "reason": "概括保留用户陈述的三项并存事实及其对因果的保留"
+    },
+    {
+      "theme_id": "5a043d46-07aa-4783-b0bb-af19830d29e2",
+      "summary_id": "715fe5f1-9ca9-46e7-ace7-f96e1845ce25",
+      "reason": "概括延续同一组时间并存事实的后续变化，并保留用户对因果的拒绝"
+    },
+    {
+      "theme_id": "329f9e84-474b-43d5-b7ee-af8b34feaf4b",
+      "summary_id": "4eaf4663-8a89-41ed-92e1-28a0a540d2b6",
+      "reason": "概括直接来自用户对两类记录分开的明确要求"
+    },
+    {
+      "theme_id": "d9f38201-51db-4018-b245-3592f05d74ab",
+      "summary_id": "3f96d5f8-deca-47ec-896e-fa36dde2ceb0",
+      "reason": "概括保留冲突发生一次、改为远程校稿、未辞职三项可验证事实"
+    },
+    {
+      "theme_id": "329f9e84-474b-43d5-b7ee-af8b34feaf4b",
+      "summary_id": "2d7eda2d-3695-433b-8dfe-93758844b433",
+      "reason": "概括说明用户要求分开记录的自述原因"
+    },
+    {
+      "theme_id": "f5bd2e25-0745-4c40-bd71-9bbc92a9e2e5",
+      "summary_id": "b7a10c99-2669-4d98-9184-48eca53a893b",
+      "reason": "概括直接记录用户列出的照护与资金条件变化及其对去年决定的重申"
+    },
+    {
+      "theme_id": "754d82eb-30f1-430b-9024-6154de24955d",
+      "summary_id": "0aab3f32-91f3-4f20-ad59-984bff578ceb",
+      "reason": "概括记录用户对签约事实和限制条件的明确陈述"
+    },
+    {
+      "theme_id": "69a892b6-dae6-4637-8d27-df6afcc2298d",
+      "summary_id": "6954d37a-1102-4f64-965c-ae58a1054042",
+      "reason": "概括记录志愿安排的具体内容、无薪性质及用户的澄清要求"
+    },
+    {
+      "theme_id": "4d9414d5-7b19-4f68-86c2-11d6a2136132",
+      "summary_id": "abeaea13-c34a-4f00-a5dd-e31e780c5e0a",
+      "reason": "概括记录用户对两次项目差异的说明及对性格标签的明确反对"
+    },
+    {
+      "theme_id": "125b88b9-26d7-44aa-9bfa-d8f94a02f50d",
+      "summary_id": "0719246c-9f9b-4ac0-830c-7ad9c63d556c",
+      "reason": "概括直接来自用户对周宁身份及同名澄清的陈述"
+    },
+    {
+      "theme_id": "cd5d8aa8-187d-467a-9e53-0f281e12f389",
+      "summary_id": "6ebe58aa-9f0f-43eb-a736-207c96eb4f14",
+      "reason": "概括保留材料规格、反馈对象与用户设定的推广边界"
+    },
+    {
+      "theme_id": "4cd81a79-ee1e-4200-b9df-2b24e96500c1",
+      "summary_id": "0343abff-ec59-41e0-80b3-26c0dd372ca3",
+      "reason": "概括保留习惯的时间起点、场景范围、目的与用户否认的推断"
+    },
+    {
+      "theme_id": "bdf8fb38-7e7b-4cc5-9804-967fc588dbfd",
+      "summary_id": "0c944277-ce75-49de-ba6b-2e4ccf5d2f36",
+      "reason": "概括保留未承诺完整项目、十月再试及合同区分三点事实"
+    },
+    {
+      "theme_id": "4db7756a-ff95-49fc-aab8-c0c4ddd8ba7c",
+      "summary_id": "dcf693f4-fa23-47c1-a98a-4031a2e921b3",
+      "reason": "消息直接描述同一袋子的外观细节、使用时长和携带场合"
+    },
+    {
+      "theme_id": "d979da47-1a23-4b52-b947-f822456f1bc1",
+      "summary_id": "6eeba85f-7d43-42c2-b986-7825ecd25899",
+      "reason": "消息同时给出录音机故障原因、修复结果和试听反馈内容"
+    },
+    {
+      "theme_id": "b9decfdd-dd0d-4645-b7fb-5f7a210c02ea",
+      "summary_id": "60361b9a-b13d-46cc-973e-d7a75b0d7166",
+      "reason": "消息区分了已验证的社区反馈和未实施的馆内类比"
+    },
+    {
+      "theme_id": "79ae706e-44a3-48ed-a6cc-66ec29675388",
+      "summary_id": "e4f5c4a1-594d-468b-b3a7-9d13a1dbf675",
+      "reason": "消息包含用户自述感受、明确的因果否认和物品归属说明"
+    },
+    {
+      "theme_id": "6425877c-bf12-4d4e-81ae-fef404fa8695",
+      "summary_id": "4f56f60f-033f-41ea-aede-c411ce991c41",
+      "reason": "用户直接列出三个待问康复师的问题并声明不要诊断"
+    },
+    {
+      "theme_id": "dfe4887b-4dc0-44f1-ac43-642b5338b632",
+      "summary_id": "40482c80-459e-46a4-8675-7fde0fb0c578",
+      "reason": "用户明确对比去年与今年对提醒的不同安排"
+    },
+    {
+      "theme_id": "1f3a05c8-4158-4861-abee-33c32892d733",
+      "summary_id": "a57e81b3-3fec-4b75-b28e-e455f07e0703",
+      "reason": "用户自称“这个变化以后也适用”并限定只改就医讨论"
+    },
+    {
+      "theme_id": "3b2be549-2683-4b99-98d1-3d535795b461",
+      "summary_id": "fae6e2f5-dad0-4ed0-8990-10dd53e102e4",
+      "reason": "用户给出续约起止日期和自设工作上限"
+    },
+    {
+      "theme_id": "662ba223-d00c-417a-ba62-d6357efc6355",
+      "summary_id": "8fa8aa9e-3cc0-4613-b7eb-759ccca486c8",
+      "reason": "用户明确志愿核展签不算有偿工时"
+    },
+    {
+      "theme_id": "4a5aa924-ae86-4655-80d3-c4654a7d51c5",
+      "summary_id": "73ed3c0f-02b8-465b-b4cd-540bba93a54e",
+      "reason": "用户直接指出两个活动不应合并"
+    },
+    {
+      "theme_id": "843fee2c-6bac-4715-b5de-89a4569fc396",
+      "summary_id": "db6ab372-cbb4-4a86-a66c-b106771bdea8",
+      "reason": "用户明确拒绝把煮面与家庭和工作经历关联"
+    },
+    {
+      "theme_id": "6099b585-f5c2-4b90-86ac-9b0508a08fc4",
+      "summary_id": "6245747d-bad8-4532-9369-cbd474302c6c",
+      "reason": "用户明确要求对烤箱等无记录信息直接承认未知"
+    }
+  ]
+}

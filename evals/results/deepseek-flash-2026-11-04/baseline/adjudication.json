@@ -1,0 +1,1139 @@
+{
+  "schema_version": 1,
+  "review_type": "human_reading_of_frozen_baseline_artifacts",
+  "reviewer": "Codex manual source/output review (not an independent model quality judge)",
+  "corpus_sha256": "8f26f516f5f33cce1248181e416a7c12f2ee46fa4d736f74903ae1b4613d0b0c",
+  "input_sha256": {
+    "memory.json": "34f94effe3ccf8659fdba319448a3c6a800de8f26e0ae858f3d2cb3d2da671ba",
+    "model_calls.json": "ecc475a7e80aef072beaf0f0f03dcee5bddcc631f6a64767c99a20f55aaff5cf",
+    "recalls.json": "d98339ba9860482e1b0751477923ef035c25a4404083c874268aee925fd1e8e9",
+    "report.json": "a11a9731fdfd3bca3c9902cca2c887a96f8212a8ff57015583ea6c6ad7d25d70"
+  },
+  "policy": {
+    "gold_unchanged": true,
+    "base_scorer_unchanged": true,
+    "unknown_is_not_false_positive": true,
+    "fact_ids_meaning": "Core annotated factual content is retained; does not certify every date/detail or every interpretation. Partial facts are separate and do not add complete-fact recall credit.",
+    "not_in_gold_meaning": "Source-supported correct content outside the fact annotation list, including profile/feedback facts. Global summary irrelevance cannot be inferred from absence in gold.",
+    "query_irrelevance_meaning": "Human judged irrelevant to this specific query; does not mean fabricated memory. Contextual material is separate from direct answer evidence.",
+    "comparison_exclusion": "q06,q08,q10,q14 retained for inspection but excluded as whole queries from the primary comparison."
+  },
+  "probe_summary": {
+    "gold_fact_count": 26,
+    "lexical_probe_matched_count": 23,
+    "human_core_content_retained_count": 25,
+    "human_core_content_retained_ids": [
+      "f01",
+      "f02",
+      "f03",
+      "f04",
+      "f05",
+      "f06",
+      "f07",
+      "f08",
+      "f09",
+      "f10",
+      "f11",
+      "f12",
+      "f14",
+      "f15",
+      "f16",
+      "f17",
+      "f18",
+      "f19",
+      "f20",
+      "f21",
+      "f22",
+      "f23",
+      "f24",
+      "f25",
+      "f26"
+    ],
+    "persisted_core_content_missing_ids": [
+      "f13"
+    ],
+    "lexical_false_negative_fact_ids": [
+      "f04",
+      "f12"
+    ],
+    "note": "25/26 core-content retention is not a 25/26 semantic-detail quality score; temporal issues are listed separately."
+  },
+  "summary_fact_overrides": [
+    {
+      "summary_id": "1495ff6c-e7a3-4fb8-acd2-e243588e1f3f",
+      "fact_ids": [
+        "f01"
+      ],
+      "partial_fact_ids": [],
+      "classification": "gold_fact",
+      "core_content_status": "full",
+      "evidence_ids": [
+        "s01_m01"
+      ],
+      "reason": "保留全职展签、照护理由及十二周备用金。"
+    },
+    {
+      "summary_id": "b54abed3-7b62-4797-a19b-5d230a7b38fd",
+      "fact_ids": [
+        "f03"
+      ],
+      "partial_fact_ids": [
+        "f01"
+      ],
+      "classification": "gold_fact",
+      "core_content_status": "full",
+      "evidence_ids": [
+        "s01_m03"
+      ],
+      "reason": "周二周四到馆、九十分钟及三个工作日在家；合同仍全职。"
+    },
+    {
+      "summary_id": "3812ac9d-1159-4706-a2ff-025f5b158d38",
+      "fact_ids": [
+        "f02"
+      ],
+      "partial_fact_ids": [],
+      "classification": "gold_fact",
+      "core_content_status": "full",
+      "evidence_ids": [
+        "s01_m05"
+      ],
+      "reason": "父亲、修好收音机、蓝袋铜拉链及橙色补丁完整。"
+    },
+    {
+      "summary_id": "c6fc86b9-3e84-4ba2-98dc-d32f588d471e",
+      "fact_ids": [
+        "f25"
+      ],
+      "partial_fact_ids": [
+        "f02"
+      ],
+      "classification": "gold_fact",
+      "core_content_status": "full",
+      "evidence_ids": [
+        "s01_m07"
+      ],
+      "reason": "明确同场谈话不证明工作与父亲修理存在因果；袋子赠送是f02补充。"
+    },
+    {
+      "summary_id": "59c27b4e-0e1e-4839-b4ae-61adde1847eb",
+      "fact_ids": [
+        "f04"
+      ],
+      "partial_fact_ids": [],
+      "classification": "gold_fact",
+      "core_content_status": "full",
+      "evidence_ids": [
+        "s02_m01",
+        "s02_m03"
+      ],
+      "reason": "“未给出项目周期”与gold没有周期保障同义；三周周转金、拒绝及年底再评估均在。"
+    },
+    {
+      "summary_id": "cfff4ab8-d2e0-47af-aed4-5b1a7c2da32f",
+      "fact_ids": [
+        "f05"
+      ],
+      "partial_fact_ids": [],
+      "classification": "gold_fact",
+      "core_content_status": "full",
+      "evidence_ids": [
+        "s02_m03"
+      ],
+      "reason": "同事周宁、绿铅笔、翼展/身长、文字审核身份完整。"
+    },
+    {
+      "summary_id": "be1b1c8f-800e-41f0-ad4f-e5194863bc45",
+      "fact_ids": [],
+      "partial_fact_ids": [],
+      "classification": "not_in_gold",
+      "core_content_status": "not_in_gold",
+      "evidence_ids": [
+        "s02_m05"
+      ],
+      "reason": "正确保留长期交互期望；对应gold_profile p01，不是gold_fact遗漏或幻觉。"
+    },
+    {
+      "summary_id": "ec0a39d2-d6a2-4747-91f0-c6c229a42580",
+      "fact_ids": [],
+      "partial_fact_ids": [],
+      "classification": "not_in_gold",
+      "core_content_status": "not_in_gold",
+      "evidence_ids": [
+        "s02_m07"
+      ],
+      "reason": "正确保留本轮机械表达反馈及非永久禁清单边界；对应gold_profile p02。"
+    },
+    {
+      "summary_id": "18151c4c-77e1-4afd-9f6a-51bf9fed3dca",
+      "fact_ids": [
+        "f06"
+      ],
+      "partial_fact_ids": [],
+      "classification": "gold_fact",
+      "core_content_status": "full",
+      "evidence_ids": [
+        "s03_m01"
+      ],
+      "reason": "9月28日膝盖、周三七点及东门完整。"
+    },
+    {
+      "summary_id": "907ea28c-6e54-470a-b5fc-fdb9e6c0b47f",
+      "fact_ids": [
+        "f07"
+      ],
+      "partial_fact_ids": [],
+      "classification": "gold_fact",
+      "core_content_status": "full",
+      "evidence_ids": [
+        "s03_m01"
+      ],
+      "reason": "医院日历提醒的需求及范围完整，2025由start_time及源会话确定；不因正文未重复年份判错。"
+    },
+    {
+      "summary_id": "44bb209f-2981-4191-981d-48770be46ead",
+      "fact_ids": [
+        "f07"
+      ],
+      "partial_fact_ids": [],
+      "classification": "gold_fact",
+      "core_content_status": "full",
+      "evidence_ids": [
+        "s03_m03"
+      ],
+      "reason": "2025阶段的预约提醒需求；医院/日历细节由同一会话前文补足。"
+    },
+    {
+      "summary_id": "71875245-125f-4411-be2f-77f0187bff92",
+      "fact_ids": [
+        "f08"
+      ],
+      "partial_fact_ids": [],
+      "classification": "gold_fact",
+      "core_content_status": "full",
+      "evidence_ids": [
+        "s03_m03"
+      ],
+      "reason": "停咖啡、头痛、10月2日提前截止及不能确证原因完整。"
+    },
+    {
+      "summary_id": "715fe5f1-9ca9-46e7-ace7-f96e1845ce25",
+      "fact_ids": [
+        "f09"
+      ],
+      "partial_fact_ids": [],
+      "classification": "gold_fact",
+      "core_content_status": "full",
+      "evidence_ids": [
+        "s03_m05"
+      ],
+      "reason": "9日延后、11日头痛减轻、未恢复咖啡及禁止治疗因果完整。"
+    },
+    {
+      "summary_id": "4eaf4663-8a89-41ed-92e1-28a0a540d2b6",
+      "fact_ids": [],
+      "partial_fact_ids": [],
+      "classification": "not_in_gold",
+      "core_content_status": "not_in_gold",
+      "evidence_ids": [
+        "s03_m07"
+      ],
+      "reason": "正确的身体部位/记录边界约束，非gold_fact清单单独标注事实。"
+    },
+    {
+      "summary_id": "3f96d5f8-deca-47ec-896e-fa36dde2ceb0",
+      "fact_ids": [],
+      "partial_fact_ids": [],
+      "classification": "not_in_gold",
+      "core_content_status": "not_in_gold",
+      "evidence_ids": [
+        "s03_m07"
+      ],
+      "reason": "正确保留一次康复工作冲突后远程校稿而非辞职；未单列gold。"
+    },
+    {
+      "summary_id": "2d7eda2d-3695-433b-8dfe-93758844b433",
+      "fact_ids": [],
+      "partial_fact_ids": [],
+      "classification": "not_in_gold",
+      "core_content_status": "not_in_gold",
+      "evidence_ids": [
+        "s03_m07"
+      ],
+      "reason": "来源有“最近事情多，混在一起特别容易说错”；内容正确但信息量低。"
+    },
+    {
+      "summary_id": "b7a10c99-2669-4d98-9184-48eca53a893b",
+      "fact_ids": [
+        "f10"
+      ],
+      "partial_fact_ids": [],
+      "classification": "gold_fact",
+      "core_content_status": "full",
+      "evidence_ids": [
+        "s04_m01"
+      ],
+      "reason": "母亲复诊稳定、2025年12月、十四周及2月10日完整。"
+    },
+    {
+      "summary_id": "0aab3f32-91f3-4f20-ad59-984bff578ceb",
+      "fact_ids": [
+        "f11"
+      ],
+      "partial_fact_ids": [],
+      "classification": "gold_fact",
+      "core_content_status": "full",
+      "evidence_ids": [
+        "s04_m03"
+      ],
+      "reason": "原音频合同期限及工作上限完整；另漏了“昨天签了”即2月19日签约细节，见factual_issues。"
+    },
+    {
+      "summary_id": "6954d37a-1102-4f64-965c-ae58a1054042",
+      "fact_ids": [
+        "f12"
+      ],
+      "partial_fact_ids": [],
+      "classification": "gold_fact",
+      "core_content_status": "full",
+      "evidence_ids": [
+        "s04_m05"
+      ],
+      "reason": "“每月回去两次”语义等同每月两次；无薪志愿核儿童展签而非恢复全职完整。"
+    },
+    {
+      "summary_id": "abeaea13-c34a-4f00-a5dd-e31e780c5e0a",
+      "fact_ids": [],
+      "partial_fact_ids": [
+        "f04",
+        "f11"
+      ],
+      "classification": "not_in_gold",
+      "core_content_status": "not_in_gold",
+      "evidence_ids": [
+        "s04_m07"
+      ],
+      "reason": "正确比较两笔不同项目并拒绝性格标签，但不单独完整承载f04资金/评估条件或f11期限上限。"
+    },
+    {
+      "summary_id": "0719246c-9f9b-4ac0-830c-7ad9c63d556c",
+      "fact_ids": [
+        "f14"
+      ],
+      "partial_fact_ids": [],
+      "classification": "gold_fact",
+      "core_content_status": "full",
+      "evidence_ids": [
+        "s06_m01"
+      ],
+      "reason": "两位周宁不是一人及社区修车身份完整；事件日期混淆另列，不把核心身份保留误称为全部细节正确。"
+    },
+    {
+      "summary_id": "6ebe58aa-9f0f-43eb-a736-207c96eb4f14",
+      "fact_ids": [
+        "f15"
+      ],
+      "partial_fact_ids": [],
+      "classification": "gold_fact",
+      "core_content_status": "full",
+      "evidence_ids": [
+        "s06_m03"
+      ],
+      "reason": "十八号字、黑字白底、蓝色螺旋及三个停靠点完整，保留不可普遍化边界。"
+    },
+    {
+      "summary_id": "0343abff-ec59-41e0-80b3-26c0dd372ca3",
+      "fact_ids": [],
+      "partial_fact_ids": [],
+      "classification": "not_in_gold",
+      "core_content_status": "not_in_gold",
+      "evidence_ids": [
+        "s06_m05"
+      ],
+      "reason": "正确长期纸本路线习惯及仍用手机/非诊断边界；对应gold_profile p03。"
+    },
+    {
+      "summary_id": "0c944277-ce75-49de-ba6b-2e4ccf5d2f36",
+      "fact_ids": [
+        "f16"
+      ],
+      "partial_fact_ids": [],
+      "classification": "gold_fact",
+      "core_content_status": "full",
+      "evidence_ids": [
+        "s06_m07"
+      ],
+      "reason": "十月试录免费社区报站、非付费合同交付完整。"
+    },
+    {
+      "summary_id": "dcf693f4-fa23-47c1-a98a-4031a2e921b3",
+      "fact_ids": [
+        "f17"
+      ],
+      "partial_fact_ids": [
+        "f02"
+      ],
+      "classification": "gold_fact",
+      "core_content_status": "full",
+      "evidence_ids": [
+        "s07_m01"
+      ],
+      "reason": "10月18日同一个蓝袋的连续使用及外观完整；同时回顾f02来源。"
+    },
+    {
+      "summary_id": "6eeba85f-7d43-42c2-b986-7825ecd25899",
+      "fact_ids": [
+        "f18",
+        "f19"
+      ],
+      "partial_fact_ids": [],
+      "classification": "gold_fact",
+      "core_content_status": "full",
+      "evidence_ids": [
+        "s07_m03"
+      ],
+      "reason": "反电池恢复播放，三秒停顿帮助纸图定位；一条summary包含两个gold事实。"
+    },
+    {
+      "summary_id": "60361b9a-b13d-46cc-973e-d7a75b0d7166",
+      "fact_ids": [
+        "f19",
+        "f20"
+      ],
+      "partial_fact_ids": [],
+      "classification": "gold_fact",
+      "core_content_status": "full",
+      "evidence_ids": [
+        "s07_m05"
+      ],
+      "reason": "社区跟上反馈和馆内边听找展柜仅待试的迁移边界完整。"
+    },
+    {
+      "summary_id": "e4f5c4a1-594d-468b-b3a7-9d13a1dbf675",
+      "fact_ids": [
+        "f21",
+        "f25"
+      ],
+      "partial_fact_ids": [],
+      "classification": "gold_fact",
+      "core_content_status": "full",
+      "evidence_ids": [
+        "s07_m07"
+      ],
+      "reason": "用户明确踏实感受呼应且否认职业因果；私人袋子边界也保留。"
+    },
+    {
+      "summary_id": "4f56f60f-033f-41ea-aede-c411ce991c41",
+      "fact_ids": [
+        "f23"
+      ],
+      "partial_fact_ids": [],
+      "classification": "gold_fact",
+      "core_content_status": "full",
+      "evidence_ids": [
+        "s08_m01"
+      ],
+      "reason": "三个向康复师咨询的问题及非远程诊断完整。"
+    },
+    {
+      "summary_id": "40482c80-459e-46a4-8675-7fde0fb0c578",
+      "fact_ids": [
+        "f22"
+      ],
+      "partial_fact_ids": [],
+      "classification": "gold_fact",
+      "core_content_status": "full",
+      "evidence_ids": [
+        "s08_m01",
+        "s08_m02"
+      ],
+      "reason": "今年短信足够、不另排日历提醒，并与去年需求区分。"
+    },
+    {
+      "summary_id": "a57e81b3-3fec-4b75-b28e-e455f07e0703",
+      "fact_ids": [],
+      "partial_fact_ids": [],
+      "classification": "not_in_gold",
+      "core_content_status": "not_in_gold",
+      "evidence_ids": [
+        "s08_m03",
+        "s08_m04"
+      ],
+      "reason": "正确有范围的长期就医交互期望；对应gold_profile p05。"
+    },
+    {
+      "summary_id": "fae6e2f5-dad0-4ed0-8990-10dd53e102e4",
+      "fact_ids": [
+        "f24"
+      ],
+      "partial_fact_ids": [
+        "f11"
+      ],
+      "classification": "gold_fact",
+      "core_content_status": "full",
+      "evidence_ids": [
+        "s08_m05",
+        "s08_m06"
+      ],
+      "reason": "续约两个月至11月30日、仍独立项目无回全职计划；也回顾原合同边界。"
+    },
+    {
+      "summary_id": "8fa8aa9e-3cc0-4613-b7eb-759ccca486c8",
+      "fact_ids": [
+        "f12"
+      ],
+      "partial_fact_ids": [],
+      "classification": "gold_fact",
+      "core_content_status": "full",
+      "evidence_ids": [
+        "s08_m05",
+        "s08_m06"
+      ],
+      "reason": "每月两次回馆核儿童展签仍志愿，不计有偿工时；不因“核儿童展签”词形差异漏计。"
+    },
+    {
+      "summary_id": "73ed3c0f-02b8-465b-b4cd-540bba93a54e",
+      "fact_ids": [],
+      "partial_fact_ids": [
+        "f17"
+      ],
+      "classification": "not_in_gold",
+      "core_content_status": "not_in_gold",
+      "evidence_ids": [
+        "s08_m07",
+        "s08_m08"
+      ],
+      "reason": "正确的10月18日与八月活动日期辨别；是f17部分补充，单独不含外观/物品同一性全部细节。"
+    },
+    {
+      "summary_id": "db6ab372-cbb4-4a86-a66c-b106771bdea8",
+      "fact_ids": [],
+      "partial_fact_ids": [],
+      "classification": "not_in_gold",
+      "core_content_status": "not_in_gold",
+      "evidence_ids": [
+        "s08_m07",
+        "s08_m08"
+      ],
+      "reason": "正确保留普通番茄面不需要串成父亲/工作故事的叙事边界。"
+    },
+    {
+      "summary_id": "6245747d-bad8-4532-9369-cbd474302c6c",
+      "fact_ids": [
+        "f26"
+      ],
+      "partial_fact_ids": [],
+      "classification": "gold_fact",
+      "core_content_status": "full",
+      "evidence_ids": [
+        "s08_m07",
+        "s08_m08"
+      ],
+      "reason": "明确未讲过烤箱信息，要求无记录直说。"
+    }
+  ],
+  "factual_issues": [
+    {
+      "issue_id": "extract-01",
+      "fact_id": "f13",
+      "source_message_ids": [
+        "s05_m01",
+        "s05_m03",
+        "s05_m05",
+        "s05_m06"
+      ],
+      "summary_id": null,
+      "status": "persistence_omission",
+      "reason": "s05输出n2/n4/n6/n8仅引assistant消息触发事务前整批验证拒绝；3840等预算事实虽生成却未入库。"
+    },
+    {
+      "issue_id": "extract-02",
+      "fact_id": "f11",
+      "summary_id": "0aab3f32-91f3-4f20-ad59-984bff578ceb",
+      "source_message_ids": [
+        "s04_m03"
+      ],
+      "status": "detail_omission",
+      "reason": "用户说昨天签约，即2026-02-19；summary与start_time仅保留2026-02-20说明已签，未保留签约日。"
+    },
+    {
+      "issue_id": "extract-03",
+      "fact_id": "f14",
+      "summary_id": "0719246c-9f9b-4ac0-830c-7ad9c63d556c",
+      "source_message_ids": [
+        "s06_m01"
+      ],
+      "status": "event_time_confusion",
+      "reason": "源会话2026-08-14周五叙述在周日活动认识，即2026-08-09；summary与start_time使用叙述日2026-08-14，未区分事件日。"
+    }
+  ],
+  "queries": [
+    {
+      "query_id": "q01",
+      "included_in_primary_comparison": true,
+      "directly_relevant_summary_ids": [
+        "3812ac9d-1159-4706-a2ff-025f5b158d38",
+        "dcf693f4-fa23-47c1-a98a-4031a2e921b3",
+        "73ed3c0f-02b8-465b-b4cd-540bba93a54e"
+      ],
+      "contextually_relevant_summary_ids": [
+        "c6fc86b9-3e84-4ba2-98dc-d32f588d471e",
+        "e4f5c4a1-594d-468b-b3a7-9d13a1dbf675"
+      ],
+      "irrelevant_summary_ids": [],
+      "unadjudicated_summary_ids": [],
+      "hit_expected_fact_ids": [
+        "f02",
+        "f17"
+      ],
+      "missed_expected_fact_ids": [],
+      "missing_relevant_profile_ids": [],
+      "missing_relevant_not_in_gold_summary_ids": [],
+      "reason": "按问题所需主事实及合理背景逐项人工复核；未标注正确内容不因unknown判错。",
+      "dispute": null
+    },
+    {
+      "query_id": "q02",
+      "included_in_primary_comparison": true,
+      "directly_relevant_summary_ids": [
+        "59c27b4e-0e1e-4839-b4ae-61adde1847eb"
+      ],
+      "contextually_relevant_summary_ids": [
+        "be1b1c8f-800e-41f0-ad4f-e5194863bc45"
+      ],
+      "irrelevant_summary_ids": [
+        "18151c4c-77e1-4afd-9f6a-51bf9fed3dca",
+        "2d7eda2d-3695-433b-8dfe-93758844b433",
+        "44bb209f-2981-4191-981d-48770be46ead"
+      ],
+      "unadjudicated_summary_ids": [],
+      "hit_expected_fact_ids": [
+        "f04"
+      ],
+      "missed_expected_fact_ids": [],
+      "missing_relevant_profile_ids": [],
+      "missing_relevant_not_in_gold_summary_ids": [],
+      "reason": "自动f04未命中只是“未给出项目周期”的词面差异；真正问题是额外召回膝盖/提醒等。",
+      "dispute": null
+    },
+    {
+      "query_id": "q03",
+      "included_in_primary_comparison": true,
+      "directly_relevant_summary_ids": [
+        "59c27b4e-0e1e-4839-b4ae-61adde1847eb"
+      ],
+      "contextually_relevant_summary_ids": [],
+      "irrelevant_summary_ids": [
+        "cfff4ab8-d2e0-47af-aed4-5b1a7c2da32f",
+        "18151c4c-77e1-4afd-9f6a-51bf9fed3dca",
+        "2d7eda2d-3695-433b-8dfe-93758844b433",
+        "44bb209f-2981-4191-981d-48770be46ead"
+      ],
+      "unadjudicated_summary_ids": [],
+      "hit_expected_fact_ids": [
+        "f04"
+      ],
+      "missed_expected_fact_ids": [
+        "f10",
+        "f11"
+      ],
+      "missing_relevant_profile_ids": [],
+      "missing_relevant_not_in_gold_summary_ids": [],
+      "reason": "同题含今年与去年，time_filter实际仅[2025]；2025-only时间加分挤掉已存b7a10c99(f10)和0aab3f32(f11)。",
+      "dispute": null
+    },
+    {
+      "query_id": "q04",
+      "included_in_primary_comparison": true,
+      "directly_relevant_summary_ids": [
+        "fae6e2f5-dad0-4ed0-8990-10dd53e102e4"
+      ],
+      "contextually_relevant_summary_ids": [
+        "0aab3f32-91f3-4f20-ad59-984bff578ceb",
+        "8fa8aa9e-3cc0-4613-b7eb-759ccca486c8"
+      ],
+      "irrelevant_summary_ids": [
+        "1495ff6c-e7a3-4fb8-acd2-e243588e1f3f",
+        "b54abed3-7b62-4797-a19b-5d230a7b38fd"
+      ],
+      "unadjudicated_summary_ids": [],
+      "hit_expected_fact_ids": [
+        "f24"
+      ],
+      "missed_expected_fact_ids": [],
+      "missing_relevant_profile_ids": [],
+      "missing_relevant_not_in_gold_summary_ids": [],
+      "reason": "旧2024全职事实有历史来源但不回答“现在”，可能稀释当前2026状态；不称历史文本本身虚假。",
+      "dispute": null
+    },
+    {
+      "query_id": "q05",
+      "included_in_primary_comparison": true,
+      "directly_relevant_summary_ids": [
+        "1495ff6c-e7a3-4fb8-acd2-e243588e1f3f",
+        "b54abed3-7b62-4797-a19b-5d230a7b38fd"
+      ],
+      "contextually_relevant_summary_ids": [],
+      "irrelevant_summary_ids": [
+        "3812ac9d-1159-4706-a2ff-025f5b158d38",
+        "c6fc86b9-3e84-4ba2-98dc-d32f588d471e",
+        "59c27b4e-0e1e-4839-b4ae-61adde1847eb"
+      ],
+      "unadjudicated_summary_ids": [],
+      "hit_expected_fact_ids": [
+        "f01",
+        "f03"
+      ],
+      "missed_expected_fact_ids": [],
+      "missing_relevant_profile_ids": [],
+      "missing_relevant_not_in_gold_summary_ids": [],
+      "reason": "按问题所需主事实及合理背景逐项人工复核；未标注正确内容不因unknown判错。",
+      "dispute": null
+    },
+    {
+      "query_id": "q06",
+      "included_in_primary_comparison": false,
+      "directly_relevant_summary_ids": [
+        "6eeba85f-7d43-42c2-b986-7825ecd25899"
+      ],
+      "contextually_relevant_summary_ids": [
+        "73ed3c0f-02b8-465b-b4cd-540bba93a54e",
+        "c6fc86b9-3e84-4ba2-98dc-d32f588d471e",
+        "0c944277-ce75-49de-ba6b-2e4ccf5d2f36"
+      ],
+      "irrelevant_summary_ids": [
+        "4f56f60f-033f-41ea-aede-c411ce991c41"
+      ],
+      "unadjudicated_summary_ids": [],
+      "hit_expected_fact_ids": [
+        "f18"
+      ],
+      "missed_expected_fact_ids": [],
+      "missing_relevant_profile_ids": [],
+      "missing_relevant_not_in_gold_summary_ids": [],
+      "reason": "按问题所需主事实及合理背景逐项人工复核；未标注正确内容不因unknown判错。",
+      "dispute": {
+        "field": "forbidden_fact_ids",
+        "fact_or_profile_id": "f15",
+        "reason": "大字地图是修理日报站语境的合理背景，禁止过严；不把移除该背景当优化收益。"
+      }
+    },
+    {
+      "query_id": "q07",
+      "included_in_primary_comparison": true,
+      "directly_relevant_summary_ids": [
+        "6eeba85f-7d43-42c2-b986-7825ecd25899",
+        "60361b9a-b13d-46cc-973e-d7a75b0d7166"
+      ],
+      "contextually_relevant_summary_ids": [
+        "0aab3f32-91f3-4f20-ad59-984bff578ceb",
+        "0c944277-ce75-49de-ba6b-2e4ccf5d2f36"
+      ],
+      "irrelevant_summary_ids": [],
+      "unadjudicated_summary_ids": [],
+      "hit_expected_fact_ids": [
+        "f19",
+        "f20"
+      ],
+      "missed_expected_fact_ids": [],
+      "missing_relevant_profile_ids": [],
+      "missing_relevant_not_in_gold_summary_ids": [],
+      "reason": "按问题所需主事实及合理背景逐项人工复核；未标注正确内容不因unknown判错。",
+      "dispute": null
+    },
+    {
+      "query_id": "q08",
+      "included_in_primary_comparison": false,
+      "directly_relevant_summary_ids": [
+        "cfff4ab8-d2e0-47af-aed4-5b1a7c2da32f",
+        "0719246c-9f9b-4ac0-830c-7ad9c63d556c"
+      ],
+      "contextually_relevant_summary_ids": [
+        "6ebe58aa-9f0f-43eb-a736-207c96eb4f14",
+        "0c944277-ce75-49de-ba6b-2e4ccf5d2f36",
+        "6eeba85f-7d43-42c2-b986-7825ecd25899"
+      ],
+      "irrelevant_summary_ids": [],
+      "unadjudicated_summary_ids": [],
+      "hit_expected_fact_ids": [
+        "f05",
+        "f14"
+      ],
+      "missed_expected_fact_ids": [],
+      "missing_relevant_profile_ids": [],
+      "missing_relevant_not_in_gold_summary_ids": [],
+      "reason": "按问题所需主事实及合理背景逐项人工复核；未标注正确内容不因unknown判错。",
+      "dispute": {
+        "field": "forbidden_fact_ids",
+        "fact_or_profile_id": "f18",
+        "reason": "社区修车者修录音机可帮助辨识同名人物；禁止过严，不据它断言误召回收益。"
+      }
+    },
+    {
+      "query_id": "q09",
+      "included_in_primary_comparison": true,
+      "directly_relevant_summary_ids": [
+        "18151c4c-77e1-4afd-9f6a-51bf9fed3dca"
+      ],
+      "contextually_relevant_summary_ids": [
+        "4eaf4663-8a89-41ed-92e1-28a0a540d2b6",
+        "44bb209f-2981-4191-981d-48770be46ead"
+      ],
+      "irrelevant_summary_ids": [
+        "59c27b4e-0e1e-4839-b4ae-61adde1847eb",
+        "2d7eda2d-3695-433b-8dfe-93758844b433"
+      ],
+      "unadjudicated_summary_ids": [],
+      "hit_expected_fact_ids": [
+        "f06"
+      ],
+      "missed_expected_fact_ids": [],
+      "missing_relevant_profile_ids": [],
+      "missing_relevant_not_in_gold_summary_ids": [],
+      "reason": "按问题所需主事实及合理背景逐项人工复核；未标注正确内容不因unknown判错。",
+      "dispute": null
+    },
+    {
+      "query_id": "q10",
+      "included_in_primary_comparison": false,
+      "directly_relevant_summary_ids": [
+        "907ea28c-6e54-470a-b5fc-fdb9e6c0b47f",
+        "44bb209f-2981-4191-981d-48770be46ead"
+      ],
+      "contextually_relevant_summary_ids": [
+        "4eaf4663-8a89-41ed-92e1-28a0a540d2b6",
+        "18151c4c-77e1-4afd-9f6a-51bf9fed3dca"
+      ],
+      "irrelevant_summary_ids": [
+        "59c27b4e-0e1e-4839-b4ae-61adde1847eb"
+      ],
+      "unadjudicated_summary_ids": [],
+      "hit_expected_fact_ids": [
+        "f07"
+      ],
+      "missed_expected_fact_ids": [
+        "f22"
+      ],
+      "missing_relevant_profile_ids": [],
+      "missing_relevant_not_in_gold_summary_ids": [],
+      "reason": "f22的40482c80已正确存储但未返回，time_filter实际仅[2025]；p05是否必须另见争议，不据它主张收益。",
+      "dispute": {
+        "field": "expected_profile_ids",
+        "fact_or_profile_id": "p05",
+        "reason": "题目问前后提醒偏好，不一定必须注入长期就医问题整理期望；整题排除主比较，但f22漏召回仍单独记录。"
+      }
+    },
+    {
+      "query_id": "q11",
+      "included_in_primary_comparison": true,
+      "directly_relevant_summary_ids": [
+        "71875245-125f-4411-be2f-77f0187bff92",
+        "715fe5f1-9ca9-46e7-ace7-f96e1845ce25"
+      ],
+      "contextually_relevant_summary_ids": [
+        "4eaf4663-8a89-41ed-92e1-28a0a540d2b6"
+      ],
+      "irrelevant_summary_ids": [
+        "18151c4c-77e1-4afd-9f6a-51bf9fed3dca"
+      ],
+      "unadjudicated_summary_ids": [],
+      "hit_expected_fact_ids": [
+        "f08",
+        "f09"
+      ],
+      "missed_expected_fact_ids": [],
+      "missing_relevant_profile_ids": [],
+      "missing_relevant_not_in_gold_summary_ids": [],
+      "reason": "无图仅返回两条头痛主事实；图开后经“分开记录”的桥接扩散到膝盖安排，且膝盖条目分数仅0.023。",
+      "dispute": null
+    },
+    {
+      "query_id": "q12",
+      "included_in_primary_comparison": true,
+      "directly_relevant_summary_ids": [],
+      "contextually_relevant_summary_ids": [],
+      "irrelevant_summary_ids": [],
+      "unadjudicated_summary_ids": [],
+      "hit_expected_fact_ids": [],
+      "missed_expected_fact_ids": [],
+      "missing_relevant_profile_ids": [
+        "p01"
+      ],
+      "missing_relevant_not_in_gold_summary_ids": [],
+      "reason": "p01已由67e74e24正确存储，且summary7也存在，均未返回；画像按近期排序而非query相关导致被最新医疗/合同画像挤出。",
+      "dispute": null
+    },
+    {
+      "query_id": "q13",
+      "included_in_primary_comparison": true,
+      "directly_relevant_summary_ids": [
+        "ec0a39d2-d6a2-4747-91f0-c6c229a42580"
+      ],
+      "contextually_relevant_summary_ids": [
+        "a57e81b3-3fec-4b75-b28e-e455f07e0703",
+        "be1b1c8f-800e-41f0-ad4f-e5194863bc45"
+      ],
+      "irrelevant_summary_ids": [
+        "4f56f60f-033f-41ea-aede-c411ce991c41",
+        "59c27b4e-0e1e-4839-b4ae-61adde1847eb"
+      ],
+      "unadjudicated_summary_ids": [],
+      "hit_expected_fact_ids": [],
+      "missed_expected_fact_ids": [],
+      "missing_relevant_profile_ids": [],
+      "missing_relevant_not_in_gold_summary_ids": [],
+      "reason": "按问题所需主事实及合理背景逐项人工复核；未标注正确内容不因unknown判错。",
+      "dispute": null
+    },
+    {
+      "query_id": "q14",
+      "included_in_primary_comparison": false,
+      "directly_relevant_summary_ids": [],
+      "contextually_relevant_summary_ids": [],
+      "irrelevant_summary_ids": [],
+      "unadjudicated_summary_ids": [],
+      "hit_expected_fact_ids": [],
+      "missed_expected_fact_ids": [],
+      "missing_relevant_profile_ids": [
+        "p04",
+        "p06"
+      ],
+      "missing_relevant_not_in_gold_summary_ids": [],
+      "reason": "s05批未入库造成行为/反馈信息缺失；q14硬性expected f13的标注争议独立列出，不能把预算事实召回当该题必须。",
+      "dispute": {
+        "field": "expected_fact_ids",
+        "fact_or_profile_id": "f13",
+        "reason": "题目问AI自称与真实行为，不一定必须完整预算金额；整题排除主比较。"
+      }
+    },
+    {
+      "query_id": "q15",
+      "included_in_primary_comparison": true,
+      "directly_relevant_summary_ids": [],
+      "contextually_relevant_summary_ids": [],
+      "irrelevant_summary_ids": [],
+      "unadjudicated_summary_ids": [],
+      "hit_expected_fact_ids": [],
+      "missed_expected_fact_ids": [
+        "f13"
+      ],
+      "missing_relevant_profile_ids": [],
+      "missing_relevant_not_in_gold_summary_ids": [],
+      "reason": "s05整批在事务前验证被拒，预算更正3840及未知项根本未入库；属于持久化遗漏继发的召回空缺。",
+      "dispute": null
+    },
+    {
+      "query_id": "q16",
+      "included_in_primary_comparison": true,
+      "directly_relevant_summary_ids": [],
+      "contextually_relevant_summary_ids": [],
+      "irrelevant_summary_ids": [],
+      "unadjudicated_summary_ids": [],
+      "hit_expected_fact_ids": [],
+      "missed_expected_fact_ids": [],
+      "missing_relevant_profile_ids": [
+        "p03"
+      ],
+      "missing_relevant_not_in_gold_summary_ids": [
+        "0343abff-ec59-41e0-80b3-26c0dd372ca3"
+      ],
+      "reason": "已存0343abff summary与7f3f6008画像准确回答纸本习惯，均未注入；当前画像按最新预算裁切而非相关性。",
+      "dispute": null
+    },
+    {
+      "query_id": "q17",
+      "included_in_primary_comparison": true,
+      "directly_relevant_summary_ids": [
+        "6954d37a-1102-4f64-965c-ae58a1054042",
+        "8fa8aa9e-3cc0-4613-b7eb-759ccca486c8"
+      ],
+      "contextually_relevant_summary_ids": [
+        "0aab3f32-91f3-4f20-ad59-984bff578ceb"
+      ],
+      "irrelevant_summary_ids": [
+        "1495ff6c-e7a3-4fb8-acd2-e243588e1f3f",
+        "b54abed3-7b62-4797-a19b-5d230a7b38fd"
+      ],
+      "unadjudicated_summary_ids": [],
+      "hit_expected_fact_ids": [
+        "f12"
+      ],
+      "missed_expected_fact_ids": [],
+      "missing_relevant_profile_ids": [],
+      "missing_relevant_not_in_gold_summary_ids": [],
+      "reason": "6954d37a与8fa8aa9e已完整回答志愿安排；自动f12漏计是词形问题。",
+      "dispute": null
+    },
+    {
+      "query_id": "q18",
+      "included_in_primary_comparison": true,
+      "directly_relevant_summary_ids": [
+        "3812ac9d-1159-4706-a2ff-025f5b158d38",
+        "c6fc86b9-3e84-4ba2-98dc-d32f588d471e",
+        "dcf693f4-fa23-47c1-a98a-4031a2e921b3",
+        "e4f5c4a1-594d-468b-b3a7-9d13a1dbf675"
+      ],
+      "contextually_relevant_summary_ids": [
+        "6eeba85f-7d43-42c2-b986-7825ecd25899"
+      ],
+      "irrelevant_summary_ids": [],
+      "unadjudicated_summary_ids": [],
+      "hit_expected_fact_ids": [
+        "f02",
+        "f17",
+        "f21"
+      ],
+      "missed_expected_fact_ids": [],
+      "missing_relevant_profile_ids": [],
+      "missing_relevant_not_in_gold_summary_ids": [],
+      "reason": "按问题所需主事实及合理背景逐项人工复核；未标注正确内容不因unknown判错。",
+      "dispute": null
+    },
+    {
+      "query_id": "q19",
+      "included_in_primary_comparison": true,
+      "directly_relevant_summary_ids": [],
+      "contextually_relevant_summary_ids": [],
+      "irrelevant_summary_ids": [],
+      "unadjudicated_summary_ids": [],
+      "hit_expected_fact_ids": [],
+      "missed_expected_fact_ids": [],
+      "missing_relevant_profile_ids": [],
+      "missing_relevant_not_in_gold_summary_ids": [],
+      "reason": "没有返回summary；注入bed7b71a画像明确无记录烤箱，不算凭空编造。gold未将f26列为expected，不能制造硬召回失败。",
+      "dispute": null
+    },
+    {
+      "query_id": "q20",
+      "included_in_primary_comparison": true,
+      "directly_relevant_summary_ids": [],
+      "contextually_relevant_summary_ids": [],
+      "irrelevant_summary_ids": [
+        "1495ff6c-e7a3-4fb8-acd2-e243588e1f3f",
+        "6eeba85f-7d43-42c2-b986-7825ecd25899",
+        "b54abed3-7b62-4797-a19b-5d230a7b38fd",
+        "60361b9a-b13d-46cc-973e-d7a75b0d7166",
+        "c6fc86b9-3e84-4ba2-98dc-d32f588d471e"
+      ],
+      "unadjudicated_summary_ids": [],
+      "hit_expected_fact_ids": [],
+      "missed_expected_fact_ids": [],
+      "missing_relevant_profile_ids": [],
+      "missing_relevant_not_in_gold_summary_ids": [],
+      "reason": "两条直接锚点只重合“原因/因是”，各0.091，随后图扩出三个与冰岛火山无关的个人经历。",
+      "dispute": null
+    },
+    {
+      "query_id": "q21",
+      "included_in_primary_comparison": true,
+      "directly_relevant_summary_ids": [],
+      "contextually_relevant_summary_ids": [
+        "db6ab372-cbb4-4a86-a66c-b106771bdea8"
+      ],
+      "irrelevant_summary_ids": [
+        "6245747d-bad8-4532-9369-cbd474302c6c"
+      ],
+      "unadjudicated_summary_ids": [],
+      "hit_expected_fact_ids": [],
+      "missed_expected_fact_ids": [],
+      "missing_relevant_profile_ids": [],
+      "missing_relevant_not_in_gold_summary_ids": [],
+      "reason": "番茄面叙事边界可作有限背景；烤箱未记录条目只是同源same_topic扩散，对普通番茄面做法无帮助。",
+      "dispute": null
+    },
+    {
+      "query_id": "q22",
+      "included_in_primary_comparison": true,
+      "directly_relevant_summary_ids": [
+        "4f56f60f-033f-41ea-aede-c411ce991c41",
+        "40482c80-459e-46a4-8675-7fde0fb0c578",
+        "a57e81b3-3fec-4b75-b28e-e455f07e0703"
+      ],
+      "contextually_relevant_summary_ids": [],
+      "irrelevant_summary_ids": [
+        "907ea28c-6e54-470a-b5fc-fdb9e6c0b47f",
+        "44bb209f-2981-4191-981d-48770be46ead"
+      ],
+      "unadjudicated_summary_ids": [],
+      "hit_expected_fact_ids": [
+        "f22",
+        "f23"
+      ],
+      "missed_expected_fact_ids": [],
+      "missing_relevant_profile_ids": [],
+      "missing_relevant_not_in_gold_summary_ids": [],
+      "reason": "当前需求已召回；同时返回2025旧日历需求，未将当前无需额外提醒的边界用于抑制旧需求。",
+      "dispute": null
+    },
+    {
+      "query_id": "q23",
+      "included_in_primary_comparison": true,
+      "directly_relevant_summary_ids": [
+        "dcf693f4-fa23-47c1-a98a-4031a2e921b3",
+        "73ed3c0f-02b8-465b-b4cd-540bba93a54e"
+      ],
+      "contextually_relevant_summary_ids": [
+        "3812ac9d-1159-4706-a2ff-025f5b158d38",
+        "c6fc86b9-3e84-4ba2-98dc-d32f588d471e",
+        "e4f5c4a1-594d-468b-b3a7-9d13a1dbf675"
+      ],
+      "irrelevant_summary_ids": [],
+      "unadjudicated_summary_ids": [],
+      "hit_expected_fact_ids": [
+        "f17"
+      ],
+      "missed_expected_fact_ids": [],
+      "missing_relevant_profile_ids": [],
+      "missing_relevant_not_in_gold_summary_ids": [],
+      "reason": "按问题所需主事实及合理背景逐项人工复核；未标注正确内容不因unknown判错。",
+      "dispute": null
+    },
+    {
+      "query_id": "q24",
+      "included_in_primary_comparison": true,
+      "directly_relevant_summary_ids": [
+        "59c27b4e-0e1e-4839-b4ae-61adde1847eb"
+      ],
+      "contextually_relevant_summary_ids": [
+        "be1b1c8f-800e-41f0-ad4f-e5194863bc45"
+      ],
+      "irrelevant_summary_ids": [
+        "44bb209f-2981-4191-981d-48770be46ead",
+        "cfff4ab8-d2e0-47af-aed4-5b1a7c2da32f",
+        "18151c4c-77e1-4afd-9f6a-51bf9fed3dca"
+      ],
+      "unadjudicated_summary_ids": [],
+      "hit_expected_fact_ids": [
+        "f04"
+      ],
+      "missed_expected_fact_ids": [],
+      "missing_relevant_profile_ids": [],
+      "missing_relevant_not_in_gold_summary_ids": [],
+      "reason": "f04实际完整返回，不是真漏召回；2025时间-only同年条目造成额外干扰。",
+      "dispute": null
+    }
+  ],
+  "primary_manual_fact_recall": {
+    "query_count": 20,
+    "excluded_query_ids": [
+      "q06",
+      "q08",
+      "q10",
+      "q14"
+    ],
+    "expected_fact_count": 23,
+    "hit_expected_fact_count": 20,
+    "missed_expected_fact_count": 3,
+    "recall": 0.8695652173913043,
+    "true_missing_fact_queries": [
+      "q03",
+      "q15"
+    ],
+    "missing_profile_queries": [
+      "q12",
+      "q16"
+    ],
+    "note": "This is manually adjudicated annotated-fact recall only. Query profiles and unlabelled useful content are reported separately; no automatic overall quality score is inferred."
+  },
+  "reviewer_disclosure": "Codex source reading; no independent human adjudicator. Does not override frozen gold or automatically certify semantic truth."
+}

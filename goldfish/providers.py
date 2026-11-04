@@ -8,6 +8,7 @@ import json
 import math
 import os
 import re
+import time
 from dataclasses import dataclass, field
 from urllib.parse import urlsplit
 from urllib.error import HTTPError
@@ -93,6 +94,8 @@ class ModelConfig:
     endpoint: str
     model: str
     key: str = field(default='', repr=False)
+    thinking: str = ''
+    max_tokens: int | None = None
 
     @property
     def configured(self):
@@ -106,7 +109,8 @@ class ModelConfig:
     def public(self):
         """Status safe to show in diagnostics; API key is never included."""
         return {'provider': self.provider or 'disabled', 'model': self.model, 'configured': self.configured,
-                'local': bool(self.endpoint and urlsplit(self.endpoint).hostname in LOCAL_NAMES)}
+                'local': bool(self.endpoint and urlsplit(self.endpoint).hostname in LOCAL_NAMES),
+                'thinking': self.thinking or 'provider_default', 'max_tokens': self.max_tokens}
 
 
 def load_config(task: str) -> ModelConfig:
@@ -115,6 +119,13 @@ def load_config(task: str) -> ModelConfig:
     endpoint = os.getenv(prefix + 'URL', '').strip()
     model = os.getenv(prefix + 'MODEL', '').strip()
     key = os.getenv(prefix + 'API_KEY', '').strip()
+    thinking = os.getenv(prefix + 'THINKING', '').strip().lower() if task.upper() == 'LLM' else ''
+    if thinking not in ('', 'enabled', 'disabled'):
+        raise ValueError(prefix + 'THINKING must be enabled or disabled')
+    raw_limit = os.getenv(prefix + 'MAX_TOKENS', '').strip() if task.upper() == 'LLM' else ''
+    max_tokens = int(raw_limit) if raw_limit else None
+    if max_tokens is not None and max_tokens < 1:
+        raise ValueError(prefix + 'MAX_TOKENS must be positive')
     # Legacy GOLDFISH_LLM_URL + MODEL works exactly as v0.1.
     if not provider and endpoint and model:
         provider = 'openai'
@@ -122,12 +133,13 @@ def load_config(task: str) -> ModelConfig:
         raise ValueError(prefix+'PROVIDER must be openai or ollama')
     if provider == 'ollama' and not endpoint:
         endpoint = 'http://127.0.0.1:11434'
-    return ModelConfig(task.upper(), provider, endpoint, model, key)
+    return ModelConfig(task.upper(), provider, endpoint, model, key, thinking, max_tokens)
 
 
 class ChatModel:
     def __init__(self, cfg: ModelConfig | None = None):
         self.cfg = cfg or load_config('LLM')
+        self.last_call = None
 
     @property
     def configured(self):
@@ -141,16 +153,45 @@ class ChatModel:
         inputs = [{'role': 'system', 'content': PROMPT},
                   {'role': 'user', 'content': json.dumps({'raw_messages': messages,
                       'candidate_existing_summaries': related}, ensure_ascii=False)}]
-        if self.cfg.provider == 'ollama':
-            url = _endpoint(self.cfg.endpoint, '/api/chat')
-            data = _post_json(url, {'model': self.cfg.model, 'messages': inputs,
-                                   'stream': False, 'format': 'json',
-                                   'options': {'temperature': 0.1}}, self.cfg.key)
-            return _json_from_text(data['message']['content'])
-        url = _endpoint(self.cfg.endpoint, '/v1/chat/completions')
-        payload = {'model': self.cfg.model, 'temperature': 0.1, 'messages': inputs}
-        data = _post_json(url, payload, self.cfg.key)
-        return _json_from_text(data['choices'][0]['message']['content'])
+        started = time.perf_counter()
+        data = {}
+        error = None
+        try:
+            if self.cfg.provider == 'ollama':
+                url = _endpoint(self.cfg.endpoint, '/api/chat')
+                payload = {'model': self.cfg.model, 'messages': inputs, 'stream': False,
+                           'format': 'json', 'options': {'temperature': 0.1}}
+                if self.cfg.thinking: payload['think'] = self.cfg.thinking == 'enabled'
+                if self.cfg.max_tokens: payload['options']['num_predict'] = self.cfg.max_tokens
+                data = _post_json(url, payload, self.cfg.key)
+                return _json_from_text(data['message']['content'])
+            url = _endpoint(self.cfg.endpoint, '/v1/chat/completions')
+            payload = {'model': self.cfg.model, 'temperature': 0.1, 'messages': inputs}
+            if self.cfg.thinking: payload['thinking'] = {'type': self.cfg.thinking}
+            if self.cfg.max_tokens: payload['max_tokens'] = self.cfg.max_tokens
+            data = _post_json(url, payload, self.cfg.key)
+            return _json_from_text(data['choices'][0]['message']['content'])
+        except Exception as err:
+            error = type(err).__name__
+            raise
+        finally:
+            # Measurement only: keep provider-reported counts, never prompts,
+            # credentials, headers or response text in operational diagnostics.
+            usage = data.get('usage') if isinstance(data, dict) else None
+            if self.cfg.provider == 'ollama' and isinstance(data, dict):
+                prompt_tokens, completion_tokens = data.get('prompt_eval_count'), data.get('eval_count')
+                usage = {'prompt_tokens': prompt_tokens, 'completion_tokens': completion_tokens}
+                if type(prompt_tokens) is int and type(completion_tokens) is int:
+                    usage['total_tokens'] = prompt_tokens + completion_tokens
+            self.last_call = {
+                'provider': self.cfg.provider, 'model': data.get('model', self.cfg.model) if isinstance(data, dict) else self.cfg.model,
+                'response_id': data.get('id') if isinstance(data, dict) else None,
+                'finish_reason': (data.get('choices') or [{}])[0].get('finish_reason') if isinstance(data, dict) and self.cfg.provider != 'ollama' else data.get('done_reason') if isinstance(data, dict) else None,
+                'latency_ms': round((time.perf_counter() - started) * 1000, 3),
+                'usage': usage, 'error_type': error,
+                'thinking': self.cfg.thinking or 'provider_default',
+                'max_tokens': self.cfg.max_tokens,
+            }
 
 
 class EmbeddingModel:

@@ -1,0 +1,146 @@
+{
+  "schema": "goldfish.dsh-live-model.v1",
+  "started_at": "2026-11-04T07:18:07.595Z",
+  "status": "failed",
+  "fixture_notice": "All human inputs and historical seed messages are synthetic fixtures. Assistant replies, consolidation output, and compaction summaries must come from real HTTP model responses.",
+  "scope": "Real DSH core host, not the interactive DSH CLI/UI. No memory tools. Live automatic consolidation remains enabled and each turn waits for its completion.",
+  "budgets": {
+    "conversation": 6,
+    "compaction": 1,
+    "consolidation": 7
+  },
+  "calls": [
+    {
+      "index": 1,
+      "purpose": "consolidation",
+      "requested_model": "deepseek-flash",
+      "request": {
+        "model": "deepseek-flash",
+        "temperature": 0.1,
+        "messages": [
+          {
+            "role": "system",
+            "content": "你是个人长期记忆的记录员，不是聊天者。只根据给出的原始消息提取可验证的事实。\n目标：第一级缩句概括（不改变原意、保留具体事件）+ 第二级主题凝练（不是把所有细节压成主题）+ 概括之间的关联。\n必须返回合法 JSON 对象，不要 Markdown：\n{\"summaries\":[{\"ref\":\"n1\",\"text\":\"精确概括，不加入用户没说过的动机\",\"evidence_ids\":[\"原消息ID\"],\"theme\":\"一个短主题\",\"theme_description\":\"主题覆盖什么\",\"theme_reason\":\"这条概括为何属于该主题\",\"start_time\":\"ISO或null\",\"end_time\":\"ISO或null\"}],\n\"links\":[{\"from\":\"n1或已存在摘要ID\",\"to\":\"n2或已存在摘要ID\",\"kind\":\"same_topic|same_person|same_event|chronological|contrast|emotion_echo|contextual|possible_cause\",\"reason\":\"关联理由，明确描述可观察证据和不确定性\",\"confidence\":0.6}],\n\"profiles\":[{\"kind\":\"user_profile|interaction_expectation|feedback|ai_observed\",\"text\":\"描述性陈述，不能转换成强制人格指令\",\"evidence_ids\":[\"原消息ID\"]}]}\n规则：\n- 用户希望 AI 怎么改变，归入 interaction_expectation，不归 AI 已有性格。\n- 单次抱怨一般为 feedback，除非用户明确说今后长期如此。\n- AI 自我宣称的喜好不算已验证人格，ai_observed 须基于真实助理行为。\n- 关系理由不得捏造因果；模型猜测只能 possible_cause，不得写 causal_confirmed。\n- 保存多个具体概括而不是只写笼统主题；没有可证事实时用空列表。\n- evidence_ids 必须引用给定的消息ID，且不许将插件注入当作原始对话。\n- 可以与给定的历史摘要关联，但不要编辑或删除原始对话。\n"
+          },
+          {
+            "role": "user",
+            "content": "{\"raw_messages\": [{\"seq\": 1, \"id\": \"fixture-old-pier\", \"session_id\": \"synthetic-historical-fixture\", \"role\": \"user\", \"event_time\": \"2026-11-04T07:18:07.973357+00:00\", \"text\": \"【合成评测历史，非真人经历】2025年10月18日，我和朋友林岚去旧码头散步。我点了桂花拿铁，杯套上写着FJ-7315。那天我把一张蓝色地铁票夹进纸质笔记本，并在本子里记下当时想转岗但还没做决定。这只是一次具体经历，不能把喝咖啡当作转岗的原因。\", \"source\": \"human\"}, {\"seq\": 2, \"id\": \"fixture-mountain\", \"session_id\": \"synthetic-historical-fixture\", \"role\": \"user\", \"event_time\": \"2026-11-04T07:18:07.978189+00:00\", \"text\": \"【合成评测历史，非真人经历】2026年2月9日，我又和林岚去北山看流星雨，也带了那本纸质笔记本。这次喝的是热可可，不是桂花拿铁。票仍夹在本子里，灯光很暗，我没有在现场补写工作决定。北山和旧码头是不同日期的两次经历，不能合并成同一次，也不能据此捏造因果。\", \"source\": \"human\"}, {\"seq\": 3, \"id\": \"fixture-feedback\", \"session_id\": \"synthetic-historical-fixture\", \"role\": \"user\", \"event_time\": \"2026-11-04T07:18:07.981685+00:00\", \"text\": \"【合成评测历史，非真人经历】你刚才的回答太机械。这是对刚才那次回答的反馈。另外我希望你今后不要总附和我，有依据时请指出不同看法。这是我的交互期望，不是在描述你天生爱反驳。\", \"source\": \"human\"}], \"candidate_existing_summaries\": []}"
+          }
+        ],
+        "thinking": {
+          "type": "disabled"
+        },
+        "max_tokens": 8192
+      },
+      "started_at": "2026-11-04T07:18:08.004Z",
+      "http_attempted": true,
+      "error": {
+        "name": "TypeError",
+        "message": "fetch failed"
+      },
+      "latency_ms": 5053.1
+    },
+    {
+      "index": 2,
+      "purpose": "consolidation",
+      "requested_model": "deepseek-flash",
+      "request": {
+        "model": "deepseek-flash",
+        "temperature": 0.1,
+        "messages": [
+          {
+            "role": "system",
+            "content": "你是个人长期记忆的记录员，不是聊天者。只根据给出的原始消息提取可验证的事实。\n目标：第一级缩句概括（不改变原意、保留具体事件）+ 第二级主题凝练（不是把所有细节压成主题）+ 概括之间的关联。\n必须返回合法 JSON 对象，不要 Markdown：\n{\"summaries\":[{\"ref\":\"n1\",\"text\":\"精确概括，不加入用户没说过的动机\",\"evidence_ids\":[\"原消息ID\"],\"theme\":\"一个短主题\",\"theme_description\":\"主题覆盖什么\",\"theme_reason\":\"这条概括为何属于该主题\",\"start_time\":\"ISO或null\",\"end_time\":\"ISO或null\"}],\n\"links\":[{\"from\":\"n1或已存在摘要ID\",\"to\":\"n2或已存在摘要ID\",\"kind\":\"same_topic|same_person|same_event|chronological|contrast|emotion_echo|contextual|possible_cause\",\"reason\":\"关联理由，明确描述可观察证据和不确定性\",\"confidence\":0.6}],\n\"profiles\":[{\"kind\":\"user_profile|interaction_expectation|feedback|ai_observed\",\"text\":\"描述性陈述，不能转换成强制人格指令\",\"evidence_ids\":[\"原消息ID\"]}]}\n规则：\n- 用户希望 AI 怎么改变，归入 interaction_expectation，不归 AI 已有性格。\n- 单次抱怨一般为 feedback，除非用户明确说今后长期如此。\n- AI 自我宣称的喜好不算已验证人格，ai_observed 须基于真实助理行为。\n- 关系理由不得捏造因果；模型猜测只能 possible_cause，不得写 causal_confirmed。\n- 保存多个具体概括而不是只写笼统主题；没有可证事实时用空列表。\n- evidence_ids 必须引用给定的消息ID，且不许将插件注入当作原始对话。\n- 可以与给定的历史摘要关联，但不要编辑或删除原始对话。\n"
+          },
+          {
+            "role": "user",
+            "content": "{\"raw_messages\": [{\"seq\": 1, \"id\": \"fixture-old-pier\", \"session_id\": \"synthetic-historical-fixture\", \"role\": \"user\", \"event_time\": \"2026-11-04T07:18:07.973357+00:00\", \"text\": \"【合成评测历史，非真人经历】2025年10月18日，我和朋友林岚去旧码头散步。我点了桂花拿铁，杯套上写着FJ-7315。那天我把一张蓝色地铁票夹进纸质笔记本，并在本子里记下当时想转岗但还没做决定。这只是一次具体经历，不能把喝咖啡当作转岗的原因。\", \"source\": \"human\"}, {\"seq\": 2, \"id\": \"fixture-mountain\", \"session_id\": \"synthetic-historical-fixture\", \"role\": \"user\", \"event_time\": \"2026-11-04T07:18:07.978189+00:00\", \"text\": \"【合成评测历史，非真人经历】2026年2月9日，我又和林岚去北山看流星雨，也带了那本纸质笔记本。这次喝的是热可可，不是桂花拿铁。票仍夹在本子里，灯光很暗，我没有在现场补写工作决定。北山和旧码头是不同日期的两次经历，不能合并成同一次，也不能据此捏造因果。\", \"source\": \"human\"}, {\"seq\": 3, \"id\": \"fixture-feedback\", \"session_id\": \"synthetic-historical-fixture\", \"role\": \"user\", \"event_time\": \"2026-11-04T07:18:07.981685+00:00\", \"text\": \"【合成评测历史，非真人经历】你刚才的回答太机械。这是对刚才那次回答的反馈。另外我希望你今后不要总附和我，有依据时请指出不同看法。这是我的交互期望，不是在描述你天生爱反驳。\", \"source\": \"human\"}], \"candidate_existing_summaries\": []}"
+          }
+        ],
+        "thinking": {
+          "type": "disabled"
+        },
+        "max_tokens": 8192
+      },
+      "started_at": "2026-11-04T07:18:13.071Z",
+      "http_attempted": true,
+      "error": {
+        "name": "TypeError",
+        "message": "fetch failed"
+      },
+      "latency_ms": 5034
+    }
+  ],
+  "checks": [],
+  "turns": [],
+  "recall_calls": [],
+  "limitations": [
+    "Coverage checks use documented literal/alias matching, not a semantic judge; unmatched English paraphrases require human review.",
+    "One real compaction is observed without forcing the model to drop or retain any fact. A retained fact is not an omission/reinjection success.",
+    "No embedding model, cancellation/retry/outage scenario, or personal DSH profile is exercised by this runner."
+  ],
+  "runtime": {
+    "package": "@deepseek-ai/dsh",
+    "version": "0.2.1-rc.5",
+    "node": "v24.22.1"
+  },
+  "models": {
+    "conversation": "deepseek-flash",
+    "compaction": "deepseek-flash",
+    "consolidation": "deepseek-flash"
+  },
+  "seed": [
+    {
+      "id": "fixture-old-pier",
+      "role": "user",
+      "text": "【合成评测历史，非真人经历】2025年10月18日，我和朋友林岚去旧码头散步。我点了桂花拿铁，杯套上写着FJ-7315。那天我把一张蓝色地铁票夹进纸质笔记本，并在本子里记下当时想转岗但还没做决定。这只是一次具体经历，不能把喝咖啡当作转岗的原因。"
+    },
+    {
+      "id": "fixture-mountain",
+      "role": "user",
+      "text": "【合成评测历史，非真人经历】2026年2月9日，我又和林岚去北山看流星雨，也带了那本纸质笔记本。这次喝的是热可可，不是桂花拿铁。票仍夹在本子里，灯光很暗，我没有在现场补写工作决定。北山和旧码头是不同日期的两次经历，不能合并成同一次，也不能据此捏造因果。"
+    },
+    {
+      "id": "fixture-feedback",
+      "role": "user",
+      "text": "【合成评测历史，非真人经历】你刚才的回答太机械。这是对刚才那次回答的反馈。另外我希望你今后不要总附和我，有依据时请指出不同看法。这是我的交互期望，不是在描述你天生爱反驳。"
+    }
+  ],
+  "error": {
+    "name": "Error",
+    "message": "Goldfish /consolidate returned HTTP 500 (RuntimeError)"
+  },
+  "finished_at": "2026-11-04T07:18:18.129Z",
+  "totals": {
+    "conversation": {
+      "attempted": 0,
+      "http_attempted": 0,
+      "successful": 0,
+      "latency_ms": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "missing_usage_calls": 0
+    },
+    "compaction": {
+      "attempted": 0,
+      "http_attempted": 0,
+      "successful": 0,
+      "latency_ms": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "missing_usage_calls": 0
+    },
+    "consolidation": {
+      "attempted": 2,
+      "http_attempted": 2,
+      "successful": 0,
+      "latency_ms": 10087,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "missing_usage_calls": 0
+    }
+  }
+}

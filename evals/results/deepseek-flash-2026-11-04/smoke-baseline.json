@@ -1,0 +1,39 @@
+{
+  "model": "deepseek-flash",
+  "input_messages": 8,
+  "fixture_origin": "constructed fictional dialogue; real DeepSeek extraction",
+  "error": {
+    "type": "ValueError",
+    "detail": "summary requires actual user evidence"
+  },
+  "call": {
+    "provider": "openai",
+    "model": "deepseek-flash",
+    "response_id": "e5a13c84-8302-449f-afa8-5e682eda253f",
+    "latency_ms": 34323.582,
+    "usage": {
+      "prompt_tokens": 1209,
+      "completion_tokens": 6244,
+      "total_tokens": 7453,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 4584
+      },
+      "prompt_cache_hit_tokens": 0,
+      "prompt_cache_miss_tokens": 1209
+    },
+    "error_type": null
+  },
+  "summaries": [],
+  "themes": [],
+  "links": [],
+  "profile": [],
+  "recall": {
+    "results": [],
+    "injection": "",
+    "mode": "lexical+time+graph",
+    "tested_context": false
+  }
+}

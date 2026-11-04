@@ -1,0 +1,9 @@
+{
+  "reviewer": "Codex reading of actual DSH model response and model-visible messages; not an independent human judge",
+  "source": "dsh-live-final/report.json",
+  "structural_checks": "all passed",
+  "semantic_duplicate_confirmed_in_this_fixture": true,
+  "evidence": "The real native compaction summary retained the old-dock date, companion, drink, FJ-7315, ticket-in-notebook and undecided transfer. The next recall re-injected the same complete old-dock summary, plus the separate mountain trip.",
+  "interpretation": "Exact-text coverage is insufficient for semantic/translated compaction. Do not count the extra injection as missing-fact recovery.",
+  "lossy_control": "dsh-live-validated-lossy/report.json explicitly adds a brief lossy summary instruction and a last-turn topic-only request. Five cue facts actually disappeared and reappeared in the real next model input; this does not describe default DSH compression behavior."
+}
