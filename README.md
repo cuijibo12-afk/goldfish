@@ -1,5 +1,7 @@
 # 金鱼 Goldfish Memory v0.3 — 个人长期关联记忆插件开发版
 
+**Windows迁移入口：[双击安装与使用说明](windows/开始使用.md)**。脚本只在你的电脑运行后安装到独立用户目录；Cloud未替你安装到个人电脑。验证边界见 [Windows交付记录](docs/WINDOWS_DELIVERY.md)。
+
 这是在原 v0.2 Python / SQLite / DSH 薄桥架构上迭代的个人开发版。正式需求以 [开发任务书](开发任务书.txt) 为准。[第一阶段](docs/PHASE_A.md) 修复接入与可靠性，[第二阶段](docs/PHASE_B.md) 建立真实模型质量基线。[第三阶段报告](docs/PHASE_C.md) 提供语义覆盖、跨时间召回、关系复核和冻结新集的真实 DeepSeek 结果。**仍有漏召回、提取失败和未裁决项，不能宣布长期记忆质量达标。** DSH 验证针对隔离的真实 core host，不代表已在你的个人设备完成验收。
 
 [第四阶段报告](docs/PHASE_D.md) 新增真实本地BGE向量与四路混合对照、内容版本索引、无效项隔离及完整成本账本。混合精排的旧集平均LLM用量约2,115Token/问，但收益未稳定，默认继续原检索；`GOLDFISH_RETRIEVAL_MODE=hybrid_llm` 显式试验。LLM与Embedding仍独立配置，语义覆盖/精排另需 `GOLDFISH_SEMANTIC_RECALL=1`。

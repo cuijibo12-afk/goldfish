@@ -9,3 +9,9 @@ __pycache__/
 node_modules/
 .dsh-test/
 artifacts/
+
+# Windows local installation and secrets (never package)
+windows/config.json
+*.xml
+.venv/
+dist/
