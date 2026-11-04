@@ -1,0 +1,831 @@
+{
+  "metadata": {
+    "corpus_id": "phase-c-sealed-v1",
+    "provenance": "Root authored fictional Chinese cases. Frozen before implementation. Not independent human adjudication; holdout outputs must not be used to tune this release.",
+    "as_of": "2026-11-04",
+    "synthetic": true,
+    "evaluation_policy": "Gold rules are separate from model self-evaluation; ambiguous outputs stay unresolved."
+  },
+  "sessions": [
+    {
+      "session_id": "h01",
+      "messages": [
+        {
+          "id": "h01u",
+          "role": "user",
+          "source": "human",
+          "event_time": "2023-11-12T12:00:00+08:00",
+          "text": "2023年11月12日，我和表姐江澜去青岩镇跑十公里。完赛后才发现白帽子不见了，最后在志愿者岗找回。那天没有受伤，不是因为跑步让我后来换工作。"
+        },
+        {
+          "id": "h01a",
+          "role": "assistant",
+          "source": "assistant_observed",
+          "event_time": "2023-11-12T12:01:00+08:00",
+          "text": "我会按你给出的具体经历、限定和来源区分记录，不推断没有说明的原因。"
+        }
+      ]
+    },
+    {
+      "session_id": "h02",
+      "messages": [
+        {
+          "id": "h02u",
+          "role": "user",
+          "source": "human",
+          "event_time": "2025-05-10T12:00:00+08:00",
+          "text": "2025年5月10日，我和江澜又去青岩镇，这次参加的是河岸清理，不是跑步。她仍戴着2023年那顶白帽子，我们捡到两袋塑料瓶。两次活动是不同事件，共同的是同一个人和同一顶帽子。"
+        },
+        {
+          "id": "h02a",
+          "role": "assistant",
+          "source": "assistant_observed",
+          "event_time": "2025-05-10T12:01:00+08:00",
+          "text": "我会按你给出的具体经历、限定和来源区分记录，不推断没有说明的原因。"
+        }
+      ]
+    },
+    {
+      "session_id": "h03",
+      "messages": [
+        {
+          "id": "h03u",
+          "role": "user",
+          "source": "human",
+          "event_time": "2024-03-04T12:00:00+08:00",
+          "text": "2024年3月我拒绝搬去外地做摄影助理，因为弟弟当时还在做康复，需要我每周接送，而且那份邀请没有住宿安排。我只打算暂缓，不代表我一辈子讨厌摄影或离不开家。"
+        },
+        {
+          "id": "h03a",
+          "role": "assistant",
+          "source": "assistant_observed",
+          "event_time": "2024-03-04T12:01:00+08:00",
+          "text": "我会按你给出的具体经历、限定和来源区分记录，不推断没有说明的原因。"
+        }
+      ]
+    },
+    {
+      "session_id": "h04",
+      "messages": [
+        {
+          "id": "h04u",
+          "role": "user",
+          "source": "human",
+          "event_time": "2026-01-08T12:00:00+08:00",
+          "text": "到2026年1月，弟弟已经可以独立乘车，不再需要我接送；新邀请提供六个月宿舍，项目也从摄影助理变成灯光记录员。我因此同意试六个月，但还没有决定永久搬家。变化是照护和住宿条件，不是突然变得大胆。"
+        },
+        {
+          "id": "h04a",
+          "role": "assistant",
+          "source": "assistant_observed",
+          "event_time": "2026-01-08T12:01:00+08:00",
+          "text": "我会按你给出的具体经历、限定和来源区分记录，不推断没有说明的原因。"
+        }
+      ]
+    },
+    {
+      "session_id": "h05",
+      "messages": [
+        {
+          "id": "h05u",
+          "role": "user",
+          "source": "human",
+          "event_time": "2026-02-20T12:00:00+08:00",
+          "text": "2026年2月20日我帮邻居修门铃，发现没有声音是接头松了，重新插好就响了。同一天我还买了咖啡，但咖啡和门铃没有关系。请不要把同天发生的两件事连成因果。"
+        },
+        {
+          "id": "h05a",
+          "role": "assistant",
+          "source": "assistant_observed",
+          "event_time": "2026-02-20T12:01:00+08:00",
+          "text": "我会按你给出的具体经历、限定和来源区分记录，不推断没有说明的原因。"
+        }
+      ]
+    },
+    {
+      "session_id": "h06",
+      "messages": [
+        {
+          "id": "h06u",
+          "role": "user",
+          "source": "human",
+          "event_time": "2026-06-13T12:00:00+08:00",
+          "text": "2026年6月13日我在海边教小朋友辨认贝壳，先让他们摸凹凸纹，再给名称卡片。后来在图书馆介绍凸版地图时也先触摸再看文字。这是我明确提出的相似教学次序；不同地点、对象和课程，不是同一次活动。"
+        },
+        {
+          "id": "h06a",
+          "role": "assistant",
+          "source": "assistant_observed",
+          "event_time": "2026-06-13T12:01:00+08:00",
+          "text": "我会按你给出的具体经历、限定和来源区分记录，不推断没有说明的原因。"
+        }
+      ]
+    },
+    {
+      "session_id": "h07",
+      "messages": [
+        {
+          "id": "h07u",
+          "role": "user",
+          "source": "human",
+          "event_time": "2026-07-21T12:00:00+08:00",
+          "text": "2026年7月21日图书馆那次凸版地图课用同样先触摸再给文字的顺序。我们没有测量学习成绩，所以不能说方法已经证实更有效。"
+        },
+        {
+          "id": "h07a",
+          "role": "assistant",
+          "source": "assistant_observed",
+          "event_time": "2026-07-21T12:01:00+08:00",
+          "text": "我会按你给出的具体经历、限定和来源区分记录，不推断没有说明的原因。"
+        }
+      ]
+    },
+    {
+      "session_id": "h08",
+      "messages": [
+        {
+          "id": "h08u",
+          "role": "user",
+          "source": "human",
+          "event_time": "2026-08-03T12:00:00+08:00",
+          "text": "2026年8月3日登记借出的帐篷颜色时，我先误写成黄色，后来核对原照片改成红色，型号是R7。最终借出的是红色R7，黄色是已纠正的登记错误，不是两顶帐篷。"
+        },
+        {
+          "id": "h08a",
+          "role": "assistant",
+          "source": "assistant_observed",
+          "event_time": "2026-08-03T12:01:00+08:00",
+          "text": "我会按你给出的具体经历、限定和来源区分记录，不推断没有说明的原因。"
+        }
+      ]
+    },
+    {
+      "session_id": "h09",
+      "messages": [
+        {
+          "id": "h09u",
+          "role": "user",
+          "source": "human",
+          "event_time": "2026-09-06T12:00:00+08:00",
+          "text": "2026年9月6日我连续两天头痛，之前一天停了茶，但也睡得很少。我没有证据判断哪个造成头痛；医生还没给诊断。请只记下先后和我说不知道原因，不要补心理解释。"
+        },
+        {
+          "id": "h09a",
+          "role": "assistant",
+          "source": "assistant_observed",
+          "event_time": "2026-09-06T12:01:00+08:00",
+          "text": "我会按你给出的具体经历、限定和来源区分记录，不推断没有说明的原因。"
+        }
+      ]
+    },
+    {
+      "session_id": "h10",
+      "messages": [
+        {
+          "id": "h10u",
+          "role": "user",
+          "source": "human",
+          "event_time": "2026-10-09T12:00:00+08:00",
+          "text": "今后讨论我的计划时，请你先指出证据和不确定的地方，再给建议；不要仅因为是我的想法就赞同。你上一条把我叫成天生乐观让我不舒服，只针对那一句，不是给我或你贴一个永久性格标签。"
+        },
+        {
+          "id": "h10a",
+          "role": "assistant",
+          "source": "assistant_observed",
+          "event_time": "2026-10-09T12:01:00+08:00",
+          "text": "我会按你给出的具体经历、限定和来源区分记录，不推断没有说明的原因。"
+        }
+      ]
+    }
+  ],
+  "gold_facts": [
+    {
+      "fact_id": "h01",
+      "label": "2023年11月12日，我和表姐江澜去青岩镇跑十公里。完",
+      "evidence_ids": [
+        "h01u"
+      ],
+      "required_detail_groups": [
+        [
+          "江澜"
+        ],
+        [
+          "青岩镇"
+        ],
+        [
+          "十公里"
+        ],
+        [
+          "白帽子"
+        ],
+        [
+          "志愿者岗"
+        ]
+      ],
+      "time_start": "2023-11-12",
+      "time_end": "2023-11-12"
+    },
+    {
+      "fact_id": "h02",
+      "label": "2025年5月10日，我和江澜又去青岩镇，这次参加的是河",
+      "evidence_ids": [
+        "h02u"
+      ],
+      "required_detail_groups": [
+        [
+          "江澜"
+        ],
+        [
+          "河岸清理"
+        ],
+        [
+          "白帽子"
+        ],
+        [
+          "两袋"
+        ],
+        [
+          "塑料瓶"
+        ]
+      ],
+      "time_start": "2025-05-10",
+      "time_end": "2025-05-10"
+    },
+    {
+      "fact_id": "h03",
+      "label": "2024年3月我拒绝搬去外地做摄影助理，因为弟弟当时还在",
+      "evidence_ids": [
+        "h03u"
+      ],
+      "required_detail_groups": [
+        [
+          "2024"
+        ],
+        [
+          "摄影助理"
+        ],
+        [
+          "弟弟"
+        ],
+        [
+          "康复"
+        ],
+        [
+          "接送"
+        ],
+        [
+          "住宿"
+        ]
+      ],
+      "time_start": "2024-03-04",
+      "time_end": "2024-03-04"
+    },
+    {
+      "fact_id": "h04",
+      "label": "到2026年1月，弟弟已经可以独立乘车，不再需要我接送；",
+      "evidence_ids": [
+        "h04u"
+      ],
+      "required_detail_groups": [
+        [
+          "2026"
+        ],
+        [
+          "弟弟"
+        ],
+        [
+          "独立乘车"
+        ],
+        [
+          "宿舍"
+        ],
+        [
+          "灯光"
+        ],
+        [
+          "六个月"
+        ]
+      ],
+      "time_start": "2026-01-08",
+      "time_end": "2026-01-08"
+    },
+    {
+      "fact_id": "h05",
+      "label": "2026年2月20日我帮邻居修门铃，发现没有声音是接头松",
+      "evidence_ids": [
+        "h05u"
+      ],
+      "required_detail_groups": [
+        [
+          "门铃"
+        ],
+        [
+          "接头"
+        ],
+        [
+          "插好"
+        ]
+      ],
+      "time_start": "2026-02-20",
+      "time_end": "2026-02-20"
+    },
+    {
+      "fact_id": "h06",
+      "label": "2026年6月13日我在海边教小朋友辨认贝壳，先让他们摸",
+      "evidence_ids": [
+        "h06u"
+      ],
+      "required_detail_groups": [
+        [
+          "贝壳"
+        ],
+        [
+          "凹凸"
+        ],
+        [
+          "名称卡片"
+        ],
+        [
+          "触摸"
+        ]
+      ],
+      "time_start": "2026-06-13",
+      "time_end": "2026-06-13"
+    },
+    {
+      "fact_id": "h07",
+      "label": "2026年7月21日图书馆那次凸版地图课用同样先触摸再给",
+      "evidence_ids": [
+        "h07u"
+      ],
+      "required_detail_groups": [
+        [
+          "图书馆"
+        ],
+        [
+          "凸版地图"
+        ],
+        [
+          "触摸"
+        ],
+        [
+          "文字"
+        ],
+        [
+          "没有测量"
+        ]
+      ],
+      "time_start": "2026-07-21",
+      "time_end": "2026-07-21"
+    },
+    {
+      "fact_id": "h08",
+      "label": "2026年8月3日登记借出的帐篷颜色时，我先误写成黄色，",
+      "evidence_ids": [
+        "h08u"
+      ],
+      "required_detail_groups": [
+        [
+          "帐篷"
+        ],
+        [
+          "红色"
+        ],
+        [
+          "R7"
+        ],
+        [
+          "黄色"
+        ],
+        [
+          "更正"
+        ]
+      ],
+      "time_start": "2026-08-03",
+      "time_end": "2026-08-03"
+    },
+    {
+      "fact_id": "h09",
+      "label": "2026年9月6日我连续两天头痛，之前一天停了茶，但也睡",
+      "evidence_ids": [
+        "h09u"
+      ],
+      "required_detail_groups": [
+        [
+          "头痛"
+        ],
+        [
+          "茶"
+        ],
+        [
+          "睡得少"
+        ],
+        [
+          "不知道"
+        ]
+      ],
+      "time_start": "2026-09-06",
+      "time_end": "2026-09-06"
+    },
+    {
+      "fact_id": "h10",
+      "label": "今后讨论我的计划时，请你先指出证据和不确定的地方，再给建",
+      "evidence_ids": [
+        "h10u"
+      ],
+      "required_detail_groups": [
+        [
+          "证据"
+        ],
+        [
+          "不确定"
+        ],
+        [
+          "建议"
+        ]
+      ],
+      "time_start": "2026-10-09",
+      "time_end": "2026-10-09"
+    }
+  ],
+  "gold_profiles": [],
+  "gold_relations": [],
+  "queries": [
+    {
+      "query_id": "z01",
+      "text": "后来那顶白帽子又在哪次活动出现？不是问马拉松。",
+      "as_of": "2026-11-04",
+      "expected_fact_ids": [
+        "h02"
+      ],
+      "allowed_fact_ids": [
+        "h01"
+      ],
+      "forbidden_fact_ids": [
+        "h03",
+        "h04",
+        "h05",
+        "h06",
+        "h07",
+        "h08",
+        "h09",
+        "h10"
+      ],
+      "expected_profile_ids": [],
+      "allowed_profile_ids": [],
+      "context": "",
+      "tags": [
+        "heldout"
+      ]
+    },
+    {
+      "query_id": "z02",
+      "text": "2023年我和谁在哪里跑步，帽子最后在哪找回？",
+      "as_of": "2026-11-04",
+      "expected_fact_ids": [
+        "h01"
+      ],
+      "allowed_fact_ids": [
+        "h02"
+      ],
+      "forbidden_fact_ids": [
+        "h03",
+        "h04",
+        "h05",
+        "h06",
+        "h07",
+        "h08",
+        "h09",
+        "h10"
+      ],
+      "expected_profile_ids": [],
+      "allowed_profile_ids": [],
+      "context": "",
+      "tags": [
+        "heldout"
+      ]
+    },
+    {
+      "query_id": "z03",
+      "text": "2024年不去摄影，2026年愿意试灯光，具体哪些条件变了？",
+      "as_of": "2026-11-04",
+      "expected_fact_ids": [
+        "h03",
+        "h04"
+      ],
+      "allowed_fact_ids": [],
+      "forbidden_fact_ids": [
+        "h01",
+        "h02",
+        "h05",
+        "h06",
+        "h07",
+        "h08",
+        "h09",
+        "h10"
+      ],
+      "expected_profile_ids": [],
+      "allowed_profile_ids": [],
+      "context": "",
+      "tags": [
+        "heldout"
+      ]
+    },
+    {
+      "query_id": "z04",
+      "text": "我接受六个月邀请，是决定永远搬走了吗？",
+      "as_of": "2026-11-04",
+      "expected_fact_ids": [
+        "h04"
+      ],
+      "allowed_fact_ids": [
+        "h03"
+      ],
+      "forbidden_fact_ids": [
+        "h01",
+        "h02",
+        "h05",
+        "h06",
+        "h07",
+        "h08",
+        "h09",
+        "h10"
+      ],
+      "expected_profile_ids": [],
+      "allowed_profile_ids": [],
+      "context": "",
+      "tags": [
+        "heldout"
+      ]
+    },
+    {
+      "query_id": "z05",
+      "text": "门铃为什么不响，后来怎么修好的？",
+      "as_of": "2026-11-04",
+      "expected_fact_ids": [
+        "h05"
+      ],
+      "allowed_fact_ids": [],
+      "forbidden_fact_ids": [
+        "h01",
+        "h02",
+        "h03",
+        "h04",
+        "h06",
+        "h07",
+        "h08",
+        "h09",
+        "h10"
+      ],
+      "expected_profile_ids": [],
+      "allowed_profile_ids": [],
+      "context": "",
+      "tags": [
+        "heldout"
+      ]
+    },
+    {
+      "query_id": "z06",
+      "text": "贝壳课和地图课哪一点相似，效果有没有验证？",
+      "as_of": "2026-11-04",
+      "expected_fact_ids": [
+        "h06",
+        "h07"
+      ],
+      "allowed_fact_ids": [],
+      "forbidden_fact_ids": [
+        "h01",
+        "h02",
+        "h03",
+        "h04",
+        "h05",
+        "h08",
+        "h09",
+        "h10"
+      ],
+      "expected_profile_ids": [],
+      "allowed_profile_ids": [],
+      "context": "",
+      "tags": [
+        "heldout"
+      ]
+    },
+    {
+      "query_id": "z07",
+      "text": "借出的帐篷最终是什么颜色型号？",
+      "as_of": "2026-11-04",
+      "expected_fact_ids": [
+        "h08"
+      ],
+      "allowed_fact_ids": [],
+      "forbidden_fact_ids": [
+        "h01",
+        "h02",
+        "h03",
+        "h04",
+        "h05",
+        "h06",
+        "h07",
+        "h09",
+        "h10"
+      ],
+      "expected_profile_ids": [],
+      "allowed_profile_ids": [],
+      "context": "",
+      "tags": [
+        "heldout"
+      ]
+    },
+    {
+      "query_id": "z08",
+      "text": "停茶造成头痛这个说法确定吗？",
+      "as_of": "2026-11-04",
+      "expected_fact_ids": [
+        "h09"
+      ],
+      "allowed_fact_ids": [],
+      "forbidden_fact_ids": [
+        "h01",
+        "h02",
+        "h03",
+        "h04",
+        "h05",
+        "h06",
+        "h07",
+        "h08",
+        "h10"
+      ],
+      "expected_profile_ids": [],
+      "allowed_profile_ids": [],
+      "context": "",
+      "tags": [
+        "heldout"
+      ]
+    },
+    {
+      "query_id": "z09",
+      "text": "土星的环是什么组成的？",
+      "as_of": "2026-11-04",
+      "expected_fact_ids": [],
+      "allowed_fact_ids": [],
+      "forbidden_fact_ids": [
+        "h01",
+        "h02",
+        "h03",
+        "h04",
+        "h05",
+        "h06",
+        "h07",
+        "h08",
+        "h09",
+        "h10"
+      ],
+      "expected_profile_ids": [],
+      "allowed_profile_ids": [],
+      "context": "",
+      "tags": [
+        "heldout"
+      ]
+    },
+    {
+      "query_id": "z10",
+      "text": "今晚做一个普通蛋炒饭吧。",
+      "as_of": "2026-11-04",
+      "expected_fact_ids": [],
+      "allowed_fact_ids": [],
+      "forbidden_fact_ids": [
+        "h01",
+        "h02",
+        "h03",
+        "h04",
+        "h05",
+        "h06",
+        "h07",
+        "h08",
+        "h09",
+        "h10"
+      ],
+      "expected_profile_ids": [],
+      "allowed_profile_ids": [],
+      "context": "",
+      "tags": [
+        "heldout"
+      ]
+    }
+  ],
+  "coverage_cases": [
+    {
+      "case_id": "hc01",
+      "memory": "2023年11月12日，用户和表姐江澜在青岩镇跑十公里；完赛后遗失的白帽子在志愿者岗找回，未受伤。",
+      "context": "On 12 November 2023, the user ran ten kilometres in Qingyan town with cousin Jiang Lan. A missing white cap was recovered at the volunteer station after the finish. No injury occurred.",
+      "expected": "full",
+      "missing_contains": []
+    },
+    {
+      "case_id": "hc02",
+      "memory": "2023年11月12日，用户和表姐江澜在青岩镇跑十公里；完赛后遗失的白帽子在志愿者岗找回，未受伤。",
+      "context": "2023年11月12日，我和江澜在青岩镇跑完十公里，没有受伤。帽子的事摘要省略了。",
+      "expected": "partial",
+      "missing_contains": [
+        "帽子",
+        "志愿者"
+      ]
+    },
+    {
+      "case_id": "hc03",
+      "memory": "2023年11月12日，用户和表姐江澜在青岩镇跑十公里；完赛后遗失的白帽子在志愿者岗找回，未受伤。",
+      "context": "之前提到一次运动经历，细节均已删去。",
+      "expected": "missing",
+      "missing_contains": [
+        "帽子"
+      ]
+    },
+    {
+      "case_id": "hc04",
+      "memory": "2023年11月12日，用户和表姐江澜在青岩镇跑十公里；完赛后遗失的白帽子在志愿者岗找回，未受伤。",
+      "context": "2023年11月12日江澜独自去青岩镇，我并未同行；她的白帽子没有找回，志愿者岗只是打听过。",
+      "expected": "missing",
+      "missing_contains": []
+    },
+    {
+      "case_id": "hc05",
+      "memory": "2023年11月12日，用户和表姐江澜在青岩镇跑十公里；完赛后遗失的白帽子在志愿者岗找回，未受伤。",
+      "context": "2025年5月10日我和江澜在青岩镇清理河岸，她戴着白帽子。我们没有跑步。",
+      "expected": "missing",
+      "missing_contains": []
+    },
+    {
+      "case_id": "hc06",
+      "memory": "用户更正：借出的是红色R7帐篷，先前黄色登记错误。",
+      "context": "The loaned tent is red, model R7. Yellow was an erroneous initial record that has been corrected.",
+      "expected": "full",
+      "missing_contains": []
+    },
+    {
+      "case_id": "hc07",
+      "memory": "用户不知道停茶与少睡哪一个造成头痛，医生尚未诊断。",
+      "context": "头痛发生前停了茶，且睡眠少；还不知道原因，也没有医生诊断。",
+      "expected": "full",
+      "missing_contains": []
+    },
+    {
+      "case_id": "hc08",
+      "memory": "用户不知道停茶与少睡哪一个造成头痛，医生尚未诊断。",
+      "context": "停茶已被确诊为头痛唯一原因。",
+      "expected": "missing",
+      "missing_contains": []
+    }
+  ],
+  "relation_cases": [
+    {
+      "case_id": "hr01",
+      "left_fact_id": "h01",
+      "right_fact_id": "h02",
+      "proposed_kind": "same_event",
+      "expected_status": "rejected",
+      "expected_kinds": [
+        "same_entity",
+        "temporal_sequence"
+      ]
+    },
+    {
+      "case_id": "hr02",
+      "left_fact_id": "h03",
+      "right_fact_id": "h04",
+      "proposed_kind": "temporal_sequence",
+      "expected_status": "supported",
+      "expected_kinds": [
+        "temporal_sequence",
+        "comparison"
+      ]
+    },
+    {
+      "case_id": "hr03",
+      "left_fact_id": "h06",
+      "right_fact_id": "h07",
+      "proposed_kind": "similar_context",
+      "expected_status": "supported",
+      "expected_kinds": [
+        "similar_context"
+      ]
+    },
+    {
+      "case_id": "hr04",
+      "left_text": "2026年8月3日同一登记先写借出黄色R7帐篷。",
+      "right_text": "用户核对后更正为红色R7，黄色为错误。",
+      "proposed_kind": "contradiction",
+      "expected_status": "supported",
+      "expected_kinds": [
+        "contradiction"
+      ]
+    },
+    {
+      "case_id": "hr05",
+      "left_fact_id": "h05",
+      "right_fact_id": "h09",
+      "proposed_kind": "possible_cause",
+      "expected_status": "rejected",
+      "expected_kinds": []
+    }
+  ]
+}
