@@ -1,0 +1,10 @@
+- insert:
+    - id: goldfish-memory
+      name: 'dsh-goldfish-memory-local'
+      config:
+        serverUrl: 'http://127.0.0.1:18320'
+        autoCapture: true
+        timeoutMs: 2500
+        limit: 5
+        depth: 2
+        maxChars: 1800

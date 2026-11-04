@@ -1,0 +1,64 @@
+金鱼 Goldfish Memory v0.2：本地模型 / 云端模型配置说明
+====================================================
+
+一、模型负责哪些任务？
+1. 整理模型（LLM）：阅读真实聊天，提取概括、凝练主题、建立概括关系、记录画像和交互期望。
+2. 向量模型（Embedding，可选）：将概括与用户问题转换为语义向量，补充关键词/时间/主题召回。
+金鱼配置不会替换 DSH 的主聊天模型，DSH 继续使用自己配置的聊天模型。
+
+二、完全本地免费使用（需要安装 Ollama，且硬件能运行所选模型）
+在 PowerShell 中执行（模型名请换成 ollama list 里真正安装的名字）：
+
+$env:GOLDFISH_LLM_PROVIDER="ollama"
+$env:GOLDFISH_LLM_MODEL="qwen3:4b"
+$env:GOLDFISH_EMBED_PROVIDER="ollama"
+$env:GOLDFISH_EMBED_MODEL="bge-m3"
+python -m goldfish.server --port 18320
+
+模型未下载时，先安装 Ollama，并用 ollama pull <model> 拉取对应模型。
+默认 Ollama 地址：http://127.0.0.1:11434
+服务默认本机监听地址：http://127.0.0.1:18320
+
+三、云端 API（通常按调用量计费）
+
+$env:GOLDFISH_LLM_PROVIDER="openai"
+$env:GOLDFISH_LLM_URL="https://YOUR_PROVIDER/v1"
+$env:GOLDFISH_LLM_MODEL="YOUR_MODEL"
+$env:GOLDFISH_LLM_API_KEY="YOUR_KEY"
+python -m goldfish.server --port 18320
+
+重要：必须填写兼容 Chat Completions 协议的 API；不能直接填普通聊天网页 URL。
+Embedding 可不设置，保持字面/主题/时间/关联检索。
+
+四、混合模式（推荐尝试）
+
+云端 LLM 负责长对话整理与建立关系；Ollama 本地 Embedding 负责查询与概括向量化。
+先设置“三”的四项，再设置：
+
+$env:GOLDFISH_EMBED_PROVIDER="ollama"
+$env:GOLDFISH_EMBED_MODEL="bge-m3"
+
+也可以反过来：本地 LLM + 云端 Embedding，不过这会将概括和每次搜索问题发送到云端。
+
+五、LM Studio / 其他本地 OpenAI-compatible 模型服务
+
+$env:GOLDFISH_LLM_PROVIDER="openai"
+$env:GOLDFISH_LLM_URL="http://127.0.0.1:1234/v1"
+$env:GOLDFISH_LLM_MODEL="你本地服务中的真实模型名"
+
+Embedding 的 URL、模型同理；本地服务必须确实提供 /v1/embeddings 接口。
+
+六、切换和排错
+
+1. 修改环境变量后，重启金鱼 Python 服务（目前没有热切换/UI）。
+2. 访问 GET http://127.0.0.1:18320/providers 确认模型类型和名称；不会显示 API 密钥。
+3. POST http://127.0.0.1:18320/reindex 可为旧概括重新建立向量。
+4. 如果模型不可用，原话仍保留；向量检索失败则退回原有检索。
+5. API Key 不放进源码或共享文件；远程 HTTP 明文默认被拒绝（远程用 HTTPS）。
+6. 如果配置 GOLDFISH_LOCAL_TOKEN，所有金鱼 HTTP API 请求需带相同的 X-Goldfish-Token 头；DSH 插件侧也需配置。
+
+隐私说明：配置云端 LLM 后，整理任务会将原始聊天内容发给该云端模型；配置云端 Embedding 后，向量化时会将摘要和搜索问题发给云端。未配置模型时，金鱼不会自动向任何模型发送内容。
+
+七、目前的验证边界
+
+已通过 Python 模拟测试，覆盖 Ollama / OpenAI-compatible 请求格式、向量 API 响应、模型切换与语义召回。尚未在你的电脑上完成 Ollama 真实加载、云端付费 API 调用及 DSH 真机集成。不同服务商兼容程度可能不一致。
