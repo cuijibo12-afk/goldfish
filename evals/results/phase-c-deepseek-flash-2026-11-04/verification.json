@@ -1,0 +1,23 @@
+{
+  "python": {
+    "command": "python -m unittest discover -s tests -v",
+    "passed": 80,
+    "failed": 0
+  },
+  "plugin": {
+    "command": "node --test dsh-plugin/*.test.mjs dsh-plugin/test.mjs",
+    "passed": 13,
+    "failed": 0
+  },
+  "dsh_host": {
+    "command": "DSH_TEST_RUNTIME=/workspace/scratch/dsh-runtime node --test tests/dsh_integration.mjs",
+    "passed": 1,
+    "failed": 0,
+    "models": "synthetic; excluded from real quality usage"
+  },
+  "offline_recompute_identical": true,
+  "credential_pattern_hit_count": 0,
+  "temporary_credential_removed": true,
+  "core_commit": "0d2282c",
+  "fixture_freeze_commit": "d2cd28c"
+}

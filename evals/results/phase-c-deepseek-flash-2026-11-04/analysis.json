@@ -1,0 +1,1602 @@
+{
+  "provenance": "Frozen evidence/phrase rules; neither model self-ratings nor human adjudication.",
+  "datasets": {
+    "regression": {
+      "fixture_sha256": "8f26f516f5f33cce1248181e416a7c12f2ee46fa4d736f74903ae1b4613d0b0c",
+      "depths": {
+        "0": {
+          "before": {
+            "query_count": 24,
+            "returned_count": 59,
+            "relevant_count": 26,
+            "false_positive_count": 2,
+            "unknown_count": 31,
+            "judged_count": 28,
+            "precision": 0.9285714285714286,
+            "precision_lower_bound": 0.4406779661016949,
+            "precision_upper_bound": 0.9661016949152542,
+            "expected_fact_count": 29,
+            "hit_fact_count": 20,
+            "missed_fact_count": 9,
+            "unresolved_fact_count": 5,
+            "recall": 0.6896551724137931,
+            "recall_lower_bound": 0.6896551724137931,
+            "recall_upper_bound": 0.8620689655172413,
+            "profiles": {
+              "returned_count": 60,
+              "relevant_count": 7,
+              "false_positive_count": 0,
+              "unknown_count": 53,
+              "judged_count": 7,
+              "precision": 1.0,
+              "precision_lower_bound": 0.11666666666666667,
+              "precision_upper_bound": 1.0,
+              "expected_count": 6,
+              "hit_count": 5,
+              "missed_count": 1,
+              "unresolved_count": 1,
+              "recall": 0.8333333333333334,
+              "recall_lower_bound": 0.8333333333333334,
+              "recall_upper_bound": 1.0
+            }
+          },
+          "after": {
+            "query_count": 24,
+            "returned_count": 52,
+            "relevant_count": 31,
+            "false_positive_count": 1,
+            "unknown_count": 20,
+            "judged_count": 32,
+            "precision": 0.96875,
+            "precision_lower_bound": 0.5961538461538461,
+            "precision_upper_bound": 0.9807692307692307,
+            "expected_fact_count": 29,
+            "hit_fact_count": 22,
+            "missed_fact_count": 7,
+            "unresolved_fact_count": 6,
+            "recall": 0.7586206896551724,
+            "recall_lower_bound": 0.7586206896551724,
+            "recall_upper_bound": 0.9655172413793104,
+            "profiles": {
+              "returned_count": 8,
+              "relevant_count": 3,
+              "false_positive_count": 0,
+              "unknown_count": 5,
+              "judged_count": 3,
+              "precision": 1.0,
+              "precision_lower_bound": 0.375,
+              "precision_upper_bound": 1.0,
+              "expected_count": 6,
+              "hit_count": 2,
+              "missed_count": 4,
+              "unresolved_count": 1,
+              "recall": 0.3333333333333333,
+              "recall_lower_bound": 0.3333333333333333,
+              "recall_upper_bound": 0.5
+            }
+          },
+          "actual_ranking_usage": {
+            "prompt_tokens": 125772,
+            "completion_tokens": 10035,
+            "total_tokens": 135807
+          },
+          "latency_ms": {
+            "median": 3015.344112499861,
+            "p95_nearest_rank": 3905.017727000086,
+            "max": 6667.531913999483
+          },
+          "injection_characters_not_tokens": 14266,
+          "model_error_count": 0
+        },
+        "1": {
+          "before": {
+            "query_count": 24,
+            "returned_count": 79,
+            "relevant_count": 33,
+            "false_positive_count": 3,
+            "unknown_count": 43,
+            "judged_count": 36,
+            "precision": 0.9166666666666666,
+            "precision_lower_bound": 0.4177215189873418,
+            "precision_upper_bound": 0.9620253164556962,
+            "expected_fact_count": 29,
+            "hit_fact_count": 21,
+            "missed_fact_count": 8,
+            "unresolved_fact_count": 4,
+            "recall": 0.7241379310344828,
+            "recall_lower_bound": 0.7241379310344828,
+            "recall_upper_bound": 0.8620689655172413,
+            "profiles": {
+              "returned_count": 60,
+              "relevant_count": 7,
+              "false_positive_count": 0,
+              "unknown_count": 53,
+              "judged_count": 7,
+              "precision": 1.0,
+              "precision_lower_bound": 0.11666666666666667,
+              "precision_upper_bound": 1.0,
+              "expected_count": 6,
+              "hit_count": 5,
+              "missed_count": 1,
+              "unresolved_count": 1,
+              "recall": 0.8333333333333334,
+              "recall_lower_bound": 0.8333333333333334,
+              "recall_upper_bound": 1.0
+            }
+          },
+          "after": {
+            "query_count": 24,
+            "returned_count": 50,
+            "relevant_count": 27,
+            "false_positive_count": 1,
+            "unknown_count": 22,
+            "judged_count": 28,
+            "precision": 0.9642857142857143,
+            "precision_lower_bound": 0.54,
+            "precision_upper_bound": 0.98,
+            "expected_fact_count": 29,
+            "hit_fact_count": 20,
+            "missed_fact_count": 9,
+            "unresolved_fact_count": 6,
+            "recall": 0.6896551724137931,
+            "recall_lower_bound": 0.6896551724137931,
+            "recall_upper_bound": 0.896551724137931,
+            "profiles": {
+              "returned_count": 8,
+              "relevant_count": 3,
+              "false_positive_count": 0,
+              "unknown_count": 5,
+              "judged_count": 3,
+              "precision": 1.0,
+              "precision_lower_bound": 0.375,
+              "precision_upper_bound": 1.0,
+              "expected_count": 6,
+              "hit_count": 2,
+              "missed_count": 4,
+              "unresolved_count": 1,
+              "recall": 0.3333333333333333,
+              "recall_lower_bound": 0.3333333333333333,
+              "recall_upper_bound": 0.5
+            }
+          },
+          "actual_ranking_usage": {
+            "prompt_tokens": 206172,
+            "completion_tokens": 9752,
+            "total_tokens": 215924
+          },
+          "latency_ms": {
+            "median": 2907.3827209999763,
+            "p95_nearest_rank": 3884.77665299979,
+            "max": 7255.9792259999085
+          },
+          "injection_characters_not_tokens": 13824,
+          "model_error_count": 0
+        },
+        "2": {
+          "before": {
+            "query_count": 24,
+            "returned_count": 81,
+            "relevant_count": 33,
+            "false_positive_count": 3,
+            "unknown_count": 45,
+            "judged_count": 36,
+            "precision": 0.9166666666666666,
+            "precision_lower_bound": 0.4074074074074074,
+            "precision_upper_bound": 0.9629629629629629,
+            "expected_fact_count": 29,
+            "hit_fact_count": 21,
+            "missed_fact_count": 8,
+            "unresolved_fact_count": 4,
+            "recall": 0.7241379310344828,
+            "recall_lower_bound": 0.7241379310344828,
+            "recall_upper_bound": 0.8620689655172413,
+            "profiles": {
+              "returned_count": 60,
+              "relevant_count": 7,
+              "false_positive_count": 0,
+              "unknown_count": 53,
+              "judged_count": 7,
+              "precision": 1.0,
+              "precision_lower_bound": 0.11666666666666667,
+              "precision_upper_bound": 1.0,
+              "expected_count": 6,
+              "hit_count": 5,
+              "missed_count": 1,
+              "unresolved_count": 1,
+              "recall": 0.8333333333333334,
+              "recall_lower_bound": 0.8333333333333334,
+              "recall_upper_bound": 1.0
+            }
+          },
+          "after": {
+            "query_count": 24,
+            "returned_count": 52,
+            "relevant_count": 29,
+            "false_positive_count": 1,
+            "unknown_count": 22,
+            "judged_count": 30,
+            "precision": 0.9666666666666667,
+            "precision_lower_bound": 0.5576923076923077,
+            "precision_upper_bound": 0.9807692307692307,
+            "expected_fact_count": 29,
+            "hit_fact_count": 21,
+            "missed_fact_count": 8,
+            "unresolved_fact_count": 6,
+            "recall": 0.7241379310344828,
+            "recall_lower_bound": 0.7241379310344828,
+            "recall_upper_bound": 0.9310344827586207,
+            "profiles": {
+              "returned_count": 7,
+              "relevant_count": 3,
+              "false_positive_count": 0,
+              "unknown_count": 4,
+              "judged_count": 3,
+              "precision": 1.0,
+              "precision_lower_bound": 0.42857142857142855,
+              "precision_upper_bound": 1.0,
+              "expected_count": 6,
+              "hit_count": 2,
+              "missed_count": 4,
+              "unresolved_count": 1,
+              "recall": 0.3333333333333333,
+              "recall_lower_bound": 0.3333333333333333,
+              "recall_upper_bound": 0.5
+            }
+          },
+          "actual_ranking_usage": {
+            "prompt_tokens": 206172,
+            "completion_tokens": 9954,
+            "total_tokens": 216126
+          },
+          "latency_ms": {
+            "median": 3148.954313499871,
+            "p95_nearest_rank": 6609.6896569997625,
+            "max": 7331.088971999634
+          },
+          "injection_characters_not_tokens": 14280,
+          "model_error_count": 0
+        }
+      },
+      "recorded_core_hashes_match_worktree": true,
+      "depth1_depth2_identical_model_inputs": 24,
+      "extraction": {
+        "gold_count": 26,
+        "record_count": 33,
+        "probe_matched_count": 23,
+        "manual_review_ids": [
+          "f04",
+          "f06",
+          "f07"
+        ],
+        "no_evidence_candidate_ids": []
+      },
+      "extraction_failures": [],
+      "model_review_statuses_not_human": {
+        "supported": 31,
+        "uncertain": 5
+      }
+    },
+    "heldout-once": {
+      "fixture_sha256": "e30efa55c200e15088f88f14567086128a4ca484cd7572b9ba19292d33ba5782",
+      "depths": {
+        "0": {
+          "before": {
+            "query_count": 10,
+            "returned_count": 14,
+            "relevant_count": 7,
+            "false_positive_count": 2,
+            "unknown_count": 5,
+            "judged_count": 9,
+            "precision": 0.7777777777777778,
+            "precision_lower_bound": 0.5,
+            "precision_upper_bound": 0.8571428571428571,
+            "expected_fact_count": 10,
+            "hit_fact_count": 5,
+            "missed_fact_count": 5,
+            "unresolved_fact_count": 2,
+            "recall": 0.5,
+            "recall_lower_bound": 0.5,
+            "recall_upper_bound": 0.7,
+            "profiles": {
+              "returned_count": 9,
+              "relevant_count": 0,
+              "false_positive_count": 0,
+              "unknown_count": 9,
+              "judged_count": 0,
+              "precision": null,
+              "precision_lower_bound": 0.0,
+              "precision_upper_bound": 1.0,
+              "expected_count": 0,
+              "hit_count": 0,
+              "missed_count": 0,
+              "unresolved_count": 0,
+              "recall": null,
+              "recall_lower_bound": null,
+              "recall_upper_bound": null
+            }
+          },
+          "after": {
+            "query_count": 10,
+            "returned_count": 12,
+            "relevant_count": 7,
+            "false_positive_count": 0,
+            "unknown_count": 5,
+            "judged_count": 7,
+            "precision": 1.0,
+            "precision_lower_bound": 0.5833333333333334,
+            "precision_upper_bound": 1.0,
+            "expected_fact_count": 10,
+            "hit_fact_count": 6,
+            "missed_fact_count": 4,
+            "unresolved_fact_count": 3,
+            "recall": 0.6,
+            "recall_lower_bound": 0.6,
+            "recall_upper_bound": 0.9,
+            "profiles": {
+              "returned_count": 0,
+              "relevant_count": 0,
+              "false_positive_count": 0,
+              "unknown_count": 0,
+              "judged_count": 0,
+              "precision": null,
+              "precision_lower_bound": null,
+              "precision_upper_bound": null,
+              "expected_count": 0,
+              "hit_count": 0,
+              "missed_count": 0,
+              "unresolved_count": 0,
+              "recall": null,
+              "recall_lower_bound": null,
+              "recall_upper_bound": null
+            }
+          },
+          "actual_ranking_usage": {
+            "prompt_tokens": 21982,
+            "completion_tokens": 1945,
+            "total_tokens": 23927
+          },
+          "latency_ms": {
+            "median": 1676.9734210001843,
+            "p95_nearest_rank": 2546.3256359998923,
+            "max": 2546.3256359998923
+          },
+          "injection_characters_not_tokens": 3321,
+          "model_error_count": 0
+        },
+        "1": {
+          "before": {
+            "query_count": 10,
+            "returned_count": 18,
+            "relevant_count": 7,
+            "false_positive_count": 3,
+            "unknown_count": 8,
+            "judged_count": 10,
+            "precision": 0.7,
+            "precision_lower_bound": 0.3888888888888889,
+            "precision_upper_bound": 0.8333333333333334,
+            "expected_fact_count": 10,
+            "hit_fact_count": 5,
+            "missed_fact_count": 5,
+            "unresolved_fact_count": 3,
+            "recall": 0.5,
+            "recall_lower_bound": 0.5,
+            "recall_upper_bound": 0.8,
+            "profiles": {
+              "returned_count": 9,
+              "relevant_count": 0,
+              "false_positive_count": 0,
+              "unknown_count": 9,
+              "judged_count": 0,
+              "precision": null,
+              "precision_lower_bound": 0.0,
+              "precision_upper_bound": 1.0,
+              "expected_count": 0,
+              "hit_count": 0,
+              "missed_count": 0,
+              "unresolved_count": 0,
+              "recall": null,
+              "recall_lower_bound": null,
+              "recall_upper_bound": null
+            }
+          },
+          "after": {
+            "query_count": 10,
+            "returned_count": 10,
+            "relevant_count": 6,
+            "false_positive_count": 0,
+            "unknown_count": 4,
+            "judged_count": 6,
+            "precision": 1.0,
+            "precision_lower_bound": 0.6,
+            "precision_upper_bound": 1.0,
+            "expected_fact_count": 10,
+            "hit_fact_count": 6,
+            "missed_fact_count": 4,
+            "unresolved_fact_count": 3,
+            "recall": 0.6,
+            "recall_lower_bound": 0.6,
+            "recall_upper_bound": 0.9,
+            "profiles": {
+              "returned_count": 0,
+              "relevant_count": 0,
+              "false_positive_count": 0,
+              "unknown_count": 0,
+              "judged_count": 0,
+              "precision": null,
+              "precision_lower_bound": null,
+              "precision_upper_bound": null,
+              "expected_count": 0,
+              "hit_count": 0,
+              "missed_count": 0,
+              "unresolved_count": 0,
+              "recall": null,
+              "recall_lower_bound": null,
+              "recall_upper_bound": null
+            }
+          },
+          "actual_ranking_usage": {
+            "prompt_tokens": 27332,
+            "completion_tokens": 1782,
+            "total_tokens": 29114
+          },
+          "latency_ms": {
+            "median": 1673.6123165001118,
+            "p95_nearest_rank": 2255.4458110007545,
+            "max": 2255.4458110007545
+          },
+          "injection_characters_not_tokens": 2989,
+          "model_error_count": 0
+        },
+        "2": {
+          "before": {
+            "query_count": 10,
+            "returned_count": 18,
+            "relevant_count": 7,
+            "false_positive_count": 3,
+            "unknown_count": 8,
+            "judged_count": 10,
+            "precision": 0.7,
+            "precision_lower_bound": 0.3888888888888889,
+            "precision_upper_bound": 0.8333333333333334,
+            "expected_fact_count": 10,
+            "hit_fact_count": 5,
+            "missed_fact_count": 5,
+            "unresolved_fact_count": 3,
+            "recall": 0.5,
+            "recall_lower_bound": 0.5,
+            "recall_upper_bound": 0.8,
+            "profiles": {
+              "returned_count": 9,
+              "relevant_count": 0,
+              "false_positive_count": 0,
+              "unknown_count": 9,
+              "judged_count": 0,
+              "precision": null,
+              "precision_lower_bound": 0.0,
+              "precision_upper_bound": 1.0,
+              "expected_count": 0,
+              "hit_count": 0,
+              "missed_count": 0,
+              "unresolved_count": 0,
+              "recall": null,
+              "recall_lower_bound": null,
+              "recall_upper_bound": null
+            }
+          },
+          "after": {
+            "query_count": 10,
+            "returned_count": 11,
+            "relevant_count": 7,
+            "false_positive_count": 0,
+            "unknown_count": 4,
+            "judged_count": 7,
+            "precision": 1.0,
+            "precision_lower_bound": 0.6363636363636364,
+            "precision_upper_bound": 1.0,
+            "expected_fact_count": 10,
+            "hit_fact_count": 6,
+            "missed_fact_count": 4,
+            "unresolved_fact_count": 3,
+            "recall": 0.6,
+            "recall_lower_bound": 0.6,
+            "recall_upper_bound": 0.9,
+            "profiles": {
+              "returned_count": 0,
+              "relevant_count": 0,
+              "false_positive_count": 0,
+              "unknown_count": 0,
+              "judged_count": 0,
+              "precision": null,
+              "precision_lower_bound": null,
+              "precision_upper_bound": null,
+              "expected_count": 0,
+              "hit_count": 0,
+              "missed_count": 0,
+              "unresolved_count": 0,
+              "recall": null,
+              "recall_lower_bound": null,
+              "recall_upper_bound": null
+            }
+          },
+          "actual_ranking_usage": {
+            "prompt_tokens": 27332,
+            "completion_tokens": 1891,
+            "total_tokens": 29223
+          },
+          "latency_ms": {
+            "median": 1648.7610754998059,
+            "p95_nearest_rank": 2424.337540999659,
+            "max": 2424.337540999659
+          },
+          "injection_characters_not_tokens": 3166,
+          "model_error_count": 0
+        }
+      },
+      "recorded_core_hashes_match_worktree": true,
+      "depth1_depth2_identical_model_inputs": 10,
+      "extraction": {
+        "gold_count": 10,
+        "record_count": 10,
+        "probe_matched_count": 5,
+        "manual_review_ids": [
+          "h06",
+          "h08",
+          "h09"
+        ],
+        "no_evidence_candidate_ids": [
+          "h03",
+          "h10"
+        ]
+      },
+      "extraction_failures": [
+        {
+          "session_id": "h03",
+          "error_type": "ValueError",
+          "call_index": 3,
+          "retried": false
+        }
+      ],
+      "coverage_rule_outcomes": {
+        "confirmed_correct_against_frozen_label": 8
+      },
+      "coverage_actual_states": {
+        "full": 3,
+        "partial": 1,
+        "missing": 1,
+        "contradicted": 3
+      },
+      "coverage_missing_detail_checks": [
+        {
+          "case_id": "hc02",
+          "all_expected_fragments_present": true
+        },
+        {
+          "case_id": "hc03",
+          "all_expected_fragments_present": true
+        }
+      ],
+      "before_exact_text_suppressed_case_ids": [],
+      "relation_rule_outcomes_not_human": {
+        "confirmed_correct_against_frozen_label": 4,
+        "unresolved": 1
+      }
+    }
+  },
+  "usage_ledger": [
+    {
+      "run": "dev",
+      "calls": 3,
+      "usage": {
+        "prompt_tokens": 11845,
+        "completion_tokens": 1736,
+        "total_tokens": 13581
+      }
+    },
+    {
+      "run": "dev2",
+      "calls": 3,
+      "usage": {
+        "prompt_tokens": 11972,
+        "completion_tokens": 1070,
+        "total_tokens": 13042
+      }
+    },
+    {
+      "run": "regression",
+      "calls": 76,
+      "usage": {
+        "prompt_tokens": 563395,
+        "completion_tokens": 35351,
+        "total_tokens": 598746
+      }
+    },
+    {
+      "run": "heldout-once",
+      "calls": 57,
+      "usage": {
+        "prompt_tokens": 118118,
+        "completion_tokens": 11317,
+        "total_tokens": 129435
+      }
+    },
+    {
+      "run": "token-probe",
+      "calls": 10,
+      "usage": {
+        "prompt_tokens": 3897,
+        "completion_tokens": 10,
+        "total_tokens": 3907
+      }
+    },
+    {
+      "run": "live-native",
+      "calls": 21,
+      "usage": {
+        "prompt_tokens": 41877,
+        "completion_tokens": 3711,
+        "total_tokens": 45588
+      }
+    },
+    {
+      "run": "live-lossy",
+      "calls": 21,
+      "usage": {
+        "prompt_tokens": 40697,
+        "completion_tokens": 3097,
+        "total_tokens": 43794
+      }
+    }
+  ],
+  "unresolved_queue": [
+    {
+      "dataset": "regression",
+      "depth": "0",
+      "query_id": "q01",
+      "category": "unknown_ids",
+      "ids": [
+        "acc2df4b-d1ea-4b04-b645-193af279ee64"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "0",
+      "query_id": "q02",
+      "category": "unknown_ids",
+      "ids": [
+        "f7f1f901-64d0-4e8e-bd3c-9764bd6215f6",
+        "5f2277ae-1a0f-4560-bc35-4d7dd991fdcd"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "0",
+      "query_id": "q02",
+      "category": "unresolved_fact_ids",
+      "ids": [
+        "f04"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "0",
+      "query_id": "q03",
+      "category": "unknown_ids",
+      "ids": [
+        "f7f1f901-64d0-4e8e-bd3c-9764bd6215f6"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "0",
+      "query_id": "q03",
+      "category": "unresolved_fact_ids",
+      "ids": [
+        "f04"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "0",
+      "query_id": "q04",
+      "category": "unknown_ids",
+      "ids": [
+        "d3b47d62-836e-47fa-8937-705e5c301f8a"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "0",
+      "query_id": "q06",
+      "category": "unknown_ids",
+      "ids": [
+        "42eb9dd8-f453-4026-a064-886ed8b98b77",
+        "acc2df4b-d1ea-4b04-b645-193af279ee64"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "0",
+      "query_id": "q08",
+      "category": "false_positive_ids",
+      "ids": [
+        "acfb8eed-13bd-402f-ac40-21d9a22e1b39"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "0",
+      "query_id": "q09",
+      "category": "unknown_ids",
+      "ids": [
+        "7dd6a756-292d-4265-8cc1-3c887995afd5",
+        "d9cbbcf0-62cb-4d06-acc0-f7d9692654ec",
+        "ef487b4b-7cc0-4b03-9de9-6d475c63741c"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "0",
+      "query_id": "q09",
+      "category": "unresolved_fact_ids",
+      "ids": [
+        "f06"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "0",
+      "query_id": "q10",
+      "category": "unknown_ids",
+      "ids": [
+        "7dd6a756-292d-4265-8cc1-3c887995afd5"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "0",
+      "query_id": "q10",
+      "category": "unresolved_fact_ids",
+      "ids": [
+        "f07"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "0",
+      "query_id": "q13",
+      "category": "unknown_ids",
+      "ids": [
+        "d6d4e9b6-6a80-4771-81b3-b19a472e1a39"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "0",
+      "query_id": "q14",
+      "category": "no_candidate_fact_ids",
+      "ids": [
+        "f13"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "0",
+      "query_id": "q15",
+      "category": "unknown_ids",
+      "ids": [
+        "ae8cfa24-55ed-4f8a-8934-51ceb988f48e",
+        "34dd0cd4-9093-4650-9cb7-fc9e39d6f302"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "0",
+      "query_id": "q16",
+      "category": "unknown_ids",
+      "ids": [
+        "e0bcba89-1ed9-4a3d-9d59-9c8274ad4d6d"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "0",
+      "query_id": "q17",
+      "category": "unknown_ids",
+      "ids": [
+        "d3b47d62-836e-47fa-8937-705e5c301f8a"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "0",
+      "query_id": "q18",
+      "category": "unknown_ids",
+      "ids": [
+        "d814bc9f-9bc1-466e-9b74-2448bbebfd11"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "0",
+      "query_id": "q18",
+      "category": "unresolved_fact_ids",
+      "ids": [
+        "f02"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "0",
+      "query_id": "q21",
+      "category": "unknown_ids",
+      "ids": [
+        "9bdd446d-650d-4ec1-8256-08cb17ea36ff"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "0",
+      "query_id": "q22",
+      "category": "unknown_ids",
+      "ids": [
+        "d6d4e9b6-6a80-4771-81b3-b19a472e1a39"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "0",
+      "query_id": "q24",
+      "category": "unknown_ids",
+      "ids": [
+        "f7f1f901-64d0-4e8e-bd3c-9764bd6215f6"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "0",
+      "query_id": "q24",
+      "category": "unresolved_fact_ids",
+      "ids": [
+        "f04"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "1",
+      "query_id": "q01",
+      "category": "unknown_ids",
+      "ids": [
+        "acc2df4b-d1ea-4b04-b645-193af279ee64"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "1",
+      "query_id": "q02",
+      "category": "unknown_ids",
+      "ids": [
+        "f7f1f901-64d0-4e8e-bd3c-9764bd6215f6",
+        "5f2277ae-1a0f-4560-bc35-4d7dd991fdcd"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "1",
+      "query_id": "q02",
+      "category": "unresolved_fact_ids",
+      "ids": [
+        "f04"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "1",
+      "query_id": "q03",
+      "category": "unknown_ids",
+      "ids": [
+        "f7f1f901-64d0-4e8e-bd3c-9764bd6215f6",
+        "5f2277ae-1a0f-4560-bc35-4d7dd991fdcd"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "1",
+      "query_id": "q03",
+      "category": "unresolved_fact_ids",
+      "ids": [
+        "f04"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "1",
+      "query_id": "q03",
+      "category": "no_candidate_fact_ids",
+      "ids": [
+        "f11"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "1",
+      "query_id": "q04",
+      "category": "unknown_ids",
+      "ids": [
+        "d3b47d62-836e-47fa-8937-705e5c301f8a"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "1",
+      "query_id": "q06",
+      "category": "unknown_ids",
+      "ids": [
+        "42eb9dd8-f453-4026-a064-886ed8b98b77",
+        "acc2df4b-d1ea-4b04-b645-193af279ee64"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "1",
+      "query_id": "q08",
+      "category": "false_positive_ids",
+      "ids": [
+        "acfb8eed-13bd-402f-ac40-21d9a22e1b39"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "1",
+      "query_id": "q09",
+      "category": "unknown_ids",
+      "ids": [
+        "7dd6a756-292d-4265-8cc1-3c887995afd5",
+        "d9cbbcf0-62cb-4d06-acc0-f7d9692654ec",
+        "ef487b4b-7cc0-4b03-9de9-6d475c63741c"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "1",
+      "query_id": "q09",
+      "category": "unresolved_fact_ids",
+      "ids": [
+        "f06"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "1",
+      "query_id": "q10",
+      "category": "unknown_ids",
+      "ids": [
+        "7dd6a756-292d-4265-8cc1-3c887995afd5"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "1",
+      "query_id": "q10",
+      "category": "unresolved_fact_ids",
+      "ids": [
+        "f07"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "1",
+      "query_id": "q13",
+      "category": "unknown_ids",
+      "ids": [
+        "d6d4e9b6-6a80-4771-81b3-b19a472e1a39"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "1",
+      "query_id": "q14",
+      "category": "no_candidate_fact_ids",
+      "ids": [
+        "f13"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "1",
+      "query_id": "q15",
+      "category": "unknown_ids",
+      "ids": [
+        "ae8cfa24-55ed-4f8a-8934-51ceb988f48e",
+        "34dd0cd4-9093-4650-9cb7-fc9e39d6f302"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "1",
+      "query_id": "q16",
+      "category": "unknown_ids",
+      "ids": [
+        "e0bcba89-1ed9-4a3d-9d59-9c8274ad4d6d"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "1",
+      "query_id": "q17",
+      "category": "unknown_ids",
+      "ids": [
+        "d3b47d62-836e-47fa-8937-705e5c301f8a"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "1",
+      "query_id": "q18",
+      "category": "unknown_ids",
+      "ids": [
+        "d814bc9f-9bc1-466e-9b74-2448bbebfd11"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "1",
+      "query_id": "q18",
+      "category": "unresolved_fact_ids",
+      "ids": [
+        "f02"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "1",
+      "query_id": "q18",
+      "category": "no_candidate_fact_ids",
+      "ids": [
+        "f17"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "1",
+      "query_id": "q21",
+      "category": "unknown_ids",
+      "ids": [
+        "9bdd446d-650d-4ec1-8256-08cb17ea36ff"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "1",
+      "query_id": "q22",
+      "category": "unknown_ids",
+      "ids": [
+        "d6d4e9b6-6a80-4771-81b3-b19a472e1a39"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "1",
+      "query_id": "q23",
+      "category": "unknown_ids",
+      "ids": [
+        "acc2df4b-d1ea-4b04-b645-193af279ee64"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "1",
+      "query_id": "q24",
+      "category": "unknown_ids",
+      "ids": [
+        "f7f1f901-64d0-4e8e-bd3c-9764bd6215f6"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "1",
+      "query_id": "q24",
+      "category": "unresolved_fact_ids",
+      "ids": [
+        "f04"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "2",
+      "query_id": "q01",
+      "category": "unknown_ids",
+      "ids": [
+        "acc2df4b-d1ea-4b04-b645-193af279ee64"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "2",
+      "query_id": "q02",
+      "category": "unknown_ids",
+      "ids": [
+        "f7f1f901-64d0-4e8e-bd3c-9764bd6215f6",
+        "5f2277ae-1a0f-4560-bc35-4d7dd991fdcd"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "2",
+      "query_id": "q02",
+      "category": "unresolved_fact_ids",
+      "ids": [
+        "f04"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "2",
+      "query_id": "q03",
+      "category": "unknown_ids",
+      "ids": [
+        "f7f1f901-64d0-4e8e-bd3c-9764bd6215f6",
+        "5f2277ae-1a0f-4560-bc35-4d7dd991fdcd"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "2",
+      "query_id": "q03",
+      "category": "unresolved_fact_ids",
+      "ids": [
+        "f04"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "2",
+      "query_id": "q03",
+      "category": "no_candidate_fact_ids",
+      "ids": [
+        "f11"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "2",
+      "query_id": "q04",
+      "category": "unknown_ids",
+      "ids": [
+        "d3b47d62-836e-47fa-8937-705e5c301f8a"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "2",
+      "query_id": "q06",
+      "category": "unknown_ids",
+      "ids": [
+        "42eb9dd8-f453-4026-a064-886ed8b98b77",
+        "acc2df4b-d1ea-4b04-b645-193af279ee64"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "2",
+      "query_id": "q08",
+      "category": "false_positive_ids",
+      "ids": [
+        "acfb8eed-13bd-402f-ac40-21d9a22e1b39"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "2",
+      "query_id": "q09",
+      "category": "unknown_ids",
+      "ids": [
+        "7dd6a756-292d-4265-8cc1-3c887995afd5",
+        "ef487b4b-7cc0-4b03-9de9-6d475c63741c",
+        "d9cbbcf0-62cb-4d06-acc0-f7d9692654ec"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "2",
+      "query_id": "q09",
+      "category": "unresolved_fact_ids",
+      "ids": [
+        "f06"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "2",
+      "query_id": "q10",
+      "category": "unknown_ids",
+      "ids": [
+        "7dd6a756-292d-4265-8cc1-3c887995afd5"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "2",
+      "query_id": "q10",
+      "category": "unresolved_fact_ids",
+      "ids": [
+        "f07"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "2",
+      "query_id": "q13",
+      "category": "unknown_ids",
+      "ids": [
+        "d6d4e9b6-6a80-4771-81b3-b19a472e1a39"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "2",
+      "query_id": "q14",
+      "category": "no_candidate_fact_ids",
+      "ids": [
+        "f13"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "2",
+      "query_id": "q15",
+      "category": "unknown_ids",
+      "ids": [
+        "ae8cfa24-55ed-4f8a-8934-51ceb988f48e",
+        "34dd0cd4-9093-4650-9cb7-fc9e39d6f302"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "2",
+      "query_id": "q16",
+      "category": "unknown_ids",
+      "ids": [
+        "e0bcba89-1ed9-4a3d-9d59-9c8274ad4d6d"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "2",
+      "query_id": "q17",
+      "category": "unknown_ids",
+      "ids": [
+        "d3b47d62-836e-47fa-8937-705e5c301f8a"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "2",
+      "query_id": "q18",
+      "category": "unknown_ids",
+      "ids": [
+        "d814bc9f-9bc1-466e-9b74-2448bbebfd11"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "2",
+      "query_id": "q18",
+      "category": "unresolved_fact_ids",
+      "ids": [
+        "f02"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "2",
+      "query_id": "q21",
+      "category": "unknown_ids",
+      "ids": [
+        "9bdd446d-650d-4ec1-8256-08cb17ea36ff"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "2",
+      "query_id": "q22",
+      "category": "unknown_ids",
+      "ids": [
+        "d6d4e9b6-6a80-4771-81b3-b19a472e1a39"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "2",
+      "query_id": "q23",
+      "category": "unknown_ids",
+      "ids": [
+        "acc2df4b-d1ea-4b04-b645-193af279ee64"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "2",
+      "query_id": "q24",
+      "category": "unknown_ids",
+      "ids": [
+        "f7f1f901-64d0-4e8e-bd3c-9764bd6215f6"
+      ]
+    },
+    {
+      "dataset": "regression",
+      "depth": "2",
+      "query_id": "q24",
+      "category": "unresolved_fact_ids",
+      "ids": [
+        "f04"
+      ]
+    },
+    {
+      "dataset": "heldout-once",
+      "depth": "0",
+      "query_id": "z03",
+      "category": "no_candidate_fact_ids",
+      "ids": [
+        "h03"
+      ]
+    },
+    {
+      "dataset": "heldout-once",
+      "depth": "0",
+      "query_id": "z05",
+      "category": "unknown_ids",
+      "ids": [
+        "053feace-1d46-43e0-8118-d77bbdbf40b6"
+      ]
+    },
+    {
+      "dataset": "heldout-once",
+      "depth": "0",
+      "query_id": "z06",
+      "category": "unknown_ids",
+      "ids": [
+        "d35e02d4-f752-42f3-8f94-eac0390c9975",
+        "6f77b950-ccc9-452b-9177-645c5b7735c4"
+      ]
+    },
+    {
+      "dataset": "heldout-once",
+      "depth": "0",
+      "query_id": "z06",
+      "category": "unresolved_fact_ids",
+      "ids": [
+        "h06"
+      ]
+    },
+    {
+      "dataset": "heldout-once",
+      "depth": "0",
+      "query_id": "z07",
+      "category": "unknown_ids",
+      "ids": [
+        "f50ee33b-550f-4e15-9c3c-0732403ae297"
+      ]
+    },
+    {
+      "dataset": "heldout-once",
+      "depth": "0",
+      "query_id": "z07",
+      "category": "unresolved_fact_ids",
+      "ids": [
+        "h08"
+      ]
+    },
+    {
+      "dataset": "heldout-once",
+      "depth": "0",
+      "query_id": "z08",
+      "category": "unknown_ids",
+      "ids": [
+        "d2016ef2-9f79-4020-acb0-dc0723b8099a"
+      ]
+    },
+    {
+      "dataset": "heldout-once",
+      "depth": "0",
+      "query_id": "z08",
+      "category": "unresolved_fact_ids",
+      "ids": [
+        "h09"
+      ]
+    },
+    {
+      "dataset": "heldout-once",
+      "depth": "1",
+      "query_id": "z03",
+      "category": "no_candidate_fact_ids",
+      "ids": [
+        "h03"
+      ]
+    },
+    {
+      "dataset": "heldout-once",
+      "depth": "1",
+      "query_id": "z06",
+      "category": "unknown_ids",
+      "ids": [
+        "d35e02d4-f752-42f3-8f94-eac0390c9975",
+        "6f77b950-ccc9-452b-9177-645c5b7735c4"
+      ]
+    },
+    {
+      "dataset": "heldout-once",
+      "depth": "1",
+      "query_id": "z06",
+      "category": "unresolved_fact_ids",
+      "ids": [
+        "h06"
+      ]
+    },
+    {
+      "dataset": "heldout-once",
+      "depth": "1",
+      "query_id": "z07",
+      "category": "unknown_ids",
+      "ids": [
+        "f50ee33b-550f-4e15-9c3c-0732403ae297"
+      ]
+    },
+    {
+      "dataset": "heldout-once",
+      "depth": "1",
+      "query_id": "z07",
+      "category": "unresolved_fact_ids",
+      "ids": [
+        "h08"
+      ]
+    },
+    {
+      "dataset": "heldout-once",
+      "depth": "1",
+      "query_id": "z08",
+      "category": "unknown_ids",
+      "ids": [
+        "d2016ef2-9f79-4020-acb0-dc0723b8099a"
+      ]
+    },
+    {
+      "dataset": "heldout-once",
+      "depth": "1",
+      "query_id": "z08",
+      "category": "unresolved_fact_ids",
+      "ids": [
+        "h09"
+      ]
+    },
+    {
+      "dataset": "heldout-once",
+      "depth": "2",
+      "query_id": "z03",
+      "category": "no_candidate_fact_ids",
+      "ids": [
+        "h03"
+      ]
+    },
+    {
+      "dataset": "heldout-once",
+      "depth": "2",
+      "query_id": "z06",
+      "category": "unknown_ids",
+      "ids": [
+        "d35e02d4-f752-42f3-8f94-eac0390c9975",
+        "6f77b950-ccc9-452b-9177-645c5b7735c4"
+      ]
+    },
+    {
+      "dataset": "heldout-once",
+      "depth": "2",
+      "query_id": "z06",
+      "category": "unresolved_fact_ids",
+      "ids": [
+        "h06"
+      ]
+    },
+    {
+      "dataset": "heldout-once",
+      "depth": "2",
+      "query_id": "z07",
+      "category": "unknown_ids",
+      "ids": [
+        "f50ee33b-550f-4e15-9c3c-0732403ae297"
+      ]
+    },
+    {
+      "dataset": "heldout-once",
+      "depth": "2",
+      "query_id": "z07",
+      "category": "unresolved_fact_ids",
+      "ids": [
+        "h08"
+      ]
+    },
+    {
+      "dataset": "heldout-once",
+      "depth": "2",
+      "query_id": "z08",
+      "category": "unknown_ids",
+      "ids": [
+        "d2016ef2-9f79-4020-acb0-dc0723b8099a"
+      ]
+    },
+    {
+      "dataset": "heldout-once",
+      "depth": "2",
+      "query_id": "z08",
+      "category": "unresolved_fact_ids",
+      "ids": [
+        "h09"
+      ]
+    }
+  ],
+  "live": {
+    "live-native": {
+      "status": "completed",
+      "failed_checks": [],
+      "injections_per_turn": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "semantic_fallbacks": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "recall_latency_ms": [
+        1701.7,
+        1957.6,
+        1785.5,
+        1917.7,
+        2252.4,
+        2074.6
+      ],
+      "final_answer": "根据现有记忆：\n\n- 桂花拿铁的杯套编号是 **FJ-7315**。\n- 蓝色地铁票夹在**纸质笔记本**里。"
+    },
+    "live-lossy": {
+      "status": "completed",
+      "failed_checks": [],
+      "injections_per_turn": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "semantic_fallbacks": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "recall_latency_ms": [
+        1732.3,
+        2696.6,
+        1982.6,
+        2207.6,
+        2278.4,
+        1742.7
+      ],
+      "final_answer": "根据现有证据：\n\n- 桂花拿铁杯套上的编号是 **FJ-7315**。\n- 蓝色地铁票夹在**纸质笔记本**里。\n\n这两条都来自 2025 年 10 月 18 日旧码头那次记录。"
+    }
+  },
+  "usage_total": {
+    "prompt_tokens": 791801,
+    "completion_tokens": 56292,
+    "total_tokens": 848093
+  },
+  "calls_total": 191
+}

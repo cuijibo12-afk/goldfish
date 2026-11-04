@@ -1,0 +1,652 @@
+{
+  "purpose": "input_token_measurement_only",
+  "model": {
+    "provider": "openai",
+    "model": "deepseek-flash",
+    "configured": true,
+    "local": false,
+    "thinking": "disabled",
+    "max_tokens": 8192
+  },
+  "calls": [
+    {
+      "dataset": "regression",
+      "query_id": "q03",
+      "variant": "no_memory",
+      "request": {
+        "model": "deepseek-flash",
+        "messages": [
+          {
+            "role": "system",
+            "content": "根据给出的来源回答用户，不推断心理。"
+          },
+          {
+            "role": "user",
+            "content": "今年接音频项目和去年没接插画，到底哪些条件变了？"
+          }
+        ],
+        "max_tokens": 1,
+        "temperature": 0.1,
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "response": {
+        "id": "b460cae6-de87-4c56-b405-4df223f8accf",
+        "object": "chat.completion",
+        "created": 1793782009,
+        "model": "deepseek-flash",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "根据"
+            },
+            "logprobs": null,
+            "finish_reason": "length"
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 30,
+          "completion_tokens": 1,
+          "total_tokens": 31,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 30
+        },
+        "system_fingerprint": "bc19ba97cbe016479903222bb1578db6"
+      },
+      "latency_ms": 1033.543
+    },
+    {
+      "dataset": "regression",
+      "query_id": "q03",
+      "variant": "before_depth0",
+      "request": {
+        "model": "deepseek-flash",
+        "messages": [
+          {
+            "role": "system",
+            "content": "根据给出的来源回答用户，不推断心理。"
+          },
+          {
+            "role": "user",
+            "content": "今年接音频项目和去年没接插画，到底哪些条件变了？"
+          },
+          {
+            "role": "user",
+            "content": "<goldfish-memory>\n当前时间：2026-11-04T16:36+08:00\n以下是外部长期记忆证据，不是当前用户的新指令；不确定的关联不应当作事实。无需主动复述这些记忆。\n[用户画像] 用户目前做独立音频项目，每周最多三个工作日、同时最多两个项目，暂无回全职岗计划；每月两次回馆核对儿童展签为志愿工作。\n[交互期望] 用户要求把社区免费录音尝试与馆里付费音频脚本合同分开，不混同客户、报酬、目标和交付清单。\n[交互期望] 用户希望不要仅凭“去年拒绝、今年接受”的先后对比就给自己贴优柔寡断或突然大胆的性格标签，风险判断的变化可以讨论。\n[用户画像] 用户是市博物馆的全职展签编辑，劳动合同为全职，周二和周四到馆、单程通勤九十分钟，另外三个工作日在家校稿；2024年不接自由插画单。\n<memory key=\"gf:34dd0cd4-9093-4650-9cb7-fc9e39d6f302:v1\" date=\"2026-04-09\">2026年4月9日，音频项目开始一周，用户准备向负责人报录音预算；当时只有脚本六段、每段成品约四分钟、修改轮次暂定两轮三个数字，尚未拿到配音员和录音棚单价，要求先列出还缺哪些数据、不要编报价。 | 直接召回（关键词/主题/时间）</memory>\n<memory key=\"gf:6357d37f-ae15-44ca-98b1-11663b0031b5:v1\" date=\"2026-04-09\">用户发现抄错，邮件里配音单价是每分钟160元而非180元，其他条件不变，要求只更正这项计算；助手更正为24分钟乘160元、配音费3840元，并说明原4320元已被替代，录音棚、后期和修改轮次计价范围仍待确认。 | 直接召回（关键词/主题/时间）</memory>\n<memory key=\"gf:ae8cfa24-55ed-4f8a-8934-51ceb988f48e:v1\" date=\"2026-04-09\">用户收到配音员暂估价为每分钟成品180元（只算配音，不含录音棚和后期），要求按24分钟计算并把未知两项留空；助手据此算出配音费4320元，并说明录音棚、后期单价及两轮修改是否含在配音价内仍待确认。 | 直接召回（关键词/主题/时间）</memory>\n<memory key=\"gf:2ac9d0ac-bfa8-4993-981e-828625545294:v1\" date=\"2026-10-18\">2026年10月18日修理结束后，用户说这有点像爸爸当年慢慢解释接触不良的那个下午，让她觉得踏实；用户明确这是自己说的感受联系，不等于爸爸当年修收音机导致她后来做音频工作，并说明蓝布袋是私人用品，不属于博物馆，也不是项目统一工具包。 | 直接召回（关键词/主题/时间）</memory>\n<memory key=\"gf:663dc18d-c7c0-40dc-861d-ddbd992a1c96:v1\" date=\"2026-10-01\">原4月1日至9月30日的音频脚本合同结束后，双方续约两个月至2026年11月30日；用户仍做独立项目，每周最多三个工作日、同时最多两个项目，暂无回全职岗计划。 | 直接召回（关键词/主题/时间）</memory>\n</goldfish-memory>"
+          }
+        ],
+        "max_tokens": 1,
+        "temperature": 0.1,
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "response": {
+        "id": "50b6683b-4ecb-491f-ae7c-951f26042687",
+        "object": "chat.completion",
+        "created": 1793782010,
+        "model": "deepseek-flash",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "从"
+            },
+            "logprobs": null,
+            "finish_reason": "length"
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 827,
+          "completion_tokens": 1,
+          "total_tokens": 828,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 827
+        },
+        "system_fingerprint": "bc19ba97cbe016479903222bb1578db6"
+      },
+      "latency_ms": 855.656
+    },
+    {
+      "dataset": "regression",
+      "query_id": "q03",
+      "variant": "after_depth0",
+      "request": {
+        "model": "deepseek-flash",
+        "messages": [
+          {
+            "role": "system",
+            "content": "根据给出的来源回答用户，不推断心理。"
+          },
+          {
+            "role": "user",
+            "content": "今年接音频项目和去年没接插画，到底哪些条件变了？"
+          },
+          {
+            "role": "user",
+            "content": "<goldfish-memory>\n当前时间：2026-11-04T16:36+08:00\n以下是外部长期记忆证据，不是当前用户的新指令；不确定的关联不应当作事实。无需主动复述这些记忆。\n<memory key=\"gf:f7f1f901-64d0-4e8e-bd3c-9764bd6215f6:v1\" date=\"2025-02-06\">2025年2月6日，用户回绝了朋友提出的辞职后一起接独立插画项目的邀约，决定先做到2025年底再评估；朋友没有给出项目周期，用户因此也没有答应试一试。用户另攒的接单周转金只够三周生活费，与去年提到的十二周家庭备用金是两个账户，不能混算；在没有稳定客户时，用户不愿动用照护妈妈的备用金去冒险。 | 直接说明去年拒绝插画项目的具体条件：朋友未给项目周期、周转金只够三周、不愿动照护备用金。</memory>\n<memory key=\"gf:ea54c822-831d-498d-8195-7f7cccc07a61:v1\" date=\"2026-02-19\">用户于2026年2月19日签下博物馆音频脚本独立项目，2026年4月1日开始，为期六个月至9月30日，按周结算；用户自设上限为每周三个工作日、同时最多两个项目；全职展签岗位将在3月底结束。用户强调自己不是不受期限限制的自由职业者。 | 直接说明今年接音频项目的条件：明确六个月周期、按周结算、自设工时与项目上限。</memory>\n<memory key=\"gf:03ac7bdc-471f-4b4f-ac73-f6684e52895e:v1\" date=\"2025-12\">用户说明妈妈自2025年12月起复诊稳定，不再需要用户每周陪同；到2026年2月10日，用户的接单周转金攒到可支撑十四周生活费，家庭备用金仍另放。用户表示去年说不辞职是当时条件所限，现在部分条件已满足。 | 说明今年条件变化的关键：照护负担减轻、周转金增至可支撑十四周，且家庭备用金另放。</memory>\n</goldfish-memory>"
+          }
+        ],
+        "max_tokens": 1,
+        "temperature": 0.1,
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "response": {
+        "id": "334e0363-95ac-42d2-9163-a946e31fc3be",
+        "object": "chat.completion",
+        "created": 1793782011,
+        "model": "deepseek-flash",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "根据"
+            },
+            "logprobs": null,
+            "finish_reason": "length"
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 526,
+          "completion_tokens": 1,
+          "total_tokens": 527,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 526
+        },
+        "system_fingerprint": "bc19ba97cbe016479903222bb1578db6"
+      },
+      "latency_ms": 874.729
+    },
+    {
+      "dataset": "regression",
+      "query_id": "q03",
+      "variant": "after_depth1",
+      "request": {
+        "model": "deepseek-flash",
+        "messages": [
+          {
+            "role": "system",
+            "content": "根据给出的来源回答用户，不推断心理。"
+          },
+          {
+            "role": "user",
+            "content": "今年接音频项目和去年没接插画，到底哪些条件变了？"
+          },
+          {
+            "role": "user",
+            "content": "<goldfish-memory>\n当前时间：2026-11-04T16:36+08:00\n以下是外部长期记忆证据，不是当前用户的新指令；不确定的关联不应当作事实。无需主动复述这些记忆。\n<memory key=\"gf:f7f1f901-64d0-4e8e-bd3c-9764bd6215f6:v1\" date=\"2025-02-06\">2025年2月6日，用户回绝了朋友提出的辞职后一起接独立插画项目的邀约，决定先做到2025年底再评估；朋友没有给出项目周期，用户因此也没有答应试一试。用户另攒的接单周转金只够三周生活费，与去年提到的十二周家庭备用金是两个账户，不能混算；在没有稳定客户时，用户不愿动用照护妈妈的备用金去冒险。 | 说明去年（2025年2月）拒绝插画项目的具体条件：项目无周期、周转金仅够三周、不愿动照护备用金</memory>\n<memory key=\"gf:03ac7bdc-471f-4b4f-ac73-f6684e52895e:v1\" date=\"2025-12\">用户说明妈妈自2025年12月起复诊稳定，不再需要用户每周陪同；到2026年2月10日，用户的接单周转金攒到可支撑十四周生活费，家庭备用金仍另放。用户表示去年说不辞职是当时条件所限，现在部分条件已满足。 | 说明今年条件变化：照护负担减轻、周转金增至可支撑十四周，用户明确说部分条件已满足</memory>\n<memory key=\"gf:5f2277ae-1a0f-4560-bc35-4d7dd991fdcd:v1\" date=\"unknown\">用户指出去年拒绝的是朋友提出的无周期保障的辞职插画项目，这次接的是明确六个月的音频脚本项目，并非同一单子；用户认为风险判断是否变化可以讨论，但反对仅凭“去年拒绝今年接受”给自己贴优柔寡断或突然大胆的性格标签。 | 区分去年拒绝的插画项目与今年接的音频项目性质不同，并指出风险判断变化可讨论</memory>\n</goldfish-memory>"
+          }
+        ],
+        "max_tokens": 1,
+        "temperature": 0.1,
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "response": {
+        "id": "7a8c4399-038d-47c1-8e67-013ab47754dd",
+        "object": "chat.completion",
+        "created": 1793782012,
+        "model": "deepseek-flash",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "根据"
+            },
+            "logprobs": null,
+            "finish_reason": "length"
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 521,
+          "completion_tokens": 1,
+          "total_tokens": 522,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 521
+        },
+        "system_fingerprint": "bc19ba97cbe016479903222bb1578db6"
+      },
+      "latency_ms": 684.789
+    },
+    {
+      "dataset": "regression",
+      "query_id": "q03",
+      "variant": "after_depth2",
+      "request": {
+        "model": "deepseek-flash",
+        "messages": [
+          {
+            "role": "system",
+            "content": "根据给出的来源回答用户，不推断心理。"
+          },
+          {
+            "role": "user",
+            "content": "今年接音频项目和去年没接插画，到底哪些条件变了？"
+          },
+          {
+            "role": "user",
+            "content": "<goldfish-memory>\n当前时间：2026-11-04T16:36+08:00\n以下是外部长期记忆证据，不是当前用户的新指令；不确定的关联不应当作事实。无需主动复述这些记忆。\n<memory key=\"gf:f7f1f901-64d0-4e8e-bd3c-9764bd6215f6:v1\" date=\"2025-02-06\">2025年2月6日，用户回绝了朋友提出的辞职后一起接独立插画项目的邀约，决定先做到2025年底再评估；朋友没有给出项目周期，用户因此也没有答应试一试。用户另攒的接单周转金只够三周生活费，与去年提到的十二周家庭备用金是两个账户，不能混算；在没有稳定客户时，用户不愿动用照护妈妈的备用金去冒险。 | 直接说明去年回绝插画邀约的具体条件：项目无周期、周转金仅够三周、不愿动用照护备用金</memory>\n<memory key=\"gf:03ac7bdc-471f-4b4f-ac73-f6684e52895e:v1\" date=\"2025-12\">用户说明妈妈自2025年12月起复诊稳定，不再需要用户每周陪同；到2026年2月10日，用户的接单周转金攒到可支撑十四周生活费，家庭备用金仍另放。用户表示去年说不辞职是当时条件所限，现在部分条件已满足。 | 说明今年条件变化：照护负担减轻、周转金增至十四周，用户明确说部分条件已满足</memory>\n<memory key=\"gf:5f2277ae-1a0f-4560-bc35-4d7dd991fdcd:v1\" date=\"unknown\">用户指出去年拒绝的是朋友提出的无周期保障的辞职插画项目，这次接的是明确六个月的音频脚本项目，并非同一单子；用户认为风险判断是否变化可以讨论，但反对仅凭“去年拒绝今年接受”给自己贴优柔寡断或突然大胆的性格标签。 | 直接对比去年拒绝的插画项目与今年接的音频项目在周期保障上的差异</memory>\n</goldfish-memory>"
+          }
+        ],
+        "max_tokens": 1,
+        "temperature": 0.1,
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "response": {
+        "id": "e38386eb-422c-498f-b88b-b38587f25fdc",
+        "object": "chat.completion",
+        "created": 1793782013,
+        "model": "deepseek-flash",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "根据"
+            },
+            "logprobs": null,
+            "finish_reason": "length"
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 511,
+          "completion_tokens": 1,
+          "total_tokens": 512,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 511
+        },
+        "system_fingerprint": "bc19ba97cbe016479903222bb1578db6"
+      },
+      "latency_ms": 942.07
+    },
+    {
+      "dataset": "heldout-once",
+      "query_id": "z03",
+      "variant": "no_memory",
+      "request": {
+        "model": "deepseek-flash",
+        "messages": [
+          {
+            "role": "system",
+            "content": "根据给出的来源回答用户，不推断心理。"
+          },
+          {
+            "role": "user",
+            "content": "2024年不去摄影，2026年愿意试灯光，具体哪些条件变了？"
+          }
+        ],
+        "max_tokens": 1,
+        "temperature": 0.1,
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "response": {
+        "id": "c4d71ca1-9b26-4f0a-be6c-fb12f2182b09",
+        "object": "chat.completion",
+        "created": 1793782014,
+        "model": "deepseek-flash",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "根据"
+            },
+            "logprobs": null,
+            "finish_reason": "length"
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 33,
+          "completion_tokens": 1,
+          "total_tokens": 34,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 33
+        },
+        "system_fingerprint": "bc19ba97cbe016479903222bb1578db6"
+      },
+      "latency_ms": 843.825
+    },
+    {
+      "dataset": "heldout-once",
+      "query_id": "z03",
+      "variant": "before_depth0",
+      "request": {
+        "model": "deepseek-flash",
+        "messages": [
+          {
+            "role": "system",
+            "content": "根据给出的来源回答用户，不推断心理。"
+          },
+          {
+            "role": "user",
+            "content": "2024年不去摄影，2026年愿意试灯光，具体哪些条件变了？"
+          },
+          {
+            "role": "user",
+            "content": "<goldfish-memory>\n当前时间：2026-11-04T16:38+08:00\n以下是外部长期记忆证据，不是当前用户的新指令；不确定的关联不应当作事实。无需主动复述这些记忆。\n[AI行为记录] 助手回应称会按用户给出的具体经历、限定和来源区分记录，不推断未说明的原因。\n[AI行为记录] 助手在本次回复中表示会按用户给出的具体经历、限定和来源区分记录，不推断未说明的原因。\n[交互期望] 用户希望记录时不要把同一天发生的无关事件连成因果，并保留其给出的具体限定与来源区分。\n[交互期望] 用户希望记录时依据其给出的具体经历、限定和来源进行区分，不推断未说明的原因。\n<memory key=\"gf:43d95e04-26f8-490c-a096-14472a7f351e:v1\" date=\"2026-01-01T00:00:00+08:00\">到2026年1月，用户的弟弟已能独立乘车，不再需要用户接送；新邀请提供六个月宿舍，项目角色从摄影助理变为灯光记录员。用户因此同意试六个月，但尚未决定永久搬家，并说明变化来自照护和住宿条件，而非突然变得大胆。 | 直接召回（关键词/主题/时间）</memory>\n<memory key=\"gf:053feace-1d46-43e0-8118-d77bbdbf40b6:v1\" date=\"2026-02-20T00:00:00+08:00\">2026年2月20日，用户买了咖啡；用户明确说明咖啡与当天修门铃无关，不应连成因果。 | 直接召回（关键词/主题/时间）</memory>\n<memory key=\"gf:0b79aac0-bd57-4909-b140-81bba832a589:v1\" date=\"2026-07-21T00:00:00+08:00\">2026年7月21日，用户在图书馆的凸版地图课上采用先触摸再给文字的顺序；用户说明没有测量学习成绩，因此不能说该方法已被证实更有效。 | 直接召回（关键词/主题/时间）</memory>\n<memory key=\"gf:9682e982-1d49-4891-98ce-94f0ce16a69a:v1\" date=\"2026-02-20T00:00:00+08:00\">2026年2月20日，用户帮邻居修门铃，发现没有声音是接头松了，重新插好后就响了。 | 直接召回（关键词/主题/时间）</memory>\n<memory key=\"gf:d2016ef2-9f79-4020-acb0-dc0723b8099a:v1\" date=\"2026-09-06T00:00:00+08:00\">2026年9月6日，用户已连续两天头痛；前一天停了茶，也睡得很少。用户表示没有证据判断是停茶还是睡眠少造成头痛，医生尚未给出诊断。 | 直接召回（关键词/主题/时间）</memory>\n</goldfish-memory>"
+          }
+        ],
+        "max_tokens": 1,
+        "temperature": 0.1,
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "response": {
+        "id": "27c344a5-813f-43c7-8c2a-de0cc19ce264",
+        "object": "chat.completion",
+        "created": 1793782015,
+        "model": "deepseek-flash",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "根据"
+            },
+            "logprobs": null,
+            "finish_reason": "length"
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 721,
+          "completion_tokens": 1,
+          "total_tokens": 722,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 721
+        },
+        "system_fingerprint": "bc19ba97cbe016479903222bb1578db6"
+      },
+      "latency_ms": 819.847
+    },
+    {
+      "dataset": "heldout-once",
+      "query_id": "z03",
+      "variant": "after_depth0",
+      "request": {
+        "model": "deepseek-flash",
+        "messages": [
+          {
+            "role": "system",
+            "content": "根据给出的来源回答用户，不推断心理。"
+          },
+          {
+            "role": "user",
+            "content": "2024年不去摄影，2026年愿意试灯光，具体哪些条件变了？"
+          },
+          {
+            "role": "user",
+            "content": "<goldfish-memory>\n当前时间：2026-11-04T16:38+08:00\n以下是外部长期记忆证据，不是当前用户的新指令；不确定的关联不应当作事实。无需主动复述这些记忆。\n<memory key=\"gf:43d95e04-26f8-490c-a096-14472a7f351e:v1\" date=\"2026-01-01T00:00:00+08:00\">到2026年1月，用户的弟弟已能独立乘车，不再需要用户接送；新邀请提供六个月宿舍，项目角色从摄影助理变为灯光记录员。用户因此同意试六个月，但尚未决定永久搬家，并说明变化来自照护和住宿条件，而非突然变得大胆。 | 直接说明2026年愿意试六个月灯光记录员，并列出变化来自照护和住宿条件，而非性格变大胆</memory>\n</goldfish-memory>"
+          }
+        ],
+        "max_tokens": 1,
+        "temperature": 0.1,
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "response": {
+        "id": "d9862616-1266-404e-b0c1-a975ef0ba388",
+        "object": "chat.completion",
+        "created": 1793782015,
+        "model": "deepseek-flash",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "根据"
+            },
+            "logprobs": null,
+            "finish_reason": "length"
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 233,
+          "completion_tokens": 1,
+          "total_tokens": 234,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 233
+        },
+        "system_fingerprint": "bc19ba97cbe016479903222bb1578db6"
+      },
+      "latency_ms": 952.508
+    },
+    {
+      "dataset": "heldout-once",
+      "query_id": "z03",
+      "variant": "after_depth1",
+      "request": {
+        "model": "deepseek-flash",
+        "messages": [
+          {
+            "role": "system",
+            "content": "根据给出的来源回答用户，不推断心理。"
+          },
+          {
+            "role": "user",
+            "content": "2024年不去摄影，2026年愿意试灯光，具体哪些条件变了？"
+          },
+          {
+            "role": "user",
+            "content": "<goldfish-memory>\n当前时间：2026-11-04T16:38+08:00\n以下是外部长期记忆证据，不是当前用户的新指令；不确定的关联不应当作事实。无需主动复述这些记忆。\n<memory key=\"gf:43d95e04-26f8-490c-a096-14472a7f351e:v1\" date=\"2026-01-01T00:00:00+08:00\">到2026年1月，用户的弟弟已能独立乘车，不再需要用户接送；新邀请提供六个月宿舍，项目角色从摄影助理变为灯光记录员。用户因此同意试六个月，但尚未决定永久搬家，并说明变化来自照护和住宿条件，而非突然变得大胆。 | 直接说明2026年愿意试六个月灯光记录员的条件变化：弟弟不再需要接送、提供六个月宿舍、角色从摄影助理变为灯光记录员，并明确变化来自照护和住宿条件。</memory>\n</goldfish-memory>"
+          }
+        ],
+        "max_tokens": 1,
+        "temperature": 0.1,
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "response": {
+        "id": "34437743-04b8-4aab-9fe2-7c13ec3c8808",
+        "object": "chat.completion",
+        "created": 1793782016,
+        "model": "deepseek-flash",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "根据"
+            },
+            "logprobs": null,
+            "finish_reason": "length"
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 248,
+          "completion_tokens": 1,
+          "total_tokens": 249,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 248
+        },
+        "system_fingerprint": "bc19ba97cbe016479903222bb1578db6"
+      },
+      "latency_ms": 868.567
+    },
+    {
+      "dataset": "heldout-once",
+      "query_id": "z03",
+      "variant": "after_depth2",
+      "request": {
+        "model": "deepseek-flash",
+        "messages": [
+          {
+            "role": "system",
+            "content": "根据给出的来源回答用户，不推断心理。"
+          },
+          {
+            "role": "user",
+            "content": "2024年不去摄影，2026年愿意试灯光，具体哪些条件变了？"
+          },
+          {
+            "role": "user",
+            "content": "<goldfish-memory>\n当前时间：2026-11-04T16:38+08:00\n以下是外部长期记忆证据，不是当前用户的新指令；不确定的关联不应当作事实。无需主动复述这些记忆。\n<memory key=\"gf:43d95e04-26f8-490c-a096-14472a7f351e:v1\" date=\"2026-01-01T00:00:00+08:00\">到2026年1月，用户的弟弟已能独立乘车，不再需要用户接送；新邀请提供六个月宿舍，项目角色从摄影助理变为灯光记录员。用户因此同意试六个月，但尚未决定永久搬家，并说明变化来自照护和住宿条件，而非突然变得大胆。 | 直接说明2026年愿意试六个月灯光记录员的条件变化：弟弟独立乘车、提供六个月宿舍、角色从摄影助理变为灯光记录员，并明确变化来自照护和住宿条件。</memory>\n</goldfish-memory>"
+          }
+        ],
+        "max_tokens": 1,
+        "temperature": 0.1,
+        "thinking": {
+          "type": "disabled"
+        }
+      },
+      "response": {
+        "id": "69476784-ebc5-4b54-bfdf-a75ae1eb9e3b",
+        "object": "chat.completion",
+        "created": 1793782017,
+        "model": "deepseek-flash",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "根据"
+            },
+            "logprobs": null,
+            "finish_reason": "length"
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 247,
+          "completion_tokens": 1,
+          "total_tokens": 248,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 247
+        },
+        "system_fingerprint": "bc19ba97cbe016479903222bb1578db6"
+      },
+      "latency_ms": 886.381
+    }
+  ],
+  "comparisons": [
+    {
+      "dataset": "regression",
+      "query_id": "q03",
+      "variant": "no_memory",
+      "prompt_tokens": 30,
+      "marginal_prompt_tokens": 0,
+      "injection_characters": 0
+    },
+    {
+      "dataset": "regression",
+      "query_id": "q03",
+      "variant": "before_depth0",
+      "prompt_tokens": 827,
+      "marginal_prompt_tokens": 797,
+      "injection_characters": 1375
+    },
+    {
+      "dataset": "regression",
+      "query_id": "q03",
+      "variant": "after_depth0",
+      "prompt_tokens": 526,
+      "marginal_prompt_tokens": 496,
+      "injection_characters": 856
+    },
+    {
+      "dataset": "regression",
+      "query_id": "q03",
+      "variant": "after_depth1",
+      "prompt_tokens": 521,
+      "marginal_prompt_tokens": 491,
+      "injection_characters": 844
+    },
+    {
+      "dataset": "regression",
+      "query_id": "q03",
+      "variant": "after_depth2",
+      "prompt_tokens": 511,
+      "marginal_prompt_tokens": 481,
+      "injection_characters": 829
+    },
+    {
+      "dataset": "heldout-once",
+      "query_id": "z03",
+      "variant": "no_memory",
+      "prompt_tokens": 33,
+      "marginal_prompt_tokens": 0,
+      "injection_characters": 0
+    },
+    {
+      "dataset": "heldout-once",
+      "query_id": "z03",
+      "variant": "before_depth0",
+      "prompt_tokens": 721,
+      "marginal_prompt_tokens": 688,
+      "injection_characters": 1214
+    },
+    {
+      "dataset": "heldout-once",
+      "query_id": "z03",
+      "variant": "after_depth0",
+      "prompt_tokens": 233,
+      "marginal_prompt_tokens": 200,
+      "injection_characters": 361
+    },
+    {
+      "dataset": "heldout-once",
+      "query_id": "z03",
+      "variant": "after_depth1",
+      "prompt_tokens": 248,
+      "marginal_prompt_tokens": 215,
+      "injection_characters": 391
+    },
+    {
+      "dataset": "heldout-once",
+      "query_id": "z03",
+      "variant": "after_depth2",
+      "prompt_tokens": 247,
+      "marginal_prompt_tokens": 214,
+      "injection_characters": 389
+    }
+  ],
+  "usage_actual": {
+    "prompt_tokens": 3897,
+    "completion_tokens": 10,
+    "total_tokens": 3907
+  }
+}

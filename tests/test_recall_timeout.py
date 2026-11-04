@@ -1,5 +1,7 @@
 """A slow local vector endpoint must leave time for lexical recall in DSH."""
 import os
+import contextlib
+import io
 import tempfile
 import threading
 import time
@@ -13,6 +15,30 @@ from goldfish.server import Service
 
 
 class RecallTimeoutTests(unittest.TestCase):
+    def test_semantic_failure_keeps_sources_and_falls_back_without_private_logs(self):
+        class UnavailableModel:
+            configured = True
+
+            def decide(self, *args, **kwargs):
+                raise TimeoutError('PRIVATE_RESPONSE_MUST_NOT_BE_LOGGED')
+
+        with tempfile.TemporaryDirectory() as tmp, patch.dict(os.environ, {}, clear=True):
+            service = Service(Path(tmp) / 'memory.db')
+            try:
+                source = service.db.add_message('s', 'user', '码头拿铁的杯套编号是A731')
+                summary = service.db.add_summary('码头拿铁的杯套编号是A731', [source])
+                service.chat = UnavailableModel()
+                output = io.StringIO()
+                with patch.dict(os.environ, {'GOLDFISH_SEMANTIC_RECALL': '1'}), contextlib.redirect_stdout(output):
+                    result = service.handle('/recall', {'query': '码头拿铁杯套编号'})
+                self.assertEqual(result['semantic_fallback'], 'TimeoutError')
+                self.assertIn(summary, {r['id'] for r in result['results']})
+                self.assertIn('A731', result['injection'])
+                self.assertEqual(service.db.evidence_for(summary)[0]['id'], source)
+                self.assertNotIn('PRIVATE_RESPONSE', output.getvalue())
+            finally:
+                service.close()
+
     def test_long_effective_context_keeps_fact_coverage_on_both_ends(self):
         with tempfile.TemporaryDirectory() as tmp, patch.dict(os.environ, {}, clear=True):
             service = Service(Path(tmp) / 'memory.db')

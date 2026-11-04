@@ -186,8 +186,8 @@ class Service:
                     print('[goldfish] semantic recall fallback:',planning_error,flush=True)
             if self.embeddings.configured:
                 try:
-                    # Leave time for lexical fallback before the DSH bridge's
-                    # default 2.5s deadline. Batch indexing keeps its 45s limit.
+                    # Keep embedding bounded alongside the optional semantic
+                    # decision. Batch indexing keeps its separate 45s limit.
                     budget=max(.05,min(float(data.get('semantic_timeout_ms',1500))/1000,1.5))
                     q=self.embeddings.embed([str(data.get('query',''))],timeout=budget)[0]
                     with self.lock:
@@ -219,7 +219,7 @@ class Service:
                 except Exception as err: result['embedding']={'error':type(err).__name__}
             return result
         with self.lock:
-            if path=='/health': return {'ok':True,'version':'0.2.1'}
+            if path=='/health': return {'ok':True,'version':'0.3.0'}
             if path=='/providers': return {'ok':True,'chat':self.chat.cfg.public(),
                                          'embedding':self.embeddings.cfg.public()}
             if path=='/ingest':

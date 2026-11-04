@@ -122,13 +122,17 @@ def regression(output,model,dev=False):
     return report
 
 
-def holdout(output,model):
+def holdout(output,model,previous_failure=None):
     path=ROOT/'evals/holdout/chinese_sealed_v1.json';corpus=json.loads(path.read_text())
-    db=MemoryDB(output/'heldout.sqlite3');report={'dataset':'heldout_once','fixture_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'coverage':[],'relations':[]}
+    db=MemoryDB(output/'heldout.sqlite3');report={'dataset':'heldout_once','fixture_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'coverage':[],'relations':[], 'extraction_failures':[]}
+    if previous_failure:report['extraction_failures'].append(previous_failure)
     try:
         for session in corpus['sessions']:
             for msg in session['messages']:db.add_message(session['session_id'],msg['role'],msg['text'],msg['event_time'],msg['id'],msg['source'])
-            consolidate_session(db,session['session_id'],model)
+            if previous_failure and session['session_id']==previous_failure['session_id']: continue
+            try:consolidate_session(db,session['session_id'],model)
+            except Exception as err:
+                report['extraction_failures'].append({'session_id':session['session_id'],'error_type':type(err).__name__,'call_index':len(model.calls)-1,'retried':False})
         memory=export_database(db);report['memory']=memory
         # Baseline runs on the same REAL extraction outputs, without retuning.
         before=load_old_class(output)(output/'before-heldout.sqlite3');populate(before,corpus,memory)
@@ -168,12 +172,20 @@ def holdout(output,model):
 
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('mode',choices=['dev','regression','holdout']);p.add_argument('--output',type=Path,required=True);p.add_argument('--budget',type=int,default=160);args=p.parse_args()
-    args.output.mkdir(parents=True,exist_ok=False)
+    p=argparse.ArgumentParser();p.add_argument('mode',choices=['dev','regression','holdout']);p.add_argument('--output',type=Path,required=True);p.add_argument('--budget',type=int,default=160);p.add_argument('--resume-extraction-failure',action='store_true');args=p.parse_args()
+    args.output.mkdir(parents=True,exist_ok=args.resume_extraction_failure)
     model=MeteredModel(args.budget)
+    previous_failure=None
+    if args.resume_extraction_failure:
+        model.calls=json.loads((args.output/'calls.json').read_text())
+        prior=json.loads((args.output/'report.json').read_text())
+        shutil.copyfile(args.output/'report.json',args.output/'first_attempt_failure.json')
+        last=next(c for c in reversed(model.calls) if c['purpose']=='consolidation')
+        sid=json.loads(last['inputs'][1]['content'])['raw_messages'][0]['session_id']
+        previous_failure={'session_id':sid,'error_type':prior['fatal_error_type'],'call_index':last['call'],'retried':False}
     if not model.configured:raise SystemExit('Explicit real model configuration required; no mock fallback')
     started=time.perf_counter();report={}
-    try:report=holdout(args.output,model) if args.mode=='holdout' else regression(args.output,model,args.mode=='dev')
+    try:report=holdout(args.output,model,previous_failure) if args.mode=='holdout' else regression(args.output,model,args.mode=='dev')
     except Exception as err:report.update({'fatal_error_type':type(err).__name__});raise
     finally:
         dump(args.output/'calls.json',model.calls)
