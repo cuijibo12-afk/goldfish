@@ -1,3 +1,5 @@
+> 历史阶段记录：保留用于了解早期实验，不代表v0.8默认配置。当前安装与架构以根README为准；旧原始评测输出已从本版本归档中排除。
+
 # DSH 真实模型评测 runner
 
 `tests/dsh_live_model.mjs` 是显式启用的真实模型评测。它运行固定版本 `@deepseek-ai/dsh@0.2.1-rc.5` 的 core 宿主、真实 Python HTTP/SQLite 后端和 Goldfish 插件；所有助手正文、整理 JSON 和官方压缩摘要均来自真实 OpenAI-compatible HTTP 请求。用户输入和历史种子全部为标明的合成评测数据，不读取个人聊天或日常 DSH profile。

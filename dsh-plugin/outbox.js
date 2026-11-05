@@ -23,7 +23,10 @@ export class Outbox {
     this.running = null;
     this.closed = false;
     const firstCreated = mkdirSync(directory, { recursive: true, mode: 0o700 });
-    if (firstCreated) {
+    // Node on Windows may return a \\?\-prefixed firstCreated path. Directory
+    // fsync is unsupported there anyway; do not compare it against an ordinary
+    // path while walking parents (the two roots can never compare equal).
+    if (firstCreated && process.platform !== 'win32') {
       // Sync every newly created directory entry, including its existing parent.
       const parent = dirname(resolve(firstCreated));
       for (let current = resolve(directory); ; current = dirname(current)) {
@@ -33,7 +36,7 @@ export class Outbox {
     }
   }
 
-  enqueue(path, payload) {
+  enqueue(path, payload, { deferUntilSchedule = false } = {}) {
     if (this.closed) return;
     const identity = path + ':' + (payload.message_id ?? payload.session_id);
     const filename = join(this.directory, createHash('sha256').update(identity).digest('hex') + '.json');
@@ -41,7 +44,7 @@ export class Outbox {
     let descriptor;
     try {
       descriptor = openSync(temporary, 'wx', 0o600);
-      writeFileSync(descriptor, JSON.stringify({ path, payload, deliveryId: randomUUID() }));
+      writeFileSync(descriptor, JSON.stringify({ path, payload, deferUntilSchedule, deliveryId: randomUUID() }));
       fsyncSync(descriptor);
       closeSync(descriptor);
       descriptor = undefined;
@@ -77,12 +80,19 @@ export class Outbox {
         this.warn('outbox record unreadable; retained for recovery');
       }
     }
-    records.sort((a, b) => {
+    // Persist partial dialogue immediately, but expose it to the consolidator
+    // only through a completed turn's boundary. In particular, a schedule for
+    // turn N must not release turn N+1 while an earlier HTTP call is pending.
+    const boundaries = new Map(records.filter(record => record.path === '/schedule')
+      .map(record => [String(record.payload.session_id), record.payload.event_seq ?? Number.MAX_SAFE_INTEGER]));
+    const ready = records.filter(record => !record.deferUntilSchedule
+      || record.payload.event_seq <= (boundaries.get(String(record.payload.session_id)) ?? -1));
+    ready.sort((a, b) => {
       if (a.path !== b.path) return a.path === '/ingest' ? -1 : 1;
       return String(a.payload.session_id).localeCompare(String(b.payload.session_id))
         || (a.payload.event_seq ?? 0) - (b.payload.event_seq ?? 0);
     });
-    for (const record of records) {
+    for (const record of ready) {
       if (this.closed) break;
       try {
         const response = await this.deliver(record.path, record.payload);

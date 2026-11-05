@@ -1,112 +1,93 @@
-param([ValidateSet('Check','Install','Configure','Start','Stop','Diagnose','Chat','Uninstall')][string]$Action='Check')
+param(
+ [ValidateSet('Check','Install','Update','Configure','Start','StartCompaction','StartExplicit','StartReadOnly','Stop','Diagnose','Chat','Uninstall')][string]$Action='Check',
+ [string]$DataDir=$env:GOLDFISH_DATA_DIR,[string]$DshExecutable=$env:GOLDFISH_DSH,
+ [string]$DshHome=$env:DSH_HOME,[string]$Profile='web',[string]$PythonExecutable='',
+ [ValidateRange(1024,65535)][int]$Port=18320
+)
 $ErrorActionPreference='Stop'
 $Root=Split-Path $PSScriptRoot -Parent
-$Data=Join-Path $env:LOCALAPPDATA 'GoldfishMemory'
-$Python=Join-Path $Data 'venv\Scripts\python.exe'
-$Dsh=Join-Path $Data 'tools\node_modules\.bin\dsh.cmd'
-$env:DSH_HOME=Join-Path $Data 'dsh'
-$env:PYTHONPATH=$Root
-$env:PATH=(Join-Path $Data 'tools\node_modules\.bin')+';'+$env:PATH
-function Run($Exe,$Arguments) { & $Exe @Arguments; if($LASTEXITCODE -ne 0){throw "Command failed: $Exe (exit $LASTEXITCODE)"} }
-function LoadConfig {
-  $file=Join-Path $Data 'config.json'
-  if(!(Test-Path $file)){throw 'Run Install first.'}
-  $c=Get-Content $file -Raw -Encoding UTF8 | ConvertFrom-Json
-  foreach($v in $c.PSObject.Properties){if($v.Name -notmatch '^GOLDFISH_'){throw 'Invalid config name'};[Environment]::SetEnvironmentVariable($v.Name,[string]$v.Value,'Process')}
+if(!$DataDir){$DataDir=Join-Path $env:LOCALAPPDATA 'GoldfishMemory'}
+$DataDir=[IO.Path]::GetFullPath($DataDir)
+$env:PYTHONPATH=$Root;$env:PYTHONUTF8='1'
+$Python=Join-Path $DataDir 'venv\Scripts\python.exe'
+$Settings=Join-Path $DataDir 'installation.json'
+if(Test-Path -LiteralPath $Settings){
+ $saved=Get-Content -LiteralPath $Settings -Raw -Encoding UTF8 | ConvertFrom-Json
+ if(!$DshExecutable){$DshExecutable=$saved.DshExecutable};if(!$DshHome){$DshHome=$saved.DshHome}
+ if(!$PSBoundParameters.ContainsKey('Profile')){$Profile=$saved.Profile}
+ if(!$PSBoundParameters.ContainsKey('Port') -and $saved.Port){$Port=$saved.Port}
 }
-function LoadKey {
-  if($env:GOLDFISH_LLM_PROVIDER -eq 'ollama' -or $env:GOLDFISH_LLM_API_KEY){return}
-  $file=Join-Path $Data 'deepseek-key.xml'
-  if(!(Test-Path $file)){throw 'Run Configure to save your API key for this Windows account.'}
-  $cred=Import-Clixml $file
-  $env:GOLDFISH_LLM_API_KEY=$cred.GetNetworkCredential().Password
+if(!$DshExecutable){$command=Get-Command dsh.cmd -ErrorAction SilentlyContinue;if($command){$DshExecutable=$command.Source}}
+if(!$DshHome){$DshHome=Join-Path $env:USERPROFILE '.dsh'}
+$DshHome=[IO.Path]::GetFullPath($DshHome)
+if($Profile -notmatch '^[A-Za-z0-9_-]+$'){throw 'Invalid profile name.'}
+$env:DSH_HOME=$DshHome
+function Run($Exe,$Arguments){& $Exe @Arguments;if($LASTEXITCODE -ne 0){throw "Command failed: $Exe (exit $LASTEXITCODE)"}}
+function RequireDsh {
+ if(!$DshExecutable -or !(Test-Path -LiteralPath $DshExecutable)){throw 'Pass -DshExecutable <absolute dsh.cmd path> and -DshHome <DSH data directory>. See README.'}
+ $env:PATH=(Split-Path $DshExecutable -Parent)+';'+$env:PATH
 }
-function StopServices {
-  $file=Join-Path $Data 'processes.json'
-  if(Test-Path $file){
-    foreach($entry in (Get-Content $file -Raw | ConvertFrom-Json)){
-      $p=Get-CimInstance Win32_Process -Filter "ProcessId=$($entry.Id)" -ErrorAction SilentlyContinue
-      # Never kill a reused PID or an unrelated local service.
-      if($p -and $p.CreationDate.ToUniversalTime().ToString('o') -eq $entry.Created -and $p.CommandLine -like '*goldfish*'){
-        Stop-Process -Id $entry.Id -ErrorAction Stop
-      }
-    }
-    Remove-Item $file
-  }
+function PythonBase {if($PythonExecutable){return @($PythonExecutable)};if(Get-Command py -ErrorAction SilentlyContinue){return @('py','-3.11')};return @('python')}
+function CheckRuntime {
+ $base=@(PythonBase);$more=@();if($base.Length -gt 1){$more=@($base[1..($base.Length-1)])}
+ Run $base[0] ($more+@('-c','import sys; assert sys.version_info >= (3,10) and sys.maxsize > 2**32; print(sys.version)'))
+ Run 'node' @('-e','const v=process.versions.node.split(String.fromCharCode(46)).map(Number);if(v[0]<24||(v[0]===24&&v[1]<9))process.exit(1);console.log(process.version)')
 }
-function SpawnService($Module,$Arguments,$Name) {
-  $out=Join-Path $Data "$Name.stdout.log"; $err=Join-Path $Data "$Name.stderr.log"
-  $args2=@('-m',$Module)+$Arguments
-  # Paths may include spaces. All arguments here are controlled local paths.
-  $quoted=($args2 | ForEach-Object {'"'+$_+'"'}) -join ' '
-  $p=Start-Process $Python -ArgumentList $quoted -WorkingDirectory $Root -WindowStyle Hidden -PassThru -RedirectStandardOutput $out -RedirectStandardError $err
-  $info=Get-CimInstance Win32_Process -Filter "ProcessId=$($p.Id)"
-  if(!$info){throw "Service exited: see $err"}
-  return @{Id=$p.Id;Created=$info.CreationDate.ToUniversalTime().ToString('o')}
+function SaveSettings {
+ New-Item -ItemType Directory -Path $DataDir -Force | Out-Null
+ @{DshExecutable=$DshExecutable;DshHome=$DshHome;Profile=$Profile;Port=$Port} | ConvertTo-Json | Set-Content -LiteralPath $Settings -Encoding UTF8
 }
-function WaitUrl($Url) {
-  for($i=0;$i -lt 60;$i++) {try {return Invoke-RestMethod $Url -TimeoutSec 2} catch {Start-Sleep -Seconds 1}}
-  throw "Service did not start: $Url. Run Diagnose."
-}
-try {
- switch($Action){
- 'Check' {
-   Run 'py' @('-3','-c','import sys; assert sys.version_info >= (3,10) and sys.maxsize > 2**32; print(sys.version)')
-   Run 'node' @('-e','const v=process.versions.node.split(".").map(Number);if(v[0]<24||(v[0]===24&&v[1]<9))process.exit(1);console.log(process.version)')
-   Run 'npm.cmd' @('--version')
-   Write-Host 'Use 64-bit Python 3.11/3.12 and Node 24.9 or later (Node 24 LTS recommended).'
- }
- 'Install' {
-   & $PSCommandPath Check
-   New-Item $Data -ItemType Directory -Force | Out-Null
-   if(!(Test-Path $Python)){Run 'py' @('-3','-m','venv',(Join-Path $Data 'venv'))}
-   Run $Python @('-m','pip','install','-r',(Join-Path $PSScriptRoot 'requirements.txt'))
-   Run $Python @((Join-Path $Root 'scripts\download_embedding.py'),'--output',(Join-Path $Data 'models\bge-small-zh'))
-   if(!(Test-Path (Join-Path $Data 'config.json'))){Copy-Item (Join-Path $PSScriptRoot 'config.example.json') (Join-Path $Data 'config.json')}
-   Run 'npm.cmd' @('install','--prefix',(Join-Path $Data 'tools'),'@deepseek-ai/dsh@0.2.1-rc.5','pnpm@10','--no-audit','--no-fund')
-   if(!(Test-Path (Join-Path $env:DSH_HOME 'profiles\goldfish-test'))){Run $Dsh @('--profile','goldfish-test','--from-default-profile','web','--dump-config')}
-   Run $Dsh @('plugin','--profile','goldfish-test','add',('link:'+(Join-Path $Root 'dsh-plugin')))
-   Run $Python @((Join-Path $Root 'scripts\migrate_database.py'),'--db',(Join-Path $Data 'memory.sqlite3'))
-   Write-Host 'Installed in your user folder. Next: Configure, Start, Chat. Do not move the project folder after linking the plugin.'
- }
- 'Configure' {
-   if(!(Test-Path $Data)){throw 'Run Install first.'}
-   $secret=Read-Host 'DeepSeek API key (hidden input)' -AsSecureString
-   $cred=New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList 'deepseek',$secret
-   $cred | Export-Clixml (Join-Path $Data 'deepseek-key.xml')
-   Write-Host 'Saved with Windows account encryption. DSH chat model is configured separately in its UI.'
- }
- 'Start' {
-   LoadConfig; LoadKey
-   if(Test-Path (Join-Path $Data 'processes.json')){throw 'Existing process record. Run Stop before Start.'}
-   foreach($port in @(18320,18321)){if(Get-NetTCPConnection -LocalPort $port -State Listen -ErrorAction SilentlyContinue){throw "Port $port already occupied; no process was stopped."}}
-   Run $Python @((Join-Path $Root 'scripts\migrate_database.py'),'--db',(Join-Path $Data 'memory.sqlite3'))
-   $records=@()
-   try {
-     if($env:GOLDFISH_EMBED_URL -eq 'http://127.0.0.1:18321'){
-       $records+=SpawnService 'evals.local_embedding_server' @('--model-dir',(Join-Path $Data 'models\bge-small-zh'),'--port','18321') 'embedding'
-       $null=WaitUrl 'http://127.0.0.1:18321'
-     }
-     $records+=SpawnService 'goldfish.server' @('--db',(Join-Path $Data 'memory.sqlite3'),'--port','18320') 'memory'
-     $null=WaitUrl 'http://127.0.0.1:18320/health'
-     Write-Host 'Goldfish ready on localhost:18320. Next: Chat.'
-   } finally {if($records.Count){ConvertTo-Json -InputObject @($records) | Set-Content (Join-Path $Data 'processes.json') -Encoding UTF8}}
- }
- 'Stop' {StopServices; Write-Host 'Recorded Goldfish services stopped; close DSH separately.'}
- 'Diagnose' {
-   Write-Host "Project: $Root`nUser data: $Data"
-   & $PSCommandPath Check
-   foreach($url in @('http://127.0.0.1:18320/health','http://127.0.0.1:18320/providers','http://127.0.0.1:18320/stats','http://127.0.0.1:18321')){
-     try {Invoke-RestMethod $url -TimeoutSec 3 | ConvertTo-Json -Depth 5} catch {Write-Host "Unavailable: $url"}
+function StopService {
+ $file=Join-Path $DataDir 'processes.json';if(!(Test-Path -LiteralPath $file)){return}
+ foreach($entry in (Get-Content -LiteralPath $file -Raw | ConvertFrom-Json)){
+  $process=Get-CimInstance Win32_Process -Filter "ProcessId=$($entry.Id)" -ErrorAction SilentlyContinue
+  if($process -and $process.CreationDate.ToUniversalTime() -eq ([datetime]$entry.Created).ToUniversalTime() -and $process.CommandLine -match 'goldfish\.server'){
+   foreach($child in @(Get-CimInstance Win32_Process -Filter "ParentProcessId=$($entry.Id)" -ErrorAction SilentlyContinue)){
+    if($child.CommandLine -match 'goldfish\.server'){Stop-Process -Id $child.ProcessId -ErrorAction Stop}
    }
-   Write-Host 'Inspect local *.stderr.log files if needed. Do not share keys, database, outbox, DSH history or full private logs.'
+   Stop-Process -Id $entry.Id -ErrorAction SilentlyContinue
+  }
  }
- 'Chat' {LoadConfig; LoadKey; $env:DEEPSEEK_API_KEY=$env:GOLDFISH_LLM_API_KEY; Run $Dsh @('--profile','goldfish-test')}
- 'Uninstall' {
-   StopServices
-   if(Test-Path (Join-Path $Data 'deepseek-key.xml')){Remove-Item (Join-Path $Data 'deepseek-key.xml')}
-   foreach($dir in @('venv','tools')){if(Test-Path (Join-Path $Data $dir)){Remove-Item (Join-Path $Data $dir) -Recurse -Force}}
-   Write-Host 'Runtime and saved Goldfish key removed. Models, config, DB, backups, logs and DSH chats are retained in your user data folder. No cloud files were removed.'
+ Remove-Item -LiteralPath $file
+}
+function StartService($Mode){
+ if(!(Test-Path -LiteralPath $Python)){throw 'Run Install first.'}
+ if(Test-Path -LiteralPath (Join-Path $DataDir 'processes.json')){throw 'Run Stop before Start.'}
+ if(Get-NetTCPConnection -LocalPort $Port -State Listen -ErrorAction SilentlyContinue){throw 'Selected port is occupied. No process was stopped.'}
+ $database=Join-Path $DataDir 'memory.sqlite3';if(!(Test-Path -LiteralPath $database)){throw 'Run Install first; database missing.'}
+ $arguments=@('-m','goldfish.server','--db',$database,'--port',[string]$Port,'--read-only')
+ if($Mode -ne 'StartReadOnly'){$arguments+=@('--allow-remember','--remember-key-file',(Join-Path $DataDir 'remember-write.key'))}
+ if($Mode -eq 'Start' -or $Mode -eq 'StartCompaction'){$arguments+='--allow-compaction'}
+ $quoted=($arguments | ForEach-Object {'"'+$_+'"'}) -join ' '
+ $process=Start-Process -FilePath $Python -ArgumentList $quoted -WorkingDirectory $Root -WindowStyle Hidden -PassThru -RedirectStandardOutput (Join-Path $DataDir 'memory.stdout.log') -RedirectStandardError (Join-Path $DataDir 'memory.stderr.log')
+ $info=Get-CimInstance Win32_Process -Filter "ProcessId=$($process.Id)";if(!$info){throw 'Backend exited. Inspect local memory.stderr.log; do not publish it.'}
+ ConvertTo-Json -InputObject @(@{Id=$process.Id;Created=$info.CreationDate.ToUniversalTime().ToString('o')}) | Set-Content -LiteralPath (Join-Path $DataDir 'processes.json') -Encoding UTF8
+ for($index=0;$index -lt 30;$index++){
+  try{$health=Invoke-RestMethod "http://127.0.0.1:$Port/health" -TimeoutSec 2;if($health.version -eq '0.8.0' -and $health.query_only){Write-Host "Goldfish 0.8.0 ready on localhost:$Port. Main model stays in DSH.";return}}catch{}
+  Start-Sleep -Seconds 1
  }
+ throw 'Readiness failed. Run Diagnose; process record is retained for Stop.'
+}
+try {switch($Action){
+ 'Check' {CheckRuntime;RequireDsh;Write-Host 'Tested DSH contract: 0.2.1-rc.5.'}
+ {$_ -in 'Install','Update'} {
+  CheckRuntime;RequireDsh
+  if(Test-Path -LiteralPath (Join-Path $DataDir 'processes.json')){throw 'Run Stop before installing/updating.'}
+  SaveSettings
+  if(!(Test-Path -LiteralPath $Python)){
+   $base=@(PythonBase);$more=@();if($base.Length -gt 1){$more=@($base[1..($base.Length-1)])}
+   Run $base[0] ($more+@('-m','venv',(Join-Path $DataDir 'venv')))
+  }
+  Run $Python @('-m','pip','install','--no-index','-r',(Join-Path $PSScriptRoot 'requirements.txt'))
+  $env:npm_config_ignore_workspace_root_check='true'
+  Run $DshExecutable @('plugin','--profile',$Profile,'add',('link:'+(Join-Path $Root 'dsh-plugin')))
+  Run $Python @((Join-Path $Root 'scripts\migrate_database.py'),'--db',(Join-Path $DataDir 'memory.sqlite3'))
+  Write-Host 'Installed without replacing existing memories. Keep this source directory in place. Next: Start, then Chat.'
  }
-} catch {Write-Host ('FAILED: '+$_.Exception.Message) -ForegroundColor Red;exit 1}
+ 'Configure' {RequireDsh;SaveSettings;Write-Host 'Saved DSH paths/profile only. Set main model and credentials in DSH; Goldfish asks for no model key.'}
+ {$_ -in 'Start','StartCompaction','StartExplicit','StartReadOnly'} {StartService $Action}
+ 'Stop' {StopService;Write-Host 'Recorded Goldfish backend stopped; DSH is separate.'}
+ 'Chat' {RequireDsh;Run $DshExecutable @('web','--profile',$Profile)}
+ 'Diagnose' {CheckRuntime;try{Invoke-RestMethod "http://127.0.0.1:$Port/health" -TimeoutSec 3 | ConvertTo-Json}catch{Write-Host 'Backend unavailable. Inspect private local logs; do not publish them.'}}
+ 'Uninstall' {StopService;RequireDsh;Run $DshExecutable @('plugin','--profile',$Profile,'remove','dsh-goldfish-memory-local');Write-Host 'Plugin detached. Database, keys, sessions, backups, venv and source retained. See README.'}
+}}catch{Write-Host ('FAILED: '+$_.Exception.Message) -ForegroundColor Red;exit 1}

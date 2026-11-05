@@ -1,16 +1,6 @@
 {
-  "GOLDFISH_LLM_PROVIDER": "openai",
-  "GOLDFISH_LLM_URL": "https://api.deepseek.com",
-  "GOLDFISH_LLM_MODEL": "deepseek-flash",
-  "GOLDFISH_LLM_THINKING": "disabled",
-  "GOLDFISH_LLM_MAX_TOKENS": "8192",
-  "GOLDFISH_EMBED_PROVIDER": "openai",
-  "GOLDFISH_EMBED_URL": "http://127.0.0.1:18321",
-  "GOLDFISH_EMBED_MODEL": "bge-small-zh-v1.5",
-  "GOLDFISH_EMBED_REVISION": "75c43b069aac4d136ba6bc1122f995fedcfd2781",
-  "GOLDFISH_EMBED_QUERY_PREFIX": "为这个句子生成表示以用于检索相关文章：",
-  "GOLDFISH_RETRIEVAL_MODE": "hybrid_llm",
-  "GOLDFISH_SEMANTIC_RECALL": "1",
-  "GOLDFISH_EMBED_AUX": "profile",
-  "GOLDFISH_TIMEZONE": "Asia/Shanghai"
+  "DshExecutable": "C:\\Tools\\dsh\\node_modules\\.bin\\dsh.cmd",
+  "DshHome": "C:\\Users\\YOUR_NAME\\.dsh",
+  "Profile": "web",
+  "Port": 18320
 }

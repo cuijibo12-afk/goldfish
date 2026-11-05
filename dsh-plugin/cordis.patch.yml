@@ -2,8 +2,12 @@
     - id: goldfish-memory
       name: 'dsh-goldfish-memory-local'
       config:
+        mode: tools
+        enableRemember: true
+        enableGuide: true
+        enableCompaction: true
         serverUrl: 'http://127.0.0.1:18320'
-        autoCapture: true
+        autoCapture: false
         timeoutMs: 12000
         limit: 5
         depth: 0

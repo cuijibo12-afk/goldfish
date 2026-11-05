@@ -1,0 +1,31 @@
+name: Publish reviewed source release
+on:
+  push:
+    branches: [phase-d/embedding-performance]
+    paths:
+      - .github/workflows/release.yml
+      - dsh-plugin/package.json
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: goldfish-source-release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Screen and build committed source
+        run: python scripts/build_delivery.py --output dist/Goldfish-Memory-v0.8.0-source.zip
+      - name: Create draft, upload verified archives, then publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPOSITORY: ${{ github.repository }}
+          GH_COMMIT: ${{ github.sha }}
+        run: python scripts/publish_release.py

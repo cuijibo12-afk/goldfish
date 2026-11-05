@@ -1,152 +1,132 @@
-# 金鱼 Goldfish Memory v0.3 — 个人长期关联记忆插件开发版
+# Goldfish Memory v0.8.0（金鱼）
 
-**Windows迁移入口：[双击安装与使用说明](windows/开始使用.md)**。脚本只在你的电脑运行后安装到独立用户目录；Cloud未替你安装到个人电脑。验证边界见 [Windows交付记录](docs/WINDOWS_DELIVERY.md)。
+金鱼是 **DeepSeek Harness（DSH）可按需调用的本地长期记忆工具**。它适合需要跨会话找回具体经历、核查原话、保留观点随时间变化的个人助手。
 
-这是在原 v0.2 Python / SQLite / DSH 薄桥架构上迭代的个人开发版。正式需求以 [开发任务书](开发任务书.txt) 为准。[第一阶段](docs/PHASE_A.md) 修复接入与可靠性，[第二阶段](docs/PHASE_B.md) 建立真实模型质量基线。[第三阶段报告](docs/PHASE_C.md) 提供语义覆盖、跨时间召回、关系复核和冻结新集的真实 DeepSeek 结果。**仍有漏召回、提取失败和未裁决项，不能宣布长期记忆质量达标。** DSH 验证针对隔离的真实 core host，不代表已在你的个人设备完成验收。
+DSH 是唯一的对话与思考主体。金鱼提供 SQLite、索引、证据、事件与关系管理，不运行第二个聊天 Agent。当前模式不需要 Ollama、BGE、向量服务或金鱼专用模型 Key；模型供应商、模型和凭据由你自己的 DSH 配置决定。
 
-[第四阶段报告](docs/PHASE_D.md) 新增真实本地BGE向量与四路混合对照、内容版本索引、无效项隔离及完整成本账本。混合精排的旧集平均LLM用量约2,115Token/问，但收益未稳定，默认继续原检索；`GOLDFISH_RETRIEVAL_MODE=hybrid_llm` 显式试验。LLM与Embedding仍独立配置，语义覆盖/精排另需 `GOLDFISH_SEMANTIC_RECALL=1`。
+本版本发布源码对应插件/后端 **0.8.0、SQLite schema 6**。已验证环境主要为 Windows、Python 3.11、Node 26 和 DSH **0.2.1-rc.5**，质量验收使用有限虚构案例。其他 DSH 版本、系统、模型和海量长期数据尚未全面验证。
 
-## 大架构（已定）
+## 工作方式
 
-```
-DSH 原始会话事件（只保存真人发言与实际助理回复）
-             │
-             ▼
-      本地原话证据库（不可改写）
-             │
-     LLM 两级整理：缩句概括 + 凝练主题
-             │
-     ┌───────┴────────────┐
-     │                    │
-  事件概括 A、B、C       用户画像 / 交互期望 / AI 行为记录
-     │                    │
-     ├─ 时间锚点          └─ 只保存可追溯的描述，不生成强制人格规则
-     ├─ 可多主题索引
-     └─ 概括↔概括：关联类型 + 关联理由 + 置信度 + 可追溯来源
-             │
-当前发言 → 同时从内容、主题、时间寻找多个起点
-             │
-       可选关联扩展（默认 0 跳，仅复核有效的边，最多 2 跳）
-             │
-       与 DSH 当前可见历史对照、去重、限制长度
-             │
-       agent/pre-step → 注入本轮模型可见上下文（不用记忆工具）
+```text
+用户发言 → DSH 主模型理解问题
+              ├─ 无需历史：正常回答，可零次金鱼调用
+              └─ 需要历史：search → 按缺口决定 explore → 必要时 evidence → 回答
+
+DSH 原生压缩成功 → 追溯被压缩的真人原话 → 持久整理任务
+              → 同一 DSH 主模型提案与复核 → 来源校验 → SQLite 原子提交与收据
 ```
 
-### 核心原则
+- **B1 主动检索**：`goldfish_search` 找主要记忆；`goldfish_explore` 依据已得记忆提出新的关联问题；`goldfish_evidence` 核查原话。工具提供证据与线索，DSH 自主决定是否查询。
+- **B2 明确保存**：说“请记住：……”时，`goldfish_remember` 绑定真人原话、当前授权、签名和持久收据。相同来源重试去重。引用、示例、否定及助手猜测不构成授权。
+- **C 总指引**：DSH 会话级的可修订工作摘要，保留当前主线、进展和待解决问题，经原生 sessionProjections 随压缩/恢复延续，不写入长期库。当前轮“细思考”只是主模型当轮原生理解和工具决策，不另存隐藏思维链或独立认知状态。
+- **D 压缩交接**：手动 `/compact` 或原生自动压缩成功后，追溯对应原始真人事件，排除助手、工具回显、指引、预测和取消/未完成轮次。固定来源范围、任务/片段 ID、事务、重试与收据避免重放重复写入。
+- **E 结构化事件**：事件可跨轮/跨压缩补充，每条事实有自己的逐字证据和偏移。复述补证据，补充、纠正、时间变化、意义变化分别处理；相互矛盾的原话不删除。
+- **E 关系网络**：临时检索线索、模型候选、证据复核支持的关系分层。正式边要求两端事实与关系依据，方向保留，明确否认可撤销，引用事实变更会使审核失效。用户自述影响不等于独立证明的因果；possible_cause 始终是候选。
 
-1. **事实和解释分离**：原话不可因模型新的理解而被覆盖；概括、主题、关系可更正。
-2. **关系不是因果**：模型只能提出关联假设，不能直接生成已证实的因果。`causal_confirmed` 只能人工确认后写入。
-3. **主题不是唯一入口**：主题、文本线索和时间并行检索；主题遗漏时仍能从细节命中。
-4. **联系是概括之间的独立边**：一条细节可以激活多段不同主题的经历，但扩展深度和预算严格限制。
-5. **描述性交互期望**：用户提出“我希望你怎样”存到用户画像之下的交互期望；不写成 AI 画像或“必须表演”的性格命令。单次抱怨优先保存为反馈。
-6. **注入不等于朗读**：模型不需要在回复中逐条复述它召回的内容。
-7. **上下文去重以本次有效历史为依据**：DSH `session.deriveMessages()` 返回压缩折叠后的当前历史。可选模型按原文命题判断完整覆盖、部分覆盖、缺失及冲突；证据不足时保留原记忆。以前注入过或残留 ID 不构成永久屏蔽。
+**明确保存与压缩整理使用不同权限。**B2 必须有本轮真人明确授权；D/E 使用开启插件时选择的宿主压缩交接权限，不复用 B2 的保存授权。立即保存不必等待压缩，之后同来源片段会被屏蔽。
 
-### v0.2 原型当前已实现
+## 依赖与安装
 
-- SQLite 存储：`raw_messages`、`summaries`、`evidence`、`themes`、`theme_members`、`links`、`profile`。
-- 双层压缩数据格式与严格来源 ID 检验；可选本地 Ollama、LM Studio 或云端 OpenAI-compatible API 驱动提取、主题及概括关系整理；原始对话不会被自动改写。
-- 概括间可解释、带置信度的关系图；schema v2 增量保存关系复核及逐字原话，区分同实体、同事件、时间先后、相似情境、矛盾与比较。模型复核仍是模型判断。
-- 中文字符 bigram、可选 Embedding、主题与时间候选并行；可选 LLM 根据问题意图选择最多 3 条经历、检查当前上下文命题覆盖，部分覆盖只注入来源中的缺失片段。实际云端与 DSH 压缩测试见第三阶段报告。
-- 本地 REST 服务，以及利用 DSH `agent/pre-step`、`session/event` 和 `agent/created` 的自动注入/采集桥；本地 outbox 先落盘，失败重试，恢复会话时从宿主分页存储补录。
-- **不配置任何模型时不会调用网络。** 配置云端 LLM 后整理会发送原话；另显式启用 `GOLDFISH_SEMANTIC_RECALL=1` 时，推理前还会发送查询、候选记忆及当前有效上下文供语义判断。云端 Embedding 另发概括与查询。数据库保存在本机。
+需要 64 位 Python 3.10+（Windows 推荐 3.11）、Node 24.9+、已有可运行的 DSH 0.2.1-rc.5 和 npm/pnpm。Python 核心仅标准库，`windows/requirements.txt` 不安装额外模型依赖。首次注册插件可能需要联网解析 DSH 的同版本 peer dependency。
 
-### 尚未实现（不能假装已经做完）
+如果尚无 DSH，可在独立目录安装固定版本；不要把安装目录设为你的私人数据目录：
 
-- 已真实测试本地BGE-small-zh-v1.5与增加1000条干扰的检索；BGE-M3、云端Embedding和万条以上规模仍未实测。
-- 时间轴精细解析（日/月/相对日期）；首版仅解析年份。
-- 在线精确 Token 硬预算；仍使用字符上限。语义覆盖已做小样本真实验证，不能据此承诺所有中文长对话均准确。
-- 关系网络的持续维护、矛盾纠错 GUI、人为关联审查界面。
-- 用户本人设备上的 DSH 验证、长期运行及更广泛版本兼容；隔离环境的固定版本验证见独立记录。
-- 跨所有未恢复历史会话的全库扫描导入；当前会自动重投本地 outbox，并补录被恢复会话的宿主持久事件。
-- 真人长期使用验证；当前质量语料是构造的虚构经历，模型输出与 DSH 压缩是真实调用。
+```powershell
+npm install --prefix C:\Tools\dsh @deepseek-ai/dsh@0.2.1-rc.5 pnpm@10
+```
 
-## 运行无需付费的基础验证
+下载本版本源码，解压到固定位置（例如 `C:\Tools\goldfish`），打开 PowerShell：
 
-需要 Python 3.10+；插件基础测试需要 Node.js 22+，固定版本 DSH 宿主测试需要 Node.js 24.9+（本次实际使用 24.22.1）。
+```powershell
+cd C:\Tools\goldfish
+.\windows\Goldfish.ps1 Install `
+  -DshExecutable 'C:\Tools\dsh\node_modules\.bin\dsh.cmd' `
+  -DshHome "$env:USERPROFILE\.dsh" -Profile web
+.\windows\Goldfish.ps1 Start
+.\windows\Goldfish.ps1 Chat
+```
 
-```bash
-cd goldfish-memory-v0.2
-PYTHONPATH=. python -m unittest discover -s tests -v
+已有 DSH 时把路径替换为你的真实路径。安装器复用该 DSH，仅添加本地 `link:` 插件，创建独立 Python venv 和缺失的数据库，不安装另一个 DSH、不更换主模型、不导入个人认证。首次 DSH 模型设置仍由你在 DSH 中完成。
+
+安装后，DSH 路径和 profile 保存在本机 `installation.json`，后续可双击 `windows/Start.cmd`、`Chat.cmd`、`Stop.cmd`。**不要移动已链接的源码目录。**脚本默认服务端口 18320；端口被占用会拒绝启动，不会关闭别的进程。隔离测试可用 `-Port` 选择其他端口，但须同步插件的 `serverUrl`。
+
+`Configure.cmd` 只保存/核对 DSH 路径与 profile，不再询问金鱼模型 Key。配置模板为 [windows/config.example.json](windows/config.example.json)，可复制并修改后放到本机数据目录，文件名用 `installation.json`。它不是模型配置，不能放 API Key。
+
+插件模板为 [dsh-plugin/cordis.patch.yml](dsh-plugin/cordis.patch.yml)：
+
+```yaml
+- insert:
+    - id: goldfish-memory
+      name: dsh-goldfish-memory-local
+      config:
+        mode: tools
+        enableRemember: true
+        enableGuide: true
+        enableCompaction: true
+        serverUrl: http://127.0.0.1:18320
+        autoCapture: false
+```
+
+修改开关后经 DSH 插件管理重载。若数据目录不是默认位置，还需为插件明确设置 `rememberKeyFile` 和 `compactionKeyFile`，分别指向新目录的两个能力文件；它们只给宿主读取，不能放入模型参数或提交到 Git。
+
+## 更新、启动与卸载
+
+1. 备份记忆库；若服务正在运行，用 SQLite backup API 或停止服务后备份，不能只复制正在写入的主文件而漏掉 WAL。
+2. 结束当前 DSH 对话、关闭宿主，运行 `windows/Stop.cmd`。
+3. 把新源码放到固定目录；在新目录运行 `Goldfish.ps1 Update`，首次指定 DSH 路径。已有数据库不会替换；迁移采用加法方式并备份。
+4. 启动金鱼，再用原 DSH 入口启动宿主；若换了源码路径，必须重新注册 link。检查 `/health` 的 version=0.8.0、schema=6、query_only=true、event_memory=true。
+
+默认 `Start` 启用 B1/B2/D/E 的确定性后端。`StartExplicit` 只开放查询与 B2；要真正停自动整理，还需停用插件 `enableCompaction`。`StartReadOnly` 只读取已有库。
+
+卸载使用 `windows/Uninstall.cmd`：停止本安装记录的金鱼服务，从选定 DSH profile 移除插件依赖，**保留数据库、能力文件、备份、venv、DSH 会话和模型配置**。需清理残留时，先自行备份，确认路径后再手动删除；脚本不做递归清空私人数据。
+
+## 数据与隐私
+
+Windows 默认数据目录为 `%LOCALAPPDATA%\GoldfishMemory`；可用 `-DataDir` 或 `GOLDFISH_DATA_DIR` 为隔离安装选择新目录。
+
+- `memory.sqlite3`、WAL/SHM：私人原始证据、记忆、事实、关系和审计。
+- `remember-write.key`、`compaction-write.key`：宿主签名能力，不是模型密钥。
+- `*.backup-*`、`*.before-D-*`、`*.before-E-*`：一致性备份。
+- `installation.json`、`processes.json`、`*.log`：本机配置与运行文件，不上传。
+- DSH 的认证、会话、总指引与压缩状态位于你配置的 DSH 数据/profile 目录。
+
+后端只监听 loopback，普通读工具不调用模型。**本地数据库不等于对话绝不离开电脑**：DSH 若使用云模型，正常对话、检索结果及整理所需原话会按 DSH 模型请求发给该供应商。整理不是离线加密保险箱。保护本机账户、备份和 DSH 凭据，不分享原始日志/数据库。
+
+本源码归档不包含个人配置、数据库、聊天记录、能力密钥、部署快照或原始真实模型调用日志。`evals` 中人工编写的虚构 fixture 保留用于测试；旧仓库历史已有虚构语料的评测输出，本版本在新提交中移出当前树，不重写历史。
+
+## 验证范围、费用与限制
+
+E 阶段已有原生 SDK 实际主模型及原 Windows 网页 `/compact` 验收：跨轮事件、同义去重、纠正/意义历史、两跳证据关联与撤销、6000 字之后细节、中断恢复和新会话召回。公开摘要见 [docs/V0.8_VALIDATION.md](docs/V0.8_VALIDATION.md)。本发布准备还验证独立依赖安装、插件加载和模拟模型集成，不能把模拟测试冒充真实对话质量。
+
+- 一次非空整理批次通常额外调用 DSH 主模型两次（提案/复核）；一次压缩可产生多批，失败重试也产生开销。查询自身不新增模型请求。
+- 六题/版的小样本对照中，D 平均25.964秒、E26.084秒；E少了模型步骤，但上下文输入约增3.4%，返回字符更多。没有证明普遍更快或省Token。
+- 旧 D/B2 跨新来源的全面语义去重、自动事件化未完成；候选窗口和事件预算有限，不能保证任意历史无漏。
+- 同模型复核不是独立事实核验。更多关系类型、跨进程多宿主、大库和长期质量未充分验证。
+- Claude 等其他路线没有完成同等 E 阶段质量验收；切换模型仍需自行检查长上下文、工具行为和指引更新，不能把某一模型的验收泛化到所有模型。
+- Windows Python 全量已有两项子进程测试失败，保留测试与说明，不制造全绿。其他系统只提供源码，不承诺一键脚本兼容。
+
+## 故障与回滚
+
+`Diagnose.cmd` 查看本机健康状态。模型离线不影响已存记忆的确定性查询，但 DSH 正式回答及整理仍需要当前模型可用。可问 DSH“金鱼整理完成了吗”，通过 `goldfish_organization_status` 区分压缩成功与整理成功。
+
+任务持久化，重启可恢复。连续语义校验失败会保留为 `needs_review`，不无限重试；修复后本机维护者可用 `python scripts/retry_event_job.py <完整任务ID>` 签名重排同一原始范围。该维护脚本默认读取标准 Windows 数据目录。
+
+优先回滚方式是保留 v0.8/schema6，关闭自动整理，改用 StartExplicit。若退旧 D/schema5：停后端和 DSH，保留完整 schema6 一致性备份，用 `rollback_e_clone.py --db <schema6库> --output <不存在的新schema5副本>` 生成旧版投影，再切换兼容代码/活动库。旧 D 不能直接打开 schema6；schema5 投影保留概括、原话与收据，但不保留 E 事实/关系表，完整回滚资料在原 schema6 库。切勿原地降级或覆盖唯一备份。
+
+## 开发与打包
+
+```powershell
+python -m unittest discover -s tests -p 'test_*.py' -v
 node --test dsh-plugin/*.test.mjs dsh-plugin/test.mjs
-PYTHONPATH=. python examples/demo.py
+$env:DSH_TEST_RUNTIME='C:\Tools\dsh'
+$env:GOLDFISH_TEST_PYTHON=(Get-Command python).Source
+node --test tests/dsh_integration.mjs tests/dsh_tools_integration.mjs tests/dsh_remember_integration.mjs tests/dsh_guide_integration.mjs tests/dsh_event_integration.mjs
+python scripts/build_delivery.py --output ..\Goldfish-Memory-v0.8.0-source.zip
 ```
 
-启动本地服务（不配置模型时只负责保存原文及召回已有摘要，**不会自动编造新摘要**）：
+SDK 集成使用临时数据库与合成模型，不读取你的凭据或真实会话。实际测试结果和未解决失败见 [docs/RELEASE_PREPARATION.md](docs/RELEASE_PREPARATION.md)。构建器只读取已提交的 Git 文件并再次排查敏感路径；不要从包含本机数据的整个目录直接压缩。
 
-```bash
-PYTHONPATH=. python -m goldfish.server --port 18320
-```
+## 许可证
 
-可用 `POST http://127.0.0.1:18320/ingest` 保存原文，`POST .../recall` 召回记忆，`POST .../consolidate` 手动触发一次模型整理，`GET .../stats` 查看条目数，`POST .../evidence` 回查概括原话，`POST .../link_evidence` 回查关系两端的原话。仅绑定 127.0.0.1，非公开服务器。可选通过 `GOLDFISH_LOCAL_TOKEN` 开启本机 API 验证（同时插件进程设置同一变量）。
-
-## 新增：本地模型 / 云端模型可随时切换（v0.2）
-
-金鱼有**两个独立的模型角色**：
-
-- **整理与语义判断模型（LLM）**：提取概括、主题、关联与画像，复核关系；显式开启语义召回后还负责问题意图和上下文覆盖。共用 `GOLDFISH_LLM_*` 配置。
-- **向量模型（Embedding）**：将概括和当前问题转成语义向量，使“换一种说法”也可能命中相关细节。使用 `GOLDFISH_EMBED_*` 配置。可以不配置；未配置时保留基础文字、主题、时间和关系检索。
-
-两个模型可以独立选择本地/云端，互不捆绑；**不会改变 DSH 主聊天所用的模型**。配置方式详见 [`MODEL_SETUP.txt`](MODEL_SETUP.txt)。以下是在 Bash / Linux / macOS 环境中的示意（Windows PowerShell 用 `$env:名称="值"` 设置）：
-
-**方式 A：完全本地，通过 Ollama（无 API 计费）**
-
-```bash
-# 模型名称改成你在 ollama list 中实际已安装的名称
-export GOLDFISH_LLM_PROVIDER=ollama
-export GOLDFISH_LLM_MODEL=qwen3:4b
-export GOLDFISH_EMBED_PROVIDER=ollama
-export GOLDFISH_EMBED_MODEL=bge-m3
-python -m goldfish.server --port 18320
-```
-
-默认访问本机 `http://127.0.0.1:11434/api/chat` 与 `/api/embed`；先安装 Ollama 并拉取模型。本地模型能力、运行速度取决于设备。
-
-**方式 B：通过云端兼容接口**
-
-```bash
-export GOLDFISH_LLM_PROVIDER=openai
-export GOLDFISH_LLM_URL=https://YOUR_PROVIDER/v1
-export GOLDFISH_LLM_MODEL=YOUR_MODEL
-export GOLDFISH_LLM_API_KEY=YOUR_KEY
-# Embedding 可单独配置或完全不配置
-python -m goldfish.server --port 18320
-```
-
-**方式 C：整理用云端大模型，向量用本地 Ollama**
-
-保留上面 B 的 `GOLDFISH_LLM_*` 变量，再设置：
-
-```bash
-export GOLDFISH_EMBED_PROVIDER=ollama
-export GOLDFISH_EMBED_MODEL=bge-m3
-```
-
-支持本地 OpenAI-compatible 服务器（例如 LM Studio）：`GOLDFISH_LLM_PROVIDER=openai`，并将 URL 设置为 `http://127.0.0.1:1234/v1`。Embedding 同理，前提是该本地服务真的支持 `/v1/embeddings`。
-
-要关闭某个模型，将对应的 `*_PROVIDER`、`*_MODEL`、`*_URL` 清空并**重启金鱼服务**。切换 Embedding 模型后，金鱼通过 `summary_vectors` 新表逐批重新向量化，原有概括和证据仍保留。`GET /providers` 可以检查当前生效的模型（不回显 API Key），`POST /reindex` 可以触发重新索引。
-
-**隐私与可靠性：** 只有明示配置云端 URL 才将对应文字发送到云端；远程 HTTP 默认禁止，HTTPS 允许。本地模型失联时保留原话，Embedding 请求失败时退回普通检索。模型响应必须是 JSON 并通过证据 ID 校验。模型精度与推理性能需真实测试。配置改动要求重启 Python 进程；目前尚无图形化模型切换界面。API Key 不应写进源码或共享压缩包。
-
-## DSH 薄桥与隔离安装
-
-`dsh-plugin/index.js` 从 `agent/pre-step` payload 直接取得 agent，自动从**真实用户输入**检索；工具续步使用有效历史中最近的真人输入，再根据当前 DSH 折叠历史对照去重，使用 `source.kind=plugin:goldfish-memory` 消息插入主对话输入。无需 Agent 主动工具调用。取消时不确认注入，宿主重试保持同一批已提交消息。官方接口依据见 [DSH API 审计](docs/DSH_API_AUDIT.md)。
-
-安装到隔离 profile 的示例（路径换成你解压后的实际绝对路径）：
-
-```bash
-dsh plugin --profile goldfish-test add link:/ABSOLUTE/PATH/goldfish-memory-v0.2/dsh-plugin
-```
-
-然后检查配置：`dsh --profile goldfish-test --dump-config`。首次初始化空 profile 时需要显式选择模板，完整可复现命令见 [DSH 验证记录](docs/DSH_VALIDATION.md)。安装后需要重启相应 DSH 进程。
-
-`dsh-plugin/cordis.patch.yml` 是示例配置。DSH 插件系统变化频繁，请先在隔离 profile 测试，确定你的版本兼容，再添加到日常使用的 profile。插件监听 `session/event` 自动提交真实消息，排除插件注入，助理回复后在服务端排队整理；若整理模型未配置，只保留原话，不会静默虚构摘要。原始事件先写入本地 outbox，再发送后端；失败保留并每 5 秒重试。默认 outbox 位于 DSH profile（SDK 则为 DSH_HOME）下 `goldfish-memory/outbox/<服务标识>`，可用 `outboxDir` 指定独立目录。该目录包含私密原话，备份时需一并保护。若 DSH 和 Python 服务不在一台机器上，localhost 不可直接共用，需同机部署或明确配置 HTTPS 服务。**隔离安装及宿主测试的具体范围见验证记录；不代表已在你的个人 DSH 上验收。**
-
-## 后续阶段
-
-当前语义召回仍需显式开启，默认关联深度为 0。第三阶段使用已授权的 DeepSeek API，未修改日常 DSH profile、未下载本地模型。后续优先处理报告中的真实失败，并补独立人工裁决与本地模型实测。
-
-第四阶段已下载固定版本的小型中文Embedding模型作本机CPU实测，模型文件留在项目外，不随源码分发。下一步优先独立裁决、画像语义分类与精确问题的多余候选，不能把已经公开的v2集重新当作未见集。
-
-更详细的设计决定、里程碑和验收场景见 [`ARCHITECTURE.md`](ARCHITECTURE.md)。
+现有仓库没有项目 LICENSE。本次未代替作者选择或添加许可证。公开源码不自动授予开放使用、修改或再分发许可；需由作者决定并补充。依赖软件遵循各自许可证。本 README 的安装步骤不替代使用授权。

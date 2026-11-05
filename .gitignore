@@ -15,3 +15,26 @@ windows/config.json
 *.xml
 .venv/
 dist/
+
+# Runtime state and private exports must never enter a release.
+backups/
+*.sqlite
+*.sqlite-*
+*.wal
+*.shm
+*.key
+*.pem
+*.p12
+*.log
+*.jsonl
+*.jsonl.*
+installation.json
+processes.json
+*credentials*
+*write.key*
+evals/results/
+docs/upgrade-*/
+.hindsight/
+data/
+sessions/
+release-artifacts/

@@ -54,6 +54,7 @@ class ScriptedAdapter extends llm.LlmAdapter {
   requests = [];
   failNext = false;
   toolNext = false;
+  toolStepsRemaining = 0;
   async resolveModel(provider, model) {
     return { provider, id: model, name: model, context: { contextWindow: 100000 } };
   }
@@ -64,8 +65,13 @@ class ScriptedAdapter extends llm.LlmAdapter {
       yield { type: 'finish', reason: { kind: 'error', failure: { message: 'synthetic retry', code: 'SERVER_ERROR' } } };
       return;
     }
-    if (this.toolNext) {
+    if (this.toolNext || this.toolStepsRemaining > 0) {
       this.toolNext = false;
+      if (this.toolStepsRemaining > 0) {
+        this.toolStepsRemaining--;
+        yield { type: 'block-start', index: 1, blockType: 'text' };
+        yield { type: 'block-end', index: 1, block: { type: 'text', text: '中间执行进展' } };
+      }
       yield { type: 'block-start', index: 0, blockType: 'tool-call' };
       yield { type: 'block-end', index: 0, block: { type: 'tool-call', id: llm.ToolCallId('synthetic-tool-call'), name: 'goldfish_test_echo', arguments: '{}' } };
       yield { type: 'finish', reason: { kind: 'tool-calls' } };
@@ -100,8 +106,10 @@ test('pinned DSH host: capture, five turns, actual compaction, cancellation, ret
   let backendPort;
   let holdRecall;
   const recallCalls = [];
+  const deliveries = [];
   const modelInputs = [];
-  const runPython = (code, args = []) => execFileSync('python', ['-c', code, ...args], { cwd: root, encoding: 'utf8' });
+  const python = process.env.GOLDFISH_TEST_PYTHON || 'python';
+  const runPython = (code, args = []) => execFileSync(python, ['-c', code, ...args], { cwd: root, encoding: 'utf8' });
   const rows = (sql, params = []) => JSON.parse(runPython(
     'import sqlite3,json,sys; c=sqlite3.connect(sys.argv[1]); c.row_factory=sqlite3.Row; print(json.dumps([dict(x) for x in c.execute(sys.argv[2],json.loads(sys.argv[3]))],ensure_ascii=False))',
     [db, sql, JSON.stringify(params)]));
@@ -116,7 +124,7 @@ test('pinned DSH host: capture, five turns, actual compaction, cancellation, ret
     for (const name of Object.keys(env)) if (name.startsWith('GOLDFISH_')) delete env[name];
     Object.assign(env, { GOLDFISH_LLM_PROVIDER: 'ollama', GOLDFISH_LLM_MODEL: 'synthetic',
       GOLDFISH_LLM_URL: `http://127.0.0.1:${modelPort}` });
-    backend = spawn('python', ['-m', 'goldfish.server', '--port', String(backendPort), '--db', db], { cwd: root, env, stdio: ['ignore', 'pipe', 'pipe'] });
+    backend = spawn(python, ['-m', 'goldfish.server', '--port', String(backendPort), '--db', db], { cwd: root, env, stdio: ['ignore', 'pipe', 'pipe'] });
     backend.stdout.on('data', data => { backendOutput += data; });
     backend.stderr.on('data', data => { backendOutput += data; });
     await until(async () => {
@@ -126,13 +134,15 @@ test('pinned DSH host: capture, five turns, actual compaction, cancellation, ret
   }
   async function mount(serverUrl, capture = true) {
     const context = new cordis.Context();
-    for (const plugin of [llm.default, sessions.default, projections.default, prompt.default, tools.default, agents.default]) await context.plugin(plugin);
+    for (const plugin of [llm.default, sessions.default, projections.default, prompt.default, tools.default, agents.default]) {
+      await context.plugin(plugin);
+    }
     await context.plugin(jsonl, { root: sessionRoot, compression: 'none' });
     await context.plugin(loop.default, { agents: [] });
     await context.plugin(meter.default);
     const adapter = new ScriptedAdapter();
     context.llm.registerAdapter(['synthetic'], adapter);
-    await context.plugin(Goldfish, { serverUrl, outboxDir, retryMs: 100, timeoutMs: 500, autoCapture: capture });
+    await context.plugin(Goldfish, { mode: 'legacy_auto', serverUrl, outboxDir, retryMs: 100, timeoutMs: 500, autoCapture: capture });
     return { context, adapter };
   }
   const send = async (agent, text) => {
@@ -162,6 +172,7 @@ test('pinned DSH host: capture, five turns, actual compaction, cancellation, ret
         const chunks = [];
         for await (const chunk of request) chunks.push(chunk);
         const body = Buffer.concat(chunks);
+        deliveries.push({ path: request.url, payload: JSON.parse(body) });
         if (request.url === '/recall') {
           recallCalls.push(JSON.parse(body));
           if (holdRecall) await holdRecall.promise;
@@ -218,6 +229,7 @@ test('pinned DSH host: capture, five turns, actual compaction, cancellation, ret
       return next();
     });
     const requestsBeforeTool = adapter.requests.length;
+    const recallsBeforeTool = recallCalls.length;
     adapter.toolNext = true;
     await send(toolAgent, `旧码头的桂花拿铁是什么？${'这是用于压缩的合成背景。'.repeat(40)}`);
     removeToolCompaction();
@@ -225,12 +237,37 @@ test('pinned DSH host: capture, five turns, actual compaction, cancellation, ret
     assert.equal(toolExecutions, 1, 'The host must execute the requested tool');
     assert(compactedDuringToolTurn);
     assert.equal(adapter.requests.length, requestsBeforeTool + 2, 'One model step before and one after the actual tool');
+    assert.equal(recallCalls.length, recallsBeforeTool + 1, 'Compaction and tool continuation reuse the one recall result');
     assert.equal(memoryMessages(adapter.requests.at(-1).messages).length, 1, 'Recall must run after same-turn compaction even when no human query remains on the surface');
     const toolLog = toolAgent.session.snapshotEvents();
     assert.equal(toolLog.filter(event => event.type === 'turn/start').length, 1);
     assert.equal(toolLog.filter(event => event.type === 'user/message' && event.data.source.kind === 'plugin:goldfish-memory').length, 2);
     await until(() => rows('SELECT * FROM raw_messages WHERE session_id=?', ['tool-compaction']).length === 2, 'tool continuation source capture');
-    t.diagnostic('PASS: real tool execution and official same-turn compactRegion remove human query and old memory; continuation recalls from transient query cache without a new human turn');
+    t.diagnostic('PASS: actual tool and compactRegion restore cached memory with only one recall request');
+
+    const manySteps = await ctx.agentLoop.create(sessions.SessionId('many-tool-steps'), { provider: 'synthetic', model: 'synthetic' });
+    let executed = 0;
+    const removeManyTool = ctx.tools.register(tools.defineContentToolFixture({
+      name: 'goldfish_test_echo', description: 'Many-step turn fixture', parameters: {},
+      execute() {
+        executed++;
+        assert.equal(deliveries.filter(item => item.payload.session_id === 'many-tool-steps').length, 0,
+          'No partial turn is exposed to background consolidation');
+        return [{ type: 'text', text: '工具结果' }];
+      },
+    }));
+    const recallsBeforeMany = recallCalls.length;
+    adapter.toolStepsRemaining = 12;
+    await send(manySteps, '执行十二次合成工具操作，最后回复');
+    removeManyTool();
+    assert.equal(executed, 12);
+    assert.equal(recallCalls.length, recallsBeforeMany + 1);
+    await until(() => deliveries.some(item => item.path === '/schedule' && item.payload.session_id === 'many-tool-steps'), 'one completed-turn schedule');
+    const turnDeliveries = deliveries.filter(item => item.payload.session_id === 'many-tool-steps');
+    assert.equal(turnDeliveries.filter(item => item.path === '/schedule').length, 1);
+    assert.equal(turnDeliveries.filter(item => item.path === '/ingest').length, 14);
+    assert(turnDeliveries.filter(item => item.path === '/ingest').every(item => !item.payload.consolidate_after));
+    t.diagnostic('PASS: twelve real host tool steps, one recall, no mid-turn deliveries, one final consolidation schedule');
 
     const cancelled = await ctx.agentLoop.create(sessions.SessionId('cancelled'), { provider: 'synthetic', model: 'synthetic' });
     holdRecall = Promise.withResolvers();

@@ -12,17 +12,33 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from .engine import MemoryDB
 from .consolidate import consolidate_session
-from .providers import ChatModel, EmbeddingModel
+from .providers import ChatModel, EmbeddingModel, ModelConfig
 from .semantic import plan_recall, cover_direct_plan, deduplicate_plan
 from .retrieval import candidate_pool, direct_plan
+from . import queries, remember, compaction, events
 
 class Service:
-    def __init__(self, db_path, *, retry_base=1.0):
+    def __init__(self, db_path, *, retry_base=1.0, read_only=False, allow_remember=False, remember_key_file=None, allow_compaction=False, enable_events=False):
         # Invalid model configuration must fail before opening the source DB or
         # creating worker threads.
-        self.chat=ChatModel()
-        self.embeddings=EmbeddingModel()
-        self.db=MemoryDB(db_path)
+        self.read_only=read_only
+        self.allow_remember=allow_remember
+        self.allow_compaction=allow_compaction
+        if allow_compaction and not read_only:
+            raise ValueError('compaction_requires_query_only_mode')
+        if allow_remember and not read_only:
+            raise ValueError('explicit_remember_requires_query_only_mode')
+        self.remember_key = remember.write_key(remember_key_file or Path(db_path).with_name('remember-write.key')) if allow_remember else None
+        self.writer=MemoryDB(db_path) if allow_remember or allow_compaction else None
+        self.compaction_key = None
+        if allow_compaction:
+            compaction.migrate(self.writer)
+            if enable_events:
+                events.migrate(self.writer)
+            self.compaction_key = remember.write_key(Path(db_path).with_name('compaction-write.key'))
+        self.chat=ChatModel(ModelConfig('LLM','','','','')) if read_only else ChatModel()
+        self.embeddings=EmbeddingModel(ModelConfig('EMBED','','','','')) if read_only else EmbeddingModel()
+        self.db=MemoryDB(db_path,read_only=read_only)
         self.lock=self.db.lock
         self.pool=ThreadPoolExecutor(max_workers=1)
         self.pending=set()
@@ -191,13 +207,49 @@ class Service:
             self._retry_thread.join()
             self.pool.shutdown(wait=True,cancel_futures=True)
             self.db.close()
+            if self.writer: self.writer.close()
         finally:
             with self._state:
                 self._closed=True
                 self._state.notify_all()
 
+    def remember_signed(self, body, signature):
+        if not self.allow_remember:
+            raise PermissionError('remember_disabled')
+        return remember.save(self.writer, remember.verify(body, signature, self.remember_key))
+
+    def compaction_signed(self, body, signature):
+        if not self.allow_compaction:
+            raise PermissionError('compaction_disabled')
+        data = remember.verify(body, signature, self.compaction_key)
+        with self.writer.lock:
+            return compaction.handle(self.writer, data)
+
     def handle(self, path, data):
         if not isinstance(data,dict): raise ValueError('JSON object required')
+        if self.read_only and path not in {'/health','/providers','/stats','/search','/explore','/memory_evidence',
+                                           '/recall','/evidence','/link_evidence'}:
+            raise ValueError('read_only')
+        if path in {'/search', '/explore', '/memory_evidence'}:
+            if path == '/memory_evidence':
+                return queries.evidence(self.db, data)
+            # Tool retrieval uses the existing embedding index, never the chat
+            # ranker/coverage LLM. The calling DSH Agent owns those decisions.
+            semantic = {}; auxiliary = {}; status = 'disabled'
+            query = queries._string(data, 'query', required=path == '/search')
+            if self.embeddings.configured and query:
+                try:
+                    vector, _, _ = self._query_embedding(query, 1.5)
+                    with self.lock:
+                        semantic = self.db.semantic_scores(vector, self.embeddings.identity)
+                        auxiliary = self.db.auxiliary_scores(vector, self.embeddings.identity, self._aux_kinds())
+                    status = 'ready'
+                except Exception:
+                    status = 'unavailable'
+            operation = queries.search if path == '/search' else queries.explore
+            result = operation(self.db, data, semantic=semantic, auxiliary=auxiliary)
+            result.update(degraded=status == 'unavailable', embedding_status=status)
+            return result
         # Network embedding calls are intentionally OUTSIDE DB locks, so an
         # Ollama cold start cannot freeze the memory event writer.
         if path=='/recall':
@@ -284,7 +336,10 @@ class Service:
                 except Exception as err: result['embedding']={'error':type(err).__name__}
             return result
         with self.lock:
-            if path=='/health': return {'ok':True,'version':'0.3.0'}
+            if path=='/health': return {'ok':True,'version':'0.8.0','memory_tools':True,
+                'read_only':self.read_only and not self.allow_remember and not self.allow_compaction,'query_only':self.read_only,
+                'explicit_remember':self.allow_remember,'compaction_handoff':self.allow_compaction,
+                'event_memory':events.enabled(self.db),'schema':self.db.db.execute('PRAGMA user_version').fetchone()[0]}
             if path=='/providers': return {'ok':True,'chat':self.chat.cfg.public(),
                                          'embedding':self.embeddings.cfg.public()}
             if path=='/ingest':
@@ -314,8 +369,9 @@ class Service:
                             'retry_sessions':len(self._retry_due)}
         raise ValueError('unknown API route')
 
-def serve(host,port,db_path):
-    service=Service(db_path)
+def serve(host,port,db_path,*,read_only=False,allow_remember=False,remember_key_file=None,allow_compaction=False):
+    service=Service(db_path,read_only=read_only,allow_remember=allow_remember,remember_key_file=remember_key_file,
+                    allow_compaction=allow_compaction,enable_events=allow_compaction)
     token=os.getenv('GOLDFISH_LOCAL_TOKEN','')
     class Handler(BaseHTTPRequestHandler):
         def setup(self):
@@ -335,18 +391,33 @@ def serve(host,port,db_path):
             if token and not hmac.compare_digest(self.headers.get('X-Goldfish-Token',''),token):
                 return self.send({'ok':False,'error':'unauthorized'},401)
             try:
-                if self.path not in {'/health','/ingest','/recall','/schedule','/consolidate','/evidence','/link_evidence','/stats','/providers','/reindex'}:
+                if self.path not in {'/health','/ingest','/recall','/schedule','/consolidate','/evidence','/link_evidence','/stats','/providers','/reindex',
+                                     '/search','/explore','/memory_evidence','/remember','/compaction'}:
                     return self.send({'ok':False,'error':'not_found'},404)
-                data={}
+                data={};body=b'{}'
                 if self.command=='POST':
                     n=int(self.headers.get('Content-Length','0'))
                     if n<0: return self.send({'ok':False,'error':'invalid_length'},400)
                     if n>2000000: return self.send({'ok':False,'error':'body_too_large'},413)
-                    data=json.loads(self.rfile.read(n) or b'{}')
-                result=service.handle(self.path,data)
+                    body=self.rfile.read(n) or b'{}'
+                    data=json.loads(body)
+                if self.path=='/remember':
+                    if self.command!='POST':raise PermissionError('post_required')
+                    result=service.remember_signed(body,self.headers.get('X-Goldfish-Remember-Signature',''))
+                elif self.path=='/compaction':
+                    if self.command!='POST':raise PermissionError('post_required')
+                    result=service.compaction_signed(body,self.headers.get('X-Goldfish-Compaction-Signature',''))
+                else:
+                    began=time.perf_counter()
+                    result=service.handle(self.path,data)
+                    if self.path in {'/search','/explore','/memory_evidence'}:
+                        result.setdefault('timings',{})['service_ms']=round((time.perf_counter()-began)*1000,3)
                 self.send(result)
+            except PermissionError:
+                self.send({'ok':False,'saved':False,'error':'remember_not_authorized'},403)
             except (ValueError,KeyError,TypeError) as err:
-                self.send({'ok':False,'error':type(err).__name__},400)
+                safe={'validation_code':str(err)} if self.path=='/compaction' and str(err) in compaction.SAFE_VALIDATION_CODES else {}
+                self.send({'ok':False,'saved':False,'error':type(err).__name__,**safe},400)
             except Exception as err:
                 self.send({'ok':False,'error':type(err).__name__},500)
         def do_GET(self): self.dispatch()
@@ -369,9 +440,14 @@ def main():
     parser=argparse.ArgumentParser(description='Goldfish local long-term memory service')
     parser.add_argument('--port',type=int,default=18320)
     parser.add_argument('--db',default=str(Path.home()/'.goldfish-memory'/'memory.sqlite3'))
+    parser.add_argument('--read-only',action='store_true',help='Query without writes, background extraction, or model calls')
+    parser.add_argument('--allow-remember',action='store_true',help='Allow only source-bound signed explicit writes; models remain off')
+    parser.add_argument('--remember-key-file',help='Local host write capability file; never a model argument')
+    parser.add_argument('--allow-compaction',action='store_true',help='Signed DSH compaction tasks; no backend model calls')
     args=parser.parse_args()
     def terminate(*_): raise KeyboardInterrupt
     signal.signal(signal.SIGTERM,terminate)
-    serve('127.0.0.1',args.port,args.db)
+    serve('127.0.0.1',args.port,args.db,read_only=args.read_only,
+          allow_remember=args.allow_remember,remember_key_file=args.remember_key_file,allow_compaction=args.allow_compaction)
 
 if __name__=='__main__': main()

@@ -1,11 +1,12 @@
 {
   "name": "dsh-goldfish-memory-local",
-  "version": "0.3.0",
+  "version": "0.8.0",
   "private": true,
-  "description": "Personal DSH auto-recall bridge for a local evidence-linked memory graph",
+  "description": "DSH source-grounded event memories, reviewed associations and native compaction handoff",
   "type": "module",
   "main": "index.js",
-  "files": ["index.js", "outbox.js", "cordis.patch.yml"],
+  "files": ["index.js", "tools.js", "remember.js", "guide.js", "compaction.js", "events.js", "host-sdk.js", "memory-refs.js", "outbox.js", "cordis.patch.yml"],
+  "peerDependencies": {"@deepseek-ai/dsh-tools": "0.2.1-rc.5"},
   "engines": {"node": ">=22"},
   "dsh": {"bundle": {"patch": "./cordis.patch.yml"}}
 }

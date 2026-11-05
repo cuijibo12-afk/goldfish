@@ -177,7 +177,7 @@ class ReliabilityTests(unittest.TestCase):
         self.db.db.execute('PRAGMA user_version=0')
         self.db.close()
         self.db = MemoryDB(self.path)
-        self.assertEqual(self.db.db.execute('PRAGMA user_version').fetchone()[0], 3)
+        self.assertEqual(self.db.db.execute('PRAGMA user_version').fetchone()[0], 4)
         self.assertEqual(self.db.get_message(mid)['text'], '原始来源')
         self.db.close()
         self.db = MemoryDB(self.path)  # Opening the migrated DB is idempotent.

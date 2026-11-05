@@ -1,3 +1,5 @@
+> 历史阶段记录：保留用于了解早期实验，不代表v0.8默认配置。当前安装与架构以根README为准；旧原始评测输出已从本版本归档中排除。
+
 # 第四阶段：Embedding 混合检索、成本与遗留错误
 
 2026-11-04。分支 `phase-d/embedding-performance`。已经实施和真实测试，保留 SQLite 记忆实体、独立 Provider、原话证据与 DSH `agent/pre-step` 自动注入；未增加 Agent 记忆工具。

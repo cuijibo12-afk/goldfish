@@ -11,7 +11,7 @@ const injection = '<goldfish-memory>旧经历的具体细节</goldfish-memory>';
 const tick = () => new Promise(resolve => setImmediate(resolve));
 function setup(config = {}) {
   const hooks = new Map();
-  apply({ on: (name, callback) => hooks.set(name, callback), logger: { warn() {} } }, { autoCapture: false, ...config });
+  apply({ on: (name, callback) => hooks.set(name, callback), logger: { warn() {} } }, { mode: 'legacy_auto', autoCapture: false, ...config });
   return hooks;
 }
 
@@ -31,7 +31,7 @@ test('payload agent is used; decision metadata and original input order survive'
   } finally { globalThis.fetch = before; }
 });
 
-test('tool continuation recalls from current derived human history, including compaction', async () => {
+test('restored tool continuation does not recall from old human history', async () => {
   const before = globalThis.fetch;
   let payload;
   globalThis.fetch = async (_, options) => {
@@ -43,9 +43,8 @@ test('tool continuation recalls from current derived human history, including co
       agent: { session: { deriveMessages: () => [human('回想工地的事'), { role: 'user', source: { kind: 'compact' }, content: '压缩保留事实' }] } },
       messages: [],
     }, async () => ({ kind: 'enter', messages: [] }));
-    assert.equal(payload.query, '回想工地的事');
-    assert.match(payload.context, /压缩保留事实/);
-    assert.equal(decision.messages.length, 1);
+    assert.equal(payload, undefined);
+    assert.equal(decision.messages.length, 0);
   } finally { globalThis.fetch = before; }
 });
 
@@ -160,7 +159,7 @@ test('restored history uses paged persistence, skips inherited events and contai
         close: async () => { throw Error('storage close failure'); },
       };
     } },
-  }, { outboxDir: directory });
+  }, { mode: 'legacy_auto', outboxDir: directory });
   try {
     await hooks.get('agent/created')({ agent: { session: { id: 'restored', inheritedEventCount: 2, firstLiveSeq: 260 } } });
     await hooks.get('dispose')();
@@ -172,7 +171,7 @@ test('restored history uses paged persistence, skips inherited events and contai
   }
 });
 
-test('compaction during the same tool chain retains only the human retrieval cue', async () => {
+test('compaction during the same turn restores cached memory without another model call', async () => {
   const before = globalThis.fetch;
   const payloads = [];
   globalThis.fetch = async (_, options) => {
@@ -187,9 +186,9 @@ test('compaction during the same tool chain retains only the human retrieval cue
     await hook({ agent, messages: [message] }, async () => ({ kind: 'enter', messages: [message] }));
     history = [{ role: 'user', source: { kind: 'compact' }, content: '往事摘要，具体细节已丢失' }];
     const result = await hook({ agent, messages: [] }, async () => ({ kind: 'enter', messages: [] }));
-    assert.equal(payloads[1].query, '旧码头桂花拿铁');
-    assert.doesNotMatch(payloads[1].context, /旧码头桂花拿铁/);
+    assert.equal(payloads.length, 1);
     assert.equal(result.messages.length, 1);
+    assert.equal(result.messages[0].content[0].text, injection);
   } finally { globalThis.fetch = before; }
 });
 

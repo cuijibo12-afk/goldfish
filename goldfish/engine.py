@@ -91,11 +91,21 @@ def _covered(text, context):
 
 
 class MemoryDB:
-    def __init__(self, path: str | Path):
+    def __init__(self, path: str | Path, *, read_only=False):
         self.path = str(path)
         self.lock = threading.RLock()
         self._session_locks = {}
         self._savepoint = 0
+        if read_only:
+            uri = Path(self.path).resolve().as_uri() + '?mode=ro'
+            self.db = sqlite3.connect(uri, uri=True, check_same_thread=False, timeout=30, isolation_level=None)
+            self.db.row_factory = sqlite3.Row
+            if self.db.execute('PRAGMA user_version').fetchone()[0] not in (3, 4, 5, 6):
+                self.db.close()
+                raise ValueError('Read-only tools require an existing schema 3, 4 or 5 database')
+            self.db.execute('PRAGMA query_only=ON')
+            self.db.execute('PRAGMA foreign_keys=ON')
+            return
         Path(self.path).parent.mkdir(mode=0o700, parents=True, exist_ok=True)
         if self.path != ':memory:':
             # Create privately before SQLite opens it, so a permissive umask
@@ -105,7 +115,7 @@ class MemoryDB:
         self.db = sqlite3.connect(self.path, check_same_thread=False, timeout=30, isolation_level=None)
         self.db.row_factory = sqlite3.Row
         version = self.db.execute('PRAGMA user_version').fetchone()[0]
-        if version > 3:
+        if version > 6:
             self.db.close()
             raise ValueError('Database schema is newer than this Goldfish version')
         self.db.execute('PRAGMA journal_mode=WAL')
@@ -172,7 +182,15 @@ class MemoryDB:
             self.db.execute('''CREATE TRIGGER IF NOT EXISTS inactive_summary_vector
                 AFTER UPDATE OF status ON summaries WHEN NEW.status!='active'
                 BEGIN DELETE FROM summary_vectors WHERE summary_id=NEW.id; END''')
-            self.db.execute('PRAGMA user_version=3')
+            self.db.execute('''CREATE TABLE IF NOT EXISTS explicit_memory_claims(
+                claim_key TEXT PRIMARY KEY, summary_id TEXT NOT NULL UNIQUE REFERENCES summaries(id),
+                source_message_id TEXT NOT NULL REFERENCES raw_messages(id), quote TEXT NOT NULL,
+                created_at TEXT NOT NULL)''')
+            self.db.execute('''CREATE TABLE IF NOT EXISTS explicit_memory_receipts(
+                receipt_id TEXT PRIMARY KEY, claim_key TEXT NOT NULL REFERENCES explicit_memory_claims(claim_key),
+                authorization_message_id TEXT NOT NULL REFERENCES raw_messages(id),
+                request_quote TEXT NOT NULL, created_at TEXT NOT NULL)''')
+            self.db.execute('PRAGMA user_version=' + str(max(version, 4)))
 
     @contextmanager
     def transaction(self):

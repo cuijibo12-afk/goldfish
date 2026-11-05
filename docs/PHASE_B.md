@@ -1,3 +1,5 @@
+> 历史阶段记录：保留用于了解早期实验，不代表v0.8默认配置。当前安装与架构以根README为准；旧原始评测输出已从本版本归档中排除。
+
 # 第二阶段：真实 DeepSeek 与中文记忆质量验证
 
 日期：2026-11-04。实际模型为官方 API 返回的 `deepseek-flash`，端点为 `https://api.deepseek.com`。保留 Python / SQLite / Provider / DSH 生命周期架构。本阶段没有增加 GUI、记忆工具或外围服务产品。

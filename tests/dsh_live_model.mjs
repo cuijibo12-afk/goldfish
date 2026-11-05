@@ -297,7 +297,7 @@ if (missing.length) {
     await ctx.plugin(jsonl, { root: join(temp, 'sessions'), compression: 'none' });
     await ctx.plugin(loop.default, { agents: [] }); await ctx.plugin(meter.default);
     const adapter = new LiveAdapter(); ctx.llm.registerAdapter(['live-openai'], adapter);
-    await ctx.plugin(Goldfish, { serverUrl, token: '', outboxDir: join(temp, 'outbox'), timeoutMs: 12000, retryMs: 100, autoCapture: true, limit: 3, maxChars: 2400 });
+    await ctx.plugin(Goldfish, { mode: 'legacy_auto', serverUrl, token: '', outboxDir: join(temp, 'outbox'), timeoutMs: 12000, retryMs: 100, autoCapture: true, limit: 3, maxChars: 2400 });
     const agent = await ctx.agentLoop.create(sessions.SessionId('synthetic-live-six-turns'), { provider: 'live-openai', model: mainConfig.model, maxTokens: 256 });
     const facts = [
       { id: 'old_pier', description: '旧码头地点', aliases: ['旧码头', 'old pier', 'old wharf'] },
